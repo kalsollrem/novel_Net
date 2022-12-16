@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>노벨넷</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/index.js"></script>
+</head>
+<body>
+    <!-- 모달 레이아웃 -->
+    <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
+    <!-- 모달 레이아웃 -->
+    <div class="wrap">
+        <header th:replace="/include/header.html :: header"></header>
+        <div class="back_slide">
+            <div class="b-slide-cont">
+                <div class="b-slide-1"></div>
+                <div class="b-slide-2"></div>
+                <div class="b-slide-3"></div>
+            </div>
+        </div>
+        <div class="contents">
+            <div class="slide">
+                <div class="slide-cont">
+                    <div class="slide-1"><a href="#"><img src="../img/bag_1.jpg" alt="메인이미지1"></a></div>
+                    <div class="slide-2"><a href="#"><img src="../img/bag_2.jpg" alt="메인이미지2"></a></div>
+                    <div class="slide-3"><a href="#"><img src="../img/bag_3.jpg" alt="메인이미지3"></a></div>
+                </div>
+            </div>
+
+            <div class="main_content">
+                <div class="link_zone"></div>
+                <div class="recomend_pd">
+                    <div class="recomend_pd_tal"><b>PD 추천픽!</b></div>
+                    <ul class="recomend_pd_novel">
+                        <!-- 5개로 늘리면 맞음 -->
+                        <li>
+                            <a href="#">
+                                <span class="img_zone"></span>
+                                <span class="novel_title">소설제목</span>
+                            </a>
+                            <span class="writer_name">작가명</span>
+                        </li>
+                        <!-- 5개로 늘리면 맞음 -->
+                    </ul>
+                </div>
+                <div class="hot_novel">
+                    <div class="hot_tag">
+                        <div class="hot_title">독자들의 <b>강추!</b></div>
+                    </div>
+                    <div class="best_one">
+                        <div class="novel_what">조회수</div>
+                        <div class="novel_choose" th:each="bestCount : ${bestCount}">
+                            <a th:href="@{/novelnet/novel(n_num=${bestCount.n_num},page=1,sort='asc')}">
+                                <img th:src="'../noteImg/'+${bestCount.n_cover}" th:alt="${bestCount.n_title}">
+                            </a>
+                            <div class="novel_date">
+                                <div class="novel_name">
+                                    <a th:href="@{/novelnet/novel(n_num=${bestCount.n_num},page=1,sort='asc')}"><h3 th:text="${bestCount.n_title}">제목</h3></a>
+                                </div>
+                                <div class="writer_name">
+                                    <h3 th:text="${bestCount.nick}">작가</h3>
+                                </div>
+                                <div class="novel_tags">
+                                    <h6 th:text="${bestCount.n_introduction}">내용</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="best_one">
+                        <div class="novel_what">추천수</div>
+                        <div class="novel_choose" th:each="bestGood : ${bestGood}">
+                            <a th:href="@{/novelnet/novel(n_num=${bestGood.n_num},page=1,sort='asc')}">
+                                <img th:src="'../noteImg/'+${bestGood.n_cover}" th:alt="${bestGood.n_title}">
+                            </a>
+                            <div class="novel_date">
+                                <div class="novel_name">
+                                    <a th:href="@{/novelnet/novel(n_num=${bestGood.n_num},page=1,sort='asc')}"><h3 th:text="${bestGood.n_title}">제목</h3></a>
+                                </div>
+                                <div class="writer_name">
+                                    <h3 th:text="${bestGood.nick}">작가</h3>
+                                </div>
+                                <div class="novel_tags">
+                                    <h6 th:text="${bestGood.n_introduction}">내용</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="best_one">
+                        <div class="novel_what">북마크</div>
+                        <div class="novel_choose" th:each="bestBookmark : ${bestBookmark}">
+                            <a th:href="@{/novelnet/novel(n_num=${bestBookmark.n_num},page=1,sort='asc')}">
+                                <img th:src="'../noteImg/'+${bestBookmark.n_cover}" th:alt="${bestBookmark.n_title}">
+                            </a>
+                            <div class="novel_date">
+                                <div class="novel_name">
+                                    <a th:href="@{/novelnet/novel(n_num=${bestBookmark.n_num},page=1,sort='asc')}"><h3 th:text="${bestBookmark.n_title}">제목</h3></a>
+                                </div>
+                                <div class="writer_name">
+                                    <h3 th:text="${bestBookmark.nick}">작가</h3>
+                                </div>
+                                <div class="novel_tags">
+                                    <h6 th:text="${bestBookmark.n_introduction}">내용</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="recomend_tag">
+                    <ul class="recomend_pd_novel">
+                        <div class="recomend_pd_tal">무료로 즐기자!</div>
+                        <!-- 5개로 늘리면 맞음 -->
+                        <li>
+                            <a href="#">
+                                <span class="img_zone"></span>
+                                <span class="novel_title">소설제목</span>
+                            </a>
+                            <span class="writer_name">작가명</span>
+                        </li>
+                        <!-- 5개로 늘리면 맞음 -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="/include/footer.html :: footer_layout"> </footer>
+</body>
+</html>

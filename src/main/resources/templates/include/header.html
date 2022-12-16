@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+    <div class="modal_layout" th:fragment="modal_layout">
+        <!-- 회원가입 -->
+        <div class="sign">
+            <div class="sign_box">
+                <button id="sign_close">x</button>
+                <div class="sign_logo">
+                    <img src="../img/logo.png" alt="소설넷">
+                </div>
+                <div class="sign_date_bag"></div>
+                <form action="/novelnet/join.do" method="post" id="joinForm" name="joinForm">
+                    <ul class="sign_date">
+                        <li>
+                            <div class="mark_box">
+                                <div class="ask_U">
+                                    이메일
+                                </div>
+                                <div class="answer_U">
+                                    <input type="text" id="e-mail" name="u_mail" placeholder=" 이메일을 입력해주세요">
+                                </div>
+                            </div>
+                            <div class="cheak_box">
+                                <span class="cheak_answer id_answer"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mark_box">
+                                <div class="ask_U">
+                                    비밀번호
+                                </div>
+                                <div class="answer_U">
+                                    <input type="password" id="password" name="u_pass" placeholder=" 12-20자 사이의 비밀번호를 입력해 주세요" maxlength='20'>
+                                </div>
+                            </div>
+                            <div class="cheak_box ">
+                                <span class="cheak_answer pass_length"> </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mark_box">
+                                <div class="ask_U">
+                                    비밀번호 확인
+                                </div>
+                                <div class="answer_U">
+                                    <input type="password" id="password_cheak" name="u_passcheak" placeholder=" 비밀번호와 동일하게 입력해주세요" maxlength='20'>
+                                </div>
+                            </div>
+                            <div class="cheak_box">
+                                <span class="cheak_answer pass_answer"> </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mark_box">
+                                <div class="ask_U">
+                                    닉네임
+                                </div>
+                                <div class="answer_U">
+                                    <input type="text" id="nick_name" name="u_nick" placeholder=" 원하시는 닉네임을 입력해주세요" maxlength='12'>
+                                </div>
+                            </div>
+                            <div class="cheak_box">
+                                <span class="cheak_answer"> </span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="sing_deal">
+                        <li>
+                            <div class="deal_ok">약관에 동의하시겠습니까?</div>
+                            <div class="yes_box"><input type="checkbox" name="u_ok" value="ok" id="contract_ok"></div>
+                        </li>
+                        <li>
+                            <div class="deal_ok">만 14세 이상입니까?</div>
+                            <div class="yes_box"><input type="checkbox" name="u_age" value="ok" id="age_ok"></div>
+                        </li>
+                    </ul>
+                </form>
+                <div class="sign_botton">
+                    <input type="button" value="가입하기" id="sign_yes">
+                </div>
+                <div class="sign_out">
+                    <div class="password_find">아이디/비밀번호 찾기</div>
+                    <div class="slash">|</div>
+                    <div class="login_change">로그인</div>
+                </div>
+            </div>
+        </div>
+        <!-- 회원가입 -->
+        <!-- 로그인 -->
+        <div class="login">
+            <div class="login_box">
+                <button id="login_close">x</button>
+                <div class="login_logo">
+                    <img src="../img/logo.png" alt="소설넷">
+                </div>
+                <div class="login_bag"></div>
+<!--                <form action="/novelnet/login.do" method="post" name="loginform" id="loginform">-->
+                    <div class="login_form">
+                        <div class="login_id">
+                            <div class="need"><input type="text" id="login_id" name="u_mail" placeholder="가입 이메일을 입력해주세요"></div>
+                        </div>
+                        <div class="login_password">
+                            <div class="need"><input type="password" id="login_password" name="u_pass" placeholder="비밀번호를 입력해주세요"></div>
+                        </div>
+                    </div>
+                    <div class="login_zone">
+                        <input type="button" value="로그인" class="login_button">
+                    </div>
+<!--                </form>-->
+                <div class="login_out">
+                    <div class="sign_find">회원가입</div>
+                    <div class="slash">/</div>
+                    <div class="password_find">비밀번호 찾기</div>
+                </div>
+            </div>
+        </div>
+        <!-- 로그인 -->
+    </div>
+    <header th:fragment="header">
+    <div class="logo">
+        <a href="/novelnet"><img src="../img/logo.png" alt="소설넷" ></a>
+    </div>
+    <ul class="menu">
+        <li><a href="#">자유</a></li>
+        <li><a href="#">유료</a></li>
+        <li><a href="#">랭킹</a></li>
+        <li><a href="#">내서재</a></li>
+    </ul>
+    <div class="myInfo">
+        <ul class="info_front">
+            <li><a href="/novelnet/write"><img src="../img/write.png"alt="글쓰기"></a></li>
+            <li><a href="#"><img src="../img/search.png"alt="검색"></a></li>
+            <li><span><a href="#">
+                        <img th:if="${session.U_NUM == null}"     src="../img/profill_login_plz.png"alt="프로필">
+                        <img th:unless="${session.U_NUM == null}" src="../img/profill_menu.png"alt="프로필">
+            </a></span></li>
+        </ul>
+        <ul class="info_menu" th:if="${session.U_NUM == null}">
+            <li><span class="infobox dragNone" id="login_on">로그인</span></li>
+            <li><span class="infobox dragNone" id="join_on">회원가입</span></li>
+            <li><span class="infobox dragNone" id="pass_find_on">아이디/패스워드 찾기</span></li>
+            <li><span class="infobox dragNone" id="gongji_on">공지사항</span></li>
+        </ul>
+        <ul class="info_menu" th:unless="${session.U_NUM == null}">
+            <li><span class="infobox dragNone" id="go_info" th:text="${session.U_NICK}"></span></li>
+            <li><span class="infobox dragNone" id="go_myNovel">내 작품관리</span></li>
+            <li><span class="infobox dragNone" id="go_NovelWrite"><a href="/novelnet/regist">작품투고</a></span></li>
+            <li><span class="infobox dragNone" id="go_logOut"><a href="/novelnet/logout.do">로그아웃</a></span></li>
+        </ul>
+    </div>
+</header>
+
+
+</body>
+</html>

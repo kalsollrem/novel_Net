@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>뷰어</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript" src="../js/viewer.js"></script>
+    <script th:inline="javascript" src="../js/reply.js"></script>
+</head>
+<body>
+<div class="wrap dragBlock">
+    <!---------------- 메뉴바 ---------------->
+    <div class="viewer_guide">
+        <div class="guide_menu">
+            <div class="home_button">
+                <button type="button" th:onclick="|location.href='@{/novelnet/novel(n_num=${n_num},sort=${sort},page=${page})}'|">
+                    <img src="../img/home_button.png" alt="홈">
+                </button>
+            </div>
+            <ul class="title_data">
+                <li><b  th:if="${memoVO.getNovel_name()}"
+                        th:text="${memoVO.getNovel_name()}"></b></li>
+                <li th:if="${memoVO.getM_title()}"
+                    th:text="${memoVO.getM_title()}"></li>
+            </ul>
+            <div class="c_list" >
+                <select name="c_sel" class="c_sel">
+                    <th:block th:each="mlist : ${memoVOList}">
+                    <option th:value="${mlist.m_num}"
+                            th:text="${mlist.ep}+'화'" th:selected="${param.chapter.toString()}==${mlist.m_num}">1화</option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="chapter_selete">
+                <img src="../img/chapter.png" alt="챕터">
+                <div class="listText">목록</div>
+            </div>
+        </div>
+    </div>
+    <div class="chapter_guide">
+        <ul class="guide_nebi">
+            <!-- 이전화 버튼 -->
+            <th:block th:if="${#strings.equals(param.type, 'gong')}">
+                <li><a th:unless="${back}" th:href="${back}"><br></a></li>
+            </th:block>
+            <th:block th:unless="${#strings.equals(param.type, 'gong')}">
+                <li><a th:if="${back}"     th:href="${back}">◀ 이전화</a></li>
+                <li><a th:unless="${back}" th:href="${back}"><br></a></li>
+            </th:block>
+            <!-- 이전화 버튼 -->
+            <li class="reply_button"><img src="../img/reply_off.png" alt="댓글" class="replyB_img"> 댓글</li>
+            <li class="memo_good"><img class="good_img" src="../img/good_Down.png" alt="추천">
+                <span class="memo_good_text" th:text="'('+${memoVO.getM_good()}+'개)'">(100)</span>
+                <input type="hidden" class="good_value" th:value="${memoVO.getM_good()}">
+            </li>
+            <!-- 다음화 버튼 -->
+            <th:block th:if="${#strings.equals(param.type, 'gong')}">
+                <li><a th:unless="${next}" th:href="${next}"><br></a></li>
+            </th:block>
+            <th:block th:unless="${#strings.equals(param.type, 'gong')}">
+                <li><a th:if="${next}"     th:href="${next}">다음화 ▶</a></li>
+                <li><a th:unless="${next}" th:href="${next}"><br></a></li>
+            </th:block>
+            <!-- 다음화 버튼 -->
+        </ul>
+    </div>
+    <!---------------- 메뉴바 ---------------->
+
+    <div class="viewer_main">
+
+        <!---------------- 댓글 ---------------->
+        <div class="reply_zone">
+            <div class="reply_banner">
+                <h3>소설 전체 댓글</h3>
+                <span th:text="'('+${ReplyCnt}+'건)'">리플갯수</span>
+            </div>
+            <!-- 리플 다는 구간 -->
+            <div class="replyLendingZone" id="reply_0">
+                <div class="reply_write">
+                    <form action="/replyWrite.do" method="post">
+                        <!-- 넘겨줄 값 -->
+                        <input type="hidden" name="r_rnum" value="0">
+                        <!-- 넘겨줄 값 -->
+                        <div class="imoticon_add">
+                            <div class="reply_imoticon">
+                                <img src="../imoticon/imo001.jpg" id="imo001" onclick="imo_on(this.id)" alt="뿅">
+                                <img src="../imoticon/imo002.jpg" id="imo002" onclick="imo_on(this.id)" alt="아루">
+                                <img src="../imoticon/imo003.jpg" id="imo003" onclick="imo_on(this.id)" alt="몰루">
+                                <img src="../imoticon/imo004.jpg" id="imo004" onclick="imo_on(this.id)" alt="더줘">
+                                <img src="../imoticon/imo005.jpg" id="imo005" onclick="imo_on(this.id)" alt="노휴먼">
+                                <img src="../imoticon/imo006.jpg" id="imo006" onclick="imo_on(this.id)" alt="두잇">
+                                <img src="../imoticon/imo007.jpg" id="imo007" onclick="imo_on(this.id)" alt="퍼엉">
+                                <img src="../imoticon/imo008.jpg" id="imo008" onclick="imo_on(this.id)" alt="에라">
+                                <img src="../imoticon/imo009.jpg" id="imo009" onclick="imo_on(this.id)" alt="개추">
+                                <img src="../imoticon/imo010.jpg" id="imo010" onclick="imo_on(this.id)" alt="원펀">
+                                <div class="imoticon_delete">
+                                    <img class="deleteImo" src="../img/delete_2.png" alt="삭제">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="imoticon_zone"></div>
+                        <div class="replay_make">
+                            <textarea name="reply_memo" id="reply_area" rows="5" placeholder="댓글을 입력해 보세요."></textarea>
+                            <input type="button" value="댓글 입력" class="reply_commit" id="reply_commit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- 리플 다는 구간 -->
+            <div class="reply_table" th:each="reply : ${replyVOList}">
+                <div th:if="${reply.r_rnum == '0'}">
+                    <div class="replyLendingZone" th:id="'reply_'+${reply.r_num}"></div>
+                    <div class="reply">
+                        <div class="user_nick">
+                            <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
+                            <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>
+                            <div class="nickname" th:text="${reply.nick}">작성자</div>
+                        </div>
+                        <div class="reply_date" th:text="${#strings.substring(reply.r_date,5 ,10)}">수정일</div>
+                        <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
+                        <div class="reply_gb">
+                            <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)">■신고</div>
+                            <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
+                            <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
+                            <div class="re_reply reply_box"><span th:id="${reply.r_num}" class="answer_r" onclick="answer_r(this.id)">▣ 답글</span></div>
+<!--                            <div class="re_reply_count reply_box" th:if="${reply.r_baby != '0'}"><span>△</span> <span th:text="'대댓글 ('+${reply.r_baby}+'건)'"></span></div>-->
+                        </div>
+                    </div>
+                </div>
+                <div th:unless="${reply.r_rnum == '0'}">
+                    <div class="reply_arrow">
+                        <img src="../img/arrow_right.png" alt="#">
+                    </div>
+                    <div class="reply to_reply">
+                        <div class="user_nick">
+                            <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
+                            <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>                                <div class="nickname" th:text="${reply.nick}">작성자</div>
+                        </div>
+                        <div class="reply_date" th:text="${#strings.substring(reply.r_date,5 ,10)}">수정일</div>
+                        <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
+                        <div class="reply_gb">
+                            <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)">■신고</div>
+                            <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
+                            <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---------------- 댓글 ---------------->
+
+
+        <!---------------- 회차 목록 ---------------->
+<!--        <div class="ep_data">-->
+<!--            <div class="ep_list">-->
+<!--                <div class="ep_sort">-->
+<!--                    <span>회차리스트</span>-->
+<!--                    <div class="sort_button">최신화 순으로 정렬↑↓</div>-->
+<!--                </div>-->
+<!--                <div class="ep_listup">-->
+<!--                    <div class="ep_box gongji">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box gongji">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <div class="ep_num"> ep.2화 </div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <div class="ep_num"> ep.2화 </div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <div class="ep_num"> ep.2화 </div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <div class="ep_num"> ep.2화 </div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <div class="ep_num"> ep.2화 </div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <div class="ep_num"> ep.2화 </div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_box">-->
+<!--                        <div class="read_cheaker read_none"> </div>-->
+<!--                        <div class="ep_tac">-->
+<!--                            <div class="ep_title">공지</div>-->
+<!--                            <div class="ep_num"> ep.2화 </div>-->
+<!--                            <ul class="ep_count">-->
+<!--                                <li><img src="../img/byte.png" alt="용량">4,001</li>-->
+<!--                                <li><img src="../img/count_peopel.png" alt="조회수">12,301</li>-->
+<!--                                <li><img src="../img/reply.png" alt="댓글">1</li>-->
+<!--                                <li><img src="../img/good.png" alt="추천">21</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="ep_date">21.05.02</div>-->
+<!--                    </div>-->
+<!--                    <div class="ep_paging">-->
+<!--                        <div class="paging_card">←</div>-->
+<!--                        <div class="paging_card">◁</div>-->
+<!--                        <div class="paging_card">1</div>-->
+<!--                        <div class="paging_card">2</div>-->
+<!--                        <div class="paging_card">3</div>-->
+<!--                        <div class="paging_card">4</div>-->
+<!--                        <div class="paging_card">5</div>-->
+<!--                        <div class="paging_card">▷</div>-->
+<!--                        <div class="paging_card">→</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <!---------------- 회차 목록 ---------------->
+
+
+        <!---------------- 뷰어  ---------------->
+
+        <div th:if="${memoVO.getM_memo()} != null"     th:utext="${memoVO.getM_memo()}" class="viewer_memo"> 페이지를 제대로 불러오지 못했습니다. </div>
+        <div th:unless="${memoVO.getM_memo()} != null" class="viewer_memo"> 내용 </div>
+
+        <!---------------- 뷰어  ---------------->
+
+
+        <div class="chapter_next">
+            <div class="next_bar">댓글 더보기</div>
+            <div class="last_bar">마지막 화 입니다</div>
+            <div class="gongji_bar">여기까지가 공지 내용입니다.</div>
+            <div class="reply_bar">더 이상 댓글이 없습니다.</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

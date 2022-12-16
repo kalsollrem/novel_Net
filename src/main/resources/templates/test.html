@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<table border="1" align="center">
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>내용</th>
+    </tr>
+    <tr th:each="memo : ${MemoList}">
+        <td th:text="${memo.m_num}"></td>
+        <td th:text="${memo.m_title}"></td>
+        <td th:text="${memo.m_memo}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,862 @@
+@charset "utf-8";
+
+/* 베이스 */
+*       { margin:0px; padding: 0px;}
+body    { color:#333; text-decoration: none; }
+ul      { list-style: none;}
+a       { text-decoration: none;}
+a:visited { color:#333; }
+a:active  { color:#333; }
+a:hover   { color:#333; text-decoration: none;}
+a:link    { color:#333; text-decoration: none;}
+
+
+
+img     { vertical-align: top; border:0px}
+
+/* 틀 */
+.wrap           {margin: auto; position: relative;}
+
+header          {width: 1200px; height: 100px; margin: auto;}
+header .logo    {width: 120px; height: 100px; float: left; }
+header .menu    {width: 440px; height: 100px; float: left; }
+header .menu>li {width: 80px; height: 100px; float: left; font-size: 25px; text-align: center; line-height: 100px; margin-left: 20px; font-weight: bold;}
+header .myInfo  {width: 200px; height: 100px; float: right; position: relative;}
+
+header .myInfo .info_front{ margin-top: 30px; float: right;}
+header .myInfo .info_front>li {width: 40px; height: 40px; margin-right: 10px; float: left;}
+header .myInfo .info_front>li>a>img {width: 26px; height: 26px; margin: 7px 0px 0px 7px;}
+header .myInfo .info_front>li>span>a>img {width: 40px; height: 40px; border-radius: 2em;}
+
+header .myInfo .info_menu{ width: 190px; position: absolute; margin: 101px 0px 0px 9px;  z-index: 1; border: 1px solid #333; box-sizing: border-box; display: none; }
+header .myInfo .info_menu >li{ width: 100%; line-height:50px; height: 50px; background-color: white; font-size: 13px; font-weight: bold; border-bottom: 1px solid silver;}
+header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
+
+/* 모달용 옵션 */
+.show {display: block;}
+
+/* 드래그 방지 */
+.dragNone {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+.spaceUP
+{
+    height: 100px;
+}
+
+/* 배너 */
+.contents {width: 1200px; margin: auto;}
+
+.wrap .back_slide{position: absolute; width: 100%; height: 280px; overflow: hidden; background-color: red;}
+.wrap .back_slide .b-slide-cont {position: relative; width: 100%; height: 300%;}
+.wrap .back_slide .b-slide-cont .b-slide-1{width: 100%; height: 280px; background-color: aqua;}
+.wrap .back_slide .b-slide-cont .b-slide-2{width: 100%; height: 280px; background-color: rosybrown;}
+.wrap .back_slide .b-slide-cont .b-slide-3{width: 100%; height: 280px; background-color: royalblue;}
+
+.slide          {width:1200px; height:280px; background-color:aliceblue; overflow: hidden;}
+.slide-cont     {position: relative; width: 1200px; height: 300%;}
+.slide-cont img {display: block; height: 280px; width: 1200px;}
+
+
+
+
+.contents .main_content                 {margin: auto; width: 1200px; }
+.contents .main_content .link_zone      {width: 100%; height: 130px;    background-color:bisque;}
+.contents .main_content .recomend_pd    {width: 1200px; height: 400px;  background-color: blue;}
+.contents .main_content .hot_novel      {width: 1200px; height: 600px;  background-color:blueviolet; }
+
+.contents .main_content .hot_novel .hot_tag      {width: 100%; height: 150px; display: block; background-color:gold; }
+.contents .main_content .hot_novel .best_one     {width: 400px; height: 450px; float: left; background-color:pink; }
+.contents .main_content .hot_novel .best_two     {width: 400px; height: 450px; float: left; background-color:aqua; }
+.contents .main_content .hot_novel .best_three   {width: 400px; height: 450px; float: left; background-color:pink; }
+
+/*추천픽(.contents .main_content .recomend_pd) */
+.recomend_pd .recomend_pd_tal       {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; background-color: rgb(206, 200, 212); }
+.recomend_pd .recomend_pd_novel     {width: 100%; height: 350px;}
+.recomend_pd .recomend_pd_novel>li  {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px; background-color: aliceblue; position: relative;}
+.recomend_pd .recomend_pd_novel>li .img_zone    {width: 180px; height: 250px; background-color: aqua; display: block;}
+.recomend_pd .recomend_pd_novel>li .novel_title {width: 180px; height: 40px; line-height: 40px; font-size: 20px; margin-top: 10px; background-color: rgb(2, 20, 20); display: block;}
+.recomend_pd .recomend_pd_novel>li .writer_name {width: 180px; height: 25px; line-height: 25px; font-size: 15px; background-color: rgb(2, 20, 20); display: block;}
+
+
+/*베스트 소설*/
+.hot_novel .hot_tag .hot_title { width: 1200px; height:60px; line-height: 60px; font-size: 28px; background-color:aliceblue;}
+
+.contents .main_content .hot_novel .novel_what                           {width: 390px; height: 50px; margin:5px 5px 5px 5px; background-color:azure }
+.contents .main_content .hot_novel .novel_choose                         {width: 390px; height: 120px; margin-left: 5px; margin-right: 5px; margin-bottom: 10px; background-color:gray; }
+.contents .main_content .hot_novel .novel_choose img                     {float: left; width: 80px; height: 120px; background-color:palevioletred; margin-right: 10px;}
+.contents .main_content .hot_novel .novel_choose .novel_date             {float: left;}
+.contents .main_content .hot_novel .novel_choose .novel_date .novel_name {width: 300px; height: 40px; background-color: aqua; display: flex;}
+.contents .main_content .hot_novel .novel_choose .novel_date .writer_name{width: 300px; height: 40px; background-color:blanchedalmond; display: flex;}
+.contents .main_content .hot_novel .novel_choose .novel_date .novel_tags {width: 300px; height: 35px; background-color:cadetblue; display: flex; padding-top: 5px;}
+
+
+.contents .main_content .hot_novel .novel_choose .novel_date .novel_name>a> {margin-top: 5px;}
+.contents .main_content .hot_novel .novel_choose .novel_date h2{float: left; display: flex; align-items: center; margin-right: 5px;}
+.contents .main_content .hot_novel .novel_choose .novel_date h3{float: left; margin-top: auto; margin-bottom: auto; font-size: 16px;}
+.contents .main_content .hot_novel .novel_choose .novel_date h6{float: left;}
+
+
+
+.recomend_tag                  {width: 1200px; height: 400px;  background-color: blue;}
+.recomend_tag .recomend_pd_tal {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; background-color: rgb(206, 200, 212); }
+.recomend_tag .recomend_pd_tal {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; background-color: rgb(206, 200, 212); }
+.recomend_tag .recomend_pd_novel                 {width: 100%; height: 350px;}
+.recomend_tag .recomend_pd_novel>li              {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px; background-color: aliceblue; position: relative;}
+.recomend_tag .recomend_pd_novel>li .img_zone    {width: 180px; height: 250px; background-color: aqua; display: block;}
+.recomend_tag .recomend_pd_novel>li .novel_title {width: 180px; height: 40px; line-height: 40px; font-size: 20px; margin-top: 10px; background-color: rgb(2, 20, 20); display: block;}
+.recomend_tag .recomend_pd_novel>li .writer_name {width: 180px; height: 25px; line-height: 25px; font-size: 15px; background-color: rgb(2, 20, 20); display: block;}
+
+
+/* 랭킹 페이지 */
+
+
+.ranking              {width: 1200px; }
+.ranking .category    {width: 1200px; height: 100px; }
+.ranking .category>li {width: 200px; height: 70px; line-height: 70px;
+    text-align: center; font-size: 25px; color:gray; float: left;
+    margin: 15px 0px 0px 80px; border-radius:50%; border: 0.5px solid silver;}
+
+.ranking .ranking_list                                {width: 1250px;}
+.ranking .ranking_list>li                             {width: 200px; height: 350px; display:inline-block; margin: 20px 45px 0px 0px}
+.ranking .ranking_list .ranking_img_zone              {width: 100%; height: 280px; background-color:wheat; position: relative;}
+.ranking .ranking_list .ranking_img_zone img          {width: 200px; height: 280px; position: absolute;}
+.ranking .ranking_list .ranking_img_zone .ranking_num {height: 25px; width: 30px; text-align: center; line-height: 25px; position: absolute; background-color:aliceblue;}
+
+.ranking_novel_title             {width: 200px; height: 40px; line-height: 40px; background-color: aliceblue; font-weight: bold;}
+.ranking_novel_title .rnt_inside {margin-left: 5px;}
+.ranking_writer_name             {width: 100%; height: 30px; line-height: 30px; font-size: 12px; color: beige; background-color: rgb(118, 135, 150);}
+.ranking_writer_name >a          {margin-left: 5px; }
+
+/* 추가 로드 */
+.ranking .ranking_load        {width: 1200px; height: 100px;}
+.ranking .ranking_load>button {width: 300px; height: 60px; font-size: 25px; margin: 20px 0px 0px 450px;}
+
+
+/* 회원가입 */
+.sign   {width: 100%; height: 100vh; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: none;}
+.sign .sign_box   {width: 500px; height: 800px; background-color:white; position:relative; }
+.sign .sign_box .sign_logo  {width: 100%; height: 150px; }
+.sign .sign_box .sign_logo>img {margin-left: 190px; margin-top: 25px;}
+.sign .sign_box #sign_close { position: absolute; width: 60px; height: 60px; margin-left: 440px; font-size: 50px; border: 0px; background-color: white;}
+
+.sign .sign_date_bag  {width: 370px; height: 390px; background-color:rgb(253, 250, 250); position: absolute; margin-left: 65px;}
+
+.sign .sign_date  {width: 350px; height: 410px; margin-left: 75px; }
+.sign .sign_date>li  {width: 100%; height: 100px; position: relative; }
+.sign .sign_date>li .mark_box   {width: 100%; height: 60px; }
+.sign .sign_date>li .cheak_box  {width: 265px; height: 30px; margin-left: 85px;  margin-top: -10px;}
+
+.sign .sign_date>li .mark_box .ask_U                      {width: 80px; height: 60px; font-size: 12px; font-weight:bold; line-height: 60px; ; float: left; }
+.sign .sign_date>li .mark_box .answer_U                   {width: 270px; height: 60px;  margin-left: 80px;}
+.sign .sign_date>li .mark_box .answer_U #e-mail           {width: 250px; height: 30px; margin-top: 15px; margin-left: 5px; font-size: 13px;}
+.sign .sign_date>li .mark_box .answer_U #password         {width: 250px; height: 30px; margin-top: 15px; margin-left: 5px; font-size: 13px;}
+.sign .sign_date>li .mark_box .answer_U #password_cheak   {width: 250px; height: 30px; margin-top: 15px; margin-left: 5px; font-size: 13px;}
+.sign .sign_date>li .mark_box .answer_U #nick_name        {width: 250px; height: 30px; margin-top: 15px; margin-left: 5px; font-size: 13px;}
+.sign .sign_date>li .cheak_box .cheak_answer              {width: 100%; height: 30px; line-height: 30px; font-weight: bold; color: rgb(241, 76, 76); font-size: 12px;}
+
+.sign .sing_deal                            {width: 350px; height: 120px; }
+.sign .sing_deal >li                        {width: 350px; height: 50px; position: relative;  margin-left: 75px;}
+.sign .sing_deal >li .deal_ok               {width: 300px; height: 50px; line-height: 50px; font-size: 18px; float: left;}
+.sign .sing_deal >li .yes_box               {width: 50px; height: 50px; margin-left: 300px;}
+.sign .sing_deal >li .yes_box #contract_ok  {width: 30px; height: 30px;  margin-left: 10px; margin-top: 10px;}
+.sign .sing_deal >li .yes_box #age_ok       {width: 30px; height: 30px; margin-left: 10px; margin-top: 10px;}
+
+.sign .sign_box .sign_botton            {width: 500px; height: 60px; }
+.sign .sign_box .sign_botton #sign_yes  {width: 400px; height: 40px; background-color: #333; color: aliceblue; font-size: 20px; border: 0px; margin-left: 50px; margin-top: 10px;}
+
+.sign .sign_box .sign_out                   {width: 300px; height: 30px; margin-left: 100px; margin-top: 2px; line-height: 30px; position: relative;}
+.sign .sign_box .sign_out .password_find    {width: 190px; height: 30px; text-align: center; float: left;}
+.sign .sign_box .sign_out .slash            {width: 10px;  height: 30px; text-align: center; float: left;}
+.sign .sign_box .sign_out .login_change     {width: 100px; height: 30px; text-align: center; float: left;}
+
+/* 회원가입 */
+
+
+
+/* 로그인 */
+.login   {width: 100%; height: 100%; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: none;}
+.login .login_box   {width: 500px; height: 480px; background-color:white; position:relative; }
+.login .login_box .login_logo  {width: 100%; height: 150px;}
+.login .login_box .login_logo>img {margin-left: 190px; margin-top: 25px;}
+.login .login_box #login_close { position: absolute; width: 60px; height: 60px; margin-left: 440px; font-size: 50px; border: 0px; background-color: white;}
+
+
+.login .login_box .login_bag                    {width: 370px; height: 160px; position: absolute; margin-left: 65px; margin-top: 10px; background-color:rgb(245, 245, 250);}
+
+.login .login_box .login_form                   {width: 350px; height: 180px; position: relative; margin-left: 75px;}
+.login .login_box .login_form .login_id         {width: 100%; height: 50px; background-color:rgb(220, 250, 250); position: absolute; margin-top: 30px;}
+.login .login_box .login_form .login_password   {width: 100%; height: 50px; background-color:rgb(220, 250, 250); position: absolute; margin-top: 100px;}
+.login .login_box .need                         {width: 300px; height: 100%; margin-left: 25px;}
+.login .login_box .need #login_id               {width: 290px; height: 100%; border: 0px; padding-left: 10px;}
+.login .login_box .need #login_password         {width: 290px; height: 100%; border: 0px; padding-left: 10px;}
+
+.login .login_box .login_zone                   {width: 260px; height: 50px; margin-left: 120px; margin-top: 30px;}
+.login .login_box .login_zone .login_button     {width: 260px; height: 50px; background-color: #333; color: aliceblue; font-size: 20px; border: 0px; }
+
+.login .login_box .login_out                     {width: 180px; height: 30px;  margin-left: 160px; margin-top: 20px;}
+.login .login_box .login_out .sign_find          {width: 70px; height: 30px; float: left; line-height: 30px; text-align: center; font-size: 13px;}
+.login .login_box .login_out .slash              {width: 10px; height: 30px; float: left; line-height: 30px; text-align: center; font-size: 13px;}
+.login .login_box .login_out .password_find      {width: 90px; height: 30px; float: left; line-height: 30px; text-align: center; font-size: 13px;}
+
+/* 로그인 */
+
+/* 소설 검색 */
+
+.search_window {display: block;}                            /* 전체 창 관리 */
+.search_space {width: 100%; height: 500px; display: none;}  /* 공백 관리 */
+
+.search_change {width: 100%; height: 100px; margin-top: 25px;}
+
+.search_choose
+{
+    border-top: solid 1px black;
+    border-right: solid 1px black;
+    border-left: solid 1px black;
+    box-sizing: border-box;
+    float: left;
+    font-weight: bold;
+}
+.search_none
+{
+    border-top: solid 1px rgba(1, 1, 0, 0.2);
+    border-right: solid 1px rgba(1, 1, 0, 0.2);
+    border-left: solid 1px rgba(1, 1, 0, 0.2);
+    border-bottom: solid 1px black;
+    box-sizing: border-box;
+    float: left;
+}
+
+.search_change .search_box    {width: 400px; height: 60px; line-height: 60px; text-align: center; font-size: 20px;}
+
+.search_change .search_all    {margin-left: 1px; }
+.search_change .search_new    {margin-left: -1px;}
+.search_change .search_fin    {margin-left: -1px;}
+.search_change .book_title  {margin-left: 1px; }
+.search_change .book_hashtag{margin-left: -1px;}
+.search_change .book_witter {margin-left: -1px;}
+
+.search_menu {width: 1200px; height: 100px; margin-top: 25px;}
+.margin_bottom25 {margin-bottom: -25px;}
+.margin_bottom10 {margin-bottom: -10px }
+
+.search_menu .search_date {width: 100%; height: 50px; line-height: 50px; border-bottom: 2px solid black;}
+.search_menu .search_date .search_count
+{width: 530px; height: 100%; font-weight: bold; margin-left: 10px; float: left;}
+
+.font_option20 {font-size: 20px;}
+.font_option15 {font-size: 15px;}
+
+.search_menu .search_date .search_what {float: right; margin-left: 20px; }
+
+
+.date_box  {float: left; width: 150px; height: 100%; }
+.box_option8035 {float: left; width: 100px; height: 100%; margin-top: 12px; } /* 검색용 공개추천조회수 박스크기 */
+.box_option8035>img {float: left; width: 80px; height: 34px; vertical-align: bottom;} /* 검색용 공개추천조회수 박스크기 */
+
+.search_date .date_view {float: left; }
+.search_date .search_write {float: right; width: 180px; height: 100%;}
+
+.search_menu .tag_box {width: 100%; height: 50px; line-height: 50px; border-bottom: 1px solid silver;}
+.search_menu .tag_box .tag_add {width: 100px; float: left;}
+.search_menu .tag_box .tag_add .tag_search {width: 80px; height: 34px; margin-left: 10px; margin-top: 8px; border: 1px solid silver;}
+.search_menu .tag_box .tag_zone  {width: 1100px; height: 50px; float: left;}
+.search_menu .tag_box .tag_zone .tag_card {width: 80px; height: 34px; margin-left: 25px; margin-top: 8px; line-height: 34px; text-align: center; border-radius:0.5em; float: left; border: 1px solid gray; color: gray;}
+.search_menu .tag_box .tag_zone .tag_card_choose{ background-color: #333; color: white; border: 1px solid #333;}
+
+.search_list    {width: 100%; }
+.search_list .search_novel { width: 100%; height: 220px; border-bottom: 1px solid silver; margin-top: 20px;}
+.search_list .search_novel .novel_img {height: 100%; width: 100px; float: left;}
+.search_list .search_novel .novel_img>img {height: 150px; width: 100px; margin-top: 10px; border-bottom-right-radius:1em ; box-shadow: 5px 5px 5px gray;}
+
+/*업태그*/
+.up_tag {width: 30px; height: 30px; position: absolute; margin-left: 85px; }
+
+.search_list .search_novel .novel_data {height: 100%; width: 1080px;  float: left; margin-left: 20px;}
+.search_list .search_novel .novel_data .searched_title { width: 100%; height: 40px; line-height: 40px; }
+.searched_title .st_title {height: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left;}
+.searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px;}
+
+
+.search_list .search_novel .novel_data .searched_tag {width: 100%; height: 45px; }
+.searched_tag .searched_tagcard {padding-left: 10px; padding-right: 10px; height: 25px; margin-right: 5px; margin-top: 10px;
+    line-height: 25px; text-align: center; border-radius:1em; font-weight: bold;
+    float: left; border: 2px solid rebeccapurple; color:rebeccapurple;}
+
+.search_novel .novel_data .searched_time {width: 100px; height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+
+.search_list .search_novel .novel_data .searched_pri          {width: 100%; height: 30px; font-size: 13px; color: gray;  }
+.search_list .search_novel .novel_data .searched_count        {width: 100%; height: 30px; line-height: 30px; margin-top: 10px;}
+.search_list .search_novel .novel_data .searched_count>li     {height: 100%; margin-right: 12px; font-weight: bold; font-size: 16px; float: left;}
+.search_list .search_novel .novel_data .searched_count>li>img {margin-top: 9px; margin-right: 5px;}
+
+.paging             {width: 100%; height: 80px; position: relative; }
+.paging_card        {line-height: 40px; font-size: 15px; text-align: center; background-color: whitesmoke;}
+.paging .paging_box {width: 380px; position: absolute; height: 40px; margin-left:430px; margin-top: 20px;}
+.paging .paging_box .paging_left  { width: 80px; height: 100%; float: left;}
+.paging .paging_box .paging_num   { width: 200px; height: 100%; float: left; margin-left: -5px; margin-right:-5px;}
+.paging .paging_box .paging_right { width: 80px; height: 100%; float: left}
+.paging .paging_box .paging_left  .paging_card  {width: 30px; height: 100%; margin-right: 10px; float: left;}
+.paging .paging_box .paging_num   .paging_card  {margin-left: 5px; margin-right: 5px; width: 30px; height: 100%; float: left;}
+.paging .paging_box .paging_right .paging_card  {width: 30px; height: 100%; margin-left: 10px; float: left;}
+.redad {color: red;}
+
+/* 검색창 */
+.search_finder   {width: 100%; }
+.search_finder .finder_box   {width: 100%; height: 50px; margin-top: 20px; border-bottom: 1px solid #333;}
+.search_finder .finder_box #search  {width: 95%; height: 50px; line-height: 50px; padding-left: 10px; border: 0px; vertical-align: bottom;}
+.search_finder .finder_box .search_go {width: 40px; height: 40px; border: 0px; margin-top: 5px; float: right;}
+.search_finder .finder_box .search_go>img {width: 40px; height: 40px; border: 0px;}
+.finder_banner   {width: 100%; height: 30px; line-height: 30px; margin-top: 20px; margin-bottom: -5px; }
+.finder_banner>span {color: #5B32DF; margin-left: 20px; font-weight: bold;}
+
+/* 태그 검색창 */
+.hashtag_finder   {display: none; }
+.hashtag_finder .hashtag_box   {width: 500px; height: 300px; z-index: 10; background-color:white; position:relative; border: 1px solid #ececec; border-radius: 1em;}
+.hashtag_finder .hashtag_box>h3  {width: 100%; height: 40px; line-height: 40px; text-align: center; margin-top: 20px;}
+.hashtag_finder .hashtag_box .text_zone  {width: 100%; height: 50px;}
+
+.text_zone #hashtag_find {width: 370px; height: 30px; padding-left: 10px; margin-top: 10px; margin-left: 50px;}
+.text_zone .search_go     {width: 30px; height: 30px; border: 0px; margin: 10px 25px 0px 0px; float: right;}
+.text_zone .search_go>img {width: 30px; height: 30px; border: 0px;}
+
+
+.hashtag_finder .hashtag_box .tag_list  {width: 440px; height: 144px; margin: 10px 0 0 20px; padding: 8px 10px 8px 10px; border-radius: 0.5em; border: 1px solid #ececec;}
+.tag_list .tag_card {padding-left: 10px; padding-right: 10px; height: 25px; margin-right: 5px; margin-top: 10px;
+    line-height: 25px; text-align: center; border-radius:1em; font-weight: bold;
+    float: left; border: 2px solid rebeccapurple; color:rebeccapurple;}
+
+/* 소설 검색 */
+
+
+/* 마이페이지 */
+.profile_bag     {width:100%; height:140px; background-color:rgb(250, 253, 255); margin-top: 50px; border-top: 1px solid #ECECEC; border-bottom: 1px solid #ECECEC;}
+
+.profile         {width:1200px; margin-top: -140px; ;}
+.profile_data    {width:1200px; height:140px; }
+.profile_data .profil_pic {width: 95px; height: 115px;  float: left; position: relative;}
+.profile_data .profil_pic>img {margin-top: 20px; border-radius: 3em; width: 95px; height: 95px; }
+.profile_data .pic_edit {width: 30px; height: 30px; position: absolute; background-color: white; border: 1px solid silver; margin-left: 65px; margin-top: 85px; border-radius: 2em;}
+.profile_data .pic_edit>img {width: 16px; height: 16px; margin-left: 7px; margin-top: 7px;}
+
+.profile_data .profil_name {width: 680px; height: 100%; float: left; font-weight: bold; font-size: 22px; line-height: 140px; margin-left: 20px;}
+.profile_data .profil_menu {width: 370px; height: 100%; float: right;}
+.profile_data .profil_menu>li {float: left; background-color: black; color: white;
+    padding-left: 15px; padding-right: 15px;
+    margin-left: 10px; margin-top: 70px; height: 40px; line-height: 40px;
+    border-radius: 20px; border: 0px;}
+/* 내 프로필 관리 */
+.profile_main               {width: 100%; height: 600px; margin-top: 30px; margin-bottom: 30px; display: none;}
+/* 내 댓글관리 */
+.serialized_reply           {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none;}
+.serialized_reply>h3        {width: 200px; height: 50px; line-height: 50px; text-align: center; background-color: #333; color: #ececec; border-radius: 0.5em; margin-bottom: 10px;}
+.reply_line {width: 200px; border: 1px solid #ececec; margin-top: 2px;}
+/* 내 정보관리 */
+.serialized_info            {width: 100%; margin-top: 30px; margin-bottom: 30px; }
+.serialized_info .info_change {width: 875px; margin-left: 50%; transform: translate(-50%,0%); border: 1px solid #ececec; box-shadow: 3px 3px #EEEEEE;}
+.info_change>li {width: 855px;  padding: 10px; display: flex; }
+.info_change>li .change_box {width: 120px; height: 40px; line-height: 40px; padding-left: 10px; float: left; font-weight: bold}
+.info_change>li>span {width: 400px; height: 40px; line-height: 40px; float: left; }
+.info_change>li>div { border: 1px solid #ececec; box-shadow: 3px 3px #EEEEEE;}
+
+.info_change>li .change_nick                 {width: 700px; height: 40px; line-height: 40px; padding-left: 10px; margin-left: 20px; float: left;}
+.info_change>li .change_nick .nick           {width: 305px; height: 30px; line-height: 40px; padding-left: 5px; margin: 5px 15px 0px 0px; float: left; border: 1px solid #EEEEEC; box-sizing: border-box; background-color: #fdfdfd;}
+.info_change>li .change_password             {width: 700px; height: 40px; line-height: 40px; padding-left: 5px; margin-left: 20px; float: left;}
+.info_change>li .change_password>span {width: 280px; height: 40px; line-height: 40px; float: left; font-size: 12px;}
+.info_change>li .change_password .password   {width: 310px; height: 30px; line-height: 40px; padding-left: 10px; margin: 5px 15px 0px 0px; float: left; border: 1px solid #EEEEEC; box-sizing: border-box; background-color: #fdfdfd;}
+.info_change>li .change_passcheck            {width: 700px; height: 40px; line-height: 40px; padding-left: 5px; margin-left: 20px; float: left;}
+.info_change>li .change_passcheck .passcheck {width: 310px; height: 30px; line-height: 40px; padding-left: 10px; margin: 5px 15px 0px 0px; float: left; border: 1px solid #EEEEEC; box-sizing: border-box; background-color: #fdfdfd;}
+.info_change>li .change_passcheck>span {width: 280px; height: 40px; line-height: 40px; float: left; font-size: 12px;}
+.info_change>li .change_mail                 {width: 700px; height: 40px; line-height: 40px; padding-left: 10px; margin-left: 20px; float: left;}
+.info_change>li .change_intro                {width: 700px; height: 200px; line-height: 40px; padding-left: 5px; margin-left: 20px; float: left; }
+.info_change>li .change_intro #intro         {width: 685px; height: 180px; line-height: 30px; margin-top: 5px; padding: 5px; border: 0px; float: left; resize: none; background-color: #fdfdfd;}
+.info_change>li .change_commit               {width: 655px; height: 40px; line-height: 40px; text-align: center; padding-top: 5px; padding-bottom: 5px; margin-left: 100px;}
+.info_change>li .change_commit .change_ok    {width: 645px; height: 100%; line-height: 40px; background-color: #333; color: white; font-size: 17px;}
+
+
+.profile_main .my_novel     {float: left;  width: 400px; height: 600px; position: relative; }
+.profile_main .my_novel .my_novels {width: 340px; height: 50px; line-height: 50px; margin-left: 20px; margin-top: 20px; padding-left: 20px; font-size: 18px; position: absolute; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+
+.profile_main .my_novel .novel_list   {width: 360px; height: 400px; position: absolute; border: 1px solid #ECECEC; margin-top: 80px; margin-left: 20px; overflow:auto; overflow-x:hidden; box-shadow: 3px 3px #EEEEEE;}
+
+.profile_main .my_novel .novel_list::-webkit-scrollbar {
+    overflow-x:hidden;
+    width: 5px;
+    background-color: #ECECEC;
+}
+.profile_main .my_novel .novel_list::-webkit-scrollbar-thumb{
+    background-color:#ECCCEC;
+    border-radius: 10px;
+}
+
+.profile_main .my_novel .novel_list>li{width: 340px; height: 50px; line-height: 50px; padding-left: 20px; border-bottom: 1px solid #CCECEC; }
+.profile_main .my_novel .novel_list>li>span {float: right; margin-right: 20px;}
+
+.profile_main .myself     {width: 800px; height: 600px; position: relative; float: left;}
+.profile_main .myself .self_info {width: 795px; height: 200px; margin-top: 20px;}
+.profile_main .myself .self_info>li {width: 250px; height: 100%; margin-right: 15px; float: left;}
+
+.profile_main .myself .self_intro { width: 780px; height: 390px;  margin-top: 10px; }
+.myself .sf_intro {width: 760px; height: 50px; margin-left: 5px; margin-top: 10px; position: absolute; line-height: 50px; font-size: 22px; font-weight: bold; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+.myself .my_intro {width: 760px; height: 315px; margin-left: 5px; margin-top: 70px; position: absolute; padding-left: 10px; padding-top: 5px; font-size: 18px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+
+.title_position          {line-height: 50px; font-size: 21px; font-weight: bold; width: 230px; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+.text_position           {line-height: 85px; font-size: 21px; font-weight: bold; width: 230px; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+
+.self_info li> .sf_date   {height: 50px; margin-left: 5px; margin-top: 0px;}
+.self_info li> .join_date {height: 85px; margin-left: 5px; margin-top: 20px;}
+.self_info li> .sf_bestpic {height: 50px; margin-left: 5px; margin-top: 0px;}
+.self_info li> .my_bestpic {height: 85px; margin-left: 5px; margin-top: 20px;}
+.self_info li> .sf_novel_info {height: 50px; margin-left: 5px; margin-top: 0px;}
+.self_info li> .my_novel_info {height: 85px; margin-left: 5px; margin-top: 20px;}
+
+
+/* 내 연재소설 관리:serialized_novel */
+.serialized_novel  {width: 100%; height: 530px; margin-top: 30px; margin-bottom: 30px; overflow-y: scroll; overflow-x:hidden; border: 1px solid #ECECEC; display: none;}
+.serialized_novel::-webkit-scrollbar {
+    overflow-x:hidden;
+    width: 3px;
+    background-color: #EEEEEC;
+}
+.serialized_novel::-webkit-scrollbar-thumb{
+    background-color:rgb(252, 155, 155);
+    border-radius: 10px;
+}
+
+
+.serialized_novel .list_up         {width: 100%; padding-top: 0px; padding-bottom: 10px; }
+
+
+
+.serialized_novel .list_up .lu_box {width: 1150px; height: 240px; margin-left: 20px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; margin-top: 10px;}
+.lu_box .lu_img     {width: 200px; height: 100%; float: left;}
+.lu_box .lu_img>img {width: 150px; height: 220px; margin: 10px 0px 0px 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; border-bottom-right-radius: 3em;}
+.lu_box .lu_data    {width: 970px; height: 100%; margin-left: -20px; float: left;}
+
+.lu_data .lu_title        {width: 940px; line-height: 60px; padding-left: 10px; font-size: 20px; font-weight: bold; height: 60px; margin-top: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; }
+.lu_data .lu_title>span   {font-size: 15px; font-weight: normal; margin-left: 10px;}
+
+.lu_box .lu_record        {width: 940px; height: 40px; line-height: 40px; margin-top: 10px; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+.lu_box .lu_record>li     {height: 100%; margin-right: 12px; font-weight: bold; font-size: 14px; float: left;}
+.lu_box .lu_record>li>img {margin-top: 14px; margin-right: 5px;}
+
+.lu_box .lu_pri            {width: 940px; height: 45px; line-height: 45px; margin-top: 10px; padding-left: 10px; font-size: 13px; font-weight: 500; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+
+.lu_box .lu_tag            {width: 940px; height: 35px; line-height: 40px; margin-top: 10px; padding-left: 10px;  border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; }
+.lu_tag .lu_tagcards       {padding-left: 8px; padding-right: 8px; height: 20px; margin-right: 5px; margin-top: 5px;    font-size: 12px;
+    line-height: 20px; text-align: center; border-radius:1em; font-weight: bold;
+    float: left; border: 2px solid rebeccapurple; color:rebeccapurple;}
+
+.lu_tag .lu_update {width: 120px; height: 25px; line-height: 25px; text-align: center; font-size: 12px;
+    border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; box-sizing: border-box;
+    margin: 5px 5px 0px 0px; float: right; }
+
+
+
+/* 내 서고 */
+.search_change {width: 100%; height: 60px; margin-top: 25px; }
+
+.book_choose
+{
+    border-top: solid 1px black;
+    border-right: solid 1px black;
+    border-left: solid 1px black;
+    box-sizing: border-box;
+    float: left;
+    font-weight: bold;
+}
+.book_none
+{
+    border-top: solid 1px rgba(1, 1, 0, 0.2);
+    border-right: solid 1px rgba(1, 1, 0, 0.2);
+    border-left: solid 1px rgba(1, 1, 0, 0.2);
+    border-bottom: solid 1px black;
+    box-sizing: border-box;
+    float: left;
+}
+
+.search_change .book_box    {width: 400px; height: 60px; line-height: 60px; text-align: center; font-size: 22px;}
+
+.search_change .book_all    {margin-left: 1px; }
+.search_change .book_new    {margin-left: -1px;}
+.search_change .book_fin    {margin-left: -1px;}
+
+.tag_box .search_zone{width: 1200px; height: 50px; float: left;}
+.tag_box .search_zone .booksearch {width: 190px; height: 30px; margin-left: 0px; padding-left: 10px;}
+.tag_box .book_set  {width: 1100px; height: 50px; float: left;}
+
+.search_sort {width: 120px; float: right;}
+.search_sort #sort_what { width: 110px; height: 30px; padding-left: 10px;}
+
+.book_list               {width: 100%; }
+.book_list .search_novel { width: 100%; height: 220px; border-bottom: 1px solid silver; margin-top: 20px;}
+.book_list .search_novel .novel_img {height: 100%; width: 120px; float: left; }
+.book_list .search_novel .novel_img>img {height: 150px; width: 110px; margin-top: 10px; border-bottom-right-radius:1em ; box-shadow: 5px 5px 5px gray;}
+
+.book_list .search_novel .up_tag {width: 30px; height: 30px; position: absolute; margin-left: 95px; }
+
+
+.book_list .search_novel .novel_data {height: 100%; width: 1065px;  float: left; margin-left: 15px; margin-top: 5px;}
+.book_list .search_novel .novel_data .searched_title { width: 100%; height: 40px; line-height: 40px;}
+.book_list .searched_title .st_title {height: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left;}
+.book_list .searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px;}
+
+
+.book_list .search_novel .novel_data .searched_tag {width: 100%; height: 45px; }
+.book_list .searched_tag .searched_tagcard {padding-left: 10px; padding-right: 10px; height: 25px; margin-right: 5px; margin-top: 10px;
+    line-height: 25px; text-align: center; border-radius:1em; font-weight: bold;
+    float: left; border: 2px solid rebeccapurple; color:rebeccapurple;}
+
+.book_list .search_novel .novel_data .searched_time {width: 100px; height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+.book_list .search_novel .novel_data .last_read {padding-left: 10px; padding-right: 10px; height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; background-color: #333; border: 1px solid #333; font-size: 13px; color: white;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+
+.book_list .search_novel .novel_data .book_next {width: 100px;  height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; background-color: #EECCEC; border: 1px solid #EECCEC; font-size: 13px; color: white;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+
+.book_list .search_novel .novel_data .no_update {width: 100px;  height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+
+
+.book_list .search_novel .novel_data .searched_pri          {width: 100%; height: 30px; font-size: 13px; color: gray;  }
+.book_list .search_novel .novel_data .searched_count        {width: 100%; height: 30px; line-height: 30px; margin-top: 10px;}
+.book_list .search_novel .novel_data .searched_count>li     {height: 100%; margin-right: 12px; font-weight: bold; font-size: 16px; float: left;}
+.book_list .search_novel .novel_data .searched_count>li>img {margin-top: 9px; margin-right: 5px;}
+
+.book_list .search_novel .novel_data .delete_button     {width: 30px; height: 30px; float: right; margin-right: 5px; margin-top: 5px; font-size: 13px;  text-align: center; line-height: 30px; }
+.book_list .search_novel .novel_data .delete_button>img {border: 1px solid silver; border-radius:0.2em;}
+
+/* 책 정보 */
+.book_info               {width: 100%; border-top: 1px solid #ECECEC; margin-top: 20px; margin-bottom: 20px; position: relative; }
+.book_info .book_img     {height: 100%; width: 220px; float: left; }
+.book_info .book_img>img {height: 240px; width: 180px; margin-top: 10px; border-bottom-right-radius:1em ; border-top-right-radius:1em ; }
+.book_info .book_img .bookmark {width: 180px; height: 40px; line-height: 40px; font-size: 15px; text-align: center; margin-top: 5px; border-radius:0.2em ; background-color: #111; color: white;}
+.book_info .book_img .bookmark a:visited{ text-decoration: none; color: white}
+.book_info .book_img .bookmark a:active { text-decoration: none; color: white}
+.book_info .book_img .bookmark a:hover  { text-decoration: none; color: white}
+.book_info .book_img .bookmark a:link   { text-decoration: none; color: white}
+
+
+
+.book_info .book_data {height: 100%; width: 965px;  float: left; margin-left: 15px; margin-top: 10px;}
+.book_info .book_data .searched_title { width: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left;}
+.book_info .book_data .searched_title .title_name    {float: left; width: 80%;}
+.book_info .book_data .searched_title .book_mark_zone{width: 55px; height: 55px; float: right; box-sizing: border-box; border-radius: 0.5em; margin-left: 10px; margin-top: -8px;}
+.book_info .book_data .searched_title .book_mark_zone>img {height: 45px; width: 45px; margin:2px 0px 0px 2px; float: right;}
+.border_pink {border: 4px solid #FFDBEC;}
+.border_gray {border: 4px solid gainsboro;}
+
+.book_info .book_data .searched_title .update_mark_zone{width: 55px; height: 55px; float: right; border: 4px solid rgb(92, 221, 161); box-sizing: border-box; border-radius: 0.5em; margin-left: 10px; margin-top: -8px;}
+.book_info .book_data .searched_title .update_mark_zone .updateIcon {width: 45px; margin:2px 0px 0px 2px}
+
+.border_line {width: 100%; border-bottom: 1px solid #ECECEC; margin-top: 20px; position: relative;}
+
+
+.book_info .book_data .book_tag {width: 100%; height: 45px; margin-top: 10px;}
+.book_info .book_tag .searched_tagcard {padding-left: 10px; padding-right: 10px; height: 25px; margin-right: 5px; margin-top: 10px;
+    line-height: 25px; text-align: center; border-radius:1em; font-weight: bold;
+    float: left; border: 2px solid rebeccapurple; color:rebeccapurple;}
+
+.book_info .book_tag .tag_guide {height: 25px; margin-right: 5px; margin-top: 10px; line-height: 25px; font-weight: bold; font-size: 16px; float: left; }
+
+.book_info .book_data .searched_time {width: 100px; height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+.book_info .book_data .last_read {padding-left: 10px; padding-right: 10px; height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; background-color: #333; border: 1px solid #333; font-size: 13px; color: white;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+
+.book_info .book_data .book_next {width: 100px;  height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; background-color: #EECCEC; border: 1px solid #EECCEC; font-size: 13px; color: white;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+
+.book_info .book_data .no_update {width: 100px;  height: 30px; float: right;
+    margin-right: 5px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
+    text-align: center; line-height: 30px; border-radius:0.2em;}
+
+.book_info .book_data .book_count        {height: 30px; line-height: 30px; margin-top: 60px; }
+.book_info .book_data .book_count>li     {height: 100%; padding-left: 10px; padding-right: 10px; margin-right: 8px; font-weight: bold; font-size: 16px; float: left; background-color: #ECECEC; border-radius:0.6em;}
+.book_info .book_data .book_count>li>img {margin-top: 9px; margin-right: 5px;}
+
+.book_info .book_data .book_pri          {width: 100%; font-size: 14px; color: black; margin-top: 20px; display: inline-block;}
+
+
+.ep_data                            {width: 100%; height: auto; margin-bottom: 20px; display:inline-block;}
+.ep_list                            {width: 800px;  float: left; }
+.another_books                      {width: 400px; float: left; display: inline; margin-top: 5px; }
+.another_books .books_anne          {width: 395px; height: 50px; line-height: 50px; padding-left: 10px; font-size: 18px; font-weight: bold; margin-bottom: 5px;}
+.another_books .another_bookcase    {width: 390px; line-height: 50px; font-weight: bold; margin-left: 5px; margin-bottom: 5px; border: 1px solid #ECECEC; display:inline-block; }
+.another_books .another_bookcase .another_data {width: 390px; height: 120px; margin-top: 8px;}
+.another_data .another_img     {width: 100px; height: 120px; float: left;}
+.another_data .another_img>a>img {height: 120px; width: 90px; margin-left: 5px;}
+.another_data .another_title   {width: 285px; height: 30px; line-height: 30px; padding-left: 5px; float: left;}
+.another_data .another_tag     {width: 275px; line-height: 30px; padding-left: 5px; float:left; min-height: 50px; margin-top: 30px; margin-bottom: 5px; border: 2px solid #ececec; border-radius: 0.3em; padding-bottom: 5px; border-radius: 0.4em;}
+.another_data .another_tag>li  {padding-left: 5px; padding-right: 5px; margin-top: 5px; margin-right: 5px; line-height: 20px; font-size: 13px; color: #666;  background-color: #F2F2F2; float: left; }
+
+.another_books .book_more      {width: 360px; height: 40px; line-height: 40px; text-align: center; font-size: 14px; font-weight: bold; margin: 10px 0px 10px 15px; border: 1px solid #ECECEC; border: 1px solid #ECECEC;}
+
+
+.ep_data .ep_listup     {width: 100%;  margin-top: 65px; }
+.ep_list .ep_sort       {height: 60px; width: 800px; line-height: 60px; float: left; border-bottom: 1px solid silver;}
+
+.ep_list .ep_sort>span         {height: 60px; width: 500px; line-height: 60px; float: left; margin-left: 5px; font-size: 18px; font-weight: bold;}
+.ep_list .ep_sort .sort_button {height: 60px; width: 150px; line-height: 60px; float: right; text-align: center; font-size: 13px;}
+.ep_list .ep_sort .sort_button >a {float: right;}
+
+.ep_box                         {width: 100%; height: 100px; background-color: white; border-bottom: 1px solid #ECECEC; display: flex;}
+.ep_box .read_cheaker           {width: 8px; height: 80px; margin: 10px 0px 0px 5px; float: left;}
+.ep_box .ep_tac                 {width: 700px; height: 100%; float: left; margin-left: 18px; }
+.ep_box .ep_tac .ep_title       {width: 695px; padding-left: 5px; height: 50px; line-height: 50px; font-size: 15px; font-weight: bold; }
+.ep_box .ep_tac .ep_count       {width: 100%; height: 30px; margin-top: 5px; }
+.ep_box .ep_tac .ep_count>li    {height: 100%; margin-left: 5px; margin-right: 12px; line-height: 30px; font-weight: bold; font-size: 12px; float: left; color: gray;}
+.ep_box .ep_tac .ep_count>li>img    {margin-top: 8px; margin-right: 5px; width: 15px; height: 15px; border: 1px solid #333; border-radius: 0.2em;}
+.ep_box .ep_date                    { width: 82px; height: 50px; line-height: 50px; text-align: center; font-weight: bold; float: left; }
+
+.ep_box .ep_tac .ep_num   {margin-left: 5px; margin-right: 12px; font-weight: bold; font-size: 12px; float: left; color: gray;
+    padding-left: 5px; padding-right: 5px; height: 20px; line-height: 20px; margin-top: 11px; background-color: #ECECEC; border-radius: 0.5em; }
+
+.gongji {background-color: #FEFFE5;}
+
+.read_none {background-color: #ECECEC;}
+.read_over {background-color: #8463F5;}
+
+.ep_paging              {width: 100%; height: 80px; margin: auto; display: flex; flex-direction: row; justify-content: center; }
+.ep_paging .paging_card {width: 30px; height: 40px; line-height: 40px; font-size: 15px; text-align: center;  margin: 20px 5px 0px 5px; border-radius: 0.2em; color: #333; font-weight: bold; background-color: #EEEEEE;}
+.ep_paging .paging_red_card {width: 30px; height: 40px; line-height: 40px; font-size: 15px; text-align: center; color:rgb(243, 63, 63); margin: 20px 5px 0px 5px; border-radius: 0.2em; font-weight: bold; background-color: #EEEEEE;}
+
+
+/* 댓글 */
+.reply_zone {width: 100%;}
+.reply_zone .reply_banner {width: 100%; height: 50px; line-height: 50px; border-bottom: 2px solid #333; margin-bottom: 5px;}
+.reply_zone .reply_banner>h3 {height: 60px; float: left;}
+.reply_zone .reply_banner>span {font-size: 12px; margin-left: 5px;}
+
+.reply                          {width: 100%; padding-bottom: 5px; border-bottom: 1px solid #ececec; margin-top: 5px;}
+.rereply_zone                   {width: 100%; padding-bottom: 5px; margin-top: 5px;}
+
+.reply .user_nick               {width: 100%; display: flex;}
+.reply .user_nick .nickname     {float: left; line-height: 30px; margin-left: 5px; font-size: 14px; font-weight: bold;}
+.reply .user_nick .user_pic     {float: right;}
+.reply .user_nick .user_pic>img {width: 30px; height: 30px; border-radius: 2em;}
+.reply .novel_where             {width: 100%; height: 30px; line-height: 30px; font-size: 20px; margin-left: 25px; margin-top: 10px; display: flex; }
+.reply .novel_where>h4          {float: left; }
+.reply .novel_where>.reply_where{float: left; margin-left: 5px; margin-top: 8px; }
+
+
+
+.reply .reply_date      { width: 100%; height: 20px; line-height: 20px; font-size: 12px; margin-left: 35px; color: green;}
+.reply .reply_where     { height: 20px; line-height: 20px; font-size: 12px; margin-left: 35px; margin-top: 5px; color:gray}
+.reply .reply_pic       { width: 100%; margin-left: 35px; margin-top: 10px;}
+.reply .reply_pic>img   { width: 80px; height: 80px;}
+.reply .reply_memo      { width: 100%; line-height: 20px; font-size: 14px; margin-left: 35px; margin-top: 10px; color:#333;}
+
+.reply .reply_gb        { width: 100%; height: 20px; line-height: 20px; font-size: 14px; margin-top: 10px; color:#333; }
+.reply .reply_my        { width: 100%; height: 20px; line-height: 20px; font-size: 14px; margin-top: 10px; color:#333; }
+.reply .reply_box       { line-height: 20px; font-size: 12px; padding-left: 5px; padding-right: 5px; float: right; border-right: 1px solid #ececec;}
+
+/* 댓글 버튼 옵션 : 타인 댓글 */
+.reply .reply_gb .re_reply_count{color: #333333;}
+.reply .reply_gb .re_reply      {color: gray;}
+.reply .reply_gb .reply_good    {color: #8463F5;}
+.reply .reply_gb .reply_bad     {color: rgb(233, 142, 99);}
+.reply .reply_gb .reply_singo   {color: red; border: 0px;}
+
+/* 댓글 버튼 옵션 : 내 댓글 */
+.reply .reply_my .re_reply      {color: gray;}
+.reply .reply_my .reply_delete  {color: red;} /*삭제*/
+.reply .reply_my .reply_amend   {color: rgb(135, 160, 243);} /*스장*/
+
+.reply .reply_good>img          { height: 14px; width: 14px; margin-top: 3px; margin-right: 2px; font-size: 14px; border-radius: 1em; }
+.reply .reply_bad>img           { height: 14px; width: 14px; margin-top: 3px; margin-right: 2px; font-size: 14px; border-radius: 1em; }
+
+.reply_zone       .to_reply     {width: 750px; margin-left: 50px; }                   /* 대 댓글용 */
+.serialized_reply .to_reply     {width: 1160px; margin-left: 50px; padding-top: 5px;} /* 대 댓글용 */
+
+.reply_zone       .reply_arrow  {width: 30px; height: 30px; float: left; margin-top: 10px;}
+.serialized_reply .reply_arrow  {width: 30px; height: 30px; float: left; margin-top: 10px;}
+.reply_arrow>img                {width: 18px; height: 18px; position: absolute; margin: -2px 0px 0px 25px;}
+
+.reply_more            {width: 100%; display: flex; flex-direction: row; justify-content: center; }
+.reply_more .reply_add {width: 250px; height: 35px; line-height: 35px; margin-top: 20px; text-align: center; font-size: 12px; font-weight: bold; color: #333; background-color:#ececec; border-radius: 2em; }
+
+/* 댓글 작성 */
+.reply_write                  {width: 100%; display: inline-block; padding-bottom: 15px; border-bottom: 1px solid #ececec;}
+.reply_write .imoticon_add    {width: 100%; }
+.reply_write .imoticon_add .reply_imoticon        {width: 100%; height: 50px; margin: 10px 0px 10px 0px; }
+.reply_write .imoticon_add .reply_imoticon>img    {width: 50px; height: 50px; border: 1px solid #ececec; box-sizing: border-box; float:left; margin-right: 10px;}
+.reply_write .imoticon_add .imoticon_delete       {width: 50px; height: 50px; float: right; }
+.reply_write .imoticon_add .imoticon_delete>img   {width: 40px; height: 40px; margin: 5px 0px 0px 5px; }
+
+.reply_write .imoticon_zone       {width: 100%; height: 140px; margin: 10px 0px 10px 0px; background-color: #ececec; border-top: 1px solid gainsboro; display: none;}
+.reply_write .imoticon_zone>img   {width: 120px; height: 120px; margin: 10px 0px 0px 15px; border: 1px solid #ececec; box-sizing: border-box;}
+
+.reply_write .replay_make               {width: 100%; background-color: #666; }
+.reply_write .replay_make #reply_area   {width: 80%; resize: none; padding: 15px 5px 5px 10px; font-size: 15px; float: left; border: 1px solid silver; box-sizing: border-box;}
+#reply_area::placeholder                {width: 80%; font-size: 15px;}
+
+.reply_write .replay_make #reply_area::-webkit-scrollbar {
+    overflow-x:hidden;
+    overflow-y: hidden;
+    width: 7px;
+    background-color: #ECECEC;
+}
+.reply_write .replay_make #reply_area::-webkit-scrollbar-thumb{
+    background-color:#111;
+    border-radius: 10px;
+}
+
+.reply_write .replay_make .reply_commit {width: 20%; height: 107px; font-size: 16px; float: left; background-color: #333; color: white; box-sizing: border-box; border: 1px solid #333;}
+.reply_write .replay_make .reply_commit:hover {background-color: #23272B;}
+
+.dragBlock {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+/* 뷰어 */
+.viewer_guide               {width: 100%; height: 70px; position: fixed; background-color: white; box-shadow: 0px 2px 5px rgb(197, 197, 197);}
+.viewer_guide .guide_menu   {width: 1200px; height: 100%; margin: auto;}
+.viewer_guide .guide_menu .home_button {width: 60px; height: 100%; float: left;}
+.viewer_guide .guide_menu .home_button>button {width: 50px; height: 50px; margin: 10px 0px 0px 15px; border: 0px; }
+.viewer_guide .guide_menu .home_button>button>img {width: 50px; height: 50px;}
+.viewer_guide .guide_menu .title_data   {width: 800px; height: 60px; margin: 10px 0px 0px 20px; float: left;}
+.viewer_guide .guide_menu .title_data>li {height: 25px; line-height: 25px; font-size: 15px; width: 100%; display: block;
+                                          overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.viewer_guide .guide_menu .chapter_selete {height: 50px; margin-top: 15px; float: right;}
+.viewer_guide .guide_menu .chapter_selete>img {width: 20px; height: 20px; float: left; margin-top: 10px;}
+.viewer_guide .guide_menu .chapter_selete>div {width: 45px; height: 40px; line-height: 40px; margin-left: 5px; font-size: 18px; font-weight: bold; float: left;}
+
+.c_list {width: 80px; height: 40px; padding: 5px; margin-left: 00px; margin-top: 10px; float: right; display: none}
+.c_sel  {width: 70px; height: 20px; margin-top: 10px; margin-left: 5px; border-radius: 0.5em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.chapter_guide                {position: fixed; left: 0; right: 0; bottom: 0; height: 70px; width: 100%; background-color: white; box-shadow: 2px 2px 8px 2px gray;}
+.chapter_guide .guide_nebi    {margin: auto; width: 1200px; height: 100%;}
+.chapter_guide .guide_nebi>li {width: 25%; line-height: 70px; text-align: center; font-size: 18px; font-weight: bold; float: left;}
+.chapter_guide .guide_nebi>li>img {width: 30px; height: 30px; margin-top: 20px;}
+.chapter_guide .guide_nebi>li>span {font-size: 15px; padding-left: 5px;}
+
+.viewer_main                {width: 1200px;  margin: auto; padding-top: 150px; padding-bottom: 150px; }
+.viewer_main .viewer_memo   {font-size: 20px; line-height: 35px;}
+.viewer_main .reply_zone    {margin-top: -70px; display: none;}         /* 댓글존 */
+.viewer_main .ep_data       {margin-top: -70px; margin-left: 200px; margin-bottom: -50px; display: none;}    /* 회차 리스트 */
+
+.chapter_next               {width: 100%; display:flex; flex-direction: row; justify-content: center; }
+.chapter_next .next_bar     {width: 60%; height: 50px; line-height: 50px; margin-top: 20px; text-align: center; font-size: 18px; font-weight: bold; color: #333; border: 1px solid #ececec; border-radius: 0.5em; display: none;}
+.chapter_next .gongji_bar   {width: 60%; height: 50px; line-height: 50px; margin-top: 20px; text-align: center; font-size: 18px; font-weight: bold; color: #333; border: 1px solid #ececec; border-radius: 0.5em; display: none;}
+.chapter_next .last_bar     {width: 60%; height: 50px; line-height: 50px; margin-top: 20px; text-align: center; font-size: 18px; font-weight: bold; color: #333; border: 1px solid #ececec; border-radius: 0.5em; display: none;}
+.chapter_next .reply_bar    {width: 250px; height: 50px; line-height: 50px; margin-top: 20px; text-align: center; font-size: 16px; font-weight: bold; color: #333; border: 1px solid #ececec; border-radius: 2em; display: none;}
+/* 뷰어 */
+
+
+/* 작품등록 */
+.regist_box            {width: 1200px; margin: auto; border-radius: 1em; display:inline-block;}
+.regist_box .novel_set {width: 1150px; height: 50px; line-height: 50px; margin-left: 25px; font-size: 18px; font-weight: bold; border-bottom: 1px solid #ececec;}
+
+.regist_box .bookcover {width: 330px; height: 500px; padding-top: 10px; margin-top: -3px; float: left;}
+.regist_box .bookcover >span    {margin-left: 30px; font-size: 13px; font-weight: bold;}
+.regist_box .bookcover .bookcover_zone>img {width: 260px; height: 350px; margin: 10px 0px 0px 30px;}
+
+.regist_data {padding-top: 10px; width: 850px;  float: left; }
+.regist_data .regist_title {width: 60%; height: 80px; float: left; font-size: 13px;}
+.regist_data .regist_title>span {font-weight: bold;}
+.regist_data .title_zone {height: 40px;}
+.regist_data .title_zone #regist_title {width: 473px; height: 35px; padding-left: 10px; margin-top: 10px; border: 1px solid #ececec;}
+
+.regist_data .regist_class {width: 40%; height: 80px; float: left; font-size: 13px;}
+.regist_data .regist_class>span {font-weight: bold;}
+.regist_data .class_zone {height: 40px;}
+.regist_data .class_zone #class {width: 100%; height: 35px; margin-top: 10px; border: 1px solid #ececec;}
+
+.regist_data .monopoly_yn {width: 60%; height: 80px; float: left; font-size: 13px;}
+.regist_data .monopoly_yn>span {font-weight: bold;}
+.regist_data .monopoly_zone {height: 40px;}
+.regist_data .monopoly_zone #monopoly {width: 95%; height: 35px; margin-top: 10px; border: 1px solid #ececec;}
+
+.regist_data .regist_option {width: 100%; height: 40px; line-height: 40px; font-size: 13px; float: left; }
+.regist_data .regist_option>span {font-size: 13px;}
+.regist_data .regist_option .regist_how {margin-right: 10px; float: left; font-weight: bold;}
+
+.regist_data .first_class {width: 895px; height: 80px; font-size: 13px; margin-top: 20px; float: left;}
+.regist_data .first_class>span {font-weight: bold;}
+.regist_data .first_zone {height: 40px;}
+.regist_data .first_zone #first {width: 855px; padding-left: 5px; height: 35px; margin-top: 10px; border: 1px solid #ececec;}
+
+.regist_data .hashtag {width: 895px; height: 80px; font-size: 13px; margin-top: 10px; float: left;}
+.regist_data .hashtag>span {font-weight: bold;}
+.regist_data .hashtag_zone {height: 40px;}
+.regist_data .hashtag_zone #hashtag_add {width: 840px; height: 35px; margin-top: 10px; padding-left: 10px; border: 1px solid #ececec;}
+
+.regist_data .introduction {width: 895px; height: 280px; font-size: 13px; margin-top: 10px; float: left;}
+.regist_data .introduction>span {font-weight: bold;}
+.regist_data .introduction_zone {height: 40px; }
+.regist_data .introduction_zone #novel_introduction {width: 850px; height: 235px; margin-top: 10px; resize: none; padding: 15px 5px 5px 10px; font-size: 15px; border: 1px solid #ececec; box-sizing: border-box;}
+
+.regist_data .cover_set {width: 895px;  font-size: 13px; margin-top: 10px; float: left;}
+.regist_data .cover_set>span {font-weight: bold;}
+.regist_data .cover_zone {height: 40px; }
+.regist_data .cover_zone #cover {width: 95%; margin-top: 10px; resize: none; font-size: 13px; }
+.regist_data .cover_rule {height: 240px; width: 755px; margin-top: 10px; padding: 15px; font-size: 12px; margin-left: 32px; margin-bottom: 10px; background-color:#eeeeee;}
+
+.button_box    {width: 100%; font-size: 14px; margin: 20px 0px 20px 0px; float: left;}
+.button_box>li {background-color: #333; float: right; margin-left: 10px;}
+
+.regist_button     {display: block;} /* 수정용 버튼 */
+.correction_button {display: block;} /* 수정용 버튼 */
+
+.button_style   {padding-left: 30px; padding-right: 30px; border: 0px; height: 40px; float: left; font-size: 15px; color: white;}
+.resist_yes     {background-color:#17A2B8; }
+.resist_no      {background-color:#363B3E; }
+.resist_delete  {background-color:#EE4F4F; }
+
+/* 작품등록 */
+
+/* 글쓰기 */
+.write_zone                           {border: 1px solid #ececec; padding: 10px; margin: 20px 0px 20px 0px; border-radius: 0.4em;}
+.write_zone .write_title              {width: 100%; height: 40px; line-height: 40px; font-weight: bold; display: inline-flex;}
+.write_zone .write_title>h4           {width: 60px; text-align: center; line-height: 40px; font-size: 18px; padding-right: 5px;}
+.write_zone .write_title #write_title {height: 30px; width: 1035px; padding-left: 10px; line-height: 40px; font-size: 15px; border: 1px solid #ececec; box-sizing: border-box; margin-top: 5px; margin-right: 10px;}
+.write_zone .write_title .wirte_type  {height: 30px; width: 70px; line-height: 40px; font-size: 15px; border: 1px solid #ececec; box-sizing: border-box; margin-top: 5px; text-align:left;}
+
+.write_zone .write_area   {margin-top: 10px;}
+.write_zone .write_submit {margin-top: 10px; height: 30px;}
+.write_zone .write_submit >span {margin-top: 10px; line-height: 30px; font-size: 12px; color: rgb(241, 76, 76);}
+.write_zone .write_submit .write_uploads {float: right; height: 30px; padding: 0px 20px 0px 20px; background-color: #333; color: white; border: 0px;}
+
+
+
+/* 글쓰기 */
+
+/* footer */
+footer                        {width: 100%; margin: auto; position: relative;}
+.notice                       {width: 100%; height: 50px; line-height: 50px; background-color: wheat; position: relative;}
+.notice_frame                 {width: 1200px; height: 50px; margin: auto}
+.notice .notice_memo_gong     {float: left; margin-right: 5px; font-size: 18px;}
+.notice .notice_memo          {float: left; margin-right: 5px; font-size: 18px;}
+.notice .new_gong             {float: left; background-color: red; height: 30px; line-height: 25px; width: 50px; text-align: center; color: white; margin: 10px 5px 0px 5px; border-radius:45%;}
+
+/*실 풋터 높이 사이즈 조절은 footer_info의 hight참조 */
+footer .footer_info           {width: 100%; height: 230px; background-color: #333;}
+footer .footer_info_frame     {width: 1200px; height: 100%; margin: auto; }
+
+footer .copyright             {width: 100%; height: 120px;  position: relative; }
+
+footer .footer_info_frame .copyright .mono_logo        { width: 140px; height: 120px; float: left;}
+footer .footer_info_frame .copyright .mono_logo img    { margin-top: 20px; margin-left: 10px;}
+footer .footer_info_frame .copyright .copyright_c      { margin-left: 10px; margin-top: 40px; width: 1050px; height: 60px; float: left; }
+footer .footer_info_frame .copyright .copyright_c>li   { height: 30px; line-height: 30px; color: gray;}
+.copyright_c_mini   {color: rgb(104, 104, 104);}
+
+footer .copyright_memo {width: 100%; height: 90px; margin-top: 0px; padding-top: 10px; }
+footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin-left: 10px; color: gray;}

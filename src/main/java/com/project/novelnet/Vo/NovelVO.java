@@ -1,0 +1,25 @@
+package com.project.novelnet.Vo;
+
+import lombok.Data;
+
+@Data
+public class NovelVO {
+    private Integer n_num;          //작품 넘버
+    private String u_num;           //작성자 번호
+    private String n_title;         //작품 제목
+    private String n_introduction;  //작품 제목
+    private String n_date;          //최신 게시물 작성일
+    private String n_type;          //자유&습작 여부
+    private String n_monopoly;      //독점 플랫폼 여부
+    private String n_fin;           //완결여부
+    private Integer n_stop;         //신고횟수
+    private Integer n_good;         //추천
+
+    private Integer n_count ;       //조회수
+    private String n_cover;         //책 커버
+
+    //편의용
+    private Integer n_chapters ;       //총화수
+    private Integer f_chapter ;        //첫번째화
+    private String  nick;
+}

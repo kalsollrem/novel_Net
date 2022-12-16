@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/modal.js"></script>
+</head>
+<body>
+    <!-- 모달 레이아웃 -->
+    <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
+    <!-- 모달 레이아웃 -->
+    <div class="wrap">
+        <header th:replace="/include/header.html :: header"></header>
+        <div class="contents">
+            <div class="main_content">
+        <!------------ 콘텐츠 영역   ------------------>
+                <div class="search_change">
+                    <div class="search_all search_box search_none">전체</div>
+                    <div class="search_new search_box search_choose">신작</div>
+                    <div class="search_fin search_box search_none">완결</div>
+                </div>
+                <div class="search_menu">
+                    <div class="search_date">
+                        <div class="search_count font_option20">총 12,123개 작품</div>
+                        <div class="search_write"><img src="../img/new_novel.png" alt="신규작품 등록"></div>
+                        <div class="search_what">
+                            <div class="date_box date_date"><img src="../img/date_on.png" alt="날짜순"></div>
+                            <div class="date_box date_view"><img src="../img/view_off.png" alt="조회순"></div>
+                            <div class="date_box date_vote"><img src="../img/vote_off.png" alt="추천순"></div>
+                        </div>
+                    </div>
+                    <div class="tag_box">
+                        <div class="tag_add"><button class="tag_search">태그검색</button></div>
+                        <div class="tag_zone">
+                            <div class="tag_card tag_card_choose">전체</div>
+                            <div class="tag_card">판타지</div>
+                            <div class="tag_card">무협</div>
+                            <div class="tag_card">현대</div>
+                            <div class="tag_card">로맨스</div>
+                            <div class="tag_card">대체역사</div>
+                            <div class="tag_card">공포</div>
+                            <div class="tag_card">SF</div>
+                            <div class="tag_card">스포츠</div>
+                            <div class="tag_card">기타</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search_list">
+                    <div class="search_novel">
+                        <div class="novel_img">
+                            <img src="../img/nover_cover.jpg" alt="소설이름" >
+                        </div>
+                        <div class="up_tag">
+                            <img src="../img/up.png" alt="up!">
+                        </div>
+                        <div class="novel_data">
+                            <div class="searched_title">
+                                <div class="st_title">소설제목</div>
+                                <div class="st_writter">작가명</div>
+                            </div>
+                            <div class="searched_pri">
+                                전회차까지의 이 소설의 이야기
+                            </div>
+                            <ul class="searched_count">
+                                <li><img src="../img/count_view.png" alt="조회수">1003명</li>
+                                <li><img src="../img/count_book.png" alt="구독">12회차</li>
+                                <li><img src="../img/count_good.png" alt="추천">50회</li>
+                            </ul>
+                            <div class="searched_tag">
+                                <div class="searched_tagcard">#아카데미</div>
+                                <div class="searched_tagcard">#현대</div>
+                            </div>
+                            <div class="searched_time">6분전 UP</div>
+                        </div>
+                    </div>
+                    <div class="search_novel">
+                        <div class="novel_img">
+                            <img src="../img/nover_cover.jpg" alt="소설이름" >
+                        </div>
+                        <div class="up_tag">
+                            <img src="../img/up.png" alt="up!">
+                        </div>
+                        <div class="novel_data">
+                            <div class="searched_title">
+                                <div class="st_title">소설제목</div>
+                                <div class="st_writter">작가명</div>
+                            </div>
+                            <div class="searched_pri">
+                                전회차까지의 이 소설의 이야기
+                            </div>
+                            <ul class="searched_count">
+                                <li><img src="../img/count_view.png" alt="조회수">1003명</li>
+                                <li><img src="../img/count_book.png" alt="구독">12회차</li>
+                                <li><img src="../img/count_good.png" alt="추천">50회</li>
+                            </ul>
+                            <div class="searched_tag">
+                                <div class="searched_tagcard">#아카데미</div>
+                                <div class="searched_tagcard">#현대</div>
+                            </div>
+                            <div class="searched_time">6분전 UP</div>
+                        </div>
+                    </div>
+                    <div class="search_novel">
+                        <div class="novel_img">
+                            <img src="../img/nover_cover.jpg" alt="소설이름" >
+                        </div>
+                        <div class="up_tag">
+                            <img src="../img/up.png" alt="up!">
+                        </div>
+                        <div class="novel_data">
+                            <div class="searched_title">
+                                <div class="st_title">소설제목</div>
+                                <div class="st_writter">작가명</div>
+                            </div>
+                            <div class="searched_pri">
+                                전회차까지의 이 소설의 이야기
+                            </div>
+                            <ul class="searched_count">
+                                <li><img src="../img/count_view.png" alt="조회수">1003명</li>
+                                <li><img src="../img/count_book.png" alt="구독">12회차</li>
+                                <li><img src="../img/count_good.png" alt="추천">50회</li>
+                            </ul>
+                            <div class="searched_tag">
+                                <div class="searched_tagcard">#아카데미</div>
+                                <div class="searched_tagcard">#현대</div>
+                            </div>
+                            <div class="searched_time">6분전 UP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paging">
+                    <div class="paging_box">
+                        <div class="paging_left">
+                            <div class="paging_card">←</div>
+                            <div class="paging_card">◁</div>
+                        </div>
+                        <div class="paging_num">
+                            <div class="paging_card">1</div>
+                            <div class="paging_card">2</div>
+                            <div class="paging_card">3</div>
+                            <div class="paging_card">4</div>
+                            <div class="paging_card">5</div>
+                        </div>
+                        <div class="paging_right">
+                            <div class="paging_card">▷</div>
+                            <div class="paging_card">→</div>
+                        </div>
+                    </div>
+                </div>
+        <!------------ 콘텐츠 영역  ------------------>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="notice">
+            <div class="notice_frame">
+                <span class="notice_memo_gong"><b>공지</b></span>
+                <div class="new_gong">new</div>
+                <span class="notice_memo">정기 시스템 점검 예정 (AM 01:00 - 04:00)</span>
+            </div>
+        </div>
+        <div class="footer_info">
+            <div class="footer_info_frame">
+                <div class="copyright">
+                    <div class="mono_logo"> 
+                        <img src="../img/mono_logo.png">
+                    </div>
+                    <ul class="copyright_c">
+                        <li>본 사이트의 등록된 컨텐츠는 사이트 및 원 저작자에게 권리가 있는 컨텐츠이며, 무단 복제/전송/수정/배포는 법적 처벌을 받을 수 있습니다.</li>
+                        <li><span class="copyright_c_mini">Copyright(c) 노벨넷 2022. All rights reserved</span></li>
+                    </ul>
+                </div>
+                <ul class="copyright_memo">
+                    <li>주식회사 노벨넷 대표 김정현 사업자등록번호 210-81-75711 통신판매업 제2021-김제요촌-013145호</li>
+                    <li>주소 김제시 요촌동 81-42번지, T플로어 3층</li>
+                    <li>고객센터 : 063-588-0011 helpNovel@gmail.com 운영시간 AM10:00 - PM 06:00 (휴게시간 PM 0:30 - 2:00)</li>
+                </ul>
+            </div>  
+        </div>
+    </footer>
+    
+</body>
+</html>

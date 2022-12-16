@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.novelnet.repository.SearchMapper">
+    <resultMap type="com.project.novelnet.Vo.NovelVO" id="novelVO">
+        <result column="u_num" property="u_num"/>
+        <result column="n_title" property="n_title"/>
+        <result column="n_introduction" property="n_introduction"/>
+        <result column="n_type" property="n_type"/>
+        <result column="m_date" property="m_date"/>
+        <result column="n_monopoly" property="n_monopoly"/>
+        <result column="n_fin" property="n_fin"/>
+    </resultMap>
+
+    <!--  소설검색  -->
+
+    <!--  게시물 검색 + 번호매기기  -->
+    <select id="findBest" resultType="com.project.novelnet.Vo.NovelVO">
+        SELECT A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_fin, b.count, c.u_nick as nick
+        FROM novel A
+        <if test="findtype.equals('count')">
+            LEFT JOIN (select sum(m_count)as count, n_num from memo group by n_num)B
+            on A.n_num = B.n_num
+        </if>
+        <if test="findtype.equals('best')">
+            LEFT JOIN (select sum(m_good)as count, n_num from memo group by n_num)B
+            on A.n_num = B.n_num
+        </if>
+        <if test="findtype.equals('bookmark')">
+            LEFT JOIN (select count(bm_num) as count, n_num from bookmark group by n_num)B
+            on A.n_num = B.n_num
+        </if>
+        LEFT join user C
+        on A.u_num = C.u_num
+        order by count desc
+        limit #{limit}
+    </select>
+
+</mapper>
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.novelnet.repository.NovelMapper">
+    <resultMap type="com.project.novelnet.Vo.NovelVO" id="novelVO">
+        <result column="u_num" property="u_num"/>
+        <result column="n_title" property="n_title"/>
+        <result column="n_introduction" property="n_introduction"/>
+        <result column="n_type" property="n_type"/>
+        <result column="m_date" property="m_date"/>
+        <result column="n_monopoly" property="n_monopoly"/>
+        <result column="n_fin" property="n_fin"/>
+    </resultMap>
+
+    <!-- 소설등록 -->
+    <insert id="novelRegist" parameterType="com.project.novelnet.Vo.NovelVO">
+        <selectKey resultType="int" keyProperty="n_num" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO novel(u_num, n_title, n_introduction, n_type, n_monopoly, n_fin)
+        VALUES (#{u_num},#{n_title},#{n_introduction},#{n_type},#{n_monopoly},#{n_fin})
+    </insert>
+
+    <!-- 수정 -->
+    <update id="novelUpdate" parameterType="com.project.novelnet.Vo.NovelVO">
+        UPDATE novel
+        SET n_title        = #{n_title},
+            n_introduction = #{n_introduction},
+            n_type         = #{n_type},
+            n_monopoly     = #{n_monopoly},
+            n_fin          = #{n_fin}
+        WHERE n_num = #{n_num}
+    </update>
+
+    <!--  소설검색  -->
+    <select id="getBookDate" resultType="com.project.novelnet.Vo.NovelVO">
+        SELECT n_num, u_num, n_date, n_title, n_introduction, n_cover, n_type, n_monopoly, n_fin,
+           (SELECT sum(m_good) FROM memo WHERE n_num=#{n_num})AS n_good,
+           (SELECT sum(m_count) FROM memo WHERE n_num=#{n_num})AS n_count,
+           (SELECT count(n_num) FROM m_warning WHERE n_num=#{n_num})AS n_stop,
+           (select count(n_num) from memo where n_num=#{n_num})as n_chapters,
+           (select m_num from memo where n_num=#{n_num} order by m_num asc limit 1)as f_chapter
+        FROM novel
+        WHERE n_num = #{n_num}
+    </select>
+
+    <!-- 작가의 다른 소설 검색  -->
+    <select id="getAnotherBook" resultType="com.project.novelnet.Vo.NovelVO">
+        select n_num, u_num, n_date, n_title, n_introduction, n_cover, n_type, n_monopoly, n_fin
+        from novel
+        where u_num = #{au_num}
+        and n_num not in(#{n_num})
+        Order by rand()
+        limit 1
+    </select>
+
+    <!--  검색확인  -->
+    <select id="cheakBookDate" resultType="int" parameterType="String">
+        SELECT COUNT(n_num)
+        FROM novel
+        WHERE n_num = #{n_num}
+    </select>
+
+    <!--  게시물 검색 + 번호매기기  -->
+    <select id="getGongjiDate" resultType="com.project.novelnet.Vo.MemoVO">
+        SELECT A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
+        (SELECT COUNT(*) FROM reply WHERE n_num = #{n_num})AS r_cnt ,B.mr_num as Cheak
+        FROM memo A
+        LEFT JOIN (Select * from m_record where u_num=#{u_num} order by mr_num desc limit 1)B
+        on A.m_num = B.m_num
+        WHERE n_num = #{n_num} and m_type='gong'
+        <if test="sort.equals('desc')">
+            ORDER BY m_num DESC
+        </if>
+    </select>
+    <!--  게시물 검색 + 번호매기기  -->
+    <select id="getMemoDate" resultType="com.project.novelnet.Vo.MemoVO">
+        (SELECT @gp:=@gp+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
+        (SELECT COUNT(*) FROM reply WHERE n_num = #{n_num})AS r_cnt ,B.mr_num as cheak
+        FROM (SELECT @gp:=0)as n, memo A
+        LEFT JOIN (Select * from m_record where u_num = #{u_num} group by m_num) B
+        on A.m_num = B.m_num
+        WHERE A.n_num = #{n_num} and A.m_type='gong'
+        <if test="sort.equals('desc')">
+            ORDER BY m_num DESC
+        </if>)
+        Union all
+        (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
+                (SELECT COUNT(*) FROM reply WHERE n_num = #{n_num})AS r_cnt ,B.mr_num as cheak
+        FROM (SELECT @ep:=#{page}-1)as n, memo A
+        LEFT JOIN (Select * from m_record where u_num = #{u_num} group by m_num) B
+        on A.m_num = B.m_num
+        WHERE A.n_num = #{n_num} and A.m_type='ep'
+        <if test="sort.equals('desc')">
+            ORDER BY m_num DESC
+        </if>
+        LIMIT #{start},#{count})
+    </select>
+
+    <!--  태그검색  -->
+    <select id="getAllTag" resultType="com.project.novelnet.Vo.TagVO">
+        SELECT h_tag, t_carte
+        FROM hashtag
+        WHERE n_num = #{n_num}
+        ORDER BY t_carte ASC , h_tag ASC
+        LIMIT 15
+    </select>
+
+    <!--  태그 5개 검색  -->
+    <select id="getMiniTag" resultType="com.project.novelnet.Vo.TagVO">
+        SELECT h_tag
+        FROM hashtag
+        WHERE n_num = #{n_num}
+        ORDER BY t_carte ASC , h_tag ASC
+        LIMIT 5
+    </select>
+
+
+
+
+</mapper>
+

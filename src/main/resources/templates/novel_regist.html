@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/novel_regist.js"></script>
+    <script src="../js/index.js"></script>
+
+</head>
+<body>
+    <!-- 모달 레이아웃 -->
+    <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
+    <!-- 모달 레이아웃 -->
+    <div class="wrap">
+        <header th:replace="/include/header.html :: header"></header>
+        <div class="contents">
+            <div class="main_content">
+        <!------------ 콘텐츠 영역   ------------------>
+
+                <div class="regist_box">
+                    <div class="novel_set">
+                        작품설정
+                    </div>
+                    <div class="bookcover">
+                        <span>* 북커버</span>
+                        <div class="bookcover_zone">
+                            <img src="../img/nover_cover.jpg" alt="커버" id="novel_cover">
+                        </div>
+                    </div>
+                    <form action="/novelnet/novelRegist.do" method="post" id="novelRegist" name="novelRegist" enctype="multipart/form-data">
+                        <div class="regist_data">
+                            <div class="regist_title">
+                                <span>작품명 : *</span>
+                                <div class="title_zone">
+                                    <input type="text" id="regist_title" name="regist_title">
+                                </div>
+                            </div>
+                            <div class="regist_class">
+                                <span>연재방식 : *</span>
+                                <div class="class_zone">
+                                    <select name="write_class" id="class">
+                                        <option value="free" selected>자유연재 (글자수 제약 없음)</option>
+                                        <option value="prime" >프라임연재 (최소 3000자) </option>
+                                        <option value="etude">습작</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="monopoly_yn">
+                                <span>독점여부 : *</span>
+                                <div class="monopoly_zone">
+                                    <select name="monopoly" id="monopoly">
+                                        <option value="free" selected>비독점작 (다수 플랫폼 연재)</option>
+                                        <option value="only">독점 (노벨넷에서만)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="regist_option">
+                                <div class="regist_how">연재상태 : *</div>
+                                <span>
+                                    <input type="radio" name="consummation" value="doing" id="doing" checked>연재중 &nbsp;
+                                    <input type="radio" name="consummation" value="done" id="done">완결
+                                </span>
+                            </div>
+                            <div class="first_class">
+                                <span>1차 분류 :*</span>
+                                <div class="first_zone">
+                                    <select name="first" id="first">
+                                        <option value="none">선택</option>
+                                        <option value="판타지">판타지</option>
+                                        <option value="무협">무협</option>
+                                        <option value="현대">현대</option>
+                                        <option value="로맨스">로맨스</option>
+                                        <option value="대체역사">대체역사</option>
+                                        <option value="공포">공포</option>
+                                        <option value="SF">SF</option>
+                                        <option value="스포츠">스포츠</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hashtag">
+                                <span>해쉬태그(#과 ,로 구분합니다) : *</span>
+                                <div class="hashtag_zone">
+                                    <input type="text" id="hashtag_add" name="hashtag_add">
+                                </div>
+                            </div>
+                            <div class="introduction">
+                                <span>작품소개 : *</span>
+                                <div class="introduction_zone">
+                                    <textarea name="novel_introduction" id="novel_introduction" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="cover_set">
+                                <span>북커버 표지 : *</span>
+                                <div class="cover_zone">
+                                    <input multiple="multiple" type="file" name="coverFile" id="cover">
+                                </div>
+                                <div class="cover_rule">
+                                    ① 성인/비성인 표지 공통 허용 기준<br>
+                                    - (외형이나 기타 특징이) 미성년이라고 판단될 수 있는 캐릭터의 성행위나 성적 신체 부위 묘사, 학대 및 잔인성을 포함하지 않은 이미지<br>
+                                    - 아동·청소년 성 보호에 관한 법률을 위반하지 않은 이미지<br>
+                                    - 보는 사람으로 하여금 모욕감을 느낄 수 있는 욕설이나 비방이 포함되지 않은 이미지<br>
+                                    <br>
+                                    ② 북커버 허용 기준<br>
+                                    - 음부와 음모, 유두가 노출되지 않은 이미지<br>
+                                    - 속옷 위로 음부 모양이나 기타 성적인 요소가 선명하게 드러나거나 노출되지 않은 이미지<br>
+                                    - 성행위 묘사나 혹은 성행위라고 판단할 수 있는 구도, 자세가 포함되지 않은 이미지<br>
+                                    <br>
+                                    ③ 고화질 표지 및 삽화 허용 기준<br>
+                                    - 성기, 음모가 노출되지 않은 이미지<br>
+                                    <br>
+                                    ▶ 과도하게 선정적이거나 잔인한 이미지, 단어가 포함된 경우 수정 또는 교체를 요청드릴 수 있습니다.<br>
+                                    또한 안내된 기준을 위반할 경우, 표지가 임의 삭제되거나 교체될 수 있음을 알려드립니다.<br>
+                                </div>
+                            </div>
+                        </form>
+                        <ul class="regist_button button_box">
+                            <li><button class="resist_yes button_style">작품등록</button> </li>
+                            <li><button class="resist_no button_style">취소</button> </li>
+                        </ul>
+                    </div>
+                </div>
+        <!------------ 콘텐츠 영역   ------------------>
+            </div>
+        </div>
+    </div>     
+    <footer>
+        <div class="notice">
+            <div class="notice_frame">
+                <span class="notice_memo_gong"><b>공지</b></span>
+                <div class="new_gong">new</div>
+                <span class="notice_memo">정기 시스템 점검 예정 (AM 01:00 - 04:00)</span>
+            </div>
+        </div>
+        <div class="footer_info">
+            <div class="footer_info_frame">
+                <div class="copyright">
+                    <div class="mono_logo"> 
+                        <img src="../img/mono_logo.png">
+                    </div>
+                    <ul class="copyright_c">
+                        <li>본 사이트의 등록된 컨텐츠는 사이트 및 원 저작자에게 권리가 있는 컨텐츠이며, 무단 복제/전송/수정/배포는 법적 처벌을 받을 수 있습니다.</li>
+                        <li><span class="copyright_c_mini">Copyright(c) 노벨넷 2022. All rights reserved</span></li>
+                    </ul>
+                </div>
+                <ul class="copyright_memo">
+                    <li>주식회사 노벨넷 대표 김정현 사업자등록번호 210-81-75711 통신판매업 제2021-김제요촌-013145호</li>
+                    <li>주소 김제시 요촌동 81-42번지, T플로어 3층</li>
+                    <li>고객센터 : 063-588-0011 helpNovel@gmail.com 운영시간 AM10:00 - PM 06:00 (휴게시간 PM 0:30 - 2:00)</li>
+                </ul>
+            </div>  
+        </div>
+    </footer>
+    
+</body>
+</html>

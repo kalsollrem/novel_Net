@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>소설정보</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/novel_info.js"></script>
+</head>
+<body>
+    <!-- 모달 레이아웃 -->
+    <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
+    <!-- 모달 레이아웃 -->
+    <div class="wrap">
+        <header th:replace="/include/header.html :: header"></header>
+        <div class="contents">
+            <div class="main_content">
+        <!------------ 콘텐츠 영역   ------------------>
+                <div class="book_info">
+                    <div class="book_img">
+                        <img th:src="'../noteImg/'+${novelVO.getN_cover()}" alt="소설명" onerror="this.src='../img/write_cover.jpg'" >
+                        <div class="bookmark">
+                            <a th:if="${novelVO.getF_chapter()}!=null and ${lastChpater} == null" th:href="@{/novelnet/view(n_num=${novelVO.getN_num()},chapter=${novelVO.getF_chapter()},sort=${sort},page=${nowPage})}">첫화보기</a>
+                            <a th:if="${novelVO.getF_chapter()}!=null and ${lastChpater} != null" th:href="@{/novelnet/view(n_num=${novelVO.getN_num()},chapter=${lastChpater},sort=${sort},page=${nowPage})}">이어보기</a>
+                            <a th:if="${novelVO.getF_chapter()}==null" href="#"></a>
+                        </div>
+                    </div>
+                    <div class="book_data">
+                        <div class="searched_title">
+                            <div class="title_name" th:text="${novelVO.getN_title()}">소설제목</div>
+                            <input type="hidden" class="bookmark_switch" th:value="${bookmark}">
+                            <!-- 북마크 -->
+                            <div class="update_mark_zone" th:if="${novelVO.getU_num()}==${session.U_NUM}">
+                                <a th:href="@{/novelnet/novelUpdate(n_num=${novelVO.getN_num()})}"><img class="updateIcon" src="../img/update.png" alt="소설수정"></a>
+                            </div>
+                            <div class="book_mark_zone border_gray" th:if="${bookmark}=='0' and ${session.U_NUM}!= null">
+                                <img src="../img/Bookmark_off.png" alt="북마크">
+                            </div>
+                            <div class="book_mark_zone border_pink" th:if="${bookmark}!='0' and ${session.U_NUM}!= null">
+                                <img src="../img/Bookmark_on.png" alt="북마크">
+                            </div>
+                        </div>
+                        <div class="st_writter">작가 :
+                            <span class="writter_name" th:text="${writer}">홀리</span>
+                        </div>
+                        <ul class="book_count">
+                            <li><img src="../img/count_view.png" alt="조회수">
+                                <span th:if="${novelVO.getN_count()} != null" th:text="${novelVO.getN_count()}+' 명'"></span>
+                                <span th:if="${novelVO.getN_count()} == null" th:text="'0 명'"></span>
+                            </li>
+                            <li><img src="../img/count_book.png" alt="화수"> <span th:text="${novelVO.getN_chapters()}+' 화'"></span> </li>
+                            <li><img src="../img/count_good.png" alt="추천">
+                                <span th:if="${novelVO.getN_good()} != null" th:text="${novelVO.getN_good()}+' 개'"></span>
+                                <span th:if="${novelVO.getN_good()} == null" th:text="'0 개'"></span>
+                            </li>
+                        </ul>
+                        <div class="book_pri" th:text="${novelVO.getN_introduction()}">
+                            소설 소개
+                        </div>
+                        <div class="book_tag">
+                            <div class="tag_guide">태그 :</div>
+                            <div class="searched_tagcard" th:each="tag : ${tag}" th:text="${tag.h_tag}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ep_data">
+                    <div class="border_line"></div>
+                    <div class="ep_list"> 
+                        <div class="ep_sort">
+                            <span>회차리스트</span>
+                            <div class="sort_button">
+                                <a th:if="${sort}=='asc'"  th:href="@{/novelnet/novel(n_num=${novelVO.getN_num()},page='1',sort='desc')}">최신화부터 정렬↑↓</a>
+                                <a th:if="${sort}=='desc'" th:href="@{/novelnet/novel(n_num=${novelVO.getN_num()},page='1',sort='asc')}">첫화부터 정렬↑↓</a>
+                            </div>
+                        </div>
+                        <div class="ep_listup">
+
+                            <th:block th:each="memo : ${memoVOList}">
+                            <!-- 공지글  -->
+                            <div class="ep_box gongji" th:if="${memo.m_type}=='gong'">
+                                <div th:if="${memo.cheak == null} and ${memo.cheak == '0'}" class="read_cheaker read_none"> </div>
+                                <div th:if="${memo.cheak != null} and ${memo.cheak != '0'}" class="read_cheaker read_over"> </div>
+                                <div class="ep_tac">
+                                    <div class="ep_title">
+                                        <a th:href="@{/novelnet/view(n_num=${param.n_num},chapter=${memo.m_num},sort=${sort},page=${nowPage},type='gong')}" th:utext="${memo.m_title}"></a>
+                                    </div>
+                                    <div class="ep_num">공지</div>
+                                    <ul class="ep_count">
+                                        <li><img src="../img/count_peopel.png" alt="조회수"><span th:text="${memo.m_count}"></span></li>
+                                        <li><img src="../img/reply.png" alt="댓글"><span th:text="${memo.r_cnt}"></span></li>
+                                        <li><img src="../img/good_Down.png" alt="추천"><span th:text="${memo.m_good}"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="ep_date" th:text="${#strings.substring(memo.m_date, 5 ,10)}">21.05.02</div>
+                            </div>
+                            <!-- 공지글  -->
+
+                            <!-- 게시물 -->
+                            <div class="ep_box" th:if="${memo.m_type}=='ep'">
+                                <div th:if="${memo.cheak == null} and ${memo.cheak == '0'}" class="read_cheaker read_none"> </div>
+                                <div th:if="${memo.cheak != null} and ${memo.cheak != '0'}" class="read_cheaker read_over"> </div>
+                                <div class="ep_tac">
+                                    <div class="ep_title">
+                                        <a th:href="@{/novelnet/view(n_num=${param.n_num},chapter=${memo.m_num},sort=${sort},page=${nowPage})}" th:utext="${memo.m_title}"></a>
+                                    </div>
+                                    <div class="ep_num"   th:utext="'EP '+${memo.ep}"> </div>
+                                    <ul class="ep_count">
+                                        <li><img src="../img/count_peopel.png" alt="조회수"><span th:text="${memo.m_count}"></span></li>
+                                        <li><img src="../img/reply.png" alt="댓글"><span th:text="${memo.r_cnt}"></span></li>
+                                        <li><img src="../img/good_Down.png" alt="추천"><span th:text="${memo.m_good}"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="ep_date" th:text="${#strings.substring(memo.m_date, 5 ,10)}">21.05.02</div>
+                            </div>
+                            <!-- 게시물 -->
+                            </th:block>
+
+
+                            <div class="ep_paging">
+                                <div class="paging_card" th:if="${paging.getPageLeft() > 0}">
+                                    <a th:href="@{/novelnet/novel(n_num=${novelVO.getN_num()},page=1,sort=${sort})}">←</a>
+                                </div>
+                                <div class="paging_card" th:if="${paging.getPageLeft() > 0}">
+                                    <a th:href="@{/novelnet/novel(n_num=${novelVO.getN_num()},page=${paging.getPageLeft()},sort=${sort})}">◁</a>
+                                </div>
+                                <!--페이징 링크-->
+                                <div class="paging_red_card" th:if="((${paging.getNowLength()}-1)*5)+1<=${paging.getAllpage()} and ${nowPage} == ((${paging.getNowLength()}-1)*5+1)" th:text="((${paging.getNowLength()}-1)*5+1)">1</div>
+                                <div class="paging_card"     th:if="((${paging.getNowLength()}-1)*5)+1<=${paging.getAllpage()} and ${nowPage} != ((${paging.getNowLength()}-1)*5+1)">
+                                    <a th:href="@{/novelnet/novel(n_num=${param.n_num},page=((${paging.getNowLength()}-1)*5+1),sort=${sort})}"
+                                       th:text="((${paging.getNowLength()}-1)*5+1)">1</a>
+                                </div>
+                                <div class="paging_red_card" th:if="((${paging.getNowLength()}-1)*5)+2<=${paging.getAllpage()} and ${nowPage} == ((${paging.getNowLength()}-1)*5+2)" th:text="((${paging.getNowLength()}-1)*5+2)">2</div>
+                                <div class="paging_card"     th:if="((${paging.getNowLength()}-1)*5)+2<=${paging.getAllpage()} and ${nowPage} != ((${paging.getNowLength()}-1)*5+2)">
+                                    <a th:href="@{/novelnet/novel(n_num=${param.n_num},page=((${paging.getNowLength()}-1)*5+2),sort=${sort})}"
+                                       th:text="((${paging.getNowLength()}-1)*5+2)">1</a>
+                                </div>
+                                <div class="paging_red_card" th:if="((${paging.getNowLength()}-1)*5)+3<=${paging.getAllpage()} and ${nowPage} == ((${paging.getNowLength()}-1)*5+3)" th:text="((${paging.getNowLength()}-1)*5+3)">3</div>
+                                <div class="paging_card"     th:if="((${paging.getNowLength()}-1)*5)+3<=${paging.getAllpage()} and ${nowPage} != ((${paging.getNowLength()}-1)*5+3)">
+                                    <a th:href="@{/novelnet/novel(n_num=${param.n_num},page=((${paging.getNowLength()}-1)*5+3),sort=${sort})}"
+                                       th:text="((${paging.getNowLength()}-1)*5+3)">3</a>
+                                </div>
+                                <div class="paging_red_card" th:if="((${paging.getNowLength()}-1)*5)+4<=${paging.getAllpage()} and ${nowPage} == ((${paging.getNowLength()}-1)*5+4)" th:text="((${paging.getNowLength()}-1)*5+4)">4</div>
+                                <div class="paging_card"     th:if="((${paging.getNowLength()}-1)*5)+4<=${paging.getAllpage()} and ${nowPage} != ((${paging.getNowLength()}-1)*5+4)">
+                                    <a th:href="@{/novelnet/novel(n_num=${param.n_num},page=((${paging.getNowLength()}-1)*5+4),sort=${sort})}"
+                                       th:text="((${paging.getNowLength()}-1)*5+4)">3</a>
+                                </div>
+                                <div class="paging_red_card" th:if="((${paging.getNowLength()}-1)*5)+5<=${paging.getAllpage()} and ${nowPage} == ((${paging.getNowLength()}-1)*5+5)" th:text="((${paging.getNowLength()}-1)*5+5)">5</div>
+                                <div class="paging_card"     th:if="((${paging.getNowLength()}-1)*5)+5<=${paging.getAllpage()} and ${nowPage} != ((${paging.getNowLength()}-1)*5+5)">
+                                    <a th:href="@{/novelnet/novel(n_num=${param.n_num},page=((${paging.getNowLength()}-1)*5+5),sort=${sort})}"
+                                       th:text="((${paging.getNowLength()}-1)*5+5)">5</a>
+                                </div>
+                                <!--페이징 링크-->
+                                <div class="paging_card" th:if="${paging.getPageRight() > 0}">
+                                    <a th:href="@{/novelnet/novel(n_num=${novelVO.getN_num()},page=${paging.getPageRight()},sort=${sort})}">▷</a>
+                                </div>
+                                <div class="paging_card" th:if="${paging.getPageRight() > 0}">
+                                    <a th:href="@{/novelnet/novel(n_num=${novelVO.getN_num()},page=${paging.getAllpage()},sort=${sort})}">→</a>
+                                </div>
+                            </div>
+                            <div class="reply_zone">
+                                <!-- 리플 다는 구간
+                                <div class="reply_banner">
+                                    <h3>소설 전체 댓글</h3>
+                                    <span>(10건)</span>
+                                </div>
+                                <div class="reply_write">
+                                    <div class="imoticon_add">
+                                        <div class="reply_imoticon">
+                                            <img src="../img/molru.png" alt="몰루">
+                                            <img src="../img/molru.png" alt="몰루">
+                                            <img src="../img/molru.png" alt="몰루">
+                                            <div class="imoticon_delete">
+                                                <img src="../img/delete_2.png" alt="삭제">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="imoticon_zone"><img src="../img/molru.png" alt="몰루"></div>
+                                    <div class="replay_make">
+                                        <textarea name="reply_area" id="reply_area" rows="5" placeholder="댓글을 입력해 보세요."></textarea>
+                                        <button class="reply_commit">댓글 입력</button>
+                                    </div>
+                                </div>
+                                -->
+                                <!-- 리플 다는 구간
+                                <div class="reply">
+                                    <div class="user_nick">
+                                        <div class="user_pic"><img src="../img/profill.png" alt="프로필"></div>
+                                        <div class="nickname">작성자</div>
+                                    </div>
+                                    <div class="reply_date">08.21 수정됨</div>
+                                    <div class="reply_where">댓글 회차 : 3화</div>
+                                    <div class="reply_pic"><img src="../img/profill.png" alt=""></div>
+                                    <div class="reply_memo">진짜임?<br>에반데<br>에반데</div>
+                                    <div class="reply_gb">
+                                        <div class="reply_singo reply_box">■신고</div>
+                                        <div class="reply_bad reply_box"><img src="../img/bad.png" alt="비추">비추(0건)</div>
+                                        <div class="reply_good reply_box"><img src="../img/good_Down.png" alt="추천">추천(10건)</div>
+                                        <div class="re_reply reply_box"><span>△</span> 대댓글 (1건)</div>
+                                    </div>
+                                </div>
+                                <div class="reply_arrow">
+                                    <img src="../img/arrow_right.png" alt="#">
+                                </div>
+                                <div class="reply to_reply">
+                                    <div class="user_nick">
+                                        <div class="user_pic"><img src="../img/profill.png" alt="프로필"></div>
+                                        <div class="nickname">작성자</div>
+                                    </div>
+                                    <div class="reply_date">08.21 수정됨</div>
+                                    <div class="reply_where">댓글 회차 : 3화</div>
+                                    <div class="reply_pic"><img src="../img/profill.png" alt=""></div>
+                                    <div class="reply_memo">진짜임?<br>에반데<br>에반데</div>
+                                    <div class="reply_gb">
+                                        <div class="reply_singo reply_box">■신고</div>
+                                        <div class="reply_bad reply_box"><img src="../img/bad.png" alt="비추">비추(0건)</div>
+                                        <div class="reply_good reply_box"><img src="../img/good_Down.png" alt="추천">추천(10건)</div>
+                                        <div class="re_reply reply_box"><span>△</span> 대댓글 (1건)</div>
+                                    </div>
+                                </div>
+                                <div class="reply">
+                                    <div class="user_nick">
+                                        <div class="user_pic"><img src="../img/profill.png" alt="프로필"></div>
+                                        <div class="nickname">작성자</div>
+                                    </div>
+                                    <div class="reply_date">08.21 수정됨</div>
+                                    <div class="reply_where">댓글 회차 : 3화</div>
+                                    <div class="reply_memo">에반데</div>
+                                    <div class="reply_gb">
+                                        <div class="reply_singo reply_box">■신고</div>
+                                        <div class="reply_bad reply_box"><img src="../img/bad.png" alt="비추">비추(0건)</div>
+                                        <div class="reply_good reply_box"><img src="../img/good_Down.png" alt="추천">추천(10건)</div>
+                                        <div class="re_reply reply_box"><span>△</span> 대댓글 (1건)</div>
+                                    </div>
+                                </div>
+                            -->
+                                <br>
+                            </div>
+                            <div class="reply_more">
+<!--                                <div class="reply_add">댓글 더보기</div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="another_books">
+                        <div class="books_anne">작가의 다른책</div>
+                        <div class="another_bookcase">
+                            <div class="another_data">
+                                <div class="another_img">
+                                    <a th:href="'/novelnet/novel?n_num='+${subNovel.getN_num()}+'&sort=asc&page=1'">
+                                        <img th:src="'../noteImg/'+${subNovel.getN_cover()}" th:alt="${subNovel.getN_title()}" onerror="this.src='../img/write_cover.jpg'">
+                                    </a>
+                                </div>
+                                <div class="another_title">
+                                    <a th:href="'/novelnet/novel?n_num='+${subNovel.getN_num()}+'&sort=asc&page=1'" th:text="${subNovel.getN_title()}"></a>
+                                </div>
+                                <ul class="another_tag">
+                                    <li th:each="subtag : ${subtag}" th:text="${subtag.h_tag}">#로맨스</li>
+                                </ul>
+                            </div>
+<!--                            <div class="book_more">더보기</div>-->
+                        </div>
+                    </div>
+                </div>
+        <!------------ 콘텐츠 영역  ------------------>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="notice">
+            <div class="notice_frame">
+                <span class="notice_memo_gong"><b>공지</b></span>
+                <div class="new_gong">new</div>
+                <span class="notice_memo">정기 시스템 점검 예정 (AM 01:00 - 04:00)</span>
+            </div>
+        </div>
+        <div class="footer_info">
+            <div class="footer_info_frame">
+                <div class="copyright">
+                    <div class="mono_logo"> 
+                        <img src="../img/mono_logo.png">
+                    </div>
+                    <ul class="copyright_c">
+                        <li>본 사이트의 등록된 컨텐츠는 사이트 및 원 저작자에게 권리가 있는 컨텐츠이며, 무단 복제/전송/수정/배포는 법적 처벌을 받을 수 있습니다.</li>
+                        <li><span class="copyright_c_mini">Copyright(c) 노벨넷 2022. All rights reserved</span></li>
+                    </ul>
+                </div>
+                <ul class="copyright_memo">
+                    <li>주식회사 노벨넷 대표 김정현 사업자등록번호 210-81-75711 통신판매업 제2021-김제요촌-013145호</li>
+                    <li>주소 김제시 요촌동 81-42번지, T플로어 3층</li>
+                    <li>고객센터 : 063-588-0011 helpNovel@gmail.com 운영시간 AM10:00 - PM 06:00 (휴게시간 PM 0:30 - 2:00)</li>
+                </ul>
+            </div>  
+        </div>
+    </footer>
+    
+</body>
+</html>
