@@ -72,7 +72,6 @@ public class LoginController {
     public String test(@RequestParam(value = "num",  required = false) String num,
                        @RequestParam(value = "count", required = false) String count, Model model) throws Exception{
 
-
         return "test";
     }
 }
