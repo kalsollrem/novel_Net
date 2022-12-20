@@ -83,7 +83,6 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .recomend_pd .recomend_pd_novel>li .novel_title {width: 180px; height: 40px; line-height: 40px; font-size: 20px; margin-top: 10px; background-color: rgb(2, 20, 20); display: block;}
 .recomend_pd .recomend_pd_novel>li .writer_name {width: 180px; height: 25px; line-height: 25px; font-size: 15px; background-color: rgb(2, 20, 20); display: block;}
 
-
 /*베스트 소설*/
 .hot_novel .hot_tag .hot_title { width: 1200px; height:60px; line-height: 60px; font-size: 28px; background-color:aliceblue;}
 
