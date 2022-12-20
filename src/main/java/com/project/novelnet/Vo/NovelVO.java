@@ -21,5 +21,6 @@ public class NovelVO {
     //편의용
     private Integer n_chapters ;       //총화수
     private Integer f_chapter ;        //첫번째화
-    private String  nick;
+    private String  nick;              //작성자 닉네임
+    private Integer noType ;           //union ALL 사용시 나눌때 사용
 }

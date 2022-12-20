@@ -4,6 +4,7 @@ import com.project.novelnet.Vo.NovelVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -28,4 +29,10 @@ public interface SearchMapper
 
     //베스트 추천 findtype : count(조회수), best(추천수), bookmark(북마크수)
     List<NovelVO> findBest(@Param("findtype")String findtype, @Param("limit")int limit);
+
+    //PD픽 리스트 검색
+    @Select("SELECT pd_pick FROM MASTER")
+    public String PdPickList();
+
+    List<NovelVO> findPdPick(List<String> pdlist);
 }

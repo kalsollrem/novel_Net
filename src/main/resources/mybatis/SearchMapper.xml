@@ -35,5 +35,33 @@
         limit #{limit}
     </select>
 
+    <!-- collection = list냐 array냐    -->
+    <!-- item       = #{}에 들어갈 명칭   -->
+    <!-- separator  = 배열 내에서 나누는 기준(일반적으로 ',') -->
+    <!-- open       = 시작시 들어갈 단어   -->
+    <!-- close      = 마무리에 들어갈 단어  -->
+    <!-- <![CDATA[ < ]]>  = '<'사용시 오류뜸  -->
+    <select id="findPdPick" parameterType="java.util.List" resultType="com.project.novelnet.Vo.NovelVO">
+        (select A.n_num, A.n_title, A.n_cover, A.n_monopoly, A.n_stop, B.u_nick as nick, @rownum := 0 AS noType
+        from novel A
+        Left join user B
+        on A.u_num = B.u_num
+        ,(SELECT @rownum :=0) AS r
+        where A.n_num IN
+        <foreach collection="list" item="pdlist" separator="," open="(" close=")" index="index">
+           #{pdlist}
+        </foreach>
+        and not n_num is null
+        limit 6)
+        UNION ALL
+        (select A.n_num, A.n_title, A.n_cover, A.n_monopoly, A.n_stop, B.u_nick as nick, @rownum := 1 AS noType
+        from novel A
+        Left  join user B
+        on A.u_num = B.u_num
+        ,(SELECT @rownum := 0) AS r
+        where A.n_monopoly = 'only' and A.n_stop <![CDATA[ < ]]> 5
+        order by rand()
+        limit 6)
+    </select>
 </mapper>
 

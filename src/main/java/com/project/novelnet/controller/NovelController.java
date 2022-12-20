@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,19 +35,34 @@ public class NovelController {
     @Autowired
     private FileUploadService fileUploadService;
 
-    //유저서비스
-    @Autowired
-    private UserService userService;
-
     //서치매퍼
     @Autowired
     private SearchMapper searchMapper;
+
+    //테스팅용
+    @GetMapping("/ts")
+    public String test(HttpSession session) throws Exception{
+//        //리스트 생성
+//        List<String> pdlist = new ArrayList<>();
+//
+//        //PD픽 리스트 가져오기
+//        String pdnovel = searchMapper.PdPickList();
+//
+//        //리스트 잘러서 배열 넣기
+//        String[] splitPick = pdnovel.split("/");
+//        for (int i=0; i< splitPick.length; i++)  {pdlist.add(splitPick[i]);}
+//
+//        //새 리스트에 마이바티스값 삽입
+//        List<NovelVO> pdpick = searchMapper.findPdPick(pdlist);
+        return "test";
+    }
 
     //메인페이지
     @GetMapping("/novelnet")
     public String indexPage(HttpSession session,
                             Model model,
                             HttpServletRequest request)throws Exception{
+        //조회수, 추천수, 북마크수별로 조회
         List<NovelVO> bestCount     = searchMapper.findBest("count",3);
         List<NovelVO> bestGood      = searchMapper.findBest("best",3);
         List<NovelVO> bestBookmark  = searchMapper.findBest("bookmark",3);
@@ -54,6 +70,23 @@ public class NovelController {
         model.addAttribute("bestCount",bestCount);
         model.addAttribute("bestGood",bestGood);
         model.addAttribute("bestBookmark",bestBookmark);
+
+
+        //PD픽과 독점작 조회
+        //리스트 생성
+        List<String> pdlist = new ArrayList<>();
+
+        //PD픽 리스트 가져오기
+        String pdnovel = searchMapper.PdPickList();
+
+        //리스트 잘러서 배열 넣기
+        String[] splitPick = pdnovel.split("/");
+        for (int i=0; i< splitPick.length; i++)  {pdlist.add(splitPick[i]);}
+
+        //새 리스트에 마이바티스값 삽입
+        List<NovelVO> pickList = searchMapper.findPdPick(pdlist);
+        model.addAttribute("pickList", pickList);
+        System.out.println(pickList);
 
         return "index";
     }
