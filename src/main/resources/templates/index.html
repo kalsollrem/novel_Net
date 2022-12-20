@@ -35,13 +35,15 @@
                     <div class="recomend_pd_tal"><b>PD 추천픽!</b></div>
                     <ul class="recomend_pd_novel">
                         <!-- 5개로 늘리면 맞음 -->
-                        <li>
-                            <a href="#">
-                                <span class="img_zone"></span>
-                                <span class="novel_title">소설제목</span>
-                            </a>
-                            <span class="writer_name">작가명</span>
-                        </li>
+                        <th:block th:each="pickList : ${pickList}">
+                            <li th:if="${pickList.noType == 0}">
+                                <a th:href="@{/novelnet/novel(n_num=${pickList.n_num},page=1,sort='asc')}">
+                                    <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}"></span>
+                                    <span class="novel_title" th:text="${pickList.n_title}"></span>
+                                </a>
+                                <span class="writer_name" th:text="${pickList.nick}">작가명</span>
+                            </li>
+                        </th:block>
                         <!-- 5개로 늘리면 맞음 -->
                     </ul>
                 </div>
@@ -91,7 +93,7 @@
                         <div class="novel_what">북마크</div>
                         <div class="novel_choose" th:each="bestBookmark : ${bestBookmark}">
                             <a th:href="@{/novelnet/novel(n_num=${bestBookmark.n_num},page=1,sort='asc')}">
-                                <img th:src="'../noteImg/'+${bestBookmark.n_cover}" th:alt="${bestBookmark.n_title}" onerror="this.src='../img/write_cover.jpg'">
+                                <img th:src="'../noteImg/'+${bestBookmark.n_cover}" onerror="this.src='../img/write_cover.jpg'" th:alt="${bestBookmark.n_title}">
                             </a>
                             <div class="novel_date">
                                 <div class="novel_name">
@@ -114,7 +116,7 @@
                         <th:block th:each="pickList : ${pickList}">
                             <li th:if="${pickList.noType == 1}">
                                 <a th:href="@{/novelnet/novel(n_num=${pickList.n_num},page=1,sort='asc')}">
-                                    <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}"></span>
+                                    <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}"  onerror="this.src='../img/write_cover.jpg'"></span>
                                     <span class="novel_title" th:text="${pickList.n_title}"></span>
                                 </a>
                                 <span class="writer_name" th:text="${pickList.nick}">작가명</span>
