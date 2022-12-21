@@ -131,10 +131,16 @@
         <li><a href="#">랭킹</a></li>
         <li><a href="#">내서재</a></li>
     </ul>
+    <!-- 로그인 여부 판단 -->
+    <th:block>
+        <input type="hidden" class="login_session_cheaker" th:if="${session.U_NUM == null}"     value="noLogin">
+        <input type="hidden" class="login_session_cheaker" th:unless="${session.U_NUM == null}" value="yesLogin">
+    </th:block>
+    <!-- 로그인 여부 판단 -->
     <div class="myInfo">
         <ul class="info_front">
-            <li><a href="/novelnet/write"><img src="../img/write.png"alt="글쓰기"></a></li>
-            <li><a href="#"><img src="../img/search.png"alt="검색"></a></li>
+            <li><img class="writePageGo" src="../img/write.png"alt="글쓰기"></li>
+            <li><img src="../img/search.png"alt="검색"></li>
             <li><span><a href="#">
                         <img th:if="${session.U_NUM == null}"     src="../img/profill_login_plz.png"alt="프로필">
                         <img th:unless="${session.U_NUM == null}" src="../img/profill_menu.png"alt="프로필">

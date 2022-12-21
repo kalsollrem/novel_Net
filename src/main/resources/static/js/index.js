@@ -38,7 +38,19 @@ $(function(){
          if(memuSwitch == 0) { $(".info_menu").fadeIn();  memuSwitch=1;}
          else                { $(".info_menu").fadeOut(); memuSwitch=0;}
     });
-    
+
+    //글쓰기 버튼
+    $(".writePageGo").click(function()   {
+        if($(".login_session_cheaker").val() == 'noLogin')
+        {
+            $(".login").fadeIn();
+        }else
+        {
+            alert("내가 쓴 글목록으로 location.href걸것");
+        }
+    })
+
+
     //가입 모달 버튼(Join modal)
     $("#join_on").click(function()   { $(".sign").fadeIn(); })
     $("#sign_close").click(function(){ $(".sign").fadeOut();});
@@ -48,7 +60,6 @@ $(function(){
     $("#login_on").click(function()      { $(".login").fadeIn(); });
     $("#login_close").click(function()   { $(".login").fadeOut();});
     $(".sign_find").click(function()     { $(".login").fadeOut(); $(".sign").fadeIn();});
-
 
     //태그검색(tag search window)
     var tag_search = $('.tag_search');

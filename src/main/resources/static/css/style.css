@@ -25,7 +25,7 @@ header .myInfo  {width: 200px; height: 100px; float: right; position: relative;}
 
 header .myInfo .info_front{ margin-top: 30px; float: right;}
 header .myInfo .info_front>li {width: 40px; height: 40px; margin-right: 10px; float: left;}
-header .myInfo .info_front>li>a>img {width: 26px; height: 26px; margin: 7px 0px 0px 7px;}
+header .myInfo .info_front>li>img {width: 26px; height: 26px; margin: 7px 0px 0px 7px;}
 header .myInfo .info_front>li>span>a>img {width: 40px; height: 40px; border-radius: 2em;}
 
 header .myInfo .info_menu{ width: 190px; position: absolute; margin: 101px 0px 0px 9px;  z-index: 1; border: 1px solid #333; box-sizing: border-box; display: none; }
@@ -75,11 +75,11 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 /*추천픽(.contents .main_content .recomend_pd) */
 .recomend_pd .recomend_pd_tal       {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; }
 .recomend_pd .recomend_pd_novel     {width: 100%; height: 350px;}
-.recomend_pd .recomend_pd_novel>li  {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px; background-color: aliceblue; position: relative;}
+.recomend_pd .recomend_pd_novel>li  {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px; border: 1px solid #eeeee0; border-radius: 0.2em; box-sizing: border-box; position: relative; box-shadow: 2px 2px ghostwhite;}
 .recomend_pd .recomend_pd_novel>li .img_zone    {width: 180px; height: 250px; display: block;}
-.recomend_pd .recomend_pd_novel>li .img_zone img{width: 180px; height: 250px; border-radius: 0.2em;}
-.recomend_pd .recomend_pd_novel>li .novel_title {width: 180px; height: 40px; line-height: 40px; font-size: 20px; margin-top: 10px; display: block;}
-.recomend_pd .recomend_pd_novel>li .writer_name {width: 180px; height: 25px; line-height: 25px; font-size: 15px; display: block;}
+.recomend_pd .recomend_pd_novel>li .img_zone img{width: 170px; height: 245px; border-radius: 0.2em; margin-left: 5px; margin-top: 5px;}
+.recomend_pd .recomend_pd_novel>li .novel_title {width: 175px; height: 40px; margin-left: 5px; line-height: 40px; font-size: 20px; margin-top: 10px; display: block;}
+.recomend_pd .recomend_pd_novel>li .writer_name {width: 175px; height: 25px; margin-left: 5px; line-height: 25px; font-size: 15px; display: block;}
 
 /*베스트 소설*/
 .hot_novel .hot_tag .hot_title { width: 1200px; height:60px; line-height: 60px; font-size: 28px; }
@@ -89,7 +89,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .contents .main_content .hot_novel .novel_what >h3                       {line-height: 50px;}
 .contents .main_content .hot_novel .novel_choose                         {width: 390px; height: 120px; margin-left: 5px; margin-right: 5px; margin-bottom: 10px; }
 .contents .main_content .hot_novel .novel_choose img                     {float: left; width: 80px; height: 120px; margin-right: 8px; border-radius: 0.2em;}
-.contents .main_content .hot_novel .novel_choose .novel_date             {float: left; border: 1px solid #eeeee0; box-sizing: border-box; padding-left: 5px; padding-right: -5px; border-radius: 0.5em;}
+.contents .main_content .hot_novel .novel_choose .novel_date             {float: left; box-shadow: 2px 2px ghostwhite; border: 1px solid #eeeee0; box-sizing: border-box; padding-left: 5px; padding-right: -5px; border-radius: 0.5em;}
 .contents .main_content .hot_novel .novel_choose .novel_date .novel_name {width: 290px; height: 40px; display: flex;}
 .contents .main_content .hot_novel .novel_choose .novel_date .writer_name{width: 290px; height: 40px; display: flex;}
 .contents .main_content .hot_novel .novel_choose .novel_date .novel_tags {width: 290px; height: 35px; display: flex; padding-top: 5px;}
@@ -107,7 +107,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .recomend_tag .recomend_pd_tal {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; margin-bottom: 5px;}
 .recomend_tag .recomend_pd_novel                 {width: 100%; height: 350px;}
 .recomend_tag .recomend_pd_novel>li              {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px;  position: relative;}
-.recomend_tag .recomend_pd_novel>li .pd_tal_hold {box-sizing: border-box; border: 1px solid #eeeee0; padding-bottom: 5px; border-radius: 0.2em;}
+.recomend_tag .recomend_pd_novel>li .pd_tal_hold {box-sizing: border-box; box-shadow: 2px 2px ghostwhite; border: 1px solid #eeeee0; padding-bottom: 5px; border-radius: 0.2em;}
 .recomend_tag .recomend_pd_novel>li .img_zone    {width: 180px; height: 250px; display: block;}
 .recomend_tag .recomend_pd_novel>li .img_zone img{width: 170px; height: 245px; margin: 3px 5px 0px 5px; border-radius: 0.2em; border: 1px solid ghostwhite; box-sizing: border-box;}
 .recomend_tag .recomend_pd_novel>li .novel_title {width: 175px; height: 30px; line-height: 30px; font-size: 20px; margin-top: 0px;  display: block; margin-left: 5px;}
