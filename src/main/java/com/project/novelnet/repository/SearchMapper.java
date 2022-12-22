@@ -35,4 +35,11 @@ public interface SearchMapper
     public String PdPickList();
 
     List<NovelVO> findPdPick(List<String> pdlist);
+
+    //내 북마크 검색
+    @Select("select n_num from bookmark where u_num=#{u_num}")
+    List<String> findbookmark(String u_num);
+
+    List<NovelVO> getBookmarkList(String u_num);
+
 }

@@ -720,6 +720,22 @@ public class NovelController {
         return bookmarkSwitch;
     }
 
+
+    //내가 북마크한 글
+    @GetMapping("/novelnet/mybook")
+    public String mybook(HttpSession session) throws Exception{
+
+        //제대로 있는가 체크용. 만들고 나서 지울것
+        List bookMakrList = searchMapper.findbookmark("19");
+        System.out.println(bookMakrList);
+
+        List<NovelVO> list = searchMapper.getBookmarkList("19");
+        System.out.println(list);
+
+
+        return "mybook";
+    }
+
     @GetMapping("/t")
     public String t(){
 //        String  u_num = "5";

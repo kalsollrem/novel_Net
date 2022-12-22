@@ -27,4 +27,5 @@ public interface UserMapper {
     @Select("select * from user where u_mail = #{id} and u_pass = #{pass}")
     UserVO getUserDataHash(@Param("id")String id, @Param("pass")String pass);
 
+
 }

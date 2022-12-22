@@ -13,14 +13,18 @@ public class NovelVO {
     private String n_monopoly;      //독점 플랫폼 여부
     private String n_fin;           //완결여부
     private Integer n_stop;         //신고횟수
-    private Integer n_good;         //추천
 
+    private Integer n_good;         //추천
     private Integer n_count ;       //조회수
+
     private String n_cover;         //책 커버
 
     //편의용 변수
     private Integer n_chapters ;       //총화수
     private Integer f_chapter ;        //첫번째화
+    private Integer last_chapter ;     //마지막으로 본 에피소드
     private String  nick;              //작성자 닉네임
     private Integer noType ;           //union ALL 사용시 나눌때 사용
+    private Integer ep_count;          //조회수 합산용
+
 }
