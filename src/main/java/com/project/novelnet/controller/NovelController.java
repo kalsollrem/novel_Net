@@ -732,6 +732,10 @@ public class NovelController {
         List<NovelVO> list = searchMapper.getBookmarkList("19");
         System.out.println(list);
 
+        //해야할것
+        //1.페이징처리
+        //2.다음화 여부 확인
+        //3.가능하면 마지막 업데이트시간
 
         return "mybook";
     }

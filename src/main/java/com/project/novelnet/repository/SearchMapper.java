@@ -40,6 +40,7 @@ public interface SearchMapper
     @Select("select n_num from bookmark where u_num=#{u_num}")
     List<String> findbookmark(String u_num);
 
+    //내 북마크 책장 데이터 검색
     List<NovelVO> getBookmarkList(String u_num);
 
 }
