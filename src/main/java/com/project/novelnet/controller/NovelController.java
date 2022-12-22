@@ -42,18 +42,7 @@ public class NovelController {
     //테스팅용
     @GetMapping("/ts")
     public String test(HttpSession session) throws Exception{
-//        //리스트 생성
-//        List<String> pdlist = new ArrayList<>();
-//
-//        //PD픽 리스트 가져오기
-//        String pdnovel = searchMapper.PdPickList();
-//
-//        //리스트 잘러서 배열 넣기
-//        String[] splitPick = pdnovel.split("/");
-//        for (int i=0; i< splitPick.length; i++)  {pdlist.add(splitPick[i]);}
-//
-//        //새 리스트에 마이바티스값 삽입
-//        List<NovelVO> pdpick = searchMapper.findPdPick(pdlist);
+
         return "test";
     }
 

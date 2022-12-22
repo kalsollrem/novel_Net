@@ -18,7 +18,7 @@ public class NovelVO {
     private Integer n_count ;       //조회수
     private String n_cover;         //책 커버
 
-    //편의용
+    //편의용 변수
     private Integer n_chapters ;       //총화수
     private Integer f_chapter ;        //첫번째화
     private String  nick;              //작성자 닉네임
