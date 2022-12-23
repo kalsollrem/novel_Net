@@ -69,10 +69,10 @@
     <select id="getBookmarkList" resultType="com.project.novelnet.Vo.NovelVO">
         select
             A.n_num, A.u_num, A.n_title, A.n_introduction,
-            sum(B.m_count) as m_count, sum(B.m_good) as m_good, count(case when B.m_type='ep' then 1 end)as ep_count,
+            sum(B.m_count) as m_count, sum(B.m_good) as m_good, count(case when B.m_type='ep' then 1 end)as ep_count, B.m_date,
             C.m_num as last_ep
         from novel A
-        left join memo B
+        left join (select * from memo order by m_date desc LIMIT 18446744073709551615) B
         on A.n_num = B.n_num
         join
             (select * from
