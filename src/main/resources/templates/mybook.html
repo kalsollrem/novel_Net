@@ -38,37 +38,47 @@
                     </div>
                 </div>
                 <div class="book_list">
-                    <div class="search_novel">
-                        <div class="novel_img">
-                            <img src="../img/nover_cover.jpg" alt="소설이름" >
-                        </div>
-                        <div class="up_tag">
-                            <img src="../img/up.png" alt="up!">
-                        </div>
-                        <div class="novel_data">
-                            <div class="searched_title">
-                                <div class="st_title">소설제목</div>
-                                <div class="st_writter">작가명</div>
-                                <div class="delete_button"><img src="../img/delete_button.png" alt="삭제"></div>
+                    <th:block th:each="novelList : ${novelList}">
+                        <div class="search_novel">
+                            <div class="novel_img">
+                                <img th:src="'../noteImg/'+${novelList.getN_cover()}" th:alt="${novelList.getN_title()}" onerror="this.src='../img/write_cover.jpg'">                            </div>
+                            <div class="up_tag">
+                                <img src="../img/up.png" alt="up!">
                             </div>
-                            <div class="searched_pri">
-                                전회차까지의 이 소설의 이야기
+                            <div class="novel_data">
+                                <div class="searched_title">
+                                    <div class="st_title" th:text="${novelList.getN_title()}">소설제목</div>
+                                    <div class="st_writter" th:text="${novelList.getNick()}">작가명</div>
+                                    <div class="delete_button"><img src="../img/delete_button.png" alt="삭제"></div>
+                                </div>
+                                <div class="searched_pri" th:text="${novelList.getN_introduction()}">
+                                    소설 줄거리
+                                </div>
+                                <ul class="searched_count">
+                                    <li>
+                                        <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count() == null}" th:text="0명">
+                                        <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count() != null}" th:text="${novelList.getN_count()}+'명'">
+                                    </li>
+                                    <li>
+                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.getEp_count() == null}" th:text="0회차">
+                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.getEp_count() != null}" th:text="${novelList.getEp_count()}+'회차'">
+                                    </li>
+                                    <li>
+                                        <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good() == null}" th:text="0회">
+                                        <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good() != null}" th:text="${novelList.getN_good()}+'회'">
+                                    </li>
+                                </ul>
+                                <div class="searched_tag">
+                                    <div class="searched_tagcard">#아카데미</div>
+                                    <div class="searched_tagcard">#현대</div>
+                                </div>
+                                <div class="searched_time">6분전 UP</div>
+                                <div class="book_next">다음화</div>
+                                <div class="no_update">신규회차 없음</div>
+                                <div class="last_read">EP 10화 다시보기</div>
                             </div>
-                            <ul class="searched_count">
-                                <li><img src="../img/count_view.png" alt="조회수">1003명</li>
-                                <li><img src="../img/count_book.png" alt="구독">12회차</li>
-                                <li><img src="../img/count_good.png" alt="추천">50회</li>
-                            </ul>
-                            <div class="searched_tag">
-                                <div class="searched_tagcard">#아카데미</div>
-                                <div class="searched_tagcard">#현대</div>
-                            </div>
-                            <div class="searched_time">6분전 UP</div>
-                            <div class="book_next">다음화</div>
-                            <div class="no_update">신규회차 없음</div>
-                            <div class="last_read">EP 10화 다시보기</div>
                         </div>
-                    </div>
+                    </th:block>
                 </div>
                 <div class="paging">
                     <div class="paging_box">

@@ -723,15 +723,17 @@ public class NovelController {
 
     //내가 북마크한 글
     @GetMapping("/novelnet/mybook")
-    public String mybook(HttpSession session) throws Exception{
+    public String mybook(HttpSession session,
+                         Model model) throws Exception{
 
         //제대로 있는가 체크용. 만들고 나서 지울것
         List bookMakrList = searchMapper.findbookmark("19");
         System.out.println(bookMakrList);
 
-        List<NovelVO> list = searchMapper.getBookmarkList("19");
-        System.out.println(list);
+        List<NovelVO> novelList = searchMapper.getBookmarkList("19");
+        System.out.println(novelList);
 
+         model.addAttribute("novelList",novelList);
         //해야할것
         //1.페이징처리
         //2.다음화 여부 확인
