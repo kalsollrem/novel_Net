@@ -68,7 +68,7 @@
                                         <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good() != null}" th:text="${novelList.getN_good()}+'회'">
                                     </li>
                                 </ul>
-                                <div class="searched_tag">
+                                <div class="searched_tag" th:text="${novelList.getAll_tag()}">
                                     <div class="searched_tagcard">#아카데미</div>
                                     <div class="searched_tagcard">#현대</div>
                                 </div>

@@ -69,13 +69,16 @@
     <!-- 소설 테이블 : 소설 번호, 작가 , 소개 , 커버
          메모테이블  : 조회수, 추천수, 총화수, 마지막 업데이트일
          소설기록    : 마지막으로 읽은 에피소드, join통해 자기 유저명으로 검색해서 범위좁힘.
-         유저테이블  : 소설테이블의 작가번호와 연동하여 닉네임.-->
+         유저테이블  : 소설테이블의 작가번호와 연동하여 닉네임.
+         태그 테이블 : group_concat으로 해쉬태그 소설 별로 일렬 정렬후 All_tag란 이름으로 합병 -->
+
     <select id="getBookmarkList" resultType="com.project.novelnet.Vo.NovelVO">
         select
             A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_stop, A.n_fin,
             sum(B.m_count) as n_count, sum(B.m_good) as n_good, count(case when B.m_type='ep' then 1 end)as ep_count, B.m_date,
             C.m_num as last_ep,
-            D.u_nick as nick
+            D.u_nick as nick,
+            E.All_tag
         from novel A
         left join (select * from memo order by m_date desc LIMIT 18446744073709551615) B
         on A.n_num = B.n_num
@@ -86,6 +89,8 @@
         on A.n_num = c.n_num
         left join user D
         on A.u_num = D.u_num
+        left join (select n_num, group_concat(h_tag separator',') as All_tag from hashtag group by n_num order by h_tag) E
+        on A.n_num = E.n_num
         group by A.n_num
         order by n_num;
     </select>
