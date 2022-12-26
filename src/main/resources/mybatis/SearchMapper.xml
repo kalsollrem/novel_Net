@@ -76,9 +76,9 @@
         select
             A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_stop, A.n_fin,
             sum(B.m_count) as n_count, sum(B.m_good) as n_good, count(case when B.m_type='ep' then 1 end)as ep_count, B.m_date,
-            C.m_num as last_ep,
+            C.m_num as last_chapter,
             D.u_nick as nick,
-            E.All_tag
+            E.all_tag
         from novel A
         left join (select * from memo order by m_date desc LIMIT 18446744073709551615) B
         on A.n_num = B.n_num
@@ -89,7 +89,7 @@
         on A.n_num = c.n_num
         left join user D
         on A.u_num = D.u_num
-        left join (select n_num, group_concat(h_tag separator',') as All_tag from hashtag group by n_num order by h_tag) E
+        left join (select n_num, group_concat(h_tag separator',') as all_tag from hashtag group by n_num order by h_tag) E
         on A.n_num = E.n_num
         group by A.n_num
         order by n_num;

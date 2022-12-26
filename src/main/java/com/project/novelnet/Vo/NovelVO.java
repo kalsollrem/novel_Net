@@ -24,7 +24,7 @@ public class NovelVO {
     private Integer f_chapter ;        //첫번째화
     private Integer last_chapter ;     //마지막으로 본 에피소드
     private String  nick;              //작성자 닉네임
-    private String  All_tag;           //모든 태그
+    private String  all_tag;           //모든 태그
     private Integer noType ;           //union ALL 사용시 나눌때 사용
     private Integer ep_count;          //조회수 합산용
 
