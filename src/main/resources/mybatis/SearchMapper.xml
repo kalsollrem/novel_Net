@@ -72,6 +72,7 @@
          유저테이블  : 소설테이블의 작가번호와 연동하여 닉네임.
          태그 테이블 : group_concat으로 해쉬태그 소설 별로 일렬 정렬후 All_tag란 이름으로 합병 -->
 
+    <!-- 번호매기기 추가 예정 -->
     <select id="getBookmarkList" resultType="com.project.novelnet.Vo.NovelVO">
         select
             A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_stop, A.n_fin,
