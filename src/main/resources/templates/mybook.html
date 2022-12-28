@@ -39,7 +39,7 @@
                 </div>
                 <div class="book_list">
                     <th:block th:each="novelList : ${novelList}">
-                        <div class="search_novel" th:if="${novelList.n_stop}<6">
+                        <div class="search_novel" th:if="${novelList.n_stop} < 6">
                             <div class="novel_img">
                                 <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
                                     <img th:src="'../noteImg/'+${novelList.n_cover}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">                            </div>
@@ -62,8 +62,8 @@
                                         <img src="../img/count_view.png" alt="조회수" th:if="${novelList.n_count != null}" th:text="${novelList.n_count}+'명'">
                                     </li>
                                     <li>
-                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.n_chapters == null}" th:text="0회차">
-                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.n_chapters != null}" th:text="${novelList.n_chapters}+'회차'">
+                                        <img src="../img/count_book.png" alt="회차" th:if="${novelList.n_chapters == null}" th:text="0회차">
+                                        <img src="../img/count_book.png" alt="회차" th:if="${novelList.n_chapters != null}" th:text="${novelList.n_chapters}+'회차'">
                                     </li>
                                     <li>
                                         <img src="../img/count_good.png" alt="추천" th:if="${novelList.n_good == null}" th:text="0회">
@@ -75,10 +75,10 @@
                                     <div class="searched_tagcard">#현대</div>
                                 </div>
                                 <div class="searched_time">6분전 UP</div>
-                                <div class="book_next" >다음화</div>
-                                <div class="no_update" >신규회차 없음</div>
-                                <div class="last_read">
-                                    <a th:href="@{/novelnet/view(n_num=${novelList.n_num},chapter=${novelList.last_chapter},sort=${sort},page=${nowPage})}" th:text="이어보기"></a>
+                                <div class="book_next" th:if="${novelList.n_chapters} != null and ${novelList.n_chapters}>${novelList.rnum}">다음화</div>
+                                <div class="no_update" th:if="${novelList.n_chapters} == null or  ${novelList.n_chapters}==${novelList.rnum}">신규회차 없음</div>
+                                <div class="last_read" th:if="${novelList.last_chapter} != null">
+                                    <a th:href="@{/novelnet/view(n_num=${novelList.n_num},chapter=${novelList.last_chapter},sort=${sort},page=${nowPage})}" th:text="' Ep '+${novelList.rnum}+' 화 '"></a>
                                 </div>
                             </div>
                         </div>

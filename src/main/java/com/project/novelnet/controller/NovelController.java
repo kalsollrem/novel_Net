@@ -727,10 +727,10 @@ public class NovelController {
                          Model model) throws Exception{
 
         //제대로 있는가 체크용. 만들고 나서 지울것
-        List bookMakrList = searchMapper.findbookmark("19");
+        List bookMakrList = searchMapper.findbookmark("20");
         System.out.println(bookMakrList);
 
-        List<NovelVO> novelList = searchMapper.getBookmarkList("19");
+        List<NovelVO> novelList = searchMapper.getBookmarkList("15");
         System.out.println(novelList);
 
          model.addAttribute("novelList",novelList);
