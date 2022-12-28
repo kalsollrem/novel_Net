@@ -111,7 +111,8 @@
     left join (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) F
     on
         A.n_num = F.n_num
-    group by A.n_num;
+    group by A.n_num
+    order by F.m_date desc;
     </select>
 </mapper>
 

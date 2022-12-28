@@ -739,6 +739,7 @@ public class NovelController {
         //2.다음화 여부 확인
         //3.가능하면 마지막 업데이트시간
 
+
         return "mybook";
     }
 
