@@ -23,6 +23,7 @@ public class NovelVO {
     private Integer n_chapters ;       //총화수
     private Integer f_chapter ;        //첫번째화
     private Integer last_chapter ;     //마지막으로 본 에피소드
+    private Integer rnum ;             //마지막으로 본 에피소드의 번호
     private String  nick;              //작성자 닉네임
     private String  all_tag;           //모든 태그
     private Integer noType ;           //union ALL 사용시 나눌때 사용

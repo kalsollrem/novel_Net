@@ -62,8 +62,8 @@
                                         <img src="../img/count_view.png" alt="조회수" th:if="${novelList.n_count != null}" th:text="${novelList.n_count}+'명'">
                                     </li>
                                     <li>
-                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.ep_count == null}" th:text="0회차">
-                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.ep_count != null}" th:text="${novelList.ep_count}+'회차'">
+                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.n_chapters == null}" th:text="0회차">
+                                        <img src="../img/count_book.png" alt="구독" th:if="${novelList.n_chapters != null}" th:text="${novelList.n_chapters}+'회차'">
                                     </li>
                                     <li>
                                         <img src="../img/count_good.png" alt="추천" th:if="${novelList.n_good == null}" th:text="0회">
