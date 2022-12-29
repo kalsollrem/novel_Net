@@ -28,5 +28,6 @@ public class NovelVO {
     private String  all_tag;           //모든 태그
     private Integer noType ;           //union ALL 사용시 나눌때 사용
     private Integer ep_count;          //조회수 합산용
+    private Integer newMemo;           //신규 등록 여부. 24미만일경우 NEW띄울때 사용.
 
 }

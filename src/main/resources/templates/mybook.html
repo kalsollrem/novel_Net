@@ -44,12 +44,14 @@
                                 <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
                                     <img th:src="'../noteImg/'+${novelList.n_cover}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">                            </div>
                                 </a>
-                            <div class="up_tag">
-                                <img src="../img/up.png" alt="up!">
+                            <div class="up_tag" th:if="${novelList.newMemo}!=null">
+                                <img src="../img/up.png" alt="up!" th:if="${novelList.newMemo}<=24">
                             </div>
                             <div class="novel_data">
                                 <div class="searched_title">
-                                    <div class="st_title" th:text="${novelList.n_title}">소설제목</div>
+                                    <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
+                                        <div class="st_title" th:text="${novelList.n_title}">소설제목</div>
+                                    </a>
                                     <div class="st_writter" th:text="${novelList.nick}">작가명</div>
                                     <div class="delete_button"><img src="../img/delete_button.png" alt="삭제"></div>
                                 </div>
@@ -74,7 +76,12 @@
                                     <div class="searched_tagcard">#아카데미</div>
                                     <div class="searched_tagcard">#현대</div>
                                 </div>
-                                <div class="searched_time">6분전 UP</div>
+                                <div th:if="${novelList.newMemo} != null">
+                                    <div class="searched_time" th:if="${novelList.newMemo}<=24 and 0<${novelList.newMemo}" th:text="${novelList.newMemo}+' 시간전 UP'">신규 시간</div>
+                                    <div class="searched_time" th:if="${novelList.newMemo}>24 and ${#strings.substring(novelList.n_date, 0, 4)}==${year}" th:text="${#strings.substring(novelList.n_date, 5)}">마지막 업데이트일</div>
+                                    <div class="searched_time" th:if="${novelList.newMemo}>24 and ${#strings.substring(novelList.n_date, 0, 4)}!=${year}" th:text="${novelList.n_date}" style="width: 120px;">마지막 업데이트일</div>
+                                    <div class="searched_time" th:if="${novelList.newMemo}==0">방금 전 UP</div>
+                                </div>
                                 <div class="book_next" th:if="${novelList.n_chapters} != null and ${novelList.n_chapters}>${novelList.rnum}">다음화</div>
                                 <div class="no_update" th:if="${novelList.n_chapters} == null or  ${novelList.n_chapters}==${novelList.rnum}">신규회차 없음</div>
                                 <div class="last_read" th:if="${novelList.last_chapter} != null">

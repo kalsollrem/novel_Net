@@ -18,9 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class NovelController {
@@ -733,12 +731,16 @@ public class NovelController {
         List<NovelVO> novelList = searchMapper.getBookmarkList("15");
         System.out.println(novelList);
 
-         model.addAttribute("novelList",novelList);
+        model.addAttribute("novelList",novelList);
+
+        //년도확인
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        model.addAttribute("year",year);
+
         //해야할것
         //1.페이징처리
         //2.다음화 여부 확인
-        //3.가능하면 마지막 업데이트시간
-
 
         return "mybook";
     }
