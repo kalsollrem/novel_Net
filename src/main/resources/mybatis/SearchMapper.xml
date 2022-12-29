@@ -109,6 +109,15 @@
         left join (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) F
         on
             A.n_num = F.n_num
+        <choose>
+            <when test="fin.equals('doing')">
+                where n_fin = 'doing'
+            </when>
+            <when test="fin.equals('done')">
+                where n_fin = 'done'
+            </when>
+            <otherwise></otherwise>
+        </choose>
         group by A.n_num
         <if test="newOld == null or newOld.equals('desc')">
             order by F.m_date desc

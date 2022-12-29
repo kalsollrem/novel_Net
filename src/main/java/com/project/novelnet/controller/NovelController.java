@@ -726,12 +726,14 @@ public class NovelController {
 
         //제대로 있는가 체크용. 만들고 나서 지울것
         List bookMakrList = searchMapper.findbookmark("20");
-        String keyword = "킹";
-        String newOld  = "desc";
-
         System.out.println(bookMakrList);
 
-        List<NovelVO> novelList = searchMapper.getBookmarkList("15", keyword, newOld);
+        String keyword = "";
+        String newOld  = "desc";
+        String fin     = "";
+
+
+        List<NovelVO> novelList = searchMapper.getBookmarkList("20", keyword, newOld,fin);
         System.out.println(novelList);
 
         model.addAttribute("novelList",novelList);
