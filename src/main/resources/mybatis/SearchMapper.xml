@@ -119,12 +119,14 @@
             <otherwise></otherwise>
         </choose>
         group by A.n_num
-        <if test="newOld == null or newOld.equals('desc')">
-            order by F.m_date desc
-        </if>
-        <if test="newOld.equals('asc')">
-            order by F.m_date asc
-        </if>
+        <choose>
+            <when test="newOld.equals('asc')">
+                order by F.m_date asc
+            </when>
+            <otherwise>
+                order by F.m_date desc
+            </otherwise>
+        </choose>
     ) as origin, (select @ROWNUM :=0) Tab
     where n_title like CONCAT('%',#{keyword},'%') or all_tag like CONCAT('%',#{keyword},'%')
     limit 0,10;
