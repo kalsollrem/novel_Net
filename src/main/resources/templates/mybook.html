@@ -17,8 +17,8 @@
             <div class="main_content">
         <!------------ 콘텐츠 영역   ------------------>
                 <div class="search_change">
-                    <div class="book_all book_box book_none">전체</div>
-                    <div class="book_new book_box book_choose">연재중</div>
+                    <div class="book_all book_box book_choose">전체</div>
+                    <div class="book_new book_box book_none">연재중</div>
                     <div class="book_fin book_box book_none">완결</div>
                 </div>
                 <div class="search_menu">
@@ -72,7 +72,7 @@
                                         <img src="../img/count_good.png" alt="추천" th:if="${novelList.n_good != null}" th:text="${novelList.n_good}+'회'">
                                     </li>
                                 </ul>
-                                <div class="searched_tag" th:text="${novelList.all_tag}">
+                                <div class="searched_tag" th:utext="${novelList.all_tag}">
                                     <div class="searched_tagcard">#아카데미</div>
                                     <div class="searched_tagcard">#현대</div>
                                 </div>

@@ -41,6 +41,6 @@ public interface SearchMapper
     List<String> findbookmark(String u_num);
 
     //내 북마크 책장 데이터 검색
-    List<NovelVO> getBookmarkList(String u_num);
+    List<NovelVO> getBookmarkList(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("newOld")String newOld);
 
 }

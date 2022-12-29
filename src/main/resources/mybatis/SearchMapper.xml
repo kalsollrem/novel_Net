@@ -101,15 +101,24 @@
         on
             C.n_num = D.n_num and D.m_num = C.m_num
         left join
-            (select n_num, group_concat(h_tag separator',') as All_tag from hashtag group by n_num order by h_tag) E
+            (select n_num, group_concat(h_tag separator' ') as All_tag
+                from (select n_num, concat(<![CDATA['<div class="searched_tagcard">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
+                group by n_num order by h_tag) E
         on
             A.n_num = E.n_num
         left join (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) F
         on
             A.n_num = F.n_num
         group by A.n_num
-        order by F.m_date desc
-    ) as origin, (select @ROWNUM :=0) tep limit 0,10;
+        <if test="newOld == null or newOld.equals('desc')">
+            order by F.m_date desc
+        </if>
+        <if test="newOld.equals('asc')">
+            order by F.m_date asc
+        </if>
+    ) as origin, (select @ROWNUM :=0) Tab
+    where n_title like CONCAT('%',#{keyword},'%') or all_tag like CONCAT('%',#{keyword},'%')
+    limit 0,10;
     </select>
 </mapper>
 
