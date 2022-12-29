@@ -686,7 +686,7 @@ public class NovelController {
     @ResponseBody
     public String bookmarkSwitch(@RequestParam(value = "n_num",required = false) String n_num,
                                  @RequestParam(value = "book_switch",required = false) String book_switch,
-                                 HttpSession session)
+                                 HttpSession session) throws Exception
     {
         String bookmarkSwitch = "none";
         String id;
@@ -722,31 +722,46 @@ public class NovelController {
     //내가 북마크한 글
     @GetMapping("/novelnet/mybook")
     public String mybook(HttpSession session,
+                         @RequestParam(value = "keyword",required = false) String keyword,
+                         @RequestParam(value = "newOld" ,required = false) String newOld,
+                         @RequestParam(value = "fin"    ,required = false) String fin,
                          Model model) throws Exception{
+
+        String u_num;
+
+        if(session.getAttribute("U_NUM") != null) {u_num = (String) session.getAttribute("U_NUM").toString(); } //유저번호
+        else                                            {u_num = "20"; }
+
 
         //제대로 있는가 체크용. 만들고 나서 지울것
         List bookMakrList = searchMapper.findbookmark("20");
         System.out.println(bookMakrList);
 
-        String keyword = "";
-        String newOld  = "desc";
-        String fin     = "";
+        if(keyword == null)                     {keyword = "";    }
+        if(newOld  != "asc" || newOld == null)  {newOld  = "desc";}
+        if(fin     == null)                     {fin     = "";    }
 
 
-        List<NovelVO> novelList = searchMapper.getBookmarkList("20", keyword, newOld,fin);
-        System.out.println(novelList);
+        if (u_num != null){
+            //북마크 갯수 확보
+            String count = searchMapper.bookmarkCount(u_num);
+            System.out.println(count);
 
-        model.addAttribute("novelList",novelList);
+            //검색(유저번호, 검색어, 업데이트 순서, 완결여부)
+            List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, fin);
+            System.out.println(novelList);
+            model.addAttribute("novelList",novelList);
 
-
-        //년도확인
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        model.addAttribute("year",year);
+            //년도확인
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            model.addAttribute("year",year);
+        }
 
         //해야할것
         //1.페이징처리
         //2.다음화 여부 확인
+
 
         return "mybook";
     }

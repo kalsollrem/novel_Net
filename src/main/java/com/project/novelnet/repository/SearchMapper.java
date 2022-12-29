@@ -40,6 +40,10 @@ public interface SearchMapper
     @Select("select n_num from bookmark where u_num=#{u_num}")
     List<String> findbookmark(String u_num);
 
+    //내 북마크 검색
+    @Select("select count(n_num) as count from bookmark where u_num=#{u_num}")
+    String bookmarkCount(String u_num);
+
     //내 북마크 책장 데이터 검색
     List<NovelVO> getBookmarkList(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("newOld")String newOld, @Param("fin")String fin);
 
