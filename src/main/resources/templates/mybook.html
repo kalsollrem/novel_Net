@@ -31,8 +31,8 @@
                             <input type="text" class="booksearch" placeholder="소설검색">
                             <div class="search_sort">
                                 <select name="sort_what" id="sort_what">
-                                    <option value="new" selected>업데이트 순</option>
-                                    <option value="old">오래된 순</option>
+                                    <option value="desc" th:selected="${newOld} == 'desc'">업데이트 순</option>
+                                    <option value="asc"  th:selected="${newOld} == 'asc' ">오래된 순</option>
                                 </select>
                             </div>
                         </div>
@@ -74,8 +74,7 @@
                                     </li>
                                 </ul>
                                 <div class="searched_tag" th:utext="${novelList.all_tag}">
-                                    <div class="searched_tagcard">#아카데미</div>
-                                    <div class="searched_tagcard">#현대</div>
+                                    <div class="searched_tagcard">#태그존</div>
                                 </div>
                                 <div th:if="${novelList.newMemo} != null">
                                     <div class="searched_time" th:if="${novelList.newMemo}<=24 and 0<${novelList.newMemo}" th:text="${novelList.newMemo}+' 시간전 UP'">신규 시간</div>

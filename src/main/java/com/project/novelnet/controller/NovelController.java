@@ -739,12 +739,20 @@ public class NovelController {
         System.out.println(bookMakrList);
 
         if(keyword == null)                     {keyword = "";    }
-        if(!newOld.equals("asc"))               {newOld  = "desc";}
-        switch (cartegory){
-            case "doWrite"  : cartegory = "doing" ; break;
-            case "compWrite": cartegory = "done"  ; break;
-            default         : cartegory = ""      ; break;
+
+        if(newOld==null)                        {newOld  = "desc";}
+        else if (newOld.equals("asc"))          {newOld  = "asc"; }
+        else                                    {newOld  = "desc";}
+
+        if (cartegory == null)                  {cartegory = "";  }
+        else {
+            switch (cartegory){
+                case "doWrite"  : cartegory = "doing" ; break;
+                case "compWrite": cartegory = "done"  ; break;
+                default         : cartegory = ""      ; break;
+            }
         }
+
         if(page    == null)                     {page    = "1";   }
 
         System.out.println("인저가항2:"+keyword +"/"+ newOld +"/"+cartegory+"/"+page);
@@ -764,6 +772,9 @@ public class NovelController {
             Calendar cal = Calendar.getInstance();
             int year = cal.get(Calendar.YEAR);
             model.addAttribute("year",year);
+
+            //신규냐 오래된순이냐
+            model.addAttribute("newOld",newOld);
         }
 
         //해야할것
