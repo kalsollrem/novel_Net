@@ -725,6 +725,7 @@ public class NovelController {
                          @RequestParam(value = "keyword",required = false) String keyword,
                          @RequestParam(value = "newOld" ,required = false) String newOld,
                          @RequestParam(value = "fin"    ,required = false) String fin,
+                         @RequestParam(value = "page"   ,required = false) String page,
                          Model model) throws Exception{
 
         String u_num;
@@ -740,6 +741,7 @@ public class NovelController {
         if(keyword == null)                     {keyword = "";    }
         if(newOld  != "asc" || newOld == null)  {newOld  = "desc";}
         if(fin     == null)                     {fin     = "";    }
+        if(page    == null)                     {page    = "1";   }
 
 
         if (u_num != null){
