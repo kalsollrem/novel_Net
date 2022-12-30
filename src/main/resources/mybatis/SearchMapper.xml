@@ -76,9 +76,10 @@
             C.m_num as last_chapter,
             D.rnum, D.count as n_count, D.m_good as n_good, IFNULL(D.b_stop,0)as n_stop, D.n_chapters,
             E.All_tag,
-            date_format(F.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , F.m_date, now()))as newMemo
+            date_format(F.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , F.m_date, now()))as newMemo,
+            G.nextNum
         from
-            (select * from bookmark where u_num = '20' group by n_num)B
+            (select * from bookmark where u_num = #{u_num} group by n_num)B
         left join
             (select nA.*, uB.u_nick as nick from novel nA left join user uB on nA.u_num = uB.u_num) A
         on
@@ -109,6 +110,10 @@
         left join (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) F
         on
             A.n_num = F.n_num
+        left join
+            (select lead(m_num) over(order by m_num) nextNum, m_num from memo where m_type='ep' order by n_num, m_num asc) G
+        on
+            C.m_num = G.m_num
         <choose>
             <when test="fin.equals('doing')">
                 where n_fin = 'doing'
@@ -130,6 +135,14 @@
     ) as origin, (select @ROWNUM :=0) Tab
     where n_title like CONCAT('%',#{keyword},'%') or all_tag like CONCAT('%',#{keyword},'%')
     limit 0,10;
+    </select>
+
+    <select id="nextEp" resultType="String">
+        select * from (
+              select lead(m_num) over(order by m_num) num, m_title, m_num
+              from memo where n_num = #{n_num} and m_type='ep'
+              order by m_num asc) pt
+        where m_num = #{m_num};
     </select>
 </mapper>
 

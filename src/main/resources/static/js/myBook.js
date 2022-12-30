@@ -21,6 +21,9 @@ $(function(){
         page         = "1";
     }
 
+    //검색어칸 설정
+    $(".booksearch").val(keyword);
+
     //메뉴 css설정
     if(cartegory == "compWrite")
     {
@@ -40,11 +43,27 @@ $(function(){
 
     //메뉴 클릭
     $(".book_all").click(function()
-    {location.href = '/novelnet/mybook?cartegory=all&page='+page+'&newOld='+newOld+'&keyword='+keyword;});
+    {
+        keyword = "";
+        location.href = '/novelnet/mybook?cartegory=all&page='+page+'&newOld='+newOld;
+    });
     $(".book_new").click(function()
-    {location.href = '/novelnet/mybook?cartegory=doWrite&page='+page+'&newOld='+newOld+'&keyword='+keyword;});
+    {
+        keyword = "";
+        location.href = '/novelnet/mybook?cartegory=doWrite&page='+page+'&newOld='+newOld;
+    });
     $(".book_fin").click(function()
-    {location.href = '/novelnet/mybook?cartegory=compWrite&page='+page+'&newOld='+newOld+'&keyword='+keyword;});
+    {
+        keyword = "";
+        location.href = '/novelnet/mybook?cartegory=compWrite&page='+page+'&newOld='+newOld;
+    });
+
+    //검색 기능
+    $(".search_btn").click(function()
+    {
+        keyword = $(".booksearch").val()
+        location.href = '/novelnet/mybook?cartegory='+cartegory+'&page='+page+'&newOld='+newOld+'&keyword='+keyword;
+    });
 
     $("#sort_what").change(function()
     {

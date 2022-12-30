@@ -765,7 +765,7 @@ public class NovelController {
 
             //검색(유저번호, 검색어, 업데이트 순서, 완결여부)
             List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, cartegory);
-            //System.out.println(novelList);
+            System.out.println(novelList);
             model.addAttribute("novelList",novelList);
 
             //년도확인

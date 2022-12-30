@@ -47,4 +47,6 @@ public interface SearchMapper
     //내 북마크 책장 데이터 검색
     List<NovelVO> getBookmarkList(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("newOld")String newOld, @Param("fin")String fin);
 
+    //다음글 검색
+    String nextEp (@Param("n_num")String n_num, @Param("m_num")String m_num);
 }
