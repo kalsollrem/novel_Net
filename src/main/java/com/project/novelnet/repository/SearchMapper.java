@@ -44,9 +44,7 @@ public interface SearchMapper
     @Select("select count(n_num) as count from bookmark where u_num=#{u_num}")
     String bookmarkCount(String u_num);
 
-    //내 북마크 책장 데이터 검색
+    //내 북마크 책장 데이터 검색(총 조회수, 총 추천수, 총 회차수, 다음화 포함)
     List<NovelVO> getBookmarkList(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("newOld")String newOld, @Param("fin")String fin);
 
-    //다음글 검색
-    String nextEp (@Param("n_num")String n_num, @Param("m_num")String m_num);
 }

@@ -137,13 +137,6 @@
     limit 0,10;
     </select>
 
-    <select id="nextEp" resultType="String">
-        select * from (
-              select lead(m_num) over(order by m_num) num, m_title, m_num
-              from memo where n_num = #{n_num} and m_type='ep'
-              order by m_num asc) pt
-        where m_num = #{m_num};
-    </select>
 </mapper>
 
 <!--구버전 쿼리-->
