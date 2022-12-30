@@ -722,10 +722,10 @@ public class NovelController {
     //내가 북마크한 글
     @GetMapping("/novelnet/mybook")
     public String mybook(HttpSession session,
-                         @RequestParam(value = "keyword",required = false) String keyword,
-                         @RequestParam(value = "newOld" ,required = false) String newOld,
-                         @RequestParam(value = "fin"    ,required = false) String fin,
-                         @RequestParam(value = "page"   ,required = false) String page,
+                         @RequestParam(value = "keyword"   ,required = false) String keyword,
+                         @RequestParam(value = "newOld"    ,required = false) String newOld,
+                         @RequestParam(value = "cartegory" ,required = false) String cartegory,
+                         @RequestParam(value = "page"      ,required = false) String page,
                          Model model) throws Exception{
 
         String u_num;
@@ -739,9 +739,15 @@ public class NovelController {
         System.out.println(bookMakrList);
 
         if(keyword == null)                     {keyword = "";    }
-        if(newOld  != "asc" || newOld == null)  {newOld  = "desc";}
-        if(fin     == null)                     {fin     = "";    }
+        if(!newOld.equals("asc"))               {newOld  = "desc";}
+        switch (cartegory){
+            case "doWrite"  : cartegory = "doing" ; break;
+            case "compWrite": cartegory = "done"  ; break;
+            default         : cartegory = ""      ; break;
+        }
         if(page    == null)                     {page    = "1";   }
+
+        System.out.println("인저가항2:"+keyword +"/"+ newOld +"/"+cartegory+"/"+page);
 
 
         if (u_num != null){
@@ -750,8 +756,8 @@ public class NovelController {
             System.out.println(count);
 
             //검색(유저번호, 검색어, 업데이트 순서, 완결여부)
-            List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, fin);
-            System.out.println(novelList);
+            List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, cartegory);
+            //System.out.println(novelList);
             model.addAttribute("novelList",novelList);
 
             //년도확인
