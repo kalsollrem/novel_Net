@@ -38,11 +38,11 @@ $(function(){
         $("#book_fin").addClass('book_none');
     }
 
-
+    //메뉴 클릭
     $(".book_all").click(function()
-    {location.href = '/novelnet/mybook?cartegory=all&page='+page+'&newOld='+newOld+'&keyword='+keyword});
+        {location.href = '/novelnet/mybook?cartegory=all&page='+page+'&newOld='+newOld+'&keyword='+keyword});
     $(".book_new").click(function()
-    {location.href = '/novelnet/mybook?cartegory=doWrite&page='+page+'&newOld='+newOld+'&keyword='+keyword});
+        {location.href = '/novelnet/mybook?cartegory=doWrite&page='+page+'&newOld='+newOld+'&keyword='+keyword});
     $(".book_fin").click(function()
-    {location.href = '/novelnet/mybook?cartegory=compWrite&page='+page+'&newOld='+newOld+'&keyword='+keyword});
+        {location.href = '/novelnet/mybook?cartegory=compWrite&page='+page+'&newOld='+newOld+'&keyword='+keyword});
 });
