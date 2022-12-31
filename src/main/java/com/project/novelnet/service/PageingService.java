@@ -27,7 +27,7 @@ public class PageingService
     public void setDivedDate()
     {
         showMemo  = 10;
-        dividPage = 10;
+        dividPage = 5;
     }
 
     public void setTotalCount(int totalCount)
