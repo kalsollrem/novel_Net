@@ -1,7 +1,9 @@
 package com.project.novelnet.service;
 
 import com.project.novelnet.Vo.PageingVO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PageingService
 {
     //입력변수
@@ -73,12 +75,12 @@ public class PageingService
         }
 
         //마지막 페이지 용
-        if(nowCase == allCase) { displayPage = (nowCase * dividPage) - allpage; }
-        else if (nowCase == 1) { displayPage = allpage;  }
-        else                   { displayPage = dividPage;}
-
-
-
+        if(nowCase == allCase) {
+            displayPage = allpage - (nowCase-1)*dividPage;
+        }else
+        {
+            displayPage = dividPage;
+        }
 
     }
 

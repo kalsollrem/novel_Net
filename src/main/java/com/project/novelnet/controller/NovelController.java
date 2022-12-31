@@ -38,12 +38,10 @@ public class NovelController {
     @Autowired
     private SearchMapper searchMapper;
 
-    //테스팅용
-    @GetMapping("/ts")
-    public String test(HttpSession session) throws Exception{
+    //페이징
+    @Autowired
+    private PageingService pageingService;
 
-        return "test";
-    }
 
     //메인페이지
     @GetMapping("/novelnet")
@@ -788,9 +786,8 @@ public class NovelController {
 
     @GetMapping("/t")
     public String t(){
-        PageingService pageingService = new PageingService();
 
-        pageingService.setTotalCount(243,21);
+        pageingService.setTotalCount(14,2);
 
         int nowCase  = pageingService.getNowCase();
         int allCase  = pageingService.getAllCase();
