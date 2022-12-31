@@ -40,7 +40,7 @@ public interface SearchMapper
     @Select("select n_num from bookmark where u_num=#{u_num}")
     List<String> findbookmark(String u_num);
 
-    //내 북마크 검색
+    //내 북마크 갯수 검색
     @Select("select count(n_num) as count from bookmark where u_num=#{u_num}")
     String bookmarkCount(String u_num);
 
