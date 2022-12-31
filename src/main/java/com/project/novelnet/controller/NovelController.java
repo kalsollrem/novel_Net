@@ -776,6 +776,7 @@ public class NovelController {
             pageingService.setNowPage(page);
             pageingService.setTotalCount(count);
 
+            int allPage     = pageingService.getAllPage();
             int nowCase     = pageingService.getNowCase();
             int allCase     = pageingService.getAllCase();
             int leftPage    = pageingService.getLeftPage();
@@ -787,6 +788,13 @@ public class NovelController {
             System.out.println("전 버튼 " + leftPage);
             System.out.println("후 버튼 " + rightPage);
             System.out.println("하단에 나온 페이지 " + displayPage);
+
+            model.addAttribute("allPage", allPage);
+            model.addAttribute("nowCase", nowCase);
+            model.addAttribute("allCase", allCase);
+            model.addAttribute("leftPage", leftPage);
+            model.addAttribute("rightPage", rightPage);
+            model.addAttribute("displayPage", displayPage);
 
             //검색(유저번호, 검색어, 업데이트 순서, 완결여부)
             List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, category);

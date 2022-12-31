@@ -11,6 +11,7 @@ public class PageingService
     private int nowPage;    //지금 있는 페이지
 
     //계산변수
+    private int allPage;   //전체 페이지
     private int nowCase;   //현재 간격
     private int allCase;   //전채 간격
     private int leftPage;   //좌 버튼
@@ -41,14 +42,14 @@ public class PageingService
 
     public void setPageDate(){
         //전체 페이지 갯수 25
-        int allpage = totalCount/showMemo;
+        allPage = totalCount/showMemo;
         if(totalCount%showMemo != 0)
         {
-            allpage = allpage+1;
+            allPage = allPage+1;
         }
 
         //전채 책장 간격 3
-        allCase = allpage/dividPage;
+        allCase = allPage/dividPage;
         if(totalCount%showMemo != 0)
         {
             allCase = allCase+1;
@@ -76,7 +77,7 @@ public class PageingService
 
         //마지막 페이지 용
         if(nowCase == allCase) {
-            displayPage = allpage - (nowCase-1)*dividPage;
+            displayPage = allPage - (nowCase-1)*dividPage;
         }else
         {
             displayPage = dividPage;
@@ -85,6 +86,7 @@ public class PageingService
     }
 
     //Getter
+    public int getAllPage()     {return allPage;}
     public int getNowCase()     {return nowCase;}
     public int getAllCase()     {return allCase;}
     public int getLeftPage()    {return leftPage;}
