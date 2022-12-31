@@ -4,18 +4,29 @@ import com.project.novelnet.Vo.PageingVO;
 
 public class PageingService
 {
+    //입력변수
     private int totalCount; //전체 게시물 숫자
     private int nowPage;    //지금 있는 페이지
 
-    private int endPage;    //끝 페이지
-    private int rightPage;   //우 버튼
+    //계산변수
+    private int nowCase;   //현재 간격
+    private int allCase;   //전채 간격
     private int leftPage;   //좌 버튼
+    private int rightPage;   //우 버튼
+    private int displayPage; //하단에 페이지를 몇개 표시할 것인가.
 
-    private int displayPage;//하단의 페이지 숫자
 
-    //나누는 용도
-    private int showMemo;   //보여줄 게시물 숫자
-    private int dividPage;   //보여줄 페이지 숫자
+    //나누기용 변수
+    private int showMemo;    //게시물을 몇페이지 단위로 나눌지
+    private int dividPage;   //책장을 몇페이지 단위로 나눌지
+
+
+    //나누기용 변수 셋팅
+    public void setDivedDate()
+    {
+        showMemo  = 10;
+        dividPage = 10;
+    }
 
     public void setTotalCount(int totalCount, int nowPage)
     {
@@ -25,34 +36,56 @@ public class PageingService
         setPageDate();
     }
 
+
     public void setPageDate(){
-        //전체 페이지 갯수
+        //전체 페이지 갯수 25
         int allpage = totalCount/showMemo;
         if(totalCount%showMemo != 0)
         {
             allpage = allpage+1;
         }
 
-        //좌페이지
-        if(nowPage/dividPage != 0)
+        //전채 책장 간격 3
+        allCase = allpage/dividPage;
+        if(totalCount%showMemo != 0)
         {
-            leftPage = (nowPage/dividPage) -1;
+            allCase = allCase+1;
+        }
+
+        //현재 간격
+        nowCase = nowPage/dividPage;
+        if(nowPage%dividPage !=0){
+            nowCase = nowCase+1;
+        }
+
+        //좌페이지
+        if (nowCase != 0) {
+            leftPage = (nowCase - 1) * dividPage;
         }
 
         //우페이지
-        if((allpage/dividPage+1)!=(nowPage/dividPage+1))
+        if(allCase > nowCase)
         {
-            rightPage = ((nowPage/dividPage+1)*10+1);
+            rightPage = (nowCase*dividPage)+1;
+        }else
+        {
+            rightPage = 0;
         }
 
+        //마지막 페이지 용
+        if(nowCase == allCase) { displayPage = (nowCase * dividPage) - allpage; }
+        else if (nowCase == 1) { displayPage = allpage;  }
+        else                   { displayPage = dividPage;}
+
+
 
 
     }
 
-    //보여줄 게시물 숫자 셋팅
-    public void setDivedDate()
-    {
-        showMemo  = 10;
-        dividPage = 10;
-    }
+    //Getter
+    public int getNowCase()     {return nowCase;}
+    public int getAllCase()     {return allCase;}
+    public int getLeftPage()    {return leftPage;}
+    public int getRightPage()   {return rightPage;}
+    public int getDisplayPage() {return displayPage;}
 }

@@ -6,6 +6,7 @@ import com.project.novelnet.repository.NovelMapper;
 import com.project.novelnet.repository.NovelRepository;
 import com.project.novelnet.repository.SearchMapper;
 import com.project.novelnet.service.FileUploadService;
+import com.project.novelnet.service.PageingService;
 import com.project.novelnet.service.UserService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -787,10 +788,21 @@ public class NovelController {
 
     @GetMapping("/t")
     public String t(){
-//        String  u_num = "5";
-//        String n_num = "1";
-//        String lastChapter = novelMapper.getLastChapter(n_num,u_num);
-//        System.out.println(lastChapter);
+        PageingService pageingService = new PageingService();
+
+        pageingService.setTotalCount(243,21);
+
+        int nowCase  = pageingService.getNowCase();
+        int allCase  = pageingService.getAllCase();
+        int leftPage = pageingService.getLeftPage();
+        int rightPage= pageingService.getRightPage();
+        int displayPage = pageingService.getDisplayPage();
+
+        System.out.println("전채 간격 " + allCase);
+        System.out.println("현재 간격 " + nowCase);
+        System.out.println("전 버튼 " + leftPage);
+        System.out.println("후 버튼 " + rightPage);
+        System.out.println("하단에 나온 페이지 " + displayPage);
 
         return "test";
     }
