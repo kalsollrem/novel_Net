@@ -133,10 +133,36 @@
             </otherwise>
         </choose>
     ) as origin, (select @ROWNUM :=0) Tab
-    where n_title like CONCAT('%',#{keyword},'%') or all_tag like CONCAT('%',#{keyword},'%')
+    where n_title like CONCAT('%',#{keyword},'%') or All_tag like CONCAT('%',#{keyword},'%')
     limit 0,10;
     </select>
-
+    <select id="bookmarkCount" resultType="Integer">
+        select
+            <choose>
+                <when test="fin.equals('doing')">
+                    count(case when n_fin='doing' then 1 end)as cnt
+                </when>
+                <when test="fin.equals('done')">
+                    count(case when n_fin='done' then 1 end)as cnt
+                </when>
+                <otherwise>
+                    count(A.n_num)as cnt
+                </otherwise>
+            </choose>
+        from
+            (select n_num, u_num from bookmark) A
+        left join
+            (select n_num, n_title, n_fin from novel) B
+        on
+            A.n_num = B.n_num
+        left join
+            (select n_num, group_concat(h_tag separator',') as All_tag from hashtag group by n_num order by h_tag) C
+        on
+            A.n_num = C.n_num
+        where
+            (n_title like CONCAT('%',#{keyword},'%') or All_tag like CONCAT('%',#{keyword},'%'))
+            and u_num = '20';
+    </select>
 </mapper>
 
 <!--구버전 쿼리-->

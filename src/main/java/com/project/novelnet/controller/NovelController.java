@@ -6,6 +6,7 @@ import com.project.novelnet.repository.NovelMapper;
 import com.project.novelnet.repository.NovelRepository;
 import com.project.novelnet.repository.SearchMapper;
 import com.project.novelnet.service.FileUploadService;
+import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
 import com.project.novelnet.service.UserService;
 import org.apache.commons.io.FileUtils;
@@ -41,6 +42,10 @@ public class NovelController {
     //페이징
     @Autowired
     private PageingService pageingService;
+
+    //편의용
+    @Autowired
+    private ManageService manageService;
 
 
     //메인페이지
@@ -723,18 +728,21 @@ public class NovelController {
     public String mybook(HttpSession session,
                          @RequestParam(value = "keyword"   ,required = false) String keyword,
                          @RequestParam(value = "newOld"    ,required = false) String newOld,
-                         @RequestParam(value = "cartegory" ,required = false) String cartegory,
+                         @RequestParam(value = "category" ,required = false) String category,
                          @RequestParam(value = "page"      ,required = false) String page,
                          Model model) throws Exception{
 
         String u_num;
+        System.out.println("======================================");
 
         if(session.getAttribute("U_NUM") != null) {u_num = (String) session.getAttribute("U_NUM").toString(); } //유저번호
-        else                                            {u_num = "20"; }
+
+
+        else                                            {u_num = "20"; } //비로그인 테스트용
 
 
         //제대로 있는가 체크용. 만들고 나서 지울것
-        List bookMakrList = searchMapper.findbookmark("20");
+        List bookMakrList = searchMapper.findbookmark(u_num);
         System.out.println(bookMakrList);
 
         if(keyword == null)                     {keyword = "";    }
@@ -743,27 +751,45 @@ public class NovelController {
         else if (newOld.equals("asc"))          {newOld  = "asc"; }
         else                                    {newOld  = "desc";}
 
-        if (cartegory == null)                  {cartegory = "";  }
+        if (category == null)                  {category = "";  }
         else {
-            switch (cartegory){
-                case "doWrite"  : cartegory = "doing" ; break;
-                case "compWrite": cartegory = "done"  ; break;
-                default         : cartegory = ""      ; break;
+            switch (category){
+                case "doWrite"  : category = "doing" ; break;
+                case "compWrite": category = "done"  ; break;
+                default         : category = ""      ; break;
             }
         }
 
         if(page    == null)                     {page    = "1";   }
-
-        System.out.println("인저가항2:"+keyword +"/"+ newOld +"/"+cartegory+"/"+page);
+        else{
+          if(manageService.isInteger(page) == false){page = "1"; }
+        }
+        System.out.println("인저가항2:"+keyword +"/"+ newOld +"/"+category+"/"+page);
 
 
         if (u_num != null){
             //북마크 갯수 확보
-            String count = searchMapper.bookmarkCount(u_num);
-            System.out.println(count);
+            int count = searchMapper.bookmarkCount(u_num, keyword, category);
+            System.out.println("갯수 : " + count);
+
+            //페이징 처리
+            pageingService.setNowPage(page);
+            pageingService.setTotalCount(count);
+
+            int nowCase     = pageingService.getNowCase();
+            int allCase     = pageingService.getAllCase();
+            int leftPage    = pageingService.getLeftPage();
+            int rightPage   = pageingService.getRightPage();
+            int displayPage = pageingService.getDisplayPage();
+
+            System.out.println("전채 간격 " + allCase);
+            System.out.println("현재 간격 " + nowCase);
+            System.out.println("전 버튼 " + leftPage);
+            System.out.println("후 버튼 " + rightPage);
+            System.out.println("하단에 나온 페이지 " + displayPage);
 
             //검색(유저번호, 검색어, 업데이트 순서, 완결여부)
-            List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, cartegory);
+            List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, category);
             System.out.println(novelList);
             model.addAttribute("novelList",novelList);
 
@@ -786,20 +812,6 @@ public class NovelController {
 
     @GetMapping("/t")
     public String t(){
-
-        pageingService.setTotalCount(14,2);
-
-        int nowCase  = pageingService.getNowCase();
-        int allCase  = pageingService.getAllCase();
-        int leftPage = pageingService.getLeftPage();
-        int rightPage= pageingService.getRightPage();
-        int displayPage = pageingService.getDisplayPage();
-
-        System.out.println("전채 간격 " + allCase);
-        System.out.println("현재 간격 " + nowCase);
-        System.out.println("전 버튼 " + leftPage);
-        System.out.println("후 버튼 " + rightPage);
-        System.out.println("하단에 나온 페이지 " + displayPage);
 
         return "test";
     }

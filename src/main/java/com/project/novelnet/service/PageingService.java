@@ -30,7 +30,7 @@ public class PageingService
         dividPage = 10;
     }
 
-    public void setTotalCount(int totalCount, int nowPage)
+    public void setTotalCount(int totalCount)
     {
         this.totalCount = totalCount;
         this.nowPage    = nowPage;
@@ -90,4 +90,6 @@ public class PageingService
     public int getLeftPage()    {return leftPage;}
     public int getRightPage()   {return rightPage;}
     public int getDisplayPage() {return displayPage;}
+    public void setNowPage(String nowPage){ this.nowPage = Integer.parseInt(nowPage); }
+    public void setNowPage(int nowPage)   { this.nowPage = nowPage; }
 }

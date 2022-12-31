@@ -31,7 +31,7 @@ public class UserController {
     public int idCheck(@RequestParam("id") String id) throws Exception {
 
         int cnt = userService.IdCheak(id);
-        System.out.println(id);
+        System.out.println("ID명 : " + id);
         return cnt;
     }
 

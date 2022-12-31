@@ -4,33 +4,42 @@ $(function(){
     const url = new URLSearchParams(urlStr);
     let keyword;
     let newOld;
-    let cartegory;
+    let category;
     let page;
 
     //주소값 없을시
     try{
-        keyword     = url.get('keyword').toString();
         newOld      = url.get('newOld').toString();
-        cartegory   = url.get('cartegory').toString();
+        category    = url.get('category').toString();
         page        = url.get('page').toString();
     }catch (err)
     {
-        keyword      = "";
         newOld       = "desc";
-        cartegory    = "all";
+        category     = "all";
         page         = "1";
     }
 
     //검색어칸 설정
-    $(".booksearch").val(keyword);
+    try {
+        keyword     = url.get('keyword').toString();
+        $(".booksearch").val(keyword);
+    }catch (e) {
+        keyword = "";
+    }
+
+    console.log(keyword);
+    console.log(newOld);
+    console.log(category);
+    console.log(page);
+
 
     //메뉴 css설정
-    if(cartegory == "compWrite")
+    if(category == "compWrite")
     {
         $("#book_all").addClass('book_none');
         $("#book_new").addClass('book_none');
         $("#book_fin").addClass('book_choose');
-    }else if (cartegory == "doWrite"){
+    }else if (category == "doWrite"){
         $("#book_all").addClass('book_none');
         $("#book_new").addClass('book_choose');
         $("#book_fin").addClass('book_none');
@@ -45,29 +54,29 @@ $(function(){
     $(".book_all").click(function()
     {
         keyword = "";
-        location.href = '/novelnet/mybook?cartegory=all&page='+page+'&newOld='+newOld;
+        location.href = '/novelnet/mybook?category=all&page='+page+'&newOld='+newOld;
     });
     $(".book_new").click(function()
     {
         keyword = "";
-        location.href = '/novelnet/mybook?cartegory=doWrite&page='+page+'&newOld='+newOld;
+        location.href = '/novelnet/mybook?category=doWrite&page='+page+'&newOld='+newOld;
     });
     $(".book_fin").click(function()
     {
         keyword = "";
-        location.href = '/novelnet/mybook?cartegory=compWrite&page='+page+'&newOld='+newOld;
+        location.href = '/novelnet/mybook?category=compWrite&page='+page+'&newOld='+newOld;
     });
 
     //검색 기능
     $(".search_btn").click(function()
     {
         keyword = $(".booksearch").val()
-        location.href = '/novelnet/mybook?cartegory='+cartegory+'&page='+page+'&newOld='+newOld+'&keyword='+keyword;
+        location.href = '/novelnet/mybook?category='+category+'&page='+page+'&newOld='+newOld+'&keyword='+keyword;
     });
 
     $("#sort_what").change(function()
     {
         newOld = $("#sort_what").val();
-        location.href = '/novelnet/mybook?cartegory='+cartegory+'&page='+page+'&newOld='+newOld+'&keyword='+keyword;
+        location.href = '/novelnet/mybook?category='+category+'&page='+page+'&newOld='+newOld+'&keyword='+keyword;
     });
 });
