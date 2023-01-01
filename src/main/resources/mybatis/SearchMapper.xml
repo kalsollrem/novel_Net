@@ -134,8 +134,10 @@
         </choose>
     ) as origin, (select @ROWNUM :=0) Tab
     where n_title like CONCAT('%',#{keyword},'%') or All_tag like CONCAT('%',#{keyword},'%')
-    limit 0,10;
+    limit #{start},10;
     </select>
+
+
     <select id="bookmarkCount" resultType="Integer">
         select
             <choose>

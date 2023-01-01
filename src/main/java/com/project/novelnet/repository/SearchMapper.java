@@ -44,6 +44,6 @@ public interface SearchMapper
     int bookmarkCount(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("fin")String fin);
 
     //내 북마크 책장 데이터 검색(총 조회수, 총 추천수, 총 회차수, 다음화 포함)
-    List<NovelVO> getBookmarkList(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("newOld")String newOld, @Param("fin")String fin);
+    List<NovelVO> getBookmarkList(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("newOld")String newOld, @Param("fin")String fin, @Param("start")int start);
 
 }

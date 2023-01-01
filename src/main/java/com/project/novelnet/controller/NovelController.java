@@ -796,8 +796,11 @@ public class NovelController {
             model.addAttribute("rightPage", rightPage);
             model.addAttribute("displayPage", displayPage);
 
+            //시작페이지처리
+            int start = (Integer.parseInt(page)-1)*10;
+
             //검색(유저번호, 검색어, 업데이트 순서, 완결여부)
-            List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, category);
+            List<NovelVO> novelList = searchMapper.getBookmarkList(u_num, keyword, newOld, category, start);
             System.out.println(novelList);
             model.addAttribute("novelList",novelList);
 
