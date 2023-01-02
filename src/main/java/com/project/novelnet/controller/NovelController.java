@@ -722,6 +722,26 @@ public class NovelController {
         return bookmarkSwitch;
     }
 
+    @PostMapping("deleteBookMark.do")
+    @ResponseBody
+    public String deleteBookMark(@RequestParam(value = "n_num",required = false) String n_num,
+                                 HttpSession session) throws Exception
+    {
+        String message = "noLogin";
+        if(session.getAttribute("U_NUM")!=null && n_num!= null)
+        {
+            String id = (String)session.getAttribute("U_NUM").toString();
+
+            System.out.println(id+"/" +n_num+ "/" +n_num);
+
+            int bm_num = searchMapper.getBookMarkNum(id, n_num);
+            searchMapper.deleteBookMark(bm_num);
+            message = "deleteOk";
+        }
+
+        return message;
+    }
+
 
     //내가 북마크한 글
     @GetMapping("/novelnet/mybook")

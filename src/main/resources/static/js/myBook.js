@@ -79,4 +79,26 @@ $(function(){
         newOld = $("#sort_what").val();
         location.href = '/novelnet/mybook?category='+category+'&page='+page+'&newOld='+newOld+'&keyword='+keyword;
     });
+
+    $(".delete_button_num").click(function()
+    {
+        let n_num = $(this).attr("id");
+
+        $.ajax({
+            url:'/deleteBookMark.do',
+            type:'post',
+            data : {"n_num":n_num},
+            success:function(s){
+                if (s == "deleteOk")    {console.log("북마크 번호 : "+n_num+"번 삭제 완료")};
+                if (s == "noLogin")     {console.log("로그인 되지 않았습니다.")};
+                location.reload();
+            },
+            error:function(){
+                alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다.");
+            }
+        });
+
+    });
+
 });
+

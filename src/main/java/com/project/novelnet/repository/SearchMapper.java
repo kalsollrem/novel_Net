@@ -25,7 +25,7 @@ public interface SearchMapper
 
     //북마크 제거
     @Delete("DELETE FROM bookmark WHERE bm_num = #{bm_num}")
-    public void deleteBookMark(int bm_num);
+    public void deleteBookMark(@Param("bm_num")int bm_num);
 
     //베스트 추천 findtype : count(조회수), best(추천수), bookmark(북마크수)
     List<NovelVO> findBest(@Param("findtype")String findtype, @Param("limit")int limit);
@@ -39,10 +39,6 @@ public interface SearchMapper
     //내 북마크 검색
     @Select("select n_num from bookmark where u_num=#{u_num}")
     List<String> findbookmark(String u_num);
-
-    //내 특정 북마크 검색
-    @Select("select bm_num from bookmark where u_num=#{u_num} and n_num=#{n_num}")
-    public int findBookmarkNum(String u_num, String n_num);
 
     //내 북마크 갯수 검색
     public int bookmarkCount(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("fin")String fin);
