@@ -126,10 +126,10 @@
         group by A.n_num
         <choose>
             <when test="newOld.equals('asc')">
-                order by F.m_date asc
+                order by n_date asc
             </when>
             <otherwise>
-                order by F.m_date desc
+                order by n_date desc
             </otherwise>
         </choose>
     ) as origin, (select @ROWNUM :=0) Tab
@@ -195,11 +195,14 @@
         </choose>
         group by A.n_num
         <choose>
-            <when test="newOld.equals('asc')">
-                order by F.m_date asc
+            <when test="orderWhat.equals('good')">
+                order by n_good desc
+            </when>
+            <when test="orderWhat.equals('count')">
+                order by n_count desc
             </when>
             <otherwise>
-                order by F.m_date desc
+                order by n_date desc
             </otherwise>
         </choose>
     ) as origin, (select @ROWNUM :=0) Tab
