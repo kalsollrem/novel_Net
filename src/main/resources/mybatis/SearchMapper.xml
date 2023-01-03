@@ -137,7 +137,9 @@
     limit #{start},10;
     </select>
 
-    <!-- 작성중  -->
+    <!--
+        제목, 태그, 작가를 선택해서 검색하는 기능.
+    -->
     <select id="getSearchNovelList" resultType="com.project.novelnet.Vo.NovelVO">
     select origin.*, @ROWNUM := @ROWNUM + 1 as ROWNUM from(
         select
