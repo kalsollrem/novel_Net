@@ -8,7 +8,6 @@ import com.project.novelnet.repository.SearchMapper;
 import com.project.novelnet.service.FileUploadService;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
-import com.project.novelnet.service.UserService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
