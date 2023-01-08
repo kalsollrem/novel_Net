@@ -141,75 +141,33 @@
         제목, 태그, 작가를 선택해서 검색하는 기능.
     -->
     <select id="getSearchNovelList" resultType="com.project.novelnet.Vo.NovelVO">
-    select origin.*, @ROWNUM := @ROWNUM + 1 as ROWNUM from(
-        select
-            B.u_num, B.n_num,
-            A.nick, A.n_title, A.n_cover, A.n_introduction, A.n_fin, A.n_type, A.n_monopoly,
-            C.m_num as last_chapter,
-            D.rnum, D.count as n_count, D.m_good as n_good, IFNULL(D.b_stop,0)as n_stop, D.n_chapters,
-            E.All_tag,
-            date_format(F.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , F.m_date, now()))as newMemo,
-            G.nextNum
-        from
-            (select * from novel where n_title like CONCAT('%',#{keyword},'%') )B
-        left join
-            (select nA.*, uB.u_nick as nick from novel nA left join user uB on nA.u_num = uB.u_num) A
-        on
-            A.n_num = B.n_num
-        left outer join
-            (select * from (select n_num, m_num, u_num from m_record where u_num = #{u_num} order by n_num asc, mr_num desc LIMIT 18446744073709551615) as m_record group by n_num) C
-        on
-            A.n_num = C.n_num
-        left join
-            (select
-                row_number() over(partition by m1.n_num order by m1.m_num asc) as rnum, m1.m_num, m1.n_num, m1.m_type,
-                m2.count , m2.m_good, m2.b_stop, m2.n_chapters
-            from (select row_number() over(partition by n_num order by m_num asc)as rnum, n_num, m_num, m_type from memo) m1
+        select @ROWNUM := @ROWNUM + 1 as ROWNUM, origin.*  from(
+            select
+                A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
+                B.u_nick,
+                ifnull(C.n_stop,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
+                date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo,
+                E.All_tag
+            from
+                (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover from novel) A
             left join
-                (select n_num as t, sum(m_count) as count, sum(m_good) as m_good, sum(b_stop) as b_stop, count(case when m_type='ep' then 1 end) as n_chapters
-                from memo group by n_num) m2
-            on m1.n_num = m2.t
-            where m_type='ep'
-            ) D
-        on
-            C.n_num = D.n_num and D.m_num = C.m_num
-        left join
-            (select n_num, group_concat(h_tag separator' ') as All_tag
+                (select u_num, u_nick from user)B
+            on A.u_num = b.u_num
+            left join
+                (select n_num, sum(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
+            on A.n_num = C.n_num
+            left join
+                (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) D
+            on A.n_num = D.n_num
+            left join
+                (select n_num, group_concat(h_tag separator' ') as All_tag
                 from (select n_num, concat(<![CDATA['<div class="searched_tagcard">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
                 group by n_num order by h_tag) E
-        on
-            A.n_num = E.n_num
-        left join (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) F
-        on
-            A.n_num = F.n_num
-        left join
-            (select lead(m_num) over(order by m_num) nextNum, m_num from memo where m_type='ep' order by n_num, m_num asc) G
-        on
-            C.m_num = G.m_num
-        <choose>
-            <when test="fin.equals('doing')">
-                where n_fin = 'doing'
-            </when>
-            <when test="fin.equals('done')">
-                where n_fin = 'done'
-            </when>
-            <otherwise></otherwise>
-        </choose>
-        group by A.n_num
-        <choose>
-            <when test="orderWhat.equals('good')">
-                order by n_good desc
-            </when>
-            <when test="orderWhat.equals('count')">
-                order by n_count desc
-            </when>
-            <otherwise>
-                order by n_date desc
-            </otherwise>
-        </choose>
-    ) as origin, (select @ROWNUM :=0) Tab
-    where All_tag like CONCAT('%',#{keyword},'%')
-    limit #{start},10;
+            on A.n_num = E.n_num
+            order by n_date asc
+        ) as origin, (select @ROWNUM :=0) Tab
+        where All_tag like CONCAT('%',#{keyword},'%')
+        limit #{start},10;
     </select>
 
 
