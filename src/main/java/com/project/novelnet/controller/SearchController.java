@@ -27,7 +27,7 @@ public class SearchController
     @GetMapping("novelnet/search")
     public String searchPage(){
 
-        //List<NovelVO> novelVOList = searchMapper.getSearchNovelList("","","",0);
+        List<NovelVO> novelVOList = searchMapper.getSearchNovelList("n_date","","","title", "", 0);
         return "search";
     }
 }

@@ -175,18 +175,17 @@
                     order by n_date desc
                 </otherwise>
             </choose>
-            order by n_date asc
         ) as origin, (select @ROWNUM :=0) Tab
         where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
         <choose>
             <when test="searchType.equals('nick')">
-                and u_nick CONCAT('%',#{searchKeyword},'%')
+                and u_nick like CONCAT('%',#{searchKeyword},'%')
             </when>
             <when test="searchType.equals('tag')">
-                and All_tag('%',#{searchKeyword},'%')
+                and All_tag like CONCAT('%',#{searchKeyword},'%')
             </when>
             <otherwise>
-                and n_title CONCAT('%',#{searchKeyword},'%')
+                and n_title like CONCAT('%',#{searchKeyword},'%')
             </otherwise>
         </choose>
         limit #{start},10;
