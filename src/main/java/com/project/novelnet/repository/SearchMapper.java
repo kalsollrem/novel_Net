@@ -49,6 +49,7 @@ public interface SearchMapper
     List<NovelVO> getSearchNovelList(@Param("sort")String sort,
                                      @Param("mainTag")String mainTag,
                                      @Param("searchTag")String searchTag,
-                                     @Param("searchTitle")String searchTitle,
+                                     @Param("searchType")String searchType,
+                                     @Param("searchKeyword")String searchKeyword,
                                      @Param("start")int start);
 }
