@@ -46,6 +46,9 @@ public interface SearchMapper
     //내 북마크 책장 데이터 검색(총 조회수, 총 추천수, 총 회차수, 다음화 포함)
     List<NovelVO> getBookmarkList(@Param("u_num")String u_num, @Param("keyword")String keyword, @Param("newOld")String newOld, @Param("fin")String fin, @Param("start")int start);
 
+    //sort : 정렬기준(공개일, 조회수, 추천), mainTag : 검색태그, searchTag : 서치태그(태그추가시)
+    //searchType: 검색할타입(제목,태그,작가), searchKeyword: 검색어
+    //start : 페이징용
     List<NovelVO> getSearchNovelList(@Param("sort")String sort,
                                      @Param("mainTag")String mainTag,
                                      @Param("searchTag")String searchTag,
