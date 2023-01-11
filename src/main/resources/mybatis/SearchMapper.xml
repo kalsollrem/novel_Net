@@ -191,7 +191,7 @@
         limit #{start},10;
     </select>
 
-    //검색된 갯수 측정
+    <!--검색된 갯수 측정-->
     <select id="searchNovelCount" resultType="Integer">
         select count(*) from(
         select
@@ -212,17 +212,6 @@
         from (select n_num, concat(<![CDATA['<div class="searched_tagcard">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
         group by n_num order by h_tag) E
         on A.n_num = E.n_num
-        <choose>
-            <when test="sort.equals('n_good')">
-                order by n_good desc
-            </when>
-            <when test="sort.equals('n_count')">
-                order by n_count desc
-            </when>
-            <otherwise>
-                order by n_date desc
-            </otherwise>
-        </choose>
         ) as origin
         where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
         <choose>
@@ -238,7 +227,7 @@
         </choose>
     </select>
 
-
+    <!--북마크 갯수-->
     <select id="bookmarkCount" resultType="Integer">
         select
             <choose>
