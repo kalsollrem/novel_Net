@@ -274,11 +274,12 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .search_list .search_novel { width: 100%; height: 220px; border-bottom: 1px solid silver; margin-top: 20px;}
 .search_list .search_novel .novel_img {height: 100%; width: 100px; float: left;}
 .search_list .search_novel .novel_img>img {height: 150px; width: 100px; margin-top: 10px; border-bottom-right-radius:1em ; box-shadow: 5px 5px 5px gray;}
+.search_list .search_novel .novel_img>a>img {height: 150px; width: 110px; margin-top: 10px; border-bottom-right-radius:1em ; box-shadow: 5px 5px 5px gray;}
 
 /*업태그*/
-.up_tag {width: 30px; height: 30px; position: absolute; margin-left: 85px; }
+.up_tag {width: 30px; height: 30px; position: absolute; margin-left: 90px; }
 
-.search_list .search_novel .novel_data {height: 100%; width: 1080px;  float: left; margin-left: 20px;}
+.search_list .search_novel .novel_data {height: 100%; width: 1075px;  float: left; margin-left: 25px;}
 .search_list .search_novel .novel_data .searched_title { width: 100%; height: 40px; line-height: 40px; }
 .searched_title .st_title {height: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left;}
 .searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px;}

@@ -144,7 +144,7 @@
         select @ROWNUM := @ROWNUM + 1 as ROWNUM, origin.*  from(
             select
                 A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
-                B.u_nick,
+                B.u_nick as nick,
                 ifnull(C.n_stop,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
                 date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo,
                 E.All_tag

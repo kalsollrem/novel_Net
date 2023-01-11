@@ -44,8 +44,9 @@
                         <div class="search_novel" th:if="${novelList.n_stop} < 6">
                             <div class="novel_img">
                                 <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
-                                    <img th:src="'../noteImg/'+${novelList.n_cover}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">                            </div>
+                                    <img th:src="'../noteImg/'+${novelList.n_cover}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">
                                 </a>
+                            </div>
                             <div class="up_tag" th:if="${novelList.newMemo}!=null">
                                 <img src="../img/up.png" alt="up!" th:if="${novelList.newMemo}<=24">
                             </div>
