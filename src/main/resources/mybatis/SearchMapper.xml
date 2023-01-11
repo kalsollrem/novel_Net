@@ -191,6 +191,7 @@
         limit #{start},10;
     </select>
 
+    //검색된 갯수 측정
     <select id="searchNovelCount" resultType="Integer">
         select count(*) from(
         select
