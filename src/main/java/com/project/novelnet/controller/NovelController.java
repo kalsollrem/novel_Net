@@ -755,8 +755,6 @@ public class NovelController {
         System.out.println("======================================");
 
         if(session.getAttribute("U_NUM") != null) {u_num = (String) session.getAttribute("U_NUM").toString(); } //유저번호
-
-
         else                                            {u_num = "20"; } //비로그인 테스트용
 
 
