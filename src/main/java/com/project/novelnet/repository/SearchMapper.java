@@ -57,5 +57,8 @@ public interface SearchMapper
                                      @Param("start")int start);
 
     //검색된 갯수 확보
-    public int searchNovelCount();
+    public int searchNovelCount(@Param("mainTag")String mainTag,
+                                @Param("searchTag")String searchTag,
+                                @Param("searchType")String searchType,
+                                @Param("searchKeyword")String searchKeyword);
 }

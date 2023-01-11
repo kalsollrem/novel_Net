@@ -65,8 +65,8 @@ public class SearchController
         //검색갯수 검색
         if (u_num != null){
 
-            //검색갯수 확보
-            int count =1; //sql추가
+            //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
+            int count = searchMapper.searchNovelCount("","","","");
             System.out.println("갯수 : " + count);
 
             //페이징 처리
