@@ -15,7 +15,7 @@ $(function (){
     {
         sort       = "date";
         searchType = "title";
-        searchTag  = "";
+        searchTag  = "t_01";
     }
 
     //검색어 설정
@@ -50,4 +50,11 @@ $(function (){
     $(".search_go").click(function (){
         location.href = '/novelnet/search?sort='+sort+'searchType'+searchType+'searchTag'+searchTag+'&keyword='+keyword; })
 
+
+    //태그
+    //01:전채 , 02:판타지, 03:무협, 04:현대, 05:로맨스, 06:대체역사, 07:공포, 08:SF, 09:스포츠, 10:기타,  00:기타 태그 검색
+    if(searchTag != "t_00")
+    {
+        $("#"+searchTag).addClass('tag_card_choose');
+    }
 })
