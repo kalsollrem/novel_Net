@@ -3,13 +3,19 @@ $(function (){
     const url = new URLSearchParams(urlStr);
     let sort;
     let keyword;
+    let searchType;
+    let searchTag;
 
     //주소값 없을시
     try{
-        sort      = url.get('sort').toString();
+        sort            = url.get('sort').toString();
+        searchType      = url.get('searchType').toString();
+        searchTag       = url.get('searchTag').toString();
     }catch (err)
     {
         sort       = "date";
+        searchType = "title";
+        searchTag  = "";
     }
 
     //검색어 설정
