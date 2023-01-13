@@ -32,7 +32,7 @@ public class SearchController
     public String searchPage(HttpSession session,
                              @RequestParam(value = "keyword"   ,required = false) String keyword,
                              @RequestParam(value = "newOld"    ,required = false) String newOld,
-                             @RequestParam(value = "category" ,required = false) String category,
+                             @RequestParam(value = "category"  ,required = false) String category,
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
 
