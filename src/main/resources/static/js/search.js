@@ -45,4 +45,9 @@ $(function (){
     $(".date_date").click(function (){ location.href = '/novelnet/search?sort=date&keyword='+keyword; })
     $(".date_view").click(function (){ location.href = '/novelnet/search?sort=view&keyword='+keyword; })
     $(".date_vote").click(function (){ location.href = '/novelnet/search?sort=vote&keyword='+keyword; })
+
+    //검색
+    $(".search_go").click(function (){
+        location.href = '/novelnet/search?sort='+sort+'searchType'+searchType+'searchTag'+searchTag+'&keyword='+keyword; })
+
 })
