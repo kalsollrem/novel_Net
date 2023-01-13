@@ -48,7 +48,7 @@ $(function (){
 
     //검색
     $(".search_go").click(function (){
-        location.href = '/novelnet/search?sort='+sort+'searchType'+searchType+'searchTag'+searchTag+'&keyword='+keyword; })
+        location.href = '/novelnet/search?sort='+sort+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
 
 
     //태그
@@ -57,4 +57,8 @@ $(function (){
     {
         $("#"+searchTag).addClass('tag_card_choose');
     }
+
+    $(".tag_card").click(function (){
+        location.href = '/novelnet/search?sort='+sort+'&searchType='+searchType+'&searchTag='+this.id+'&keyword='+keyword;
+    })
 })
