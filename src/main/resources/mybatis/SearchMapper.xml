@@ -171,6 +171,7 @@
     -->
     <select id="getSearchNovelList" resultType="com.project.novelnet.Vo.NovelVO">
         select @ROWNUM := @ROWNUM + 1 as ROWNUM, origin.*  from(
+            select * from(
             select
                 A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
                 B.u_nick as nick,
@@ -193,18 +194,7 @@
                 from (select n_num, concat(<![CDATA['<div class="searched_tagcard">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
                 group by n_num order by h_tag) E
             on A.n_num = E.n_num
-            <choose>
-                <when test="sort.equals('n_good')">
-                    order by n_good desc
-                </when>
-                <when test="sort.equals('n_count')">
-                    order by n_count desc
-                </when>
-                <otherwise>
-                    order by n_date desc
-                </otherwise>
-            </choose>
-        ) as origin, (select @ROWNUM :=0) Tab
+        ) as ori
         where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
         <choose>
             <when test="searchType.equals('writer')">
@@ -217,7 +207,18 @@
                 and n_title like CONCAT('%',#{searchKeyword},'%')
             </otherwise>
         </choose>
-        limit #{start},10;
+        <choose>
+            <when test="sort.equals('n_good')">
+                order by n_good desc
+            </when>
+            <when test="sort.equals('n_count')">
+                order by n_count desc
+            </when>
+            <otherwise>
+                order by n_date desc
+            </otherwise>
+        </choose>
+        limit #{start},10) as origin , (select @ROWNUM :=0) Tab;
     </select>
 
     <!--검색된 갯수 측정-->

@@ -48,8 +48,8 @@ public class SearchController
         if(sort==null)                        {sort  = "n_date";}  //날짜
         else {
             switch (sort){
-                case "count": sort = "n_count"      ; break;    //조회수
-                case "good" : sort  = "n_good"      ; break;    //추천수
+                case "view" : sort  = "n_count"     ; break;    //조회수
+                case "vote" : sort  = "n_good"      ; break;    //추천수
                 default     : sort  = "n_date"      ; break;    //날짜
             }
         }
