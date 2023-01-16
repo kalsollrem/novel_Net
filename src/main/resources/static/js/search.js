@@ -18,7 +18,11 @@ $(function (){
     //메인태그 없을시
     try         { mainTag  = url.get('mainTag').toString(); }
     catch (err) { mainTag  = "t_01"; }
-    $("#"+mainTag).addClass('tag_card_choose');
+
+    //01:전채 , 02:판타지, 03:무협, 04:현대, 05:로맨스, 06:대체역사, 07:공포, 08:SF, 09:스포츠, 10:기타,  00:기타 태그 검색
+    const tagArr = ['t_01', 't_02', 't_03', 't_04', 't_05', 't_06', 't_07', 't_08', 't_09', 't_10'];
+    if(tagArr.includes(mainTag) == false)   { $("#t_01").addClass('tag_card_choose');    }
+    else                                    { $("#"+mainTag).addClass('tag_card_choose') };
 
     //서브태그 없을시
     try         { searchTag  = url.get('searchTag').toString(); }
@@ -65,6 +69,11 @@ $(function (){
         $('.book_witter').addClass('search_none');
     }
 
+    $('.book_title').click(function (){location.href = '/novelnet/search?sort=date&mainTag='+mainTag+'&searchType=title&searchTag='+searchTag+'&keyword='+keyword;});
+    $('.book_hashtag').click(function (){location.href = '/novelnet/search?sort=date&mainTag='+mainTag+'&searchType=introduction&searchTag='+searchTag+'&keyword='+keyword;});
+    $('.book_witter').click(function (){location.href = '/novelnet/search?sort=date&mainTag='+mainTag+'&searchType=writer&searchTag='+searchTag+'&keyword='+keyword;});
+
+
     // 클릭시 링크이동
     $(".date_date").click(function (){ location.href = '/novelnet/search?sort=date&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
     $(".date_view").click(function (){ location.href = '/novelnet/search?sort=view&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
@@ -76,9 +85,7 @@ $(function (){
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
 
 
-    //태그
-    //01:전채 , 02:판타지, 03:무협, 04:현대, 05:로맨스, 06:대체역사, 07:공포, 08:SF, 09:스포츠, 10:기타,  00:기타 태그 검색
-    const tagArr = ['t_01', 't_02', 't_03', 't_04', 't_05', 't_06', 't_07', 't_08', 't_09', 't_10'];
+    //서브 태그 검색
     if(searchTag != "")
     {
         $(".tag_search").css("background-color",'#333')
@@ -88,4 +95,18 @@ $(function (){
     $(".tag_card").click(function (){
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+this.id+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
     })
+
+
+    $(".tag_search").click(function (){
+        const hashtag_finder = $('.hashtag_finder');
+        hashtag_finder.css("position", "absolute");
+        hashtag_finder.css("top", Math.max(0, (($(window).height() - hashtag_finder.outerHeight()) / 2) + $(window).scrollTop()) + "px");
+        hashtag_finder.css("left", Math.max(0, (($(window).width() - hashtag_finder.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+        $(".hashtag_finder").fadeIn(1000);
+    });
+
+    $(".hashtag_finder").click(function (){
+        $(".hashtag_finder").hide();
+    });
+
 })

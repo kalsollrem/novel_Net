@@ -104,14 +104,14 @@
                                 </th:block>
                             </div>
                         <div class="paging_num">
-                            <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}>=1"><a th:href="@{/novelnet/mybook(category=${param.category},page=((${nowCase}-1)*5+1),newOld=${param.newOld},keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+1">1</a></div>
+                            <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}>=0"><a th:href="@{/novelnet/mybook(category=${param.category},page=((${nowCase}-1)*5+1),newOld=${param.newOld},keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+1">1</a></div>
                             <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+2)" th:if="${allPage}>=2"><a th:href="@{/novelnet/mybook(category=${param.category},page=((${nowCase}-1)*5+2),newOld=${param.newOld},keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+2">2</a></div>
                             <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+3)" th:if="${allPage}>=3"><a th:href="@{/novelnet/mybook(category=${param.category},page=((${nowCase}-1)*5+3),newOld=${param.newOld},keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+3">3</a></div>
                             <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+4)" th:if="${allPage}>=4"><a th:href="@{/novelnet/mybook(category=${param.category},page=((${nowCase}-1)*5+4),newOld=${param.newOld},keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+4">4</a></div>
                             <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+5)" th:if="${allPage}>=5"><a th:href="@{/novelnet/mybook(category=${param.category},page=((${nowCase}-1)*5+5),newOld=${param.newOld},keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+5">5</a></div>
                         </div>
                         <div class="paging_right">
-                            <th:block th:if="${nowCase} != ${allCase}">
+                            <th:block th:if="${nowCase} != ${allCase} and ${allCase} != 0">
                                 <div class="paging_card"><a th:href="@{/novelnet/mybook(category=${param.category},page=((${nowCase}-1)*5+1),newOld=${param.newOld},keyword=${param.keyword})}">▷</a></div>
                                 <div class="paging_card"><a th:href="@{/novelnet/mybook(category=${param.category},page=${allPage},newOld=${param.newOld},keyword=${param.keyword})}">→</a></div>
                             </th:block>
