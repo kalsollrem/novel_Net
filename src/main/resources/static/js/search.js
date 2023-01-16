@@ -55,7 +55,8 @@ $(function (){
 
     //태그
     //01:전채 , 02:판타지, 03:무협, 04:현대, 05:로맨스, 06:대체역사, 07:공포, 08:SF, 09:스포츠, 10:기타,  00:기타 태그 검색
-    if(searchTag == "t_00")
+    const tagArr = ['t_01', 't_02', 't_03', 't_04', 't_05', 't_06', 't_07', 't_08', 't_09', 't_10'];
+    if(tagArr.includes(searchTag) == false)
     {
         $(".tag_search").css("background-color",'#333')
         $(".tag_search").css("color",'white')
