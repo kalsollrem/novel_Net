@@ -43,33 +43,44 @@ public class SearchController
         if(keyword == null)                   {keyword = "";    }
 
         if(sort==null)                        {sort  = "n_date";}  //날짜
-        else if (sort.equals("n_count"))      {sort  = "n_count";}  //조회수
-        else                                  {sort  = "n_good";}  //추천수
+        else {
+            switch (sort){
+                case "count": sort = "n_count"      ; break;    //조회수
+                case "good" : sort  = "n_good"      ; break;    //추천수
+                default     : sort  = "n_date"      ; break;    //날짜
+            }
+        }
 
-        if(searchType==null)                        {searchType  = "nick";}            //닉네임
-        else if (searchType.equals("asc"))          {searchType  = "introduction";}    //소개문
-        else                                        {searchType  = "title";}           //제목
+        if(searchType==null)                        {searchType  = "nick";}  //날짜
+        else {
+            switch (searchType){
+                case "nick":         searchType  = "nick"            ; break;    //닉네임
+                case "introduction": searchType  = "introduction"    ; break;    //소개문
+                default            : searchType  = "title"           ; break;    //제목
+                }
+        }
+
 
         if (mainTag == null)                  {mainTag = "";  }
         else {
             switch (mainTag){
-                case "t_01": searchTag = ""     ; break;
-                case "t_02": searchTag = "판타지"; break;
-                case "t_03": searchTag = "무협"  ; break;
-                case "t_04": searchTag = "현대"  ; break;
-                case "t_05": searchTag = "로맨스"; break;
-                case "t_06": searchTag = "대체역사"  ; break;
-                case "t_07": searchTag = "공포"  ; break;
-                case "t_08": searchTag = "SF"   ; break;
-                case "t_09": searchTag = "스포츠"; break;
-                case "t_10": searchTag = "기타"  ; break;
-                default    : searchTag = ""     ; break;
+                case "t_01": mainTag = ""     ; break;
+                case "t_02": mainTag = "판타지"; break;
+                case "t_03": mainTag = "무협"  ; break;
+                case "t_04": mainTag = "현대"  ; break;
+                case "t_05": mainTag = "로맨스"; break;
+                case "t_06": mainTag = "대체역사"  ; break;
+                case "t_07": mainTag = "공포"  ; break;
+                case "t_08": mainTag = "SF"   ; break;
+                case "t_09": mainTag = "스포츠"; break;
+                case "t_10": mainTag = "기타"  ; break;
+                default    : mainTag = ""     ; break;
             }
         }
 
         if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
 
-        System.out.println("검색태그"+mainTag);
+        System.out.println("검색 메인 태그"+mainTag);
 
         if(page    == null)                     {page    = "1";   }
         else{
