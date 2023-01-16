@@ -105,6 +105,8 @@ public class SearchController
         System.out.println("후 버튼 " + rightPage);
         System.out.println("하단에 나온 페이지 " + displayPage);
 
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("searchCount", count);
         model.addAttribute("allPage", allPage);
         model.addAttribute("nowCase", nowCase);
         model.addAttribute("allCase", allCase);

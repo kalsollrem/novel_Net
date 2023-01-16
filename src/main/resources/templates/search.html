@@ -14,7 +14,7 @@
             <h3>태그 검색</h3>
             <div class="text_zone">
                 <input type="text" name="hashtag_find" id="hashtag_find" placeholder="해쉬태그를 넣어주세요">
-                <button class="search_go"><img src="../img/finder.png" alt="검색"></button>
+                <button class="search_go subTagSearch"><img src="../img/finder.png" alt="검색"></button>
             </div>
             <ul class="tag_list">
                 <li><div class="tag_card">#판타지</div>  </li>
@@ -39,14 +39,14 @@
         <!------------ 콘텐츠 영역   ------------------>
                 <div class="search_finder">
                     <div class="finder_box">
-                        <input type="text" id="search" placeholder="소설제목, 태그, 작가를 검색해주세요. 띄어쓰기시 여러 키워드 검색을 제공합니다.">
-                        <button class="search_go"><img src="../img/finder.png" alt="검색"></button>
+                        <input type="text" id="search" placeholder="검색에 필요한 단어를 입력해주세요.">
+                        <button class="search_go mainTagSearch"><img src="../img/finder.png" alt="검색"></button>
                     </div>
                 </div>
                 <div class="search_space"></div>
                 <div class="search_window">
-                    <div class="finder_banner">
-                        <span>검색어</span>의 검색결과 입니다.
+                    <div class="finder_banner" th:if="${keyword}!=null and ${keyword}!=''">
+                        <span th:text="'『 '+${param.keyword}+' 』'"></span>의 검색결과 입니다.
                     </div>
                     <div class="search_change margin_bottom25">
                         <div class="book_title   search_box">제목</div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="search_menu">
                         <div class="search_date">
-                            <div class="search_count font_option15">총 12,123개 작품</div>
+                            <div class="search_count font_option15" th:text="'총 '+ ${searchCount} +'개 작품'"></div>
                             <div class="search_what">
                                 <div class="box_option8035 date_date"><img src="../img/date_on.png" alt="날짜순"></div>
                                 <div class="box_option8035 date_view"><img src="../img/view_off.png" alt="조회순"></div>

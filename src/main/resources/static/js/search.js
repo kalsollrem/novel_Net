@@ -80,7 +80,7 @@ $(function (){
     $(".date_vote").click(function (){ location.href = '/novelnet/search?sort=vote&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
 
     //검색
-    $(".search_go").click(function (){
+    $(".mainTagSearch").click(function (){
         keyword = $("#search").val()
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
 
@@ -96,7 +96,7 @@ $(function (){
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+this.id+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
     })
 
-
+    //태그 추가검색
     $(".tag_search").click(function (){
         const hashtag_finder = $('.hashtag_finder');
         hashtag_finder.css("position", "absolute");
@@ -105,8 +105,10 @@ $(function (){
         $(".hashtag_finder").fadeIn(1000);
     });
 
-    $(".hashtag_finder").click(function (){
-        $(".hashtag_finder").hide();
+    $(".subTagSearch").click(function (){
+        searchTag = $('#hashtag_find').val();
+        location.href = '/novelnet/search?sort='+sort+'&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
     });
+
 
 })
