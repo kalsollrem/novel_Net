@@ -54,10 +54,10 @@ public class SearchController
             }
         }
 
-        if(searchType==null)                        {searchType  = "nick";}  //날짜
+        if(searchType==null)                        {searchType  = "title";}
         else {
             switch (searchType){
-                case "nick":         searchType  = "nick"            ; break;    //닉네임
+                case "writer":       searchType  = "writer"            ; break;    //닉네임
                 case "introduction": searchType  = "introduction"    ; break;    //소개문
                 default            : searchType  = "title"           ; break;    //제목
                 }

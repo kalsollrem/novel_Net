@@ -18,6 +18,7 @@ $(function (){
     //메인태그 없을시
     try         { mainTag  = url.get('mainTag').toString(); }
     catch (err) { mainTag  = "t_01"; }
+    $("#"+mainTag).addClass('tag_card_choose');
 
     //서브태그 없을시
     try         { searchTag  = url.get('searchTag').toString(); }
@@ -44,6 +45,26 @@ $(function (){
         $('.date_vote>img').attr('src','../img/vote_off.png');
     }
 
+    //서치 타입 css
+    if(searchType == "introduction")
+    {
+        $('.book_title').addClass('search_none');
+        $('.book_hashtag').addClass('search_choose');
+        $('.book_witter').addClass('search_none');
+    }
+    else if(searchType == "writer")
+    {
+        $('.book_title').addClass('search_none');
+        $('.book_hashtag').addClass('search_none');
+        $('.book_witter').addClass('search_choose');
+    }
+    else
+    {
+        $('.book_title').addClass('search_choose');
+        $('.book_hashtag').addClass('search_none');
+        $('.book_witter').addClass('search_none');
+    }
+
     // 클릭시 링크이동
     $(".date_date").click(function (){ location.href = '/novelnet/search?sort=date&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
     $(".date_view").click(function (){ location.href = '/novelnet/search?sort=view&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
@@ -58,13 +79,10 @@ $(function (){
     //태그
     //01:전채 , 02:판타지, 03:무협, 04:현대, 05:로맨스, 06:대체역사, 07:공포, 08:SF, 09:스포츠, 10:기타,  00:기타 태그 검색
     const tagArr = ['t_01', 't_02', 't_03', 't_04', 't_05', 't_06', 't_07', 't_08', 't_09', 't_10'];
-    if(tagArr.includes(mainTag) == false)
+    if(searchTag != "")
     {
         $(".tag_search").css("background-color",'#333')
         $(".tag_search").css("color",'white')
-    }else
-    {
-        $("#"+mainTag).addClass('tag_card_choose');
     }
 
     $(".tag_card").click(function (){
