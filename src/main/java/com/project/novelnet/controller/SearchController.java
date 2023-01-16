@@ -41,9 +41,9 @@ public class SearchController
 
         if(keyword == null)                   {keyword = "";    }
 
-        if(sort==null)                        {sort  = "date";}  //날짜
-        else if (sort.equals("asc"))          {sort  = "view";}  //조회수
-        else                                  {sort  = "vote";}  //추천수
+        if(sort==null)                        {sort  = "n_date";}  //날짜
+        else if (sort.equals("asc"))          {sort  = "n_count";}  //조회수
+        else                                  {sort  = "n_good";}  //추천수
 
         if (searchTag == null)                  {searchTag = "";  }
         else {
@@ -63,7 +63,7 @@ public class SearchController
             }
         }
 
-        System.out.println(searchTag);
+        System.out.println("검색태그"+searchTag);
 
         if(page    == null)                     {page    = "1";   }
         else{
@@ -103,7 +103,7 @@ public class SearchController
         int start = (Integer.parseInt(page)-1)*10;
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
-        List<NovelVO> novelList = searchMapper.getSearchNovelList("n_date","","","title", "", 0);
+        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,"","","title", "", 0);
         System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
