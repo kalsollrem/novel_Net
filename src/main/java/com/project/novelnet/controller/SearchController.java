@@ -32,6 +32,7 @@ public class SearchController
     public String searchPage(HttpSession session,
                              @RequestParam(value = "sort"      ,required = false) String sort,
                              @RequestParam(value = "searchType",required = false) String searchType,
+                             @RequestParam(value = "mainTag"   ,required = false) String mainTag,
                              @RequestParam(value = "searchTag" ,required = false) String searchTag,
                              @RequestParam(value = "keyword"   ,required = false) String keyword,
                              @RequestParam(value = "page"      ,required = false) String page,
@@ -42,13 +43,16 @@ public class SearchController
         if(keyword == null)                   {keyword = "";    }
 
         if(sort==null)                        {sort  = "n_date";}  //날짜
-        else if (sort.equals("asc"))          {sort  = "n_count";}  //조회수
+        else if (sort.equals("n_count"))      {sort  = "n_count";}  //조회수
         else                                  {sort  = "n_good";}  //추천수
 
-        if (searchTag == null)                  {searchTag = "";  }
+        if(searchType==null)                        {searchType  = "nick";}            //닉네임
+        else if (searchType.equals("asc"))          {searchType  = "introduction";}    //소개문
+        else                                        {searchType  = "title";}           //제목
+
+        if (mainTag == null)                  {mainTag = "";  }
         else {
-            switch (searchTag){
-                case ""    : searchTag = ""     ; break;
+            switch (mainTag){
                 case "t_01": searchTag = ""     ; break;
                 case "t_02": searchTag = "판타지"; break;
                 case "t_03": searchTag = "무협"  ; break;
@@ -59,11 +63,13 @@ public class SearchController
                 case "t_08": searchTag = "SF"   ; break;
                 case "t_09": searchTag = "스포츠"; break;
                 case "t_10": searchTag = "기타"  ; break;
-                default    : searchTag = searchTag; break;
+                default    : searchTag = ""     ; break;
             }
         }
 
-        System.out.println("검색태그"+searchTag);
+        if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
+
+        System.out.println("검색태그"+mainTag);
 
         if(page    == null)                     {page    = "1";   }
         else{
@@ -72,7 +78,7 @@ public class SearchController
 
 
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
-        int count = searchMapper.searchNovelCount("","","","");
+        int count = searchMapper.searchNovelCount(mainTag,searchTag,"","");
         System.out.println("갯수 : " + count);
 
         //페이징 처리

@@ -181,8 +181,8 @@
             <when test="searchType.equals('nick')">
                 and u_nick like CONCAT('%',#{searchKeyword},'%')
             </when>
-            <when test="searchType.equals('tag')">
-                and All_tag like CONCAT('%',#{searchKeyword},'%')
+            <when test="searchType.equals('introduction')">
+                and n_introduction like CONCAT('%',#{searchKeyword},'%')
             </when>
             <otherwise>
                 and n_title like CONCAT('%',#{searchKeyword},'%')
@@ -218,8 +218,8 @@
             <when test="searchType.equals('nick')">
                 and u_nick like CONCAT('%',#{searchKeyword},'%')
             </when>
-            <when test="searchType.equals('tag')">
-                and All_tag like CONCAT('%',#{searchKeyword},'%')
+            <when test="searchType.equals('introduction')">
+                and n_introduction like CONCAT('%',#{searchKeyword},'%')
             </when>
             <otherwise>
                 and n_title like CONCAT('%',#{searchKeyword},'%')
