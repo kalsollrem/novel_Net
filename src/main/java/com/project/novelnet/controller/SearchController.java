@@ -42,6 +42,9 @@ public class SearchController
 
         if(keyword == null)                   {keyword = "";    }
 
+        if(page    == null)                   {page    = "1";   }
+        else{ if(manageService.isInteger(page) == false){page = "1"; } }
+
         if(sort==null)                        {sort  = "n_date";}  //날짜
         else {
             switch (sort){
@@ -64,7 +67,6 @@ public class SearchController
         if (mainTag == null)                  {mainTag = "";  }
         else {
             switch (mainTag){
-                case "t_01": mainTag = ""     ; break;
                 case "t_02": mainTag = "판타지"; break;
                 case "t_03": mainTag = "무협"  ; break;
                 case "t_04": mainTag = "현대"  ; break;
@@ -82,14 +84,8 @@ public class SearchController
 
         System.out.println("검색 메인 태그"+mainTag);
 
-        if(page    == null)                     {page    = "1";   }
-        else{
-            if(manageService.isInteger(page) == false){page = "1"; }
-        }
-
-
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
-        int count = searchMapper.searchNovelCount(mainTag,searchTag,"","");
+        int count = searchMapper.searchNovelCount(mainTag,searchTag,searchType,keyword);
         System.out.println("갯수 : " + count);
 
         //페이징 처리
@@ -119,9 +115,12 @@ public class SearchController
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
 
+        System.out.println("정렬 : "+sort+"/ 메인테그 : "+mainTag+"/ 검색 태그 : "+searchTag+"/ 검색 타입:"+searchType+"/");
+
+
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
-        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,"","","title", "", 0);
-        System.out.println(novelList);
+        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,mainTag,"",searchType, keyword, 0);
+        //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
         //년도확인
@@ -129,10 +128,6 @@ public class SearchController
         int year = cal.get(Calendar.YEAR);
         model.addAttribute("year",year);
 
-
-
-
-        List<NovelVO> novelVOList = searchMapper.getSearchNovelList("n_date","","","title", "", 0);
         return "search";
     }
 }
