@@ -158,21 +158,21 @@
                         <div class="paging_box">
                             <div class="paging_left">
                                 <th:block th:if="${nowCase}!=1">
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(category=${param.category},page=1,keyword=${param.keyword})}">←</a></div>
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(category=${param.category},page=${leftPage},keyword=${param.keyword})}">◁</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=1)}">←</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=${leftPage})}">◁</a></div>
                                 </th:block>
                             </div>
                             <div class="paging_num">
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}>=0"><a th:href="@{/novelnet/search(category=${param.category},page=((${nowCase}-1)*5+1),keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+1">1</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+2)" th:if="${allPage}>=2"><a th:href="@{/novelnet/search(category=${param.category},page=((${nowCase}-1)*5+2),keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+2">2</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+3)" th:if="${allPage}>=3"><a th:href="@{/novelnet/search(category=${param.category},page=((${nowCase}-1)*5+3),keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+3">3</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+4)" th:if="${allPage}>=4"><a th:href="@{/novelnet/search(category=${param.category},page=((${nowCase}-1)*5+4),keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+4">4</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+5)" th:if="${allPage}>=5"><a th:href="@{/novelnet/search(category=${param.category},page=((${nowCase}-1)*5+5),keyword=${param.keyword})}" th:text="(${nowCase}-1)*5+5">5</a></div>
+                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}>=0"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}" th:text="(${nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+2)" th:if="${allPage}>=2"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+2))}" th:text="(${nowCase}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+3)" th:if="${allPage}>=3"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+3))}" th:text="(${nowCase}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+4)" th:if="${allPage}>=4"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+4))}" th:text="(${nowCase}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+5)" th:if="${allPage}>=5"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+5))}" th:text="(${nowCase}-1)*5+5">5</a></div>
                             </div>
                             <div class="paging_right">
                                 <th:block th:if="${nowCase} != ${allCase} and ${allCase} != 0">
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(category=${param.category},page=((${nowCase}-1)*5+1),keyword=${param.keyword})}">▷</a></div>
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(category=${param.category},page=((${nowCase}-1)*5+1),keyword=${param.keyword})}">→</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}">▷</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}">→</a></div>
                                 </th:block>
                             </div>
                         </div>
