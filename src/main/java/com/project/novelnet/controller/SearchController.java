@@ -119,7 +119,7 @@ public class SearchController
 
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
-        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,mainTag,"",searchType, keyword, 0);
+        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,mainTag,searchTag,searchType, keyword, 0);
         //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
