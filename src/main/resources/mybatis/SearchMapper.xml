@@ -191,7 +191,7 @@
             on A.n_num = D.n_num
             left join
                 (select n_num, group_concat(h_tag separator' ') as All_tag
-                from (select n_num, concat(<![CDATA['<div class="searched_tagcard">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
+                from (select n_num, concat(<![CDATA['<div class="searched_tagcard subSearch">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
                 group by n_num order by h_tag) E
             on A.n_num = E.n_num
         ) as ori
