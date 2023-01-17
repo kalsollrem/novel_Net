@@ -102,8 +102,8 @@
         on
             C.n_num = D.n_num and D.m_num = C.m_num
         left join
-            (select n_num, group_concat(h_tag separator' ') as All_tag
-                from (select n_num, concat(<![CDATA['<div class="searched_tagcard">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
+            (select n_num, group_concat(h_tag order by t_carte asc separator' ' ) as All_tag
+                from (select n_num, t_carte, concat(<![CDATA['<div class="searched_tagcard">',h_tag,'</div>']]>)as h_tag from hashtag)tagChange
                 group by n_num order by h_tag) E
         on
             A.n_num = E.n_num
@@ -190,8 +190,8 @@
                 (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) D
             on A.n_num = D.n_num
             left join
-                (select n_num, group_concat(h_tag separator' ') as All_tag
-                from (select n_num, concat(<![CDATA['<div class="searched_tagcard subSearch">',h_tag,'</div>']]>)as h_tag from hashtag order by n_num asc, t_carte asc)tagChange
+                (select n_num, group_concat(h_tag order by t_carte asc separator' ') as All_tag
+                from (select n_num, t_carte, concat(<![CDATA['<div class="searched_tagcard subSearch">',h_tag,'</div>']]>)as h_tag from hashtag)tagChange
                 group by n_num order by h_tag) E
             on A.n_num = E.n_num
         ) as ori
