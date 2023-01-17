@@ -39,6 +39,14 @@ $(function(){
          else                { $(".info_menu").fadeOut(); memuSwitch=0;}
     });
 
+    //우측상단 메뉴 닫기
+    $(document).mouseup(function (e){
+        if($(".info_menu").has(e.target).length === 0){
+            $(".info_menu").hide();
+            memuSwitch = 0;
+        }
+    });
+
     //글쓰기 버튼
     $(".writePageGo").click(function()   {
         if($(".login_session_cheaker").val() == 'noLogin')
