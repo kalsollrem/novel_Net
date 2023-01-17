@@ -5,6 +5,7 @@
     <title>Index</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/index.js"></script>
     <script src="../js/search.js"></script>
 </head>
 <body>
@@ -80,33 +81,6 @@
                         </div>
                     </div>
                     <div class="search_list">
-<!--                        <div class="search_novel">-->
-<!--                            <div class="novel_img">-->
-<!--                                <img src="../img/nover_cover.jpg" alt="소설이름" >-->
-<!--                            </div>-->
-<!--                            <div class="up_tag">-->
-<!--                                <img src="../img/up.png" alt="up!">-->
-<!--                            </div>-->
-<!--                            <div class="novel_data">-->
-<!--                                <div class="searched_title">-->
-<!--                                    <div class="st_title">소설제목</div>-->
-<!--                                    <div class="st_writter">작가명</div>-->
-<!--                                </div>-->
-<!--                                <div class="searched_pri">-->
-<!--                                    전회차까지의 이 소설의 이야기-->
-<!--                                </div>-->
-<!--                                <ul class="searched_count">-->
-<!--                                    <li><img src="../img/count_view.png" alt="조회수">1003명</li>-->
-<!--                                    <li><img src="../img/count_book.png" alt="구독">12회차</li>-->
-<!--                                    <li><img src="../img/count_good.png" alt="추천">50회</li>-->
-<!--                                </ul>-->
-<!--                                <div class="searched_tag">-->
-<!--                                    <div class="searched_tagcard">#아카데미</div>-->
-<!--                                    <div class="searched_tagcard">#현대</div>-->
-<!--                                </div>-->
-<!--                                <div class="searched_time">6분전 UP</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
                         <th:block th:each="novelList : ${novelList}">
                             <div class="search_novel" th:if="${novelList.n_stop} < 6">
                                 <div class="novel_img">

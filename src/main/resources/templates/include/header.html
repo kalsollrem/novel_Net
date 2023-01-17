@@ -139,8 +139,8 @@
     <!-- 로그인 여부 판단 -->
     <div class="myInfo">
         <ul class="info_front">
-            <li><img class="writePageGo" src="../img/write.png"alt="글쓰기"></li>
-            <li><img src="../img/search.png"alt="검색"></li>
+            <li><img class="writePageGo" src="../img/write.png"alt="글쓰기" id="writePage_btn"></li>
+            <li><img src="../img/search.png"alt="검색" id="searchPage_btn"></li>
             <li><span><a href="#">
                         <img th:if="${session.U_NUM == null}"     src="../img/profill_login_plz.png"alt="프로필">
                         <img th:unless="${session.U_NUM == null}" src="../img/profill_menu.png"alt="프로필">

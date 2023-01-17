@@ -26,11 +26,11 @@ $(function(){
     login_box.css("left", Math.max(0, (($(window).width() - login_box.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
     $('.login_box').fadeIn(500);
     
-    //검색모달(Search window)
-    var login_box = $('.hashtag_box');
-    login_box.css("position", "absolute");
-    login_box.css("top", Math.max(0, (($(window).height() - login_box.outerHeight()) / 2) + $(window).scrollTop()) + "px");
-    login_box.css("left", Math.max(0, (($(window).width() - login_box.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+    // //검색모달(Search window)
+    // var login_box = $('.hashtag_box');
+    // login_box.css("position", "absolute");
+    // login_box.css("top", Math.max(0, (($(window).height() - login_box.outerHeight()) / 2) + $(window).scrollTop()) + "px");
+    // login_box.css("left", Math.max(0, (($(window).width() - login_box.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
   
     //우측 상단메뉴(Right menu)
     var memuSwitch = 0;
@@ -50,6 +50,8 @@ $(function(){
         }
     })
 
+    //검색페이지 버튼
+    $('#searchPage_btn').click(function (){location.href='/novelnet/search'});
 
     //가입 모달 버튼(Join modal)
     $("#join_on").click(function()   { $(".sign").fadeIn(); })
