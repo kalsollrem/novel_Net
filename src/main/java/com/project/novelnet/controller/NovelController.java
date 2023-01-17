@@ -781,7 +781,7 @@ public class NovelController {
         else{
           if(manageService.isInteger(page) == false){page = "1"; }
         }
-        System.out.println("인저가항2:"+keyword +"/"+ newOld +"/"+category+"/"+page);
+        System.out.println("변수 리스트 :"+keyword +"/"+ newOld +"/"+category+"/"+page);
 
 
         if (u_num != null){

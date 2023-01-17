@@ -96,6 +96,7 @@ $(function (){
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+this.id+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
     })
 
+
     //태그 추가검색
     $(".tag_search").click(function (){
         const hashtag_finder = $('.hashtag_finder');
@@ -104,7 +105,13 @@ $(function (){
         hashtag_finder.css("left", Math.max(0, (($(window).width() - hashtag_finder.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
         $(".hashtag_finder").fadeIn(1000);
     });
-
+    //다른영역 클릭시 창닫기.
+    $(document).mouseup(function (e){
+        if($(".hashtag_finder").has(e.target).length === 0){
+            $(".hashtag_finder").hide();
+        }
+    });
+    //태그 추가 검색 버튼
     $(".subTagSearch").click(function (){
         searchTag = $('#hashtag_find').val();
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
