@@ -85,37 +85,48 @@ $(function (){
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword; })
 
 
-    //서브 태그 검색
+    //서브 태그 활성화시
     if(searchTag != "")
     {
         $(".tag_search").css("background-color",'#333')
         $(".tag_search").css("color",'white')
     }
 
+    //메인 태그 검색
     $(".tag_card").click(function (){
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+this.id+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
     })
 
 
-    //태그 추가검색
+    //서브 태그 검색창 열기
     $(".tag_search").click(function (){
         const hashtag_finder = $('.hashtag_finder');
         hashtag_finder.css("position", "absolute");
         hashtag_finder.css("top", Math.max(0, (($(window).height() - hashtag_finder.outerHeight()) / 2) + $(window).scrollTop()) + "px");
         hashtag_finder.css("left", Math.max(0, (($(window).width() - hashtag_finder.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
         $(".hashtag_finder").fadeIn(1000);
+        $("#hashtag_find").val(searchTag);
     });
-    //다른영역 클릭시 창닫기.
+
+    //서브태그 검색창 다른영역 클릭시 창닫기.
     $(document).mouseup(function (e){
         if($(".hashtag_finder").has(e.target).length === 0){
             $(".hashtag_finder").hide();
         }
     });
+
     //태그 추가 검색 버튼
     $(".subTagSearch").click(function (){
         searchTag = $('#hashtag_find').val();
         location.href = '/novelnet/search?sort='+sort+'&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
     });
+
+    //서브태그 클릭시
+    $(".subSearch").click(function (){
+        searchTag = this.innerText.substr(1)
+        location.href = '/novelnet/search?sort='+sort+'&mainTag='+mainTag+'&searchType='+searchType+'&searchTag='+searchTag+'&keyword='+keyword;
+    })
+
 
 
 })
