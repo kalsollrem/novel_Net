@@ -259,6 +259,11 @@
 
 
     <!--플러스 검색 기능  -->
+    <!--writeType : 자유연재, 프라임   -->
+    <!--monopoly  : 독점연재, 자유연재   -->
+    <!--monopoly  : 독점연재, 자유연재   -->
+    <!--dateType  : 연재중, 완결   -->
+    <!--sort      : 조회수, 업데이트순, 추천수   -->
     <select id="getSearchPlusNovelList" resultType="com.project.novelnet.Vo.NovelVO">
         select @ROWNUM := @ROWNUM + 1 as ROWNUM, origin.*  from(
         select * from
@@ -308,10 +313,10 @@
             ) as ori
         where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
         <choose>
-            <when test="searchType.equals('newNovel')">
+            <when test="dateType.equals('newNovel')">
                 and newMemo <![CDATA[<=]]> 720
             </when>
-            <when test="searchType.equals('finNovel')">
+            <when test="dateType.equals('finNovel')">
                 and n_fin = 'done'
             </when>
             <otherwise>
