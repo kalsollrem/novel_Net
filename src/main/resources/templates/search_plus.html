@@ -8,6 +8,27 @@
     <script src="../js/modal.js"></script>
 </head>
 <body>
+    <!-- 로그인 -->
+    <div class="hashtag_finder">
+        <div class="hashtag_box">
+            <h3>태그 검색</h3>
+            <div class="text_zone">
+                <input type="text" name="hashtag_find" id="hashtag_find" placeholder="해쉬태그를 넣어주세요">
+                <button class="search_go subTagSearch"><img src="../img/finder.png" alt="검색"></button>
+            </div>
+            <ul class="tag_list">
+                <li><div class="tag_card subSearch">#판타지</div>  </li>
+                <li><div class="tag_card subSearch">#무협</div>    </li>
+                <li><div class="tag_card subSearch">#현대</div>    </li>
+                <li><div class="tag_card subSearch">#로맨스</div>  </li>
+                <li><div class="tag_card subSearch">#대체역사</div></li>
+                <li><div class="tag_card subSearch">#공포</div>    </li>
+                <li><div class="tag_card subSearch">#SF</div>      </li>
+                <li><div class="tag_card subSearch">#스포츠</div>  </li>
+                <li><div class="tag_card subSearch">#기타</div>    </li>
+            </ul>
+        </div>
+    </div>
     <!-- 모달 레이아웃 -->
     <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
     <!-- 모달 레이아웃 -->
@@ -23,135 +44,106 @@
                 </div>
                 <div class="search_menu">
                     <div class="search_date">
-                        <div class="search_count font_option20">총 12,123개 작품</div>
+                        <div class="search_count font_option15" th:text="'총 '+ ${searchCount} +'개 작품'"></div>
                         <div class="search_write"><img src="../img/new_novel.png" alt="신규작품 등록"></div>
                         <div class="search_what">
-                            <div class="date_box date_date"><img src="../img/date_on.png" alt="날짜순"></div>
-                            <div class="date_box date_view"><img src="../img/view_off.png" alt="조회순"></div>
-                            <div class="date_box date_vote"><img src="../img/vote_off.png" alt="추천순"></div>
+                            <div class="box_option8035 date_date"><img src="../img/date_on.png" alt="날짜순"></div>
+                            <div class="box_option8035 date_view"><img src="../img/view_off.png" alt="조회순"></div>
+                            <div class="box_option8035 date_vote"><img src="../img/vote_off.png" alt="추천순"></div>
                         </div>
                     </div>
                     <div class="tag_box">
                         <div class="tag_add"><button class="tag_search">태그검색</button></div>
                         <div class="tag_zone">
-                            <div class="tag_card tag_card_choose">전체</div>
-                            <div class="tag_card">판타지</div>
-                            <div class="tag_card">무협</div>
-                            <div class="tag_card">현대</div>
-                            <div class="tag_card">로맨스</div>
-                            <div class="tag_card">대체역사</div>
-                            <div class="tag_card">공포</div>
-                            <div class="tag_card">SF</div>
-                            <div class="tag_card">스포츠</div>
-                            <div class="tag_card">기타</div>
+                            <!--tag_card_choose 클래스로 선택-->
+                            <div id="t_01" class="tag_card">전체</div>
+                            <div id="t_02" class="tag_card">판타지</div>
+                            <div id="t_03" class="tag_card">무협</div>
+                            <div id="t_04" class="tag_card">현대</div>
+                            <div id="t_05" class="tag_card">로맨스</div>
+                            <div id="t_06" class="tag_card">대체역사</div>
+                            <div id="t_07" class="tag_card">공포</div>
+                            <div id="t_08" class="tag_card">SF</div>
+                            <div id="t_09" class="tag_card">스포츠</div>
+                            <div id="t_10" class="tag_card">기타</div>
                         </div>
                     </div>
                 </div>
                 <div class="search_list">
-                    <div class="search_novel">
-                        <div class="novel_img">
-                            <img src="../img/nover_cover.jpg" alt="소설이름" >
-                        </div>
-                        <div class="up_tag">
-                            <img src="../img/up.png" alt="up!">
-                        </div>
-                        <div class="novel_data">
-                            <div class="searched_title">
-                                <div class="st_title">소설제목</div>
-                                <div class="st_writter">작가명</div>
+                    <th:block th:each="novelList : ${novelList}">
+                        <div class="search_novel" th:if="${novelList.n_stop} < 6">
+                            <div class="novel_img">
+                                <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
+                                    <img th:src="'../noteImg/'+${novelList.n_cover}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">
+                                </a>
                             </div>
-                            <div class="searched_pri">
-                                전회차까지의 이 소설의 이야기
+                            <div class="up_tag" th:if="${novelList.newMemo}!=null">
+                                <img src="../img/up.png" alt="up!" th:if="${novelList.newMemo}<=24">
                             </div>
-                            <ul class="searched_count">
-                                <li><img src="../img/count_view.png" alt="조회수">1003명</li>
-                                <li><img src="../img/count_book.png" alt="구독">12회차</li>
-                                <li><img src="../img/count_good.png" alt="추천">50회</li>
-                            </ul>
-                            <div class="searched_tag">
-                                <div class="searched_tagcard">#아카데미</div>
-                                <div class="searched_tagcard">#현대</div>
+                            <div class="novel_data">
+                                <div class="searched_title">
+                                    <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
+                                        <div class="st_title" th:text="${novelList.n_title}">소설제목</div>
+                                    </a>
+                                    <div class="st_writter" th:text="${novelList.nick}">작가명</div>
+                                </div>
+                                <div class="searched_pri" th:text="${novelList.n_introduction}">
+                                    소설 줄거리
+                                </div>
+                                <ul class="searched_count">
+                                    <li>
+                                        <img src="../img/count_view.png" alt="조회수" th:if="${novelList.n_count == null}" th:text="0명">
+                                        <img src="../img/count_view.png" alt="조회수" th:if="${novelList.n_count != null}" th:text="${novelList.n_count}+'명'">
+                                    </li>
+                                    <li>
+                                        <img src="../img/count_book.png" alt="회차" th:if="${novelList.n_chapters == null}" th:text="0회차">
+                                        <img src="../img/count_book.png" alt="회차" th:if="${novelList.n_chapters != null}" th:text="${novelList.n_chapters}+'회차'">
+                                    </li>
+                                    <li>
+                                        <img src="../img/count_good.png" alt="추천" th:if="${novelList.n_good == null}" th:text="0회">
+                                        <img src="../img/count_good.png" alt="추천" th:if="${novelList.n_good != null}" th:text="${novelList.n_good}+'회'">
+                                    </li>
+                                </ul>
+                                <div class="searched_tag" th:utext="${novelList.all_tag}">
+                                    <div class="searched_tagcard">#태그존</div>
+                                </div>
+                                <div th:if="${novelList.newMemo} != null">
+                                    <div class="searched_time" th:if="${novelList.newMemo}<=24 and 0<${novelList.newMemo}" th:text="${novelList.newMemo}+' 시간전 UP'">신규 시간</div>
+                                    <div class="searched_time" th:if="${novelList.newMemo}>24 and ${#strings.substring(novelList.n_date, 0, 4)}==${year}" th:text="${#strings.substring(novelList.n_date, 5)}">마지막 업데이트일</div>
+                                    <div class="searched_time" th:if="${novelList.newMemo}>24 and ${#strings.substring(novelList.n_date, 0, 4)}!=${year}" th:text="${novelList.n_date}" style="width: 120px;">마지막 업데이트일</div>
+                                    <div class="searched_time" th:if="${novelList.newMemo}==0">방금 전 UP</div>
+                                </div>
                             </div>
-                            <div class="searched_time">6분전 UP</div>
                         </div>
-                    </div>
-                    <div class="search_novel">
-                        <div class="novel_img">
-                            <img src="../img/nover_cover.jpg" alt="소설이름" >
-                        </div>
-                        <div class="up_tag">
-                            <img src="../img/up.png" alt="up!">
-                        </div>
-                        <div class="novel_data">
-                            <div class="searched_title">
-                                <div class="st_title">소설제목</div>
-                                <div class="st_writter">작가명</div>
-                            </div>
-                            <div class="searched_pri">
-                                전회차까지의 이 소설의 이야기
-                            </div>
-                            <ul class="searched_count">
-                                <li><img src="../img/count_view.png" alt="조회수">1003명</li>
-                                <li><img src="../img/count_book.png" alt="구독">12회차</li>
-                                <li><img src="../img/count_good.png" alt="추천">50회</li>
-                            </ul>
-                            <div class="searched_tag">
-                                <div class="searched_tagcard">#아카데미</div>
-                                <div class="searched_tagcard">#현대</div>
-                            </div>
-                            <div class="searched_time">6분전 UP</div>
-                        </div>
-                    </div>
-                    <div class="search_novel">
-                        <div class="novel_img">
-                            <img src="../img/nover_cover.jpg" alt="소설이름" >
-                        </div>
-                        <div class="up_tag">
-                            <img src="../img/up.png" alt="up!">
-                        </div>
-                        <div class="novel_data">
-                            <div class="searched_title">
-                                <div class="st_title">소설제목</div>
-                                <div class="st_writter">작가명</div>
-                            </div>
-                            <div class="searched_pri">
-                                전회차까지의 이 소설의 이야기
-                            </div>
-                            <ul class="searched_count">
-                                <li><img src="../img/count_view.png" alt="조회수">1003명</li>
-                                <li><img src="../img/count_book.png" alt="구독">12회차</li>
-                                <li><img src="../img/count_good.png" alt="추천">50회</li>
-                            </ul>
-                            <div class="searched_tag">
-                                <div class="searched_tagcard">#아카데미</div>
-                                <div class="searched_tagcard">#현대</div>
-                            </div>
-                            <div class="searched_time">6분전 UP</div>
-                        </div>
-                    </div>
+                    </th:block>
                 </div>
                 <div class="paging">
                     <div class="paging_box">
                         <div class="paging_left">
-                            <div class="paging_card">←</div>
-                            <div class="paging_card">◁</div>
+                            <th:block th:if="${nowCase}!=1">
+                                <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=1)}">←</a></div>
+                                <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=${leftPage})}">◁</a></div>
+                            </th:block>
                         </div>
                         <div class="paging_num">
-                            <div class="paging_card">1</div>
-                            <div class="paging_card">2</div>
-                            <div class="paging_card">3</div>
-                            <div class="paging_card">4</div>
-                            <div class="paging_card">5</div>
+                            <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}>=0"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}" th:text="(${nowCase}-1)*5+1">1</a></div>
+                            <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+2)" th:if="${allPage}>=2"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+2))}" th:text="(${nowCase}-1)*5+2">2</a></div>
+                            <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+3)" th:if="${allPage}>=3"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+3))}" th:text="(${nowCase}-1)*5+3">3</a></div>
+                            <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+4)" th:if="${allPage}>=4"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+4))}" th:text="(${nowCase}-1)*5+4">4</a></div>
+                            <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+5)" th:if="${allPage}>=5"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+5))}" th:text="(${nowCase}-1)*5+5">5</a></div>
                         </div>
                         <div class="paging_right">
-                            <div class="paging_card">▷</div>
-                            <div class="paging_card">→</div>
+                            <th:block th:if="${nowCase} != ${allCase} and ${allCase} != 0">
+                                <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}">▷</a></div>
+                                <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}">→</a></div>
+                            </th:block>
                         </div>
                     </div>
                 </div>
-        <!------------ 콘텐츠 영역  ------------------>
             </div>
+            <!------------ 콘텐츠 영역  ------------------>
         </div>
+    </div>
     </div>
     <footer>
         <div class="notice">
@@ -164,7 +156,7 @@
         <div class="footer_info">
             <div class="footer_info_frame">
                 <div class="copyright">
-                    <div class="mono_logo"> 
+                    <div class="mono_logo">
                         <img src="../img/mono_logo.png">
                     </div>
                     <ul class="copyright_c">
@@ -177,9 +169,9 @@
                     <li>주소 김제시 요촌동 81-42번지, T플로어 3층</li>
                     <li>고객센터 : 063-588-0011 helpNovel@gmail.com 운영시간 AM10:00 - PM 06:00 (휴게시간 PM 0:30 - 2:00)</li>
                 </ul>
-            </div>  
+            </div>
         </div>
     </footer>
-    
+
 </body>
 </html>
