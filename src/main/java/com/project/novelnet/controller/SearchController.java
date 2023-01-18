@@ -132,4 +132,18 @@ public class SearchController
 
         return "search";
     }
+
+
+    @GetMapping("novelnet/searchPlus")
+    public String searchPlusPage(HttpSession session,
+                             @RequestParam(value = "sort"      ,required = false) String sort,
+                             @RequestParam(value = "searchType",required = false) String searchType,
+                             @RequestParam(value = "mainTag"   ,required = false) String mainTag,
+                             @RequestParam(value = "searchTag" ,required = false) String searchTag,
+                             @RequestParam(value = "keyword"   ,required = false) String keyword,
+                             @RequestParam(value = "page"      ,required = false) String page,
+                             Model model) throws Exception{
+
+        return "search_plus";
+    }
 }
