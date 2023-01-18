@@ -61,4 +61,14 @@ public interface SearchMapper
                                 @Param("searchTag")String searchTag,
                                 @Param("searchType")String searchType,
                                 @Param("searchKeyword")String searchKeyword);
+
+    //검색 플러스 페이지용.
+    List<NovelVO> getSearchPlusNovelList(@Param("sort")String sort,
+                                         @Param("mainTag")String mainTag,
+                                         @Param("searchTag")String searchTag,
+                                         @Param("dateType")String dateType,
+                                         @Param("searchKeyword")String searchKeyword,
+                                         @Param("writeType")String writeType,
+                                         @Param("monopoly")String monopoly,
+                                         @Param("start")int start);
 }
