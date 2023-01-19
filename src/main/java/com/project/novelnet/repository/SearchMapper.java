@@ -67,8 +67,8 @@ public interface SearchMapper
                                          @Param("mainTag")String mainTag,
                                          @Param("searchTag")String searchTag,
                                          @Param("dateType")String dateType,
-                                         @Param("searchKeyword")String searchKeyword,
-                                         @Param("writeType")String writeType,
+                                         @Param("novelType")String novelType,
+                                         @Param("doType")String doType,
                                          @Param("monopoly")String monopoly,
                                          @Param("start")int start);
 }

@@ -278,11 +278,11 @@
             (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover
              from novel
             <choose>
-                <when test="writeType.equals('newNovel')">
-                    where n_type = 'free'
+                <when test="doType.equals('newNovel')">
+                    where n_fin = 'doing'
                 </when>
-                <when test="writeType.equals('finNovel')">
-                    where n_type = 'prime'
+                <when test="doType.equals('finNovel')">
+                    where n_fin = 'fin'
                 </when>
             </choose>
             <choose>
@@ -292,8 +292,14 @@
                 <when test="monopoly.equals('free')">
                     and n_monopoly = 'free'
                 </when>
-                <otherwise>
-                </otherwise>
+            </choose>
+            <choose>
+                <when test="novelType.equals('free')">
+                    and n_type = 'free'
+                </when>
+                <when test="novelType.equals('prime')">
+                    and n_type = 'prime'
+                </when>
             </choose>
              ) A
         left join
@@ -319,8 +325,7 @@
             <when test="dateType.equals('finNovel')">
                 and n_fin = 'done'
             </when>
-            <otherwise>
-            </otherwise>
+            <otherwise></otherwise>
         </choose>
         <choose>
             <when test="sort.equals('n_good')">

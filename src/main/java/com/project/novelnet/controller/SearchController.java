@@ -121,7 +121,7 @@ public class SearchController
 
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
-        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,mainTag,searchTag,searchType, keyword, 0);
+        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,mainTag,searchTag,searchType, keyword, start);
         //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
@@ -141,8 +141,11 @@ public class SearchController
                              @RequestParam(value = "mainTag"   ,required = false) String mainTag,
                              @RequestParam(value = "searchTag" ,required = false) String searchTag,
                              @RequestParam(value = "keyword"   ,required = false) String keyword,
+//                             @RequestParam(value = "keyword"   ,required = false) String keyword,
+//                             @RequestParam(value = "keyword"   ,required = false) String keyword,
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
+//        dateType,writeType,monopoly
 
         System.out.println("======================================");
 
@@ -227,7 +230,7 @@ public class SearchController
 
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
-        List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,mainTag,searchTag,searchType, keyword, 0);
+        List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,"anyway","free","newNovel","free",start);
         //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
