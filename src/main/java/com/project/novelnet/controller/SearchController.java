@@ -134,6 +134,7 @@ public class SearchController
     }
 
 
+    //자유연재 페이지
     @GetMapping("novelnet/searchPlus")
     public String searchPlusPage(HttpSession session,
                              @RequestParam(value = "sort"      ,required = false) String sort,
@@ -144,17 +145,19 @@ public class SearchController
                              @RequestParam(value = "doType"    ,required = false) String doType,
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
-//        dateType : 신작(newNovel), 완결(finNovel)
-//        novelType : 자유연재(free), 프라임(prime)
-//        monopoly : 플랫폼독점(only), 자유(free)
-//        doType : 연재중(newNovel), 완결(finNovel)
 
         System.out.println("======================================");
 
+        //연재방식
         String novelType = "free";
 
-        if(monopoly  == null)               {monopoly  = "";}
 
+        //monopoly : 플랫폼독점(only), 자유(free)
+        if(monopoly  == "free")               {monopoly  = "free";}
+        else                                  {monopoly  = "only";}
+
+
+        //doType : 연재중(doNovel), 신작만(newNovel), 완결(finNovel)
         if(doType    == null)               {doType    = "";}
         else {
             switch (doType){
@@ -165,10 +168,13 @@ public class SearchController
             }
         }
 
+        //페이지
         if(page    == null)                             {page    = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
 
-        if(sort==null)                        {sort  = "n_date";}  //날짜
+
+        //정렬방식
+        if(sort==null)                                  {sort  = "n_date";}  //날짜
         else {
             switch (sort){
                 case "view" : sort  = "n_count"     ; break;    //조회수
@@ -177,16 +183,8 @@ public class SearchController
             }
         }
 
-        if(searchType==null)                        {searchType  = "title";}
-        else {
-            switch (searchType){
-                case "writer":       searchType  = "writer"            ; break;    //닉네임
-                case "introduction": searchType  = "introduction"    ; break;    //소개문
-                default            : searchType  = "title"           ; break;    //제목
-            }
-        }
 
-
+        //메인태그
         if (mainTag == null)                  {mainTag = "";  }
         else {
             switch (mainTag){
@@ -203,12 +201,13 @@ public class SearchController
             }
         }
 
+        //서브 검색태그
         if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
 
         System.out.println("검색 메인 태그"+mainTag);
 
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
-        int count = searchMapper.searchNovelCount(mainTag,searchTag,searchType,"");
+        int count = searchMapper.searchNovelCount(mainTag,searchTag,"title","");
         System.out.println("갯수 : " + count);
 
         //페이징 처리

@@ -261,7 +261,6 @@
     <!--플러스 검색 기능  -->
     <!--writeType : 자유연재, 프라임   -->
     <!--monopoly  : 독점연재, 자유연재   -->
-    <!--monopoly  : 독점연재, 자유연재   -->
     <!--dateType  : 연재중, 완결   -->
     <!--sort      : 조회수, 업데이트순, 추천수   -->
     <select id="getSearchPlusNovelList" resultType="com.project.novelnet.Vo.NovelVO">
