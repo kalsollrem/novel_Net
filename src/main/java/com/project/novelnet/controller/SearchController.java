@@ -140,16 +140,19 @@ public class SearchController
                              @RequestParam(value = "searchType",required = false) String searchType,
                              @RequestParam(value = "mainTag"   ,required = false) String mainTag,
                              @RequestParam(value = "searchTag" ,required = false) String searchTag,
-                             @RequestParam(value = "keyword"   ,required = false) String keyword,
-//                             @RequestParam(value = "keyword"   ,required = false) String keyword,
-//                             @RequestParam(value = "keyword"   ,required = false) String keyword,
+                             @RequestParam(value = "novelType" ,required = false) String novelType,
+                             @RequestParam(value = "monopoly"  ,required = false) String monopoly,
+                             @RequestParam(value = "doType"    ,required = false) String doType,
+                             @RequestParam(value = "dateType"  ,required = false) String dateType,
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
-//        dateType,writeType,monopoly
+//        dateType : 신작(newNovel), 완결(finNovel)
+//        novelType : 자유연재(free), 프라임(prime)
+//        monopoly : 플랫폼독점(only), 자유(free)
+//        doType : 연재중(newNovel), 완결(finNovel)
 
         System.out.println("======================================");
 
-        if(keyword == null)                   {keyword = "";    }
 
         if(page    == null)                   {page    = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
@@ -194,7 +197,7 @@ public class SearchController
         System.out.println("검색 메인 태그"+mainTag);
 
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
-        int count = searchMapper.searchNovelCount(mainTag,searchTag,searchType,keyword);
+        int count = searchMapper.searchNovelCount(mainTag,searchTag,searchType,"");
         System.out.println("갯수 : " + count);
 
         //페이징 처리
@@ -214,7 +217,6 @@ public class SearchController
         System.out.println("후 버튼 " + rightPage);
         System.out.println("하단에 나온 페이지 " + displayPage);
 
-        model.addAttribute("keyword", keyword);
         model.addAttribute("searchCount", count);
         model.addAttribute("allPage", allPage);
         model.addAttribute("nowCase", nowCase);
