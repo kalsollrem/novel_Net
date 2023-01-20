@@ -153,7 +153,8 @@ public class SearchController
 
 
         //monopoly : 플랫폼독점(only), 자유(free)
-        if(monopoly  == "free")               {monopoly  = "free";}
+        if(monopoly == null)                  {monopoly = "free";}
+        else if(monopoly  == "free")          {monopoly  = "free";}
         else                                  {monopoly  = "only";}
 
 
