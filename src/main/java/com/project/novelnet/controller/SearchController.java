@@ -154,6 +154,11 @@ public class SearchController
         System.out.println("======================================");
 
 
+        if(dateType    == null)               {dateType  = "";}
+        if(novelType    == null)              {novelType = "";}
+        if(monopoly    == null)               {monopoly  = "";}
+        if(doType    == null)                 {doType    = "";}
+
         if(page    == null)                   {page    = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
 
@@ -232,7 +237,7 @@ public class SearchController
 
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
-        List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,"anyway","free","newNovel","free",start);
+        List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,dateType,novelType,doType,monopoly,start);
         //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
