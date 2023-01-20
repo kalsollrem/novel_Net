@@ -140,10 +140,8 @@ public class SearchController
                              @RequestParam(value = "searchType",required = false) String searchType,
                              @RequestParam(value = "mainTag"   ,required = false) String mainTag,
                              @RequestParam(value = "searchTag" ,required = false) String searchTag,
-                             @RequestParam(value = "novelType" ,required = false) String novelType,
                              @RequestParam(value = "monopoly"  ,required = false) String monopoly,
                              @RequestParam(value = "doType"    ,required = false) String doType,
-                             @RequestParam(value = "dateType"  ,required = false) String dateType,
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
 //        dateType : 신작(newNovel), 완결(finNovel)
@@ -153,13 +151,21 @@ public class SearchController
 
         System.out.println("======================================");
 
+        String novelType = "free";
 
-        if(dateType    == null)               {dateType  = "";}
-        if(novelType    == null)              {novelType = "";}
-        if(monopoly    == null)               {monopoly  = "";}
-        if(doType    == null)                 {doType    = "";}
+        if(monopoly  == null)               {monopoly  = "";}
 
-        if(page    == null)                   {page    = "1";   }
+        if(doType    == null)               {doType    = "";}
+        else {
+            switch (doType){
+                case "doNovel"  : doType  = "doNovel"      ; break;    //연재중
+                case "newNovel" : doType  = "newNovel"     ; break;    //신작만
+                case "finNovel" : doType  = "finNovel"     ; break;    //완결만
+                default         : doType  = ""             ; break;    //전체
+            }
+        }
+
+        if(page    == null)                             {page    = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
 
         if(sort==null)                        {sort  = "n_date";}  //날짜
@@ -237,7 +243,7 @@ public class SearchController
 
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
-        List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,dateType,novelType,doType,monopoly,start);
+        List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,novelType,doType,monopoly,start);
         //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 

@@ -66,7 +66,6 @@ public interface SearchMapper
     List<NovelVO> getSearchPlusNovelList(@Param("sort")String sort,
                                          @Param("mainTag")String mainTag,
                                          @Param("searchTag")String searchTag,
-                                         @Param("dateType")String dateType,
                                          @Param("novelType")String novelType,
                                          @Param("doType")String doType,
                                          @Param("monopoly")String monopoly,
