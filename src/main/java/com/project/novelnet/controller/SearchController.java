@@ -138,7 +138,6 @@ public class SearchController
     @GetMapping("novelnet/searchPlus")
     public String searchPlusPage(HttpSession session,
                              @RequestParam(value = "sort"      ,required = false) String sort,
-                             @RequestParam(value = "searchType",required = false) String searchType,
                              @RequestParam(value = "mainTag"   ,required = false) String mainTag,
                              @RequestParam(value = "searchTag" ,required = false) String searchTag,
                              @RequestParam(value = "monopoly"  ,required = false) String monopoly,
@@ -153,7 +152,7 @@ public class SearchController
 
 
         //monopoly : 플랫폼독점(only), 자유(free)
-        if(monopoly == null)                  {monopoly = "free";}
+        if(monopoly == null)                  {monopoly  = "free";}
         else if(monopoly  == "free")          {monopoly  = "free";}
         else                                  {monopoly  = "only";}
 
@@ -239,7 +238,7 @@ public class SearchController
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
 
-        System.out.println("정렬 : "+sort+"/ 메인테그 : "+mainTag+"/ 검색 태그 : "+searchTag+"/ 검색 타입:"+searchType+"/");
+        System.out.println("정렬 : "+sort+"/ 메인테그 : "+mainTag+"/ 검색 태그 : "+searchTag+"/ 검색 타입:"+doType+"/");
 
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)

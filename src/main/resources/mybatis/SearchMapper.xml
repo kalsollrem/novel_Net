@@ -277,19 +277,19 @@
             (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover
              from novel
             <choose>
-                <when test="monopoly.equals('only')">
-                    where n_monopoly = 'only'
+                <when test="novelType.equals('free')">
+                    where n_type = 'free'
                 </when>
-                <when test="monopoly.equals('free')">
-                    where n_monopoly = 'free'
+                <when test="novelType.equals('prime')">
+                    where n_type = 'prime'
                 </when>
             </choose>
             <choose>
-                <when test="novelType.equals('free')">
-                    and n_type = 'free'
+                <when test="monopoly.equals('only')">
+                    and n_monopoly = 'only'
                 </when>
-                <when test="novelType.equals('prime')">
-                    and n_type = 'prime'
+                <when test="monopoly.equals('free')">
+                    and n_monopoly = 'free'
                 </when>
             </choose>
             <choose>
