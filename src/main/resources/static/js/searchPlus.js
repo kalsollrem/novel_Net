@@ -2,10 +2,12 @@ $(function (){
     const urlStr = location.search;
     const url = new URLSearchParams(urlStr);
     let sort;
-    let doType;
     let mainTag;
+    let doType;
     let searchTag;
     let monopoly;
+
+    let link = '/novelnet/searchPlus?sort='+sort+'&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly
 
     //주소값 없을시
     try         { sort = url.get('sort').toString(); }
@@ -54,13 +56,13 @@ $(function (){
     }
 
     //서치 타입 css
-    if(doType == "search_new")
+    if(doType == "newNovel")
     {
         $('.search_all').addClass('search_none');
         $('.search_new').addClass('search_choose');
         $('.search_fin').addClass('search_none');
     }
-    else if(doType == "search_fin")
+    else if(doType == "finNovel")
     {
         $('.search_all').addClass('search_none');
         $('.search_new').addClass('search_none');
@@ -73,15 +75,17 @@ $(function (){
         $('.search_fin').addClass('search_none');
     }
 
-    $('.search_all').click(function (){location.href = '/novelnet/searchPlus'});
-    $('.search_new').click(function (){location.href = '/novelnet/searchPlus'});
-    $('.search_fin').click(function (){location.href = '/novelnet/searchPlus'});
+    $('.search_all').click(function (){location.href = '/novelnet/searchPlus?sort=date&mainTag='+mainTag+'&doType=allNovel&searchTag='+searchTag+'&monopoly'+monopoly});
+    $('.search_new').click(function (){location.href = '/novelnet/searchPlus?sort=date&mainTag='+mainTag+'&doType=newNovel&searchTag='+searchTag+'&monopoly'+monopoly});
+    $('.search_fin').click(function (){location.href = '/novelnet/searchPlus?sort=date&mainTag='+mainTag+'&doType=finNovel&searchTag='+searchTag+'&monopoly'+monopoly});
 
     // 클릭시 링크이동
-    $(".date_date").click(function (){ location.href = ''})
-    $(".date_view").click(function (){ location.href = ''})
-    $(".date_vote").click(function (){ location.href = ''})
+    $(".date_date").click(function (){ location.href = '/novelnet/searchPlus?sort=date&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly})
+    $(".date_view").click(function (){ location.href = '/novelnet/searchPlus?sort=view&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly})
+    $(".date_vote").click(function (){ location.href = '/novelnet/searchPlus?sort=vote&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly})
 
+    //클릭시 작성 페이지로 이동
+    $('search_write').click(function (){location.href= 'novelnet/regist'})
 
     //서브 태그 활성화시
     if(searchTag != "")
@@ -89,6 +93,11 @@ $(function (){
         $(".tag_search").css("background-color",'#333')
         $(".tag_search").css("color",'white')
     }
+
+    //메인 태그 검색
+    $(".tag_card").click(function (){
+        location.href = '/novelnet/searchPlus?sort='+sort+'&mainTag='+this.id+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly
+    })
 
     //서브 태그 검색창 열기
     $(".tag_search").click(function (){
@@ -110,12 +119,12 @@ $(function (){
     //태그 추가 검색 버튼
     $(".subTagSearch").click(function (){
         searchTag = $('#hashtag_find').val();
-        location.href = ''
+        location.href = '/novelnet/searchPlus?sort='+sort+'&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly
     });
 
     //서브태그 클릭시
     $(".subSearch").click(function (){
         searchTag = this.innerText.substr(1)
-        location.href = ''
+        location.href = '/novelnet/searchPlus?sort='+sort+'&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly
     })
 });
