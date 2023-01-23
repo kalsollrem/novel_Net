@@ -40,11 +40,15 @@
                             <div class="book_mark_zone border_pink" th:if="${bookmark}!='0' and ${session.U_NUM}!= null">
                                 <img src="../img/Bookmark_on.png" alt="북마크">
                             </div>
+                            <div class="write_mark_zone" th:if="${session.U_NUM}==${novelVO.getU_num()}">
+                                <a th:href="@{/novelnet/write(n_num=${novelVO.getN_num()})}"><img class="updateIcon" src="../img/write_ep.png" alt="글쓰기"></a>
+                            </div>
                         </div>
                         <div class="st_writter">작가 :
                             <span class="writter_name" th:text="${writer}">홀리</span>
                         </div>
                         <ul class="book_count">
+                            <hr class="grayline">
                             <li><img src="../img/count_view.png" alt="조회수">
                                 <span th:if="${novelVO.getN_count()} != null" th:text="${novelVO.getN_count()}+' 명'"></span>
                                 <span th:if="${novelVO.getN_count()} == null" th:text="'0 명'"></span>
@@ -79,8 +83,8 @@
                             <th:block th:each="memo : ${memoVOList}">
                             <!-- 공지글  -->
                             <div class="ep_box gongji" th:if="${memo.m_type}=='gong'">
-                                <div th:if="${memo.cheak == null} and ${memo.cheak == '0'}" class="read_cheaker read_none"> </div>
-                                <div th:if="${memo.cheak != null} and ${memo.cheak != '0'}" class="read_cheaker read_over"> </div>
+                                <div th:if="${memo.cheak == null} or ${memo.cheak == 0}" class="read_cheaker read_none"> </div>
+                                <div th:if="${memo.cheak > 0}" class="read_cheaker read_over"> </div>
                                 <div class="ep_tac">
                                     <div class="ep_title">
                                         <a th:href="@{/novelnet/view(n_num=${param.n_num},chapter=${memo.m_num},sort=${sort},page=${nowPage},type='gong')}" th:utext="${memo.m_title}"></a>
@@ -98,8 +102,8 @@
 
                             <!-- 게시물 -->
                             <div class="ep_box" th:if="${memo.m_type}=='ep'">
-                                <div th:if="${memo.cheak == null} and ${memo.cheak == '0'}" class="read_cheaker read_none"> </div>
-                                <div th:if="${memo.cheak != null} and ${memo.cheak != '0'}" class="read_cheaker read_over"> </div>
+                                <div th:if="${memo.cheak == null} or ${memo.cheak == '0'}" class="read_cheaker read_none"> </div>
+                                <div th:if="${memo.cheak > 0}" class="read_cheaker read_over"> </div>
                                 <div class="ep_tac">
                                     <div class="ep_title">
                                         <a th:href="@{/novelnet/view(n_num=${param.n_num},chapter=${memo.m_num},sort=${sort},page=${nowPage})}" th:utext="${memo.m_title}"></a>

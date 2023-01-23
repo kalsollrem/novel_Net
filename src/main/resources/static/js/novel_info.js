@@ -38,4 +38,8 @@ $(function (){
             }
         });
     });
+
+    $(".write_mark_zone").click(function (){
+        location.href = '';
+    });
 })

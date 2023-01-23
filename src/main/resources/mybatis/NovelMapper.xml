@@ -74,21 +74,25 @@
     </select>
     <!--  게시물 검색 + 번호매기기  -->
     <select id="getMemoDate" resultType="com.project.novelnet.Vo.MemoVO">
-        (SELECT @gp:=@gp+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
-        (SELECT COUNT(*) FROM reply WHERE n_num = #{n_num})AS r_cnt ,B.mr_num as cheak
-        FROM (SELECT @gp:=0)as n, memo A
-        LEFT JOIN (Select * from m_record where u_num = #{u_num} group by m_num) B
+        (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
+                IFNULL(B.cheak ,0)as cheak, IFNULL(C.cnt,0)as r_cnt
+        FROM (SELECT @ep:=#{page}-1)as n, memo A
+        LEFT JOIN (Select m_num, count(mr_num) as cheak from m_record where u_num = #{u_num} group by m_num) B
         on A.m_num = B.m_num
+        LEFT JOIN (SELECT m_num, count(r_num) as cnt FROM reply group by m_num) C
+        on B.m_num = C.m_num
         WHERE A.n_num = #{n_num} and A.m_type='gong'
         <if test="sort.equals('desc')">
             ORDER BY m_num DESC
         </if>)
         Union all
         (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
-                (SELECT COUNT(*) FROM reply WHERE n_num = #{n_num})AS r_cnt ,B.mr_num as cheak
+                IFNULL(B.cheak ,0)as cheak, IFNULL(C.cnt,0)as r_cnt
         FROM (SELECT @ep:=#{page}-1)as n, memo A
-        LEFT JOIN (Select * from m_record where u_num = #{u_num} group by m_num) B
+        LEFT JOIN (Select m_num, count(mr_num) as cheak from m_record where u_num = #{u_num} group by m_num) B
         on A.m_num = B.m_num
+        LEFT JOIN (SELECT m_num, count(r_num) as cnt FROM reply group by m_num) C
+        on B.m_num = C.m_num
         WHERE A.n_num = #{n_num} and A.m_type='ep'
         <if test="sort.equals('desc')">
             ORDER BY m_num DESC
