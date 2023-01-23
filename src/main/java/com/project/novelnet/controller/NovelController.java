@@ -71,16 +71,12 @@ public class NovelController {
 
         //리스트 잘러서 배열 넣기
         String[] splitPick = pdnovel.split("/");
-
         int pdpickCnt = 0;
         for (int i=0; i<=splitPick.length; i++)  {
             if(pdpickCnt <= 6)
             {
                 pdlist.add(splitPick[i]);
                 pdpickCnt++;
-            }else
-            {
-                break;
             }
         }
 
