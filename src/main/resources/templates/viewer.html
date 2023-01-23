@@ -12,6 +12,7 @@
 <div class="wrap dragBlock">
     <!---------------- 메뉴바 ---------------->
     <div class="viewer_guide">
+        <div class="write_update_btn" th:if="${updateOK}==1"><img src="/img/write_update.png" alt="신고"></div>
         <div class="guide_menu">
             <div class="home_button">
                 <button type="button" th:onclick="|location.href='@{/novelnet/novel(n_num=${n_num},sort=${sort},page=${page})}'|">
@@ -39,6 +40,7 @@
         </div>
     </div>
     <div class="chapter_guide">
+        <div class="nebiOpt"><img src="../img/singo.png" alt="신고"></div>
         <ul class="guide_nebi">
             <!-- 이전화 버튼 -->
             <th:block th:if="${#strings.equals(param.type, 'gong')}">

@@ -426,6 +426,11 @@ public class NovelController {
                 //읽은 기록 등록
                 novelMapper.setRecord(n_num,m_num,u_num);
 
+                //수정권환
+                int unt = novelMapper.UpdateOkCheaker(m_num, u_num);
+                model.addAttribute("updateOK",unt);
+                System.out.println("권환 : " + unt);
+
                 //조회수증가
                 if(session.getAttribute("chapter_"+m_num) == null){
                     session.setAttribute("chapter_"+m_num, m_num);

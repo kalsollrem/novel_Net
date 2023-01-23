@@ -37,6 +37,10 @@ public interface NovelMapper {
     @Select("select m_num from m_record where n_num=#{n_num} and u_num=#{u_num} order by mr_num desc limit 1")
     public String getLastChapter(@Param("n_num")String n_num, @Param("u_num")String u_num);
 
+    //수정권환 확인
+    @Select("select count(B.u_num) as cnt from memo A left join novel B on A.n_num = B.n_num where m_num = #{m_num} and u_num=#{u_num}")
+    public int UpdateOkCheaker(@Param("m_num")String m_num , @Param("u_num")String u_num);
+
     @Select("select * from memo")
     List<MemoVO> getAllMemo();
 
