@@ -206,8 +206,9 @@ public class SearchController
 
         System.out.println("검색 메인 태그"+mainTag);
 
+        System.out.println("메인태그 "+ mainTag +"/서치태그: "+ searchTag +"/ 노블타입 : "+ novelType +"/ 두 타입: "+ doType +"/ 모노폴리 :"+ monopoly);
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
-        int count = searchMapper.searchNovelCount(mainTag,searchTag,"title","");
+        int count = searchMapper.searchPlusNovelCount(mainTag,searchTag,novelType,doType,monopoly);
         System.out.println("갯수 : " + count);
 
         //페이징 처리

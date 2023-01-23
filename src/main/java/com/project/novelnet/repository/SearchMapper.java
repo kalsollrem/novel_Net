@@ -70,4 +70,11 @@ public interface SearchMapper
                                          @Param("doType")String doType,
                                          @Param("monopoly")String monopoly,
                                          @Param("start")int start);
+
+    //검색 플러스 검색갯수
+    public int searchPlusNovelCount(@Param("mainTag")String mainTag,
+                                    @Param("searchTag")String searchTag,
+                                    @Param("novelType")String novelType,
+                                    @Param("doType")String doType,
+                                    @Param("monopoly")String monopoly);
 }
