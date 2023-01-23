@@ -27,5 +27,9 @@ public interface UserMapper {
     @Select("select * from user where u_mail = #{id} and u_pass = #{pass}")
     UserVO getUserDataHash(@Param("id")String id, @Param("pass")String pass);
 
+    //잃어버린 비밀번호 가져오기
+    @Select("select u_pass from user where u_mail = #{u_mail}")
+    public String getLostId(@Param("u_mail")String u_mail);
+
 
 }

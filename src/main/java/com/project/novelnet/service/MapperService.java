@@ -45,5 +45,10 @@ public class MapperService implements UserMapper {
         return null;
     }
 
+    @Override
+    public String getLostId(String u_mail) {
+        return null;
+    }
+
 
 }

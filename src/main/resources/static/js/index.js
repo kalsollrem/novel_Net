@@ -26,11 +26,12 @@ $(function(){
     login_box.css("left", Math.max(0, (($(window).width() - login_box.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
     $('.login_box').fadeIn(500);
     
-    // //검색모달(Search window)
-    // var login_box = $('.hashtag_box');
-    // login_box.css("position", "absolute");
-    // login_box.css("top", Math.max(0, (($(window).height() - login_box.outerHeight()) / 2) + $(window).scrollTop()) + "px");
-    // login_box.css("left", Math.max(0, (($(window).width() - login_box.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+    //비밀번호 검색모달(passFinder window)
+    var passfinder = $('.passfinder_box');
+    passfinder.css("position", "absolute");
+    passfinder.css("top", Math.max(0, (($(window).height() - login_box.outerHeight()) / 2) + $(window).scrollTop()) + "px");
+    passfinder.css("left", Math.max(0, (($(window).width() - login_box.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+    $('.passfinder_box').fadeIn(500);
   
     //우측 상단메뉴(Right menu)
     var memuSwitch = 0;
@@ -62,14 +63,34 @@ $(function(){
     $('#searchPage_btn').click(function (){location.href='/novelnet/search'});
 
     //가입 모달 버튼(Join modal)
-    $("#join_on").click(function()   { $(".sign").fadeIn(); })
-    $("#sign_close").click(function(){ $(".sign").fadeOut();});
+    $("#join_on").click(function()       { $(".sign").fadeIn(); })
+    $(document).mouseup(function (e){
+        if($(".sign").has(e.target).length === 0){
+            $(".sign").hide();
+        }
+    });
     $(".login_change").click(function()  { $(".sign").fadeOut();  $(".login").fadeIn();});
+    $(".password_find").click(function() { $(".sign").fadeOut();  $(".passfinder").fadeIn();});
 
     //회원가입 모달 버튼(Sign modal)
     $("#login_on").click(function()      { $(".login").fadeIn(); });
-    $("#login_close").click(function()   { $(".login").fadeOut();});
+    $(document).mouseup(function (e){
+        if($(".login").has(e.target).length === 0){
+            $(".login").hide();
+        }
+    });
     $(".sign_find").click(function()     { $(".login").fadeOut(); $(".sign").fadeIn();});
+    $(".password_find").click(function() { $(".login").fadeOut(); $(".passfinder").fadeIn();});
+
+    //비밀번호 찾기 모달 버튼(Sign modal)
+    $("#pass_find_on").click(function()      { $(".passfinder").fadeIn(); });
+    $(document).mouseup(function (e){
+        if($(".passfinder").has(e.target).length === 0){
+            $(".passfinder").hide();
+        }
+    });
+    $(".sign_find").click(function()     { $(".passfinder").fadeOut(); $(".sign").fadeIn();});
+    $(".login_change").click(function()  { $(".passfinder").fadeOut(); $(".login").fadeIn();});
 
     //태그검색(tag search window)
     var tag_search = $('.tag_search');
@@ -291,5 +312,73 @@ $(function(){
         }
     })
 
+    $('.mailbox').on('change', function (){
+        console.log(this.value);
+        if(this.value == 'self')
+        {
+            $('.sizeOptB').show();
+        }
+        else
+        {
+            $('.selfaddr').val('');
+            $('.sizeOptB').hide();
+        }
+    })
+
+    $('.findbtn').click(function (){
+        let mailname = $('.mailname').val()
+        let mailaddr = $('.mailbox').val()
+        let selfaddr = $('.selfaddr').val()
+        if(mailname == "" || mailname == null)
+        {
+            $('.mailname').focus();
+            $('.passfinder_answer').text('e-mail을 입력해 주세요')
+            return false
+        }
+        else if(mailaddr == 'none')
+        {
+            $('.passfinder_answer').text('주소를 선택해주세요')
+
+            alert("주소를 선택해주세요");
+            return false
+        }
+        else if(mailaddr == 'self' && (selfaddr == '' || selfaddr == null))
+        {
+            $('.selfaddr').focus();
+            $('.passfinder_answer').text('주소를 입력해주세요')
+            return false
+        }
+        else {
+            var findid;
+            if (mailaddr == 'self')
+            {
+                findid = mailname + '@'+selfaddr;
+            }
+            else
+            {
+                findid = mailname + '@'+mailaddr;
+            }
+            $.ajax({
+                url:'/passfinder.do',
+                type:'post',
+                data : {"findid":findid
+                },
+                success:function(s){
+                    if (s == "findOK")
+                    {
+                        alert("가입하신 이메일로 비밀번호가 전송되었습니다.");
+                        $('.passfinder_answer').text('메일함을 확인해주세요!')
+                    }else
+                    {
+                        alert("입력하신 이메일이 존재하지 않습니다!");
+                        $('.passfinder_answer').text('메일주소를 확인해주세요!')
+                    }
+                },
+                error:function(){
+                    alert("비밀번호 검색이 실패하였습니다. 잠시후 다시 시도해주세요.");
+                }
+            });
+        }
+    });
 });
 

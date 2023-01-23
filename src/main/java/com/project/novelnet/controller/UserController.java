@@ -1,6 +1,7 @@
 package com.project.novelnet.controller;
 import com.project.novelnet.Vo.UserVO;
 import com.project.novelnet.repository.NovelRepository;
+import com.project.novelnet.repository.UserMapper;
 import com.project.novelnet.service.MailService;
 import com.project.novelnet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -24,6 +26,9 @@ public class UserController {
 
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     //아이디 중복 검사
     @PostMapping("/idCheck")
@@ -61,6 +66,32 @@ public class UserController {
             model.addAttribute("searchUrl", "/novelnet");
         }
         return "redirect:/novelnet";
+    }
+    @PostMapping("/passfinder.do")
+    @ResponseBody
+    public String passfinder(@RequestParam String findid, HttpServletRequest request, HttpSession session)throws Exception{
+
+        String answer;
+
+        System.out.println(findid);
+
+        String password = userMapper.getLostId(findid);
+        System.out.println(password);
+
+        //프론트에 보낼 답변
+        if (password == null || password == "")
+        {
+            answer = "fail";
+        }else
+        {
+            answer = "findOK";
+            mailService.passFinemailSend(findid, password);
+        }
+        System.out.println(answer);
+
+
+
+        return answer;
     }
 
     //유저인증 메일 서비스
