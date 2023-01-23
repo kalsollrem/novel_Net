@@ -35,6 +35,15 @@
         limit #{limit}
     </select>
 
+    <!--  독점작 검색  -->
+    <select id="findonlyNovel" resultType="com.project.novelnet.Vo.NovelVO">
+        SELECT A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_fin, c.u_nick as nick
+        FROM (select  * from novel where n_monopoly='only' order by rand() LIMIT 5) A
+        LEFT join user C
+        on A.u_num = C.u_num
+        limit 6;
+    </select>
+
     <!-- collection = list냐 array냐    -->
     <!-- item       = #{}에 들어갈 명칭   -->
     <!-- separator  = 배열 내에서 나누는 기준(일반적으로 ',') -->

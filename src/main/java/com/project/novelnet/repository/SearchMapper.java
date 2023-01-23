@@ -36,6 +36,8 @@ public interface SearchMapper
 
     List<NovelVO> findPdPick(List<String> pdlist);
 
+    //독점작 검색
+    List<NovelVO> findonlyNovel();
     //내 북마크 검색
     @Select("select n_num from bookmark where u_num=#{u_num}")
     List<String> findbookmark(String u_num);

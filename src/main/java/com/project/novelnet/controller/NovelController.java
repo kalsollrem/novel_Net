@@ -79,9 +79,9 @@ public class NovelController {
                 pdpickCnt++;
             }
         }
+        List<NovelVO> pickList = searchMapper.findPdPick(pdlist);
 
         //새 리스트에 마이바티스값 삽입
-        List<NovelVO> pickList = searchMapper.findPdPick(pdlist);
         model.addAttribute("pickList", pickList);
         System.out.println(pickList);
 
