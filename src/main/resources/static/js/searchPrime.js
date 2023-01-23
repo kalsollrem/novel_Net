@@ -70,7 +70,7 @@ $(function (){
         $('.search_new').addClass('search_none');
         $('.search_fin').addClass('search_choose');
     }
-    else if(doType == "search_only")
+    else if(doType == "onlyNovel")
     {
         $('.search_all').addClass('search_none');
         $('.search_only').addClass('search_choose');
@@ -85,15 +85,15 @@ $(function (){
         $('.search_fin').addClass('search_none');
     }
 
-    $('.search_all').click(function  (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=allNovel&searchTag='+searchTag+'&monopoly'+monopoly});
-    $('.search_only').click(function (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=allNovel&searchTag='+searchTag+'&monopoly'+monopoly});
-    $('.search_new').click(function  (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=newNovel&searchTag='+searchTag+'&monopoly'+monopoly});
-    $('.search_fin').click(function  (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=finNovel&searchTag='+searchTag+'&monopoly'+monopoly});
+    $('.search_all').click(function  (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=allNovel&searchTag='+searchTag+'&monopoly=all'});
+    $('.search_only').click(function (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=onlyNovel&searchTag='+searchTag+'&monopoly=only'});
+    $('.search_new').click(function  (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=newNovel&searchTag='+searchTag+'&monopoly=all'});
+    $('.search_fin').click(function  (){location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType=finNovel&searchTag='+searchTag+'&monopoly=all'});
 
     // 클릭시 링크이동
-    $(".date_date").click(function (){ location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly})
-    $(".date_view").click(function (){ location.href = '/novelnet/searchPrime?sort=view&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly})
-    $(".date_vote").click(function (){ location.href = '/novelnet/searchPrime?sort=vote&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly})
+    $(".date_date").click(function (){ location.href = '/novelnet/searchPrime?sort=date&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly='+monopoly})
+    $(".date_view").click(function (){ location.href = '/novelnet/searchPrime?sort=view&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly='+monopoly})
+    $(".date_vote").click(function (){ location.href = '/novelnet/searchPrime?sort=vote&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly='+monopoly})
 
     //클릭시 작성 페이지로 이동
     $('.search_write').click(function (){
@@ -116,7 +116,7 @@ $(function (){
 
     //메인 태그 검색
     $(".tag_card").click(function (){
-        location.href = '/novelnet/searchPrime?sort='+sort+'&mainTag='+this.id+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly
+        location.href = '/novelnet/searchPrime?sort='+sort+'&mainTag='+this.id+'&doType='+doType+'&searchTag='+searchTag+'&monopoly='+monopoly
     })
 
     //서브 태그 검색창 열기
@@ -139,12 +139,12 @@ $(function (){
     //태그 추가 검색 버튼
     $(".subTagSearch").click(function (){
         searchTag = $('#hashtag_find').val();
-        location.href = '/novelnet/searchPrime?sort='+sort+'&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly
+        location.href = '/novelnet/searchPrime?sort='+sort+'&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly='+monopoly
     });
 
     //서브태그 클릭시
     $(".subSearch").click(function (){
         searchTag = this.innerText.substr(1)
-        location.href = '/novelnet/searchPrime?sort='+sort+'&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly'+monopoly
+        location.href = '/novelnet/searchPrime?sort='+sort+'&mainTag='+mainTag+'&doType='+doType+'&searchTag='+searchTag+'&monopoly='+monopoly
     })
 });

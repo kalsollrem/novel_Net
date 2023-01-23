@@ -387,12 +387,12 @@
         from (select n_num, t_carte, concat(<![CDATA['<div class="searched_tagcard subSearch">',h_tag,'</div>']]>)as h_tag from hashtag)tagChange
         group by n_num order by h_tag) E
         on A.n_num = E.n_num
+        where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
+        ) as ori
         <choose>
             <when test="doType.equals('newNovel')">
                 where newMemo <![CDATA[<=]]> 720
             </when>
         </choose>
-        where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
-        ) as ori
     </select>
 </mapper>

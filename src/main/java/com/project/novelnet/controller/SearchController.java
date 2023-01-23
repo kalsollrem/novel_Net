@@ -277,9 +277,10 @@ public class SearchController
 
 
         //monopoly : 플랫폼독점(only), 자유(free)
-        if(monopoly == null)                  {monopoly  = "free";}
-        else if(monopoly  == "free")          {monopoly  = "free";}
-        else                                  {monopoly  = "only";}
+        if(monopoly == null)                  {monopoly  = "";}
+        else if(monopoly.equals("free"))      {monopoly  = "free";}
+        else if(monopoly.equals("only"))      {monopoly  = "only";}
+        else                                  {monopoly  = "";}
 
 
         //doType : 연재중(doNovel), 신작만(newNovel), 완결(finNovel)
@@ -294,7 +295,7 @@ public class SearchController
         }
 
         //페이지
-        if(page    == null)                             {page    = "1";   }
+        if(page    == null)                             {page = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
 
 
