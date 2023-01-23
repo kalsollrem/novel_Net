@@ -138,13 +138,12 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .ranking .ranking_load        {width: 1200px; height: 100px;}
 .ranking .ranking_load>button {width: 300px; height: 60px; font-size: 25px; margin: 20px 0px 0px 450px;}
 
-
 /* 회원가입 */
 .sign   {width: 100%; height: 100vh; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: none;}
-.sign .sign_box   {width: 500px; height: 800px; background-color:white; position:relative; }
+.sign .sign_box   {width: 500px; height: 800px; background-color:white; position:relative; border-radius: 0.5em;}
 .sign .sign_box .sign_logo  {width: 100%; height: 150px; }
 .sign .sign_box .sign_logo>img {margin-left: 190px; margin-top: 25px;}
-.sign .sign_box #sign_close { position: absolute; width: 60px; height: 60px; margin-left: 440px; font-size: 50px; border: 0px; background-color: white;}
+.sign .sign_box #sign_close { position: absolute; width: 60px; height: 60px; margin-left: 440px; font-size: 50px; border: 0px; background-color: white; border-radius: 0.5em;}
 
 .sign .sign_date_bag  {width: 370px; height: 390px; background-color:rgb(253, 250, 250); position: absolute; margin-left: 65px;}
 
@@ -178,14 +177,35 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 /* 회원가입 */
 
+/* 비밀번호 찾기 */
+.passfinder                                   {width: 100%; height: 100%; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: none;}
+.passfinder .passfinder_box                   {width: 500px; background-color:white; position:relative; background-color: white; border-radius: 0.5em; padding-top: 10px;}
+.passfinder .passfinder_box .passfinder_text  {font-size: 20px; text-align: center; padding-top: 10px; padding-bottom: 10px; font-weight: bold;  background-color: rgb(206, 230, 250); width: 400px; margin-left: 50px; margin-bottom: 20px; border-radius: 10px;}
 
+.passfinder_colerBox                             {border: 2px solid rgb(226, 232, 250); box-sizing: border-box; margin-top: 20px; width: 480px; height: 110px; padding-top: 5px; margin-left: 10px; border-radius: 1em; }
+.passfinder .passfinder_box .mailLine            {width: 100%; height: 30px; margin-top: 13px; }
+.passfinder .passfinder_box .mailLine .mailname  {width: 200px; height: 30px; margin-left: 20px;  border:0px solid black;  border-radius: 5px; float: left; background-color:aliceblue;}
+.passfinder .passfinder_box .mailLine .mailgolbangE  {width: 20px; height: 100%; margin: 0px 5px 0px 5px;  border:0 solid black; line-height: 25px; border-radius: 5px; float: left; text-align: center;}
+.passfinder .passfinder_box .mailLine .mailbox   {width: 150px; height: 30px; border:0 solid black;  border-radius: 5px; float: left; background-color:aliceblue; padding-left: 5px;}
+.passfinder .passfinder_box .findbtn             {width: 50px;  height: 30px; border:0 solid black;  border-radius: 5px; margin-left: 10px; float: left; background-color: #333; color: white;}
+.passfinder .passfinder_box .mailLine .mailaddr  {width: 150px; height: 30px; border:0 solid black;  border-radius: 5px; float: left; margin-left: 252px; background-color:aliceblue;}
+
+.passfinder .passfinder_box .answerLine          {width: 100%; height: 100px; }
+.passfinder .passfinder_box .passfinder_answer   {width: 300px; height: 30px; font-size: 18px; line-height: 30px; font-weight:bold; border:0 solid black;  border-radius: 5px; background-color: #f3e5f3; margin-top: 20px; float: left; padding: 20px; margin-left: 75px; text-align: center;}
+
+.passfinder .passfinder_out                 {width: 200px; height: 40px; margin-left: 150px; line-height: 30px; position: relative;}
+.passfinder .passfinder_out>div             {float: left;}
+.passfinder .passfinder_out .sign_change    {width: 95px; height: 30px; text-align: center; }
+.passfinder .passfinder_out .slash          {width: 10px;  height: 30px; text-align: center; }
+.passfinder .passfinder_out .login_change   {width: 95px; height: 30px; text-align: center; }
+/* 비밀번호 찾기 */
 
 /* 로그인 */
 .login   {width: 100%; height: 100%; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: none;}
-.login .login_box   {width: 500px; height: 480px; background-color:white; position:relative; }
+.login .login_box   {width: 500px; height: 480px; background-color:white; position:relative; border-radius: 0.5em;}
 .login .login_box .login_logo  {width: 100%; height: 150px;}
 .login .login_box .login_logo>img {margin-left: 190px; margin-top: 25px;}
-.login .login_box #login_close { position: absolute; width: 60px; height: 60px; margin-left: 440px; font-size: 50px; border: 0px; background-color: white;}
+.login .login_box #login_close { position: absolute; width: 60px; height: 60px; margin-left: 440px; font-size: 50px; border: 0px; background-color: white; border-radius: 0.5em;}
 
 
 .login .login_box .login_bag                    {width: 370px; height: 160px; position: absolute; margin-left: 65px; margin-top: 10px; background-color:rgb(245, 245, 250);}
