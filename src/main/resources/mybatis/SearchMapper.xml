@@ -319,7 +319,7 @@
         where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
         <choose>
             <when test="doType.equals('newNovel')">
-                where newMemo <![CDATA[<=]]> 720
+                and newMemo <![CDATA[<=]]> 720
             </when>
         </choose>
         <choose>

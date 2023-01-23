@@ -252,7 +252,137 @@ public class SearchController
         int year = cal.get(Calendar.YEAR);
         model.addAttribute("year",year);
 
+        //신규 작품 등록버튼 작동확인
+        if (session.getAttribute("U_NUM")!=null){
+            model.addAttribute("writeGo", "writeGo");
+        }
+
         return "search_plus";
+    }
+    //자유연재 페이지
+    @GetMapping("novelnet/searchPrime")
+    public String searchPrimePage(HttpSession session,
+                             @RequestParam(value = "sort"      ,required = false) String sort,
+                             @RequestParam(value = "mainTag"   ,required = false) String mainTag,
+                             @RequestParam(value = "searchTag" ,required = false) String searchTag,
+                             @RequestParam(value = "monopoly"  ,required = false) String monopoly,
+                             @RequestParam(value = "doType"    ,required = false) String doType,
+                             @RequestParam(value = "page"      ,required = false) String page,
+                             Model model) throws Exception{
+
+        System.out.println("======================================");
+
+        //연재방식
+        String novelType = "prime";
+
+
+        //monopoly : 플랫폼독점(only), 자유(free)
+        if(monopoly == null)                  {monopoly  = "free";}
+        else if(monopoly  == "free")          {monopoly  = "free";}
+        else                                  {monopoly  = "only";}
+
+
+        //doType : 연재중(doNovel), 신작만(newNovel), 완결(finNovel)
+        if(doType    == null)               {doType    = "";}
+        else {
+            switch (doType){
+                case "doNovel"  : doType  = "doNovel"      ; break;    //연재중
+                case "newNovel" : doType  = "newNovel"     ; break;    //신작만
+                case "finNovel" : doType  = "finNovel"     ; break;    //완결만
+                default         : doType  = ""             ; break;    //전체
+            }
+        }
+
+        //페이지
+        if(page    == null)                             {page    = "1";   }
+        else{ if(manageService.isInteger(page) == false){page = "1"; } }
+
+
+        //정렬방식
+        if(sort==null)                                  {sort  = "n_date";}  //날짜
+        else {
+            switch (sort){
+                case "view" : sort  = "n_count"     ; break;    //조회수
+                case "vote" : sort  = "n_good"      ; break;    //추천수
+                default     : sort  = "n_date"      ; break;    //날짜
+            }
+        }
+
+
+        //메인태그
+        if (mainTag == null)                  {mainTag = "";  }
+        else {
+            switch (mainTag){
+                case "t_02": mainTag = "판타지"; break;
+                case "t_03": mainTag = "무협"  ; break;
+                case "t_04": mainTag = "현대"  ; break;
+                case "t_05": mainTag = "로맨스"; break;
+                case "t_06": mainTag = "대체역사"  ; break;
+                case "t_07": mainTag = "공포"  ; break;
+                case "t_08": mainTag = "SF"   ; break;
+                case "t_09": mainTag = "스포츠"; break;
+                case "t_10": mainTag = "기타"  ; break;
+                default    : mainTag = ""     ; break;
+            }
+        }
+
+        //서브 검색태그
+        if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
+
+        System.out.println("검색 메인 태그"+mainTag);
+
+        System.out.println("메인태그 "+ mainTag +"/서치태그: "+ searchTag +"/ 노블타입 : "+ novelType +"/ 두 타입: "+ doType +"/ 모노폴리 :"+ monopoly);
+        //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
+        int count = searchMapper.searchPlusNovelCount(mainTag,searchTag,novelType,doType,monopoly);
+        System.out.println("갯수 : " + count);
+
+        //페이징 처리
+        pageingService.setNowPage(page);
+        pageingService.setTotalCount(count);
+
+        int allPage     = pageingService.getAllPage();
+        int nowCase     = pageingService.getNowCase();
+        int allCase     = pageingService.getAllCase();
+        int leftPage    = pageingService.getLeftPage();
+        int rightPage   = pageingService.getRightPage();
+        int displayPage = pageingService.getDisplayPage();
+
+        System.out.println("전채 간격 " + allCase);
+        System.out.println("현재 간격 " + nowCase);
+        System.out.println("전 버튼 " + leftPage);
+        System.out.println("후 버튼 " + rightPage);
+        System.out.println("하단에 나온 페이지 " + displayPage);
+
+        model.addAttribute("searchCount", count);
+        model.addAttribute("allPage", allPage);
+        model.addAttribute("nowCase", nowCase);
+        model.addAttribute("allCase", allCase);
+        model.addAttribute("leftPage", leftPage);
+        model.addAttribute("rightPage", rightPage);
+        model.addAttribute("displayPage", displayPage);
+
+        //시작페이지처리
+        int start = (Integer.parseInt(page)-1)*10;
+
+        System.out.println("정렬 : "+sort+"/ 메인테그 : "+mainTag+"/ 검색 태그 : "+searchTag+"/ 검색 타입:"+doType+"/");
+
+
+        //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
+        List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,novelType,doType,monopoly,start);
+        //System.out.println(novelList);
+        model.addAttribute("novelList",novelList);
+
+        //년도확인
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        model.addAttribute("year",year);
+
+        //신규 작품 등록버튼 작동확인
+        if (session.getAttribute("U_NUM")!=null){
+            model.addAttribute("writeGo", "writeGo");
+        }
+
+        return "search_prime";
     }
 
     @GetMapping("novelnet/ranking")
