@@ -18,75 +18,33 @@
     <!------------ 콘텐츠 영역   ------------------>
                 <div class="ranking">
                     <ul class="category">
-                        <li>전체</li>
-                        <li>무료</li>
-                        <li>프라임</li>
-                        <li>완결</li>
+                        <li class="categoryMark" id="allnovel">전체</li>
+                        <li class="categoryMark" id="freeNovel">무료</li>
+                        <li class="categoryMark" id="primeNovel">프라임</li>
+                        <li class="categoryMark" id="finNovel">완결</li>
                     </ul>
-                    <ul class="ranking_list">
-                        <li>
-                            <a href="#">
-                                <div class="ranking_img_zone">
-                                    <img src="/img/bag_3.jpg" alt="이미지">
-                                    <div class="ranking_num">100</div>
+                    <ul class="ranking_list" >
+                        <th:block th:each="novelList : ${novelVOList}">
+                            <li>
+                                <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
+                                    <div class="ranking_img_zone">
+                                        <img th:src="'../images/'+${novelList.n_cover}"  onerror="this.src='../img/write_cover.jpg'">
+                                        <div class="ranking_num" th:text="${novelList.rnum}">1</div>
+                                    </div>
+                                    <div class="ranking_novel_title"><span class="rnt_inside overLineTypeA" th:text="${novelList.n_title}">소설제목</span></div>
+                                </a>
+                                <div class="ranking_writer_name overLineTypeA"><a href="#" th:text="${novelList.nick}">작가명</a></div>
+                                <div class="optTagbox">
+                                    <div class="tagmark primeTag"   th:if="${novelList.n_type}=='prime'">프라임</div>
+                                    <div class="tagmark dockjomTag" th:if="${novelList.n_monopoly}=='only'">독점</div>
+                                    <div class="tagmark endTag"     th:if="${novelList.n_fin}=='done'">완결</div>
                                 </div>
-                                <div class="ranking_novel_title"><span class="rnt_inside">소설제목</span></div>
-                            </a>
-                            <div class="ranking_writer_name"><a href="#">작가명</a></div>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="ranking_img_zone">
-                                    <img src="/img/bag_3.jpg" alt="이미지">
-                                    <div class="ranking_num">100</div>
-                                </div>
-                                <div class="ranking_novel_title"><span class="rnt_inside">소설제목</span></div>
-                            </a>
-                            <div class="ranking_writer_name"><a href="#">작가명</a></div>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="ranking_img_zone">
-                                    <img src="/img/bag_3.jpg" alt="이미지">
-                                    <div class="ranking_num">100</div>
-                                </div>
-                                <div class="ranking_novel_title"><span class="rnt_inside">소설제목</span></div>
-                            </a>
-                            <div class="ranking_writer_name"><a href="#">작가명</a></div>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="ranking_img_zone">
-                                    <img src="/img/bag_3.jpg" alt="이미지">
-                                    <div class="ranking_num">100</div>
-                                </div>
-                                <div class="ranking_novel_title"><span class="rnt_inside">소설제목</span></div>
-                            </a>
-                            <div class="ranking_writer_name"><a href="#">작가명</a></div>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="ranking_img_zone">
-                                    <img src="/img/bag_3.jpg" alt="이미지">
-                                    <div class="ranking_num">100</div>
-                                </div>
-                                <div class="ranking_novel_title"><span class="rnt_inside">소설제목</span></div>
-                            </a>
-                            <div class="ranking_writer_name"><a href="#">작가명</a></div>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="ranking_img_zone">
-                                    <img src="/img/bag_3.jpg" alt="이미지">
-                                    <div class="ranking_num">100</div>
-                                </div>
-                                <div class="ranking_novel_title"><span class="rnt_inside">소설제목</span></div>
-                            </a>
-                            <div class="ranking_writer_name"><a href="#">작가명</a></div>
-                        </li>
+                                <div class="hrBox"></div>
+                            </li>
+                        </th:block>
                     </ul>
                     <div class="ranking_load">
-                        <button>추가 로드</button>
+                        <button class="ranking_load_button">Next Search</button>
                     </div>
                 </div>
             <!------------ 콘텐츠 영역  ------------------>

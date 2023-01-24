@@ -23,7 +23,7 @@ public class NovelVO {
     private Integer n_chapters ;       //총화수
     private Integer f_chapter ;        //첫번째화
     private Integer last_chapter ;     //마지막으로 본 에피소드
-    private Integer rnum ;             //마지막으로 본 에피소드의 번호
+    private Integer rnum ;             //마지막으로 본 에피소드의 번호, 탑100화면에선 번호따는데도 쓰임.
     private Integer nextNum ;          //다음글 m_num
     private String  nick;              //작성자 닉네임
     private String  all_tag;           //모든 태그

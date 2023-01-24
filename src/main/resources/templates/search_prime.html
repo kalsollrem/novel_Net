@@ -89,11 +89,11 @@
                             <div class="novel_data">
                                 <div class="searched_title">
                                     <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
-                                        <div class="st_title" th:text="${novelList.n_title}">소설제목</div>
+                                        <div class="st_title"  th:text="${novelList.n_title}">소설제목</div>
                                     </a>
                                     <div class="st_writter" th:text="${novelList.nick}">작가명</div>
                                 </div>
-                                <div class="searched_pri" th:text="${novelList.n_introduction}">
+                                <div class="searched_pri" th:classappend="overLineTypeB" th:text="${novelList.n_introduction}">
                                     소설 줄거리
                                 </div>
                                 <ul class="searched_count">

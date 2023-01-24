@@ -9,6 +9,7 @@ import com.project.novelnet.service.FileUploadService;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
 import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -236,7 +237,6 @@ public class NovelController {
         regist_title = regist_title.replace(" ","");
         NovelVO novelVO = new NovelVO();
 
-
         if(regist_title != null && !regist_title.equals("") && session.getAttribute("U_NUM") != null)
         {
             System.out.println("작품명 : " + regist_title + "\n" +
@@ -265,6 +265,10 @@ public class NovelController {
             return "redirect:/novelnet/regist";
         }
 
+        if (hashtag_add.length()>25)
+        {
+            hashtag_add = hashtag_add.substring(0,25);
+        }
         //Hashtag 저장
         if(first.equals("none") || first == null) { hashtag_add = "기타," + hashtag_add.replace(" ", ""); }
         else{ hashtag_add = first.replace(" ", "") + "," + hashtag_add.replace(" ", ""); }
@@ -370,6 +374,11 @@ public class NovelController {
         if (type == null || type =="")
         {
             type = "ep";
+        }
+
+        if(manageService.isInteger(page) == true)
+        {
+            page = "1";
         }
 
         if (m_num == null)  { m_num = "1";}
@@ -763,16 +772,12 @@ public class NovelController {
                          @RequestParam(value = "page"      ,required = false) String page,
                          Model model) throws Exception{
 
-        String u_num;
+        String u_num="";
         System.out.println("======================================");
 
-        if(session.getAttribute("U_NUM") != null) {u_num = (String) session.getAttribute("U_NUM").toString(); } //유저번호
-        else                                            {u_num = "20"; } //비로그인 테스트용
+        if(session.getAttribute("U_NUM") != null) {
+            u_num = (String) session.getAttribute("U_NUM").toString(); } //유저번호
 
-
-        //제대로 있는가 체크용. 만들고 나서 지울것
-        List bookMakrList = searchMapper.findbookmark(u_num);
-        System.out.println(bookMakrList);
 
         if(keyword == null)                     {keyword = "";    }
 
@@ -789,6 +794,7 @@ public class NovelController {
             }
         }
 
+
         if(page    == null)                     {page    = "1";   }
         else{
           if(manageService.isInteger(page) == false){page = "1"; }
@@ -796,7 +802,7 @@ public class NovelController {
         System.out.println("변수 리스트 :"+keyword +"/"+ newOld +"/"+category+"/"+page);
 
 
-        if (u_num != null){
+        if (u_num != ""){
             //북마크 갯수 확보
             int count = searchMapper.bookmarkCount(u_num, keyword, category);
             System.out.println("갯수 : " + count);
@@ -848,6 +854,33 @@ public class NovelController {
 
 
         return "mybook";
+    }
+
+    @GetMapping("/novelnet/best")
+    public String bestPic(HttpSession session,
+                          @RequestParam(value = "sort",   required = false) String sort,
+                          @RequestParam(value = "carte"   ,required = false) String carte,
+                          @RequestParam(value = "page"    ,required = false) String page,
+                          Model model) throws Exception
+    {
+        //정렬
+        if (sort == null || sort =="") { sort = "n_good"; }
+        else if (sort == "n_count")    { sort = "n_count";}
+        else                           { sort = "n_good"; }
+
+        //카테고리
+        if(carte == null)                                { carte = ""; }
+
+        //시작페이지
+        int start = 0;
+        if(manageService.isInteger(page) == true)        { start = (Integer.parseInt(page)-1)*100;}
+
+        //데이터 검색
+        List<NovelVO> novelVOList = searchMapper.bestNovelFinder(sort, carte, start);
+        System.out.println(novelVOList);
+        model.addAttribute("novelVOList", novelVOList);
+
+        return "best";
     }
 
     @GetMapping("/t")

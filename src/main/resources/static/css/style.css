@@ -14,6 +14,21 @@ a:link    { color:#333; text-decoration: none;}
 
 img     { vertical-align: top; border:0px}
 
+/* 줄 넘어갈때 사용*/
+/*1줄*/
+.overLineTypeA {overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+                -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
+/*2줄*/
+.overLineTypeB {overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+                -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+
+/* 다용도 태그박스 */
+.optTagbox            {width: 200px; height: 30px;}
+.tagmark              {width: 35px; height: 15px; text-align: center; color: white; font-size: 5px; margin-left: 5px; float: left; border-radius: 3px; margin-top: 5px;}
+.primeTag             {background-color: #8463F5;}
+.dockjomTag           {background-color: #4a77b3;}
+.endTag               {background-color: #312e2c;}
+
 /* 틀 */
 .wrap           {margin: auto; position: relative;}
 
@@ -115,28 +130,27 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 
 /* 랭킹 페이지 */
-
-
 .ranking              {width: 1200px; }
 .ranking .category    {width: 1200px; height: 100px; }
 .ranking .category>li {width: 200px; height: 70px; line-height: 70px;
     text-align: center; font-size: 25px; color:gray; float: left;
-    margin: 15px 0px 0px 80px; border-radius:50%; border: 0.5px solid silver;}
+    margin: 15px 0px 0px 80px; border-radius:15px; border: 0.5px solid silver;}
 
 .ranking .ranking_list                                {width: 1250px;}
-.ranking .ranking_list>li                             {width: 200px; height: 350px; display:inline-block; margin: 20px 45px 0px 0px}
+.ranking .ranking_list>li                             {width: 200px; height: 380px; display:inline-block; margin: 50px 45px 0px 0px}
 .ranking .ranking_list .ranking_img_zone              {width: 100%; height: 280px; background-color:wheat; position: relative;}
 .ranking .ranking_list .ranking_img_zone img          {width: 200px; height: 280px; position: absolute;}
-.ranking .ranking_list .ranking_img_zone .ranking_num {height: 25px; width: 30px; text-align: center; line-height: 25px; position: absolute; background-color:aliceblue;}
+.ranking .ranking_list .ranking_img_zone .ranking_num {height: 25px; width: 30px; text-align: center; line-height: 25px; position: absolute; opacity: 0.3; background-color:#333; color: white; text-align: center; font-size: 11px; border-radius: 3px;}
 
-.ranking_novel_title             {width: 200px; height: 40px; line-height: 40px; background-color: #eeeee0; font-weight: bold;}
-.ranking_novel_title .rnt_inside {margin-left: 5px;}
-.ranking_writer_name             {width: 100%; height: 30px; line-height: 30px; font-size: 12px; color: beige; background-color: rgb(118, 135, 150);}
+.ranking_novel_title             {width: 200px; height: 25px; line-height: 25px;  font-weight: bold; display: table-cell; vertical-align: middle; font-size: 15px;}
+.ranking_novel_title .rnt_inside {margin-left: 5px;  }
+.ranking_writer_name             {width: 200px; height: 20px; line-height: 30px; font-weight: bold; display: table-cell; font-size: 12px; color: beige; }
 .ranking_writer_name >a          {margin-left: 5px; }
+.hrBox                           {width: 200px; margin-top: 5px; height: 1px; background-color: rgb(231, 231, 231)}
 
 /* 추가 로드 */
 .ranking .ranking_load        {width: 1200px; height: 100px;}
-.ranking .ranking_load>button {width: 300px; height: 60px; font-size: 25px; margin: 20px 0px 0px 450px;}
+.ranking .ranking_load>button {width: 300px; height: 60px; font-size: 25px; margin: 20px 0px 0px 450px; border: none;}
 
 /* 회원가입 */
 .sign   {width: 100%; height: 100vh; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: none;}
@@ -312,16 +326,16 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px;}
 
 
-.search_list .search_novel .novel_data .searched_tag {width: 100%; height: 45px; }
-.searched_tag .searched_tagcard {padding-left: 10px; padding-right: 10px; height: 25px; margin-right: 5px; margin-top: 10px;
-    line-height: 25px; text-align: center; border-radius:1em; font-weight: bold;
+.search_list .search_novel .novel_data .searched_tag {width: 100%; height: 40px; overflow-y: hidden; display: inline-block; position: relative;}
+.searched_tag .searched_tagcard {padding-left: 10px; padding-right: 10px; height: 20px; margin-right: 5px; margin-top: 10px;
+    line-height: 20px; text-align: center; border-radius:1em; font-weight: bold; font-size: 12px;
     float: left; border: 2px solid rebeccapurple; color:rebeccapurple;}
 
 .search_novel .novel_data .searched_time {width: 100px; height: 30px; float: right;
     margin-right: 5px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
     text-align: center; line-height: 30px; border-radius:0.2em;}
 
-.search_list .search_novel .novel_data .searched_pri          {width: 100%; height: 30px; font-size: 13px; color: gray;  }
+.search_list .search_novel .novel_data .searched_pri          {width: 100%; height: 50px; font-size: 13px; color: gray;  }
 .search_list .search_novel .novel_data .searched_count        {width: 100%; height: 30px; line-height: 30px; margin-top: 10px;}
 .search_list .search_novel .novel_data .searched_count>li     {height: 100%; margin-right: 12px; font-weight: bold; font-size: 16px; float: left;}
 .search_list .search_novel .novel_data .searched_count>li>img {margin-top: 9px; margin-right: 5px;}
@@ -536,8 +550,10 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .book_list .search_novel .novel_data {height: 100%; width: 1065px;  float: left; margin-left: 15px; margin-top: 5px;}
 .book_list .search_novel .novel_data .searched_title { width: 100%; height: 40px; line-height: 40px;}
-.book_list .searched_title .st_title {height: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left;}
-.book_list .searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px; border-bottom: 1px solid #ECECEC;}
+.book_list .searched_title .st_title {height: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left; max-width: 60%; max-height:40px;
+                                        overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.book_list .searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px; border-bottom: 1px solid #ECECEC;
+                                        max-width: 38%; max-height:40px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
 
 
 .book_list .search_novel .novel_data .searched_tag {width: 100%; height: 45px; }
@@ -563,7 +579,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
     text-align: center; line-height: 30px; border-radius:0.2em;}
 
 
-.book_list .search_novel .novel_data .searched_pri          {width: 100%; height: 30px; font-size: 13px; color: gray;  }
+.book_list .search_novel .novel_data .searched_pri          {width: 100%; height: 50px; font-size: 13px; color: gray;  }
 .book_list .search_novel .novel_data .searched_count        {width: 100%; height: 30px; line-height: 30px; margin-top: 10px;}
 .book_list .search_novel .novel_data .searched_count>li     {height: 100%; margin-right: 12px; font-weight: bold; font-size: 16px; float: left;}
 .book_list .search_novel .novel_data .searched_count>li>img {margin-top: 9px; margin-right: 5px;}
@@ -766,7 +782,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 }
 
 /* 뷰어용 글 수정 삭제 옵션 박스 */
-.memo_option                                {width: 100%; height: 100%; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: block;}
+.memo_option                                {width: 100%; height: 100%; position: absolute; background-color: rgba(1, 1, 0, 0.3); z-index: 5; display: none;}
 .memo_option .memo_OptBox                   {width: 400px;height: 200px; background-color:white; position:relative; border-radius: 0.5em; border: 2px solid #49494b; box-sizing: border-box;}
 .memo_option .memo_OptBox .boxLine          {width: 80%; height: 60px; line-height: 58px;  border-radius: 0.5em; background-color: #49494b; margin-left: 10%; margin-top: 25px; float: left;
                                              font-size: 30px; color: white; text-align: center; border: 2px solid #767679;  box-sizing: border-box; }
@@ -832,7 +848,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .regist_box .bookcover .bookcover_zone>img {width: 260px; height: 350px; margin: 10px 0px 0px 30px;}
 
 .regist_data {padding-top: 10px; width: 850px;  float: left; }
-.regist_data .regist_title {width: 60%; height: 80px; float: left; font-size: 13px;}
+.regist_data .regist_title {width: 60%; height: 80px; float: left; font-size: 13px; }
 .regist_data .regist_title>span {font-weight: bold;}
 .regist_data .title_zone {height: 40px;}
 .regist_data .title_zone #regist_title {width: 473px; height: 35px; padding-left: 10px; margin-top: 10px; border: 1px solid #ececec;}

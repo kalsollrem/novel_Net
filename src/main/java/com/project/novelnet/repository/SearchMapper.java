@@ -79,4 +79,7 @@ public interface SearchMapper
                                     @Param("novelType")String novelType,
                                     @Param("doType")String doType,
                                     @Param("monopoly")String monopoly);
+
+    //베스트 픽 검색
+    List<NovelVO> bestNovelFinder(@Param("sort")String sort,@Param("carte")String carte, @Param("start")int start);
 }

@@ -94,11 +94,11 @@
                                 <div class="novel_data">
                                     <div class="searched_title">
                                         <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
-                                            <div class="st_title" th:text="${novelList.n_title}">소설제목</div>
+                                            <div class="st_title overLineTypeA" th:text="${novelList.n_title}">소설제목</div>
                                         </a>
-                                        <div class="st_writter" th:text="${novelList.nick}">작가명</div>
+                                        <div class="st_writter overLineTypeA" th:text="${novelList.nick}">작가명</div>
                                     </div>
-                                    <div class="searched_pri" th:text="${novelList.n_introduction}">
+                                    <div class="searched_pri" th:class="overLineTypeB" th:text="${novelList.n_introduction}">
                                         소설 줄거리
                                     </div>
                                     <ul class="searched_count">
@@ -116,7 +116,7 @@
                                         </li>
                                     </ul>
                                     <div class="searched_tag" th:utext="${novelList.all_tag}">
-                                        <div class="searched_tagcard">#태그존</div>
+                                        <div class="searched_tagcard overLineTypeA" >#태그존</div>
                                     </div>
                                     <div th:if="${novelList.newMemo} != null">
                                         <div class="searched_time" th:if="${novelList.newMemo}<=24 and 0<${novelList.newMemo}" th:text="${novelList.newMemo}+' 시간전 UP'">신규 시간</div>
@@ -145,8 +145,8 @@
                             </div>
                             <div class="paging_right">
                                 <th:block th:if="${nowCase} != ${allCase} and ${allCase} != 0">
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}">▷</a></div>
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase}-1)*5+1))}">→</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase})*5+1))}">▷</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase})*5+1))}">→</a></div>
                                 </th:block>
                             </div>
                         </div>
