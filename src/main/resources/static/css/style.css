@@ -742,6 +742,9 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .serialized_reply .reply_arrow  {width: 30px; height: 30px; float: left; margin-top: 10px;}
 .reply_arrow>img                {width: 18px; height: 18px; position: absolute; margin: -2px 0px 0px 25px;}
 
+.profilOnlyArrow                {width: 30px; height: 30px; float: left; margin-top: 10px;}
+.profilOnlyArrow>img            {width: 18px; height: 18px; position: absolute; margin: 12px 0px 0px 50px;}
+
 .reply_more            {width: 100%; display: flex; flex-direction: row; justify-content: center; }
 .reply_more .reply_add {width: 250px; height: 35px; line-height: 35px; margin-top: 20px; text-align: center; font-size: 12px; font-weight: bold; color: #333; background-color:#ececec; border-radius: 2em; }
 
