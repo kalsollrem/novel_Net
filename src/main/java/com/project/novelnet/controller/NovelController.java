@@ -164,6 +164,32 @@ public class NovelController {
         return jsonObject;
     }
 
+    //글수정
+    @PostMapping(value = "/novelnet/writeImg.do" ,  produces = "application/json")
+    @ResponseBody
+    public String memoDelete (@RequestParam("chapter") String  chapter,
+                              @RequestParam("n_num") String  n_num,
+                              HttpSession session)throws Exception {
+        //1:삭제됨,  2:권한없음,  3:로직에러로 삭제안됨
+        String answer = "3";
+
+        //로그인과 경로체크
+        if(session.getAttribute("U_NUM") != null)
+        {
+            String u_num = (String) session.getAttribute("U_NUM");
+            int cheak = novelMapper.UpdateOkCheaker(chapter,u_num);
+            if(cheak > 0){
+                novelMapper.deleteMemo(chapter);
+                answer = "1";       //삭제됨
+            }
+            else {
+                answer = "0";       //삭제권한 없음
+            }
+        }
+
+        //작성자 권한 확인
+        return answer;
+    }
 
     //소설작성
     @GetMapping("/novelnet/regist")

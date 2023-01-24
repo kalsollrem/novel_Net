@@ -28,7 +28,7 @@ $(function(){
         $.ajax({
             url:'/memoDelete.do',
             type:'post',
-            data : {"n_num":n_num},
+            data : {"chapter":chapter},
             success:function(s){
                 if (s == 0)     {alert("삭제 권한이 없습니다.")}
                 else if (s == 1){alert("삭제되었습니다")}

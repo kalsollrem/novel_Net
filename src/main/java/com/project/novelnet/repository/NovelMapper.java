@@ -41,6 +41,10 @@ public interface NovelMapper {
     @Select("select count(B.u_num) as cnt from memo A left join novel B on A.n_num = B.n_num where m_num = #{m_num} and u_num=#{u_num}")
     public int UpdateOkCheaker(@Param("m_num")String m_num , @Param("u_num")String u_num);
 
+    //글삭제
+    @Delete("delete from memo where m_num = #{m_num}")
+    public void deleteMemo(@Param("m_num")String m_num);
+
     @Select("select * from memo")
     List<MemoVO> getAllMemo();
 
