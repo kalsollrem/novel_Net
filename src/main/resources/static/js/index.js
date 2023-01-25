@@ -18,7 +18,7 @@ $(function(){
     sign_box.css("top", Math.max(0, (($(window).height() - sign_box.outerHeight()) / 2) + $(window).scrollTop()) + "px");
     sign_box.css("left", Math.max(0, (($(window).width() - sign_box.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
     $('.sign_box').fadeIn(500);
-    
+
     //로그인 모달(Login window)
     var login_box = $('.login_box');
     login_box.css("position", "absolute");

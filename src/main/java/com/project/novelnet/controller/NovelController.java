@@ -164,32 +164,87 @@ public class NovelController {
         return jsonObject;
     }
 
-    //글수정
-//    @PostMapping(value = "/novelnet/writeImg.do" ,  produces = "application/json")
-//    @ResponseBody
-//    public String memoDelete (@RequestParam("chapter") String  chapter,
-//                              @RequestParam("n_num") String  n_num,
-//                              HttpSession session)throws Exception {
-//        //1:삭제됨,  2:권한없음,  3:로직에러로 삭제안됨
-//        String answer = "3";
-//
-//        //로그인과 경로체크
-//        if(session.getAttribute("U_NUM") != null)
+
+    //글쓰기 글수정
+    @GetMapping("/novelnet/reWrite")
+    public String novelreWrite(HttpSession session, Model model,
+                                 @RequestParam(value = "n_num"      ,required = false) String n_num,
+                                 @RequestParam(value = "sort"      ,required = false) String sort,
+                                 @RequestParam(value = "page"      ,required = false) String page,
+                                 @RequestParam(value = "chapter"    ,required = false) String chapter)
+    {
+        System.out.println("유저번호 :"+session.getAttribute("U_NUM") +  "\n 소설번호 : " + n_num);
+
+        MemoVO memoVO = novelMapper.getMemo(n_num, chapter);
+        if (memoVO.getM_num() == null)
+        {
+            return "redirect:/novelnet/novel?" +
+                    "n_num="+n_num+
+                    "&sort="+sort+
+                    "&page="+page;
+        }
+
+        model.addAttribute("memoVo", memoVO);
+
+
+//        if (n_num == null || session.getAttribute("U_NUM") == null || n_num.matches("-?\\d+(\\.\\d+)?") == false)
 //        {
-//            String u_num = (String) session.getAttribute("U_NUM");
-//            int cheak = novelMapper.UpdateOkCheaker(chapter,u_num);
-//            if(cheak > 0){
-//                novelMapper.deleteMemo(chapter);
-//                answer = "1";       //삭제됨
-//            }
-//            else {
-//                answer = "0";       //삭제권한 없음
+//            return "redirect:/novelnet";
+//        }
+//        else
+//        {
+//            if(novelMapper.memoOK((Integer)session.getAttribute("U_NUM"), n_num) == 0) {
+//                System.out.println("작성권한이 없습니다.");
+//                return "redirect:/novelnet";
 //            }
 //        }
-//
-//        //작성자 권한 확인
-//        return answer;
-//    }
+        return "novel_reWrite";
+    }
+
+    //글작성
+    @PostMapping("/novelnet/reWriteForm")
+    public String novelreWrite(NovelWriteForm nwForm,
+                               HttpSession session)throws Exception
+    {
+        MemoVO memoVO = new MemoVO();
+
+        memoVO.setM_title(nwForm.getWrite_title());
+        memoVO.setM_memo(nwForm.getWrite_memo());
+        memoVO.setM_type(nwForm.getWrite_type());
+        memoVO.setN_num(nwForm.getWrite_number());
+        novelRepository.memoSave(memoVO);
+
+
+        return "redirect:/novelnet/view?n_num=13&chapter=273&sort=asc&page=1="+ memoVO.getM_num();
+    }
+
+    //삭제
+    @PostMapping(value = "/novelnet/memoDelete.do" ,  produces = "application/json")
+    @ResponseBody
+    public String memoDelete (@RequestParam("chapter") String  chapter,
+                              @RequestParam("n_num") String  n_num,
+                              HttpSession session)throws Exception
+    {
+        //1:삭제됨,  2:권한없음,  3:로직에러로 삭제안됨
+        String answer = "3";
+
+        //로그인과 경로체크
+        if(session.getAttribute("U_NUM") != null)
+        {
+            String u_num = (String) session.getAttribute("U_NUM");
+            int cheak = novelMapper.UpdateOkCheaker(chapter,u_num);
+            if(cheak > 0){
+                novelMapper.deleteMemo(chapter);
+                answer = "1";       //삭제됨
+            }
+            else {
+                answer = "0";       //삭제권한 없음
+            }
+        }
+
+        //작성자 권한 확인
+        return answer;
+    }
 
     //소설작성
     @GetMapping("/novelnet/regist")
