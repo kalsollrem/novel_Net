@@ -53,11 +53,15 @@
         limit 1
     </select>
 
-    <!--  검색확인  -->
+    <!--  소설 검색 확인  -->
     <select id="cheakBookDate" resultType="int" parameterType="String">
         SELECT COUNT(n_num)
         FROM novel
         WHERE n_num = #{n_num}
+    </select>
+
+    <select id="cheakMemo" resultType="int" parameterType="String">
+        select count(m_num)as memoCnt from memo where m_num=#{m_num}
     </select>
 
     <!--  게시물 검색 + 번호매기기  -->
@@ -83,9 +87,14 @@
         LEFT JOIN (SELECT m_num, count(r_num) as cnt FROM reply group by m_num) C
         on B.m_num = C.m_num
         WHERE A.n_num = #{n_num} and A.m_type='gong'
-        <if test="sort.equals('desc')">
-            ORDER BY m_num DESC
-        </if>)
+        <choose>
+            <when test="sort.equals('desc')">
+                ORDER BY m_num DESC
+            </when>
+            <otherwise>
+                ORDER BY m_num asc
+            </otherwise>
+        </choose>)
         Union all
         (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
                 IFNULL(B.cheak ,0)as cheak, IFNULL(C.cnt,0)as r_cnt
@@ -95,9 +104,14 @@
         LEFT JOIN (SELECT m_num, count(r_num) as cnt FROM reply group by m_num) C
         on B.m_num = C.m_num
         WHERE A.n_num = #{n_num} and A.m_type='ep'
-        <if test="sort.equals('desc')">
-            ORDER BY m_num DESC
-        </if>
+        <choose>
+            <when test="sort.equals('desc')">
+                ORDER BY m_num DESC
+            </when>
+            <otherwise>
+                ORDER BY m_num asc
+            </otherwise>
+        </choose>
         LIMIT #{start},#{count})
     </select>
 

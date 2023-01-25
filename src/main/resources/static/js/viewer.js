@@ -6,11 +6,17 @@ $(function(){
     let sort;
     let page;
 
+    try         { n_num = url.get('n_num').toString(); }
+    catch (err) { n_num = "";    }
+
+    try         { chapter = url.get('chapter').toString(); }
+    catch (err) { chapter = "";    }
+
     try         { sort = url.get('sort').toString(); }
     catch (err) { sort = "date";    }
 
-    try         { sort = url.get('page').toString(); }
-    catch (err) { sort = "1";    }
+    try         { page = url.get('page').toString(); }
+    catch (err) { page = "1";    }
 
     //메모옵션박스
     var memo_OptBox = $('.memo_OptBox');
@@ -19,8 +25,18 @@ $(function(){
     memo_OptBox.css("left", Math.max(0, (($(window).width() - memo_OptBox.outerWidth()) / 2) + $(window).scrollLeft()) + "px");
 
     // 글 수정&삭제창
-    $(".write_update_btn>img").click(function(){
+    $(".update_btn").click(function(){
         $('.memo_option').fadeIn(500);
+        $('.optTypeA').fadeIn(500);
+    });
+
+    //다른영역 클릭시 창닫기.
+    $(document).mouseup(function (e){
+        if($(".memo_option").has(e.target).length === 0){
+            $(".memo_option").hide();
+            $(".optTypeA").hide();
+            $(".optTypeB").hide();
+        }
     });
 
     // 글수정
@@ -46,10 +62,13 @@ $(function(){
         $.ajax({
             url:'/memoDelete.do',
             type:'post',
-            data : {"chapter":chapter},
+            data : {"chapter":chapter,
+                    "n_num":n_num},
             success:function(s){
                 if (s == 0)     {alert("삭제 권한이 없습니다.")}
-                else if (s == 1){alert("삭제되었습니다")}
+                else if (s == 1){alert("삭제되었습니다")
+                                 location.href = "/novelnet/novel?n_num="+n_num+"&sort="+sort+"&page="+page
+                                }
                 else            {alert("삭제에 실패하였습니다.")}
                 $('.memo_option').hide();
                 $('.optTypeB').hide();

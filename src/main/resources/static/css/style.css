@@ -799,7 +799,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .memo_option .answerBtn_zone .DeleteYesBtn  {width: 45%; height: 40px;  line-height: 40px; color: white; text-align: center; border-radius: 0.5em; background-color: #49494b;  border: 2px solid #767679; box-sizing: border-box; float: left; }
 .memo_option .answerBtn_zone .DeleteNoBtn   {width: 45%; height: 40px;  line-height: 40px; color: white; text-align: center; border-radius: 0.5em; background-color: #49494b;  border: 2px solid #767679; box-sizing: border-box; float: right;}
 .memo_option .hoverOpt:hover                {background-color: #ECCCEC; border: 2px solid #ffdaff; box-sizing: border-box;}
-.memo_option .optTypeA                      {display: block}
+.memo_option .optTypeA                      {display: none}
 .memo_option .optTypeB                      {display: none;}
 
 /* 뷰어 */

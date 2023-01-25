@@ -183,6 +183,10 @@ public class NovelController {
         {
             sort = "asc";
         }
+        if (manageService.isInteger(n_num) == false || manageService.isInteger(chapter) == false || chapter == null || n_num ==null)
+        {
+            return "redirect:/novelnet/";
+        }
 
         MemoVO memoVO = novelMapper.getMemo(n_num, chapter);
         if (memoVO.getM_num() == null)
@@ -236,7 +240,7 @@ public class NovelController {
     }
 
     //삭제
-    @PostMapping(value = "/novelnet/memoDelete.do" ,  produces = "application/json")
+    @PostMapping("/memoDelete.do")
     @ResponseBody
     public String memoDelete (@RequestParam("chapter") String  chapter,
                               @RequestParam("n_num") String  n_num,
@@ -248,7 +252,7 @@ public class NovelController {
         //로그인과 경로체크
         if(session.getAttribute("U_NUM") != null)
         {
-            String u_num = (String) session.getAttribute("U_NUM");
+            String u_num = (String)session.getAttribute("U_NUM").toString();
             int cheak = novelMapper.UpdateOkCheaker(chapter,u_num);
             if(cheak > 0){
                 novelMapper.deleteMemo(chapter);
@@ -453,15 +457,7 @@ public class NovelController {
                             @RequestParam(value = "type",   required = false) String type,
                             HttpServletRequest request)throws Exception{
 
-        if (m_num == null || m_num =="")
-        {
-            m_num = "1";
-        }
-        if (n_num == null || n_num =="")
-        {
-            n_num = "1";
-        }
-        if (page == null || page =="")
+        if (page == null || manageService.isInteger(page) == false)
         {
             page = "1";
         }
@@ -474,23 +470,25 @@ public class NovelController {
             type = "ep";
         }
 
-        if(manageService.isInteger(page) == true)
-        {
-            page = "1";
-        }
 
-        if (m_num == null)  { m_num = "1";}
-        if (n_num == null)  { return "redirect:/novelnet"; }
+        if (m_num == null || manageService.isInteger(m_num) == false || n_num == null || manageService.isInteger(n_num) == false)
+        {
+            return "redirect:/novelnet";
+        }
         else
         {
-            MemoVO memoVO = novelMapper.getMemo(n_num, m_num);
-            if (memoVO.getM_num() == null)
+            //게시물 존재확인
+            int memoCnt = novelMapper.cheakMemo(m_num);
+            System.out.println("존재여부 : "+memoCnt);
+            if(memoCnt == 0)
             {
                 return "redirect:/novelnet/novel?" +
                         "n_num="+n_num+
                         "&sort="+sort+
                         "&page="+page;
             }
+
+            MemoVO memoVO = novelMapper.getMemo(n_num, m_num);
 
             //다음화
             String next = novelMapper.getNextMemo(n_num, m_num);

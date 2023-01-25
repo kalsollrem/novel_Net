@@ -19,6 +19,9 @@ public interface NovelMapper {
         @Result(property="b_stop", column="b_stop")
     })
 
+    //게시물 존재여부 체크
+    public int cheakMemo(@Param("m_num")String m_num);
+
     //소설 게시물 보기
     @Select("select m_num, m_title, m_memo, m_date, m_count, m_good, b_stop, m_type, " +
             "(select n_title from novel where n_num=${n_num})as novel_name " +

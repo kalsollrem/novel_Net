@@ -9,10 +9,35 @@
     <script th:inline="javascript" src="../js/reply.js"></script>
 </head>
 <body>
+<!-- 뷰어용 글 수정 삭제용 박스 -->
+<div class="memo_option">
+    <div class="memoOpta">
+        <div class="memo_OptBox optTypeA">
+            <div class="boxLine memo_rewrite hoverOpt">
+                글 수정
+            </div>
+            <div class="boxLine memo_delete hoverOpt">
+                글 삭제
+            </div>
+        </div>
+        <div class="memo_OptBox optTypeB">
+            <div class="memo_Delete_alert">
+                <div class="lineUp">정말로 삭제하시겠습니까?</div>
+                <div class="lineDown">삭제한 글은 복구가 불가능합니다</div>
+            </div>
+            <div class="answerBtn_zone">
+                <div class="DeleteYesBtn hoverOpt">예</div>
+                <div class="DeleteNoBtn hoverOpt">아니오</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 뷰어용 글 수정 삭제용 박스 -->
 <div class="wrap dragBlock">
     <!---------------- 메뉴바 ---------------->
     <div class="viewer_guide">
-        <div class="write_update_btn" th:if="${updateOK}==1"><img src="/img/write_update.png" alt="수정/삭제"></div>
+<!--        <div class="write_update_btn" th:if="${updateOK}==1"><img class="update_btn" src="/img/write_update.png" alt="수정/삭제"></div>-->
+        <div class="write_update_btn" ><img class="update_btn" src="/img/write_update.png" alt="수정/삭제"></div>
         <div class="guide_menu">
             <div class="home_button">
                 <button type="button" th:onclick="|location.href='@{/novelnet/novel(n_num=${n_num},sort=${sort},page=${page})}'|">
