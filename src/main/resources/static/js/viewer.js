@@ -44,6 +44,12 @@ $(function(){
         location.href = "/novelnet/reWrite?n_num="+n_num+"&chapter="+chapter;
     });
 
+    // 신고
+    $(".nebiOpt>img").click(function(){
+        $('.memo_option').fadeIn(500);
+        $('.optTypeC').fadeIn(500);
+    });
+
     // 글삭제
     $(".memo_delete").click(function(){
         $('.optTypeA').hide();
