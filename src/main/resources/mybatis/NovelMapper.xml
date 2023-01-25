@@ -72,6 +72,7 @@
             ORDER BY m_num DESC
         </if>
     </select>
+
     <!--  게시물 검색 + 번호매기기  -->
     <select id="getMemoDate" resultType="com.project.novelnet.Vo.MemoVO">
         (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
@@ -118,7 +119,14 @@
         LIMIT 5
     </select>
 
-
+    <!-- 글 수정 -->
+    <update id="memoUpdate" parameterType="com.project.novelnet.Vo.MemoVO">
+        UPDATE memo
+        SET   m_title        = #{m_title},
+              m_type         = #{m_type},
+              m_memo         = #{m_memo}
+        WHERE m_num          = #{m_num}
+    </update>
 
 
 </mapper>

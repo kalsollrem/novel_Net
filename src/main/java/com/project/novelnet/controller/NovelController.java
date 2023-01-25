@@ -165,7 +165,7 @@ public class NovelController {
     }
 
 
-    //글쓰기 글수정
+    //글수정
     @GetMapping("/novelnet/reWrite")
     public String novelreWrite(HttpSession session, Model model,
                                  @RequestParam(value = "n_num"      ,required = false) String n_num,
@@ -174,6 +174,15 @@ public class NovelController {
                                  @RequestParam(value = "chapter"    ,required = false) String chapter)
     {
         System.out.println("유저번호 :"+session.getAttribute("U_NUM") +  "\n 소설번호 : " + n_num);
+
+        if (page == null || page =="")
+        {
+            page = "1";
+        }
+        if (sort == null || sort =="")
+        {
+            sort = "asc";
+        }
 
         MemoVO memoVO = novelMapper.getMemo(n_num, chapter);
         if (memoVO.getM_num() == null)
@@ -187,17 +196,23 @@ public class NovelController {
         model.addAttribute("memoVo", memoVO);
 
 
-//        if (n_num == null || session.getAttribute("U_NUM") == null || n_num.matches("-?\\d+(\\.\\d+)?") == false)
-//        {
-//            return "redirect:/novelnet";
-//        }
-//        else
-//        {
-//            if(novelMapper.memoOK((Integer)session.getAttribute("U_NUM"), n_num) == 0) {
-//                System.out.println("작성권한이 없습니다.");
-//                return "redirect:/novelnet";
-//            }
-//        }
+        if (n_num == null || session.getAttribute("U_NUM") == null || n_num.matches("-?\\d+(\\.\\d+)?") == false)
+        {
+            return "redirect:redirect:/novelnet/novel?" +
+                    "n_num="+n_num+
+                    "&sort="+sort+
+                    "&page="+page;
+        }
+        else
+        {
+            if(novelMapper.memoOK((Integer)session.getAttribute("U_NUM"), n_num) == 0) {
+                System.out.println("수정권한이 없습니다.");
+                return "redirect:redirect:/novelnet/novel?" +
+                        "n_num="+n_num+
+                        "&sort="+sort+
+                        "&page="+page;
+            }
+        }
         return "novel_reWrite";
     }
 
@@ -211,11 +226,13 @@ public class NovelController {
         memoVO.setM_title(nwForm.getWrite_title());
         memoVO.setM_memo(nwForm.getWrite_memo());
         memoVO.setM_type(nwForm.getWrite_type());
-        memoVO.setN_num(nwForm.getWrite_number());
-        novelRepository.memoSave(memoVO);
+        memoVO.setM_num(Integer.parseInt(nwForm.getWrite_chapter()));
 
+        System.out.println(nwForm.getWrite_chapter()+'/'+nwForm.getWrite_title()+'/'+nwForm.getWrite_type()+'/'+nwForm.getWrite_memo());
+        novelMapper.memoUpdate(memoVO);
 
-        return "redirect:/novelnet/view?n_num=13&chapter=273&sort=asc&page=1="+ memoVO.getM_num();
+        return "redirect:/novelnet/view?n_num="+nwForm.getWrite_number()+"&chapter="+nwForm.getWrite_chapter()+
+               "&sort="+nwForm.getSort()+"&page="+nwForm.getPage();
     }
 
     //삭제

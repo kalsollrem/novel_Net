@@ -45,8 +45,12 @@ public interface NovelMapper {
     @Delete("delete from memo where m_num = #{m_num}")
     public void deleteMemo(@Param("m_num")String m_num);
 
+    //전체게시물 검색
     @Select("select * from memo")
     List<MemoVO> getAllMemo();
+
+    //게시물 수정
+    public void memoUpdate(MemoVO memoVO);
 
     //게시물 리스트 검색.
     @Select("select  @ep:=@ep+1 AS ep, m_type, m_num from (SELECT @ep:=0)as n, memo where n_num = #{n_num} and m_type='ep'")
