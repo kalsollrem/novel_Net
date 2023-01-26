@@ -698,7 +698,7 @@ public class NovelController {
     @PostMapping("/memoWarning.do")
     @ResponseBody
     public String memoWarning(HttpSession session,
-                              @RequestParam(value = "m_num", required = false) String m_num,
+                              @RequestParam(value = "chapter", required = false) String chapter,
                               @RequestParam(value = "n_num", required = false) String n_num,
                               @RequestParam(value = "w_why", required = false) String w_why,
                               HttpServletRequest request)throws Exception
@@ -715,10 +715,10 @@ public class NovelController {
         if(session.getAttribute("U_NUM") != null) {
             u_num = (Integer)session.getAttribute("U_NUM");
 
-            if(manageService.isInteger(m_num) == true && manageService.isInteger(n_num) ==true)
+            if(manageService.isInteger(chapter) == true && manageService.isInteger(n_num) ==true)
             {
                 novel_num = Integer.parseInt(n_num);
-                memo_num  = Integer.parseInt(m_num);
+                memo_num  = Integer.parseInt(chapter);
 
                 //신고 등록 여부 확인
                 String timgDiff = warningMapper.cheakMemoWarning(novel_num,u_num);

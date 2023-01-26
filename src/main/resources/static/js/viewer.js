@@ -36,6 +36,7 @@ $(function(){
             $(".memo_option").hide();
             $(".optTypeA").hide();
             $(".optTypeB").hide();
+            $(".optTypeC").hide();
         }
     });
 
@@ -48,7 +49,40 @@ $(function(){
     $(".nebiOpt>img").click(function(){
         $('.memo_option').fadeIn(500);
         $('.optTypeC').fadeIn(500);
+        $('.shingoBefore').fadeIn(500);
+        $('.shingoAfter').hide();
     });
+
+    // 신고버튼
+    $(".singoBtn").click(function(){
+        let w_why = $(".whySingo").val()
+        $.ajax({
+            url:'/memoWarning.do',
+            type:'post',
+            data : {"chapter":chapter,
+                    "w_why":w_why,
+                    "n_num":n_num},
+            success:function(s){
+                if      (s == 0){$(".singodone>p").text("신고에 실패하였습니다")}
+                else if (s == 1){$(".singodone>p").text("신고되었습니다")      }
+                else            {$(".singodone>p").text("이미 신고하신 소설입니다")}
+            },
+            error:function(){
+                alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다.");
+            }
+        });
+        $('.shingoBefore').hide();
+        $('.shingoAfter').show();
+    });
+
+
+    // 신고완료
+    $(".singodoneBtn").click(function(){
+        $('.memo_option').hide();
+        $('.shingoAfter').hide();
+        $('.shingoBefore').hide();
+    });
+
 
     // 글삭제
     $(".memo_delete").click(function(){
