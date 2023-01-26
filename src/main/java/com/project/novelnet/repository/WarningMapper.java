@@ -26,8 +26,8 @@ public interface WarningMapper
                                @Param("m_num")int m_num, @Param("w_why")String w_why);
 
     //게시물 경고 기록 여부(n_num과 u_num이 없거나, timeDiff가 1440 이상이면 가능)
-    @Select("select n_num, u_num, TIMESTAMPDIFF(minute, mw_date, SYSDATE())as timeDiff " +
-            "from m_warning where n_num =#{n_num} and u_num =#{u_num}")
-    List<MemoWarningVO> cheakBookMark(String u_num, String n_num);
+    @Select("select TIMESTAMPDIFF(minute, mw_date, SYSDATE())as timeDiff " +
+            "from m_warning where n_num =#{n_num} and u_num =#{u_num} order by mw_num desc limit 1;")
+    public String cheakMemoWarning(@Param("n_num")int n_num,@Param("u_num")int u_num);
 
 }
