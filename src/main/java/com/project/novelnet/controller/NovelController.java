@@ -5,6 +5,7 @@ import com.project.novelnet.Vo.*;
 import com.project.novelnet.repository.NovelMapper;
 import com.project.novelnet.repository.NovelRepository;
 import com.project.novelnet.repository.SearchMapper;
+import com.project.novelnet.repository.WarningMapper;
 import com.project.novelnet.service.FileUploadService;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
@@ -46,6 +47,10 @@ public class NovelController {
     //편의용
     @Autowired
     private ManageService manageService;
+
+    //경고용 매퍼
+    @Autowired
+    private WarningMapper warningMapper;
 
 
     //메인페이지
@@ -562,6 +567,7 @@ public class NovelController {
         return "viewer";
     }
 
+    //댓글 등록
     @PostMapping("/replyWrite.do")
     @ResponseBody
     public String replyWriteForim(HttpSession session,
@@ -602,6 +608,8 @@ public class NovelController {
         return state;
     }
 
+
+    //댓글 신고
     @PostMapping("/stopReply.do")
     @ResponseBody
     public int stopReply(HttpSession session,
@@ -631,7 +639,7 @@ public class NovelController {
         }
     }
 
-
+    //댓글 추천 비추
     @PostMapping("/updownlike.do")
     @ResponseBody
     public int updownlike(HttpSession session,
@@ -662,6 +670,7 @@ public class NovelController {
         return cnt;
     }
 
+    //게시글 추천, 비추천
     @PostMapping("/goodUpDown.do")
     @ResponseBody
     public int goodUpDown(HttpSession session,
@@ -683,6 +692,57 @@ public class NovelController {
         }
 
         return m_count;
+    }
+
+    //게시물 신고
+    @PostMapping("/memoWarning.do")
+    @ResponseBody
+    public String memoWarning(HttpSession session,
+                              @RequestParam(value = "m_num", required = false) String m_num,
+                              @RequestParam(value = "n_num", required = false) String n_num,
+                              @RequestParam(value = "w_why", required = false) String w_why,
+                              HttpServletRequest request)throws Exception
+    {
+        int u_num;
+        int novel_num;
+        int memo_num;
+        if (w_why == null){ w_why = ""; }
+
+        //0 : 실패,   1:성공,   2:신고한지 24시간이 안됨
+        String state = "0";
+
+
+        if(session.getAttribute("U_NUM") != null) {
+            u_num = (Integer)session.getAttribute("U_NUM");
+
+            if(manageService.isInteger(m_num) == true && manageService.isInteger(n_num) ==true)
+            {
+                novel_num = Integer.parseInt(n_num);
+                memo_num  = Integer.parseInt(m_num);
+
+                //신고 등록 여부 확인
+                String timgDiff = warningMapper.cheakMemoWarning(novel_num,u_num);
+                System.out.println(timgDiff);
+
+                //신고시간이 null값이거나 1440분을 넘으면 경고등록
+                if (timgDiff == null)
+                {
+                    warningMapper.setMemoWarning(novel_num,u_num,memo_num,w_why);
+                    state = "1";
+                }
+                else
+                {
+                    if(Integer.parseInt(timgDiff) > 1440)
+                    {
+                        warningMapper.setMemoWarning(novel_num,u_num,memo_num,w_why);
+                        state = "1";
+                    }
+                    else {state = "2";}
+                }
+            }
+        }
+
+        return state;
     }
 
     //글보기
