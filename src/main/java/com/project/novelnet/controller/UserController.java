@@ -114,12 +114,16 @@ public class UserController {
     @PostMapping("/novelnet/login")
     public String getLoginData(UserVO userVO, HttpSession session) throws Exception{
         System.out.println(userVO.getU_mail()+" / "+userVO.getU_pass());
-//        userVO = loginService.getLogin(userVO);
-//        if (userVO != null){
-//            session.setAttribute("userData", userVO);
-//        }
+
         return "redirect:/novelnet";
     }
 
+
+    @GetMapping("/novelnet/profill")
+    public String profillPage(UserVO userVO, HttpSession session) throws Exception{
+
+
+        return "mypage";
+    }
 
 }
