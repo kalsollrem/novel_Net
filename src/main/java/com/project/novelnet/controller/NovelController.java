@@ -928,11 +928,14 @@ public class NovelController {
                          @RequestParam(value = "page"      ,required = false) String page,
                          Model model) throws Exception{
 
-        String u_num="";
+        String u_num="0";
         System.out.println("======================================");
 
-        if(session.getAttribute("U_NUM") != null) {
-            u_num = (String) session.getAttribute("U_NUM").toString(); } //유저번호
+        if(session.getAttribute("U_NUM") != null)
+        {
+            //유저번호
+            u_num = (String) session.getAttribute("U_NUM").toString();
+        }
 
 
         if(keyword == null)                     {keyword = "";    }

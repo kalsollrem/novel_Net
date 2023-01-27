@@ -8,4 +8,7 @@ public class TagVO {
     String h_tag;
     String c_carte;
     String t_num;
+
+    //편의용
+    String h_max; //최대 갯수의 태그
 }
