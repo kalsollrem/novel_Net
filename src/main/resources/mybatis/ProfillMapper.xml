@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.novelnet.repository.ProfillMapper">
+
+    <select id="likeTagAndRcnt" parameterType="com.project.novelnet.Vo.TagVO">
+        select * from
+            (select h_tag, u_num, count(*) as max from
+                 (
+                     select A.n_num, A.u_num, B.h_tag
+                     from (select * from m_record where u_num = #{u_num} group by n_num) A
+                     join hashtag B
+                     on A.n_num = B.n_num
+                 )Des
+            group by n_num
+            order by max desc
+            limit 1)B,(select count(*)h_max from reply where u_num = #{u_num})Ces;
+    </select>
+
+    <select id="getProfillNovelList" parameterType="com.project.novelnet.Vo.NovelVO">
+        select
+            A.n_num, A.u_num, A.n_title,
+            B.u_nick, B.u_pic, IFNULL(C.n_stop,0)as n_stop
+        from
+            (select n_num, u_num, n_title from novel )A
+        left join
+            (select u_num, u_nick, u_pic from user)B
+        on A.u_num = b.u_num
+        left join
+            (select n_num, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
+        on A.n_num = C.n_num
+    </select>
+
+
+</mapper>
+
