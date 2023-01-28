@@ -138,10 +138,17 @@ public class UserController {
         }else
         {
             //선호태그
-            List<TagVO> Tvo = profillMapper.likeTagAndRcnt(u_num);
+            List<TagVO> tvo = profillMapper.likeTagAndRcnt(u_num);
+            model.addAttribute("tvo",tvo);
 
             //내 소설 리스트
             List<NovelVO> novelVO = profillMapper.getProfillNovelList(u_num);
+            model.addAttribute("novelVO", novelVO);
+
+            if(user == u_num)
+            {
+                //유저 정보 추가.
+            }
 
             return "mypage";
         }
