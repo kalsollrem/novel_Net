@@ -128,17 +128,23 @@ public class UserController {
 
     @GetMapping("/novelnet/profill")
     public String profillPage(Model model,
-                              HttpSession session) throws Exception{
-
+                              String user,
+                              HttpSession session) throws Exception
+    {
         String u_num = "20";
 
-        //선호태그
-        List<TagVO> Tvo = profillMapper.likeTagAndRcnt(u_num);
+        if (user == null){
+            return "redirect:/novelnet";
+        }else
+        {
+            //선호태그
+            List<TagVO> Tvo = profillMapper.likeTagAndRcnt(u_num);
 
-        //내 소설 리스트
-        List<NovelVO> novelVO = profillMapper.getProfillNovelList(u_num);
+            //내 소설 리스트
+            List<NovelVO> novelVO = profillMapper.getProfillNovelList(u_num);
 
-        return "mypage";
+            return "mypage";
+        }
     }
 
 }
