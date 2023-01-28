@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.novelnet.repository.ProfillMapper">
-
-    <select id="likeTagAndRcnt" parameterType="com.project.novelnet.Vo.TagVO">
+    <select id="likeTagAndRcnt" resultType="com.project.novelnet.Vo.TagVO">
         select * from
-            (select h_tag, u_num, count(*) as max from
+            (select h_tag, u_num, count(*) as h_max from
                  (
                      select A.n_num, A.u_num, B.h_tag
                      from (select * from m_record where u_num = #{u_num} group by n_num) A
@@ -12,11 +11,11 @@
                      on A.n_num = B.n_num
                  )Des
             group by n_num
-            order by max desc
+            order by h_max desc
             limit 1)B,(select count(*)h_max from reply where u_num = #{u_num})Ces;
     </select>
 
-    <select id="getProfillNovelList" parameterType="com.project.novelnet.Vo.NovelVO">
+    <select id="getProfillNovelList" resultType="com.project.novelnet.Vo.NovelVO">
         select * from(
             select
                 A.n_num, A.u_num, A.n_title,
@@ -35,9 +34,7 @@
                 A.u_num = #{u_num}
             order by
                 n_num desc
-        ) R where n_stop <![CDATA[ <= ]]> 5
+        )R  where n_stop <![CDATA[ <= ]]> 5
     </select>
-
-
 </mapper>
 
