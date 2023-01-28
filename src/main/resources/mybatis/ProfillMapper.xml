@@ -17,17 +17,25 @@
     </select>
 
     <select id="getProfillNovelList" parameterType="com.project.novelnet.Vo.NovelVO">
-        select
-            A.n_num, A.u_num, A.n_title,
-            B.u_nick, B.u_pic, IFNULL(C.n_stop,0)as n_stop
-        from
-            (select n_num, u_num, n_title from novel )A
-        left join
-            (select u_num, u_nick, u_pic from user)B
-        on A.u_num = b.u_num
-        left join
-            (select n_num, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
-        on A.n_num = C.n_num
+        select * from(
+            select
+                A.n_num, A.u_num, A.n_title,
+                B.u_nick, B.u_pic, IFNULL(C.n_stop,0)as n_stop
+            from
+                (select n_num, u_num, n_title from novel ) A
+            left join
+                (select u_num, u_nick, u_pic from user)B
+            on
+                A.u_num = b.u_num
+            left join
+                (select n_num, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
+            on
+                A.n_num = C.n_num
+            where
+                A.u_num = #{u_num}
+            order by
+                n_num desc
+        ) R where n_stop <![CDATA[ <= ]]> 5
     </select>
 
 

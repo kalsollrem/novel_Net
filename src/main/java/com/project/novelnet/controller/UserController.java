@@ -1,6 +1,9 @@
 package com.project.novelnet.controller;
+import com.project.novelnet.Vo.NovelVO;
+import com.project.novelnet.Vo.TagVO;
 import com.project.novelnet.Vo.UserVO;
 import com.project.novelnet.repository.NovelRepository;
+import com.project.novelnet.repository.ProfillMapper;
 import com.project.novelnet.repository.UserMapper;
 import com.project.novelnet.service.MailService;
 import com.project.novelnet.service.UserService;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -29,6 +33,9 @@ public class UserController {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ProfillMapper profillMapper;
 
     //아이디 중복 검사
     @PostMapping("/idCheck")
@@ -120,8 +127,16 @@ public class UserController {
 
 
     @GetMapping("/novelnet/profill")
-    public String profillPage(UserVO userVO, HttpSession session) throws Exception{
+    public String profillPage(Model model,
+                              HttpSession session) throws Exception{
 
+        String u_num = "20";
+
+        //선호태그
+        List<TagVO> Tvo = profillMapper.likeTagAndRcnt(u_num);
+
+        //내 소설 리스트
+        List<NovelVO> novelVO = profillMapper.getProfillNovelList(u_num);
 
         return "mypage";
     }

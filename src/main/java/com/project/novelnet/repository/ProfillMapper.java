@@ -2,6 +2,7 @@ package com.project.novelnet.repository;
 
 import com.project.novelnet.Vo.NovelVO;
 import com.project.novelnet.Vo.TagVO;
+import com.project.novelnet.Vo.UserVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -15,4 +16,7 @@ public interface ProfillMapper
 {
     //선호 장르+총댓글
     List<TagVO> likeTagAndRcnt(@Param("u_num") String u_num);
+
+    //프로필 주인의 소설
+    List<NovelVO> getProfillNovelList(@Param("u_num") String u_num);
 }
