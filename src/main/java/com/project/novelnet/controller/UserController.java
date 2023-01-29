@@ -6,7 +6,9 @@ import com.project.novelnet.repository.NovelRepository;
 import com.project.novelnet.repository.ProfillMapper;
 import com.project.novelnet.repository.UserMapper;
 import com.project.novelnet.service.MailService;
+import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,6 +39,9 @@ public class UserController {
 
     @Autowired
     private ProfillMapper profillMapper;
+
+    @Autowired
+    private ManageService manageService;
 
     //아이디 중복 검사
     @PostMapping("/idCheck")
@@ -128,12 +134,13 @@ public class UserController {
 
     @GetMapping("/novelnet/profill")
     public String profillPage(Model model,
-                              String user,
+                              @Param("user") String user,
                               HttpSession session) throws Exception
     {
         String u_num = "20";
+        ArrayList<UserVO> profillData;
 
-        if (user == null){
+        if (manageService.isInteger(user) == false){
             return "redirect:/novelnet";
         }else
         {
@@ -145,10 +152,10 @@ public class UserController {
             List<NovelVO> novelVO = profillMapper.getProfillNovelList(u_num);
             model.addAttribute("novelVO", novelVO);
 
-            if(user == u_num)
-            {
-                //유저 정보 추가.
-            }
+            //보여줄 유저 데이터 확보(게스트는 프로필+사진)
+            if(user == u_num){ profillData = profillMapper.getProfill(u_num); } //자신
+            else             { profillData = profillMapper.getMyself(user);   } //게스트
+            model.addAttribute("profillData", profillData);
 
             return "mypage";
         }
