@@ -117,6 +117,8 @@ $(function(){
     var id_OK = 0;
     var pass_OK = 0;
     var pass_cheak_OK = 0;
+    const az = /^[0-9]+$/;
+    const reg = /\s/g;
 
     //폼체크 - 아이디 중복검사.
     $("#e-mail").keyup(function(){
@@ -164,7 +166,6 @@ $(function(){
     //폼체크 - 비밀번호 입력확인
     $("#password").keyup(function(){
         const pass  = $('#password').val();
-        const az = /^[0-9]+$/;
 
         if(0 < pass.length && pass.length <= 12)
         {
@@ -183,6 +184,11 @@ $(function(){
             {
                 $(".pass_length").text("* 보안을 위해 영문이나 한글을 포함해주세요")
                 $(".pass_length").css("color", "blue")
+                pass_OK = 0;
+            }
+            else if(pass.match(reg)){
+                $(".pass_length").text("* 공백을 제거해주세요")
+                $(".pass_length").css("color", "black")
                 pass_OK = 0;
             }
             else
@@ -247,6 +253,12 @@ $(function(){
         {
             $('#nick_name').focus();
             alert("닉네임을 입력해주세요");
+            return false
+        }
+        else if(nick_OK.match(reg))
+        {
+            $('#nick_name').focus();
+            alert("공백을 제거해주세요");
             return false
         }
         else if(contract_ok == false )
