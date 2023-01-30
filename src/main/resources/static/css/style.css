@@ -396,13 +396,14 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
     margin-left: 10px; margin-top: 70px; height: 40px; line-height: 40px;
     border-radius: 20px; border: 0px;}
 /* 내 프로필 관리 */
-.profile_main               {width: 100%; height: 600px; margin-top: 30px; margin-bottom: 30px; display: none;}
+.profile_main               {width: 100%; height: 600px; margin-top: 30px; margin-bottom: 30px; display: block;}
 /* 내 댓글관리 */
 .serialized_reply           {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none;}
 .serialized_reply>h3        {width: 200px; height: 50px; line-height: 50px; text-align: center; background-color: #333; color: #ececec; border-radius: 0.5em; margin-bottom: 10px;}
-.reply_line {width: 200px; border: 1px solid #ececec; margin-top: 2px;}
+.reply_line                 {width: 200px; border: 1px solid #ececec; margin-top: 2px;}
+
 /* 내 정보관리 */
-.serialized_info            {width: 100%; margin-top: 30px; margin-bottom: 30px; }
+.serialized_info            {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none;}
 .serialized_info .info_change {width: 875px; margin-left: 50%; transform: translate(-50%,0%); border: 1px solid #ececec; box-shadow: 3px 3px #EEEEEE;}
 .info_change>li {width: 855px;  padding: 10px; display: flex; }
 .info_change>li .change_box {width: 120px; height: 40px; line-height: 40px; padding-left: 10px; float: left; font-weight: bold}
@@ -429,15 +430,8 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .profile_main .my_novel .novel_list   {width: 360px; height: 400px; position: absolute; border: 1px solid #ECECEC; margin-top: 80px; margin-left: 20px; overflow:auto; overflow-x:hidden; box-shadow: 3px 3px #EEEEEE;}
 
-.profile_main .my_novel .novel_list::-webkit-scrollbar {
-    overflow-x:hidden;
-    width: 5px;
-    background-color: #ECECEC;
-}
-.profile_main .my_novel .novel_list::-webkit-scrollbar-thumb{
-    background-color:#ECCCEC;
-    border-radius: 10px;
-}
+.profile_main .my_novel .novel_list::-webkit-scrollbar       { overflow-x:hidden; width: 5px; background-color: #EEEEEC;}
+.profile_main .my_novel .novel_list::-webkit-scrollbar-thumb { background-color:#ECCCEC; border-radius: 10px;}
 
 .profile_main .my_novel .novel_list>li{width: 340px; height: 50px; line-height: 50px; padding-left: 20px; border-bottom: 1px solid #CCECEC; }
 .profile_main .my_novel .novel_list>li>span {float: right; margin-right: 20px;}
@@ -448,7 +442,9 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .profile_main .myself .self_intro { width: 780px; height: 390px;  margin-top: 10px; }
 .myself .sf_intro {width: 760px; height: 50px; margin-left: 5px; margin-top: 10px; position: absolute; line-height: 50px; font-size: 22px; font-weight: bold; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
-.myself .my_intro {width: 760px; height: 315px; margin-left: 5px; margin-top: 70px; position: absolute; padding-left: 10px; padding-top: 5px; font-size: 18px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
+.myself .my_intro {width: 760px; height: 315px; margin-left: 5px; margin-top: 70px; position: absolute; padding-left: 10px; padding-top: 5px; font-size: 18px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; overflow-y: scroll; overflow-x:hidden;}
+.my_intro::-webkit-scrollbar      { overflow-x:hidden; width: 5px; background-color: #EEEEEC;}
+.my_intro::-webkit-scrollbar-thumb{ background-color:#ECCCEC; border-radius: 10px;}
 
 .title_position          {line-height: 50px; font-size: 21px; font-weight: bold; width: 230px; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
 .text_position           {line-height: 85px; font-size: 21px; font-weight: bold; width: 230px; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
@@ -472,6 +468,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
     background-color:rgb(252, 155, 155);
     border-radius: 10px;
 }
+
 
 
 .serialized_novel .list_up         {width: 100%; padding-top: 0px; padding-bottom: 10px; }
