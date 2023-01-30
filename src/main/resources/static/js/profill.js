@@ -15,57 +15,61 @@ $(function (){
     $('.btn_myReply').click(function ()       {profill.hide(); info.hide(); novel.hide(); reply.show();})
 
 
-    let passC        = $("#passwordChange").val();
-    let passCheakC   = $(".passcheck").val();
-    let nickC        = $("#nickChange").val();
-    let message = '';
-    const reg = /\s/g; //공백판별
-    var conformNick  = 0;
-    var conformPass = 0;
 
-    //비밀번호 확인
-    if (pass.length != 0)
+    $('.change_ok').click(function ()
     {
-        if (passC.length < 12)
-        {
-            message = '비밀번호가 너무 짧습니다.';
-            conformPass = 0;
-        }
-        else if (passC.length > 20)
-        {
-            message = '비밀번호가 너무 깁니다.'
-            conformPass = 0;
-        }
-        else if (passC.match(reg))
-        {
-            message = '공백을 제거해주세요.'
-            conformPass = 0;
-        }
-        else if (passC != passCheakC)
-        {
-            message = '비밀번호를 다시 확인해주세요'
-            conformPass = 0;
-        }
-    }
-    else
-    {
-        conformPass = 1;
-    }
 
-    //닉네임확인
-    if(nickC != "")
-    {
-        if(nickC.match(reg))
+        let passC        = $("#passwordChange").val();
+        let passCheakC   = $(".passcheck").val();
+        let nickC        = $("#nickChange").val();
+        var message = '';
+        const reg = /\s/g; //공백판별
+        var conformNick  = 0;
+        var conformPass = 0;
+
+        //비밀번호 확인
+        if (passC.length != 0)
         {
-            message = '공백을 제거해주세요.'
-            conformNick = 0;
+            if (passC.length < 12)
+            {
+                message = '비밀번호가 너무 짧습니다.';
+                conformPass = 0;
+            }
+            else if (passC.length > 20)
+            {
+                message = '비밀번호가 너무 깁니다.'
+                conformPass = 0;
+            }
+            else if (passC.match(reg))
+            {
+                message = '공백을 제거해주세요.'
+                conformPass = 0;
+            }
+            else if (passC != passCheakC)
+            {
+                message = '비밀번호를 다시 확인해주세요'
+                conformPass = 0;
+            }
         }
-    }
-    else
-    {
-        conformNick = 1;
-    }
+        else
+        {
+            conformPass = 1;
+        }
 
-
+        //닉네임확인
+        if(nickC != "")
+        {
+            if(nickC.match(reg))
+            {
+                message = '공백을 제거해주세요.'
+                conformNick = 0;
+            }
+        }
+        else
+        {
+            conformNick = 1;
+        }
+        alert(message)
+    })
 
 });
