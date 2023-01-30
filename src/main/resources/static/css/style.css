@@ -406,7 +406,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .serialized_info            {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none;}
 .serialized_info .info_change {width: 875px; margin-left: 50%; transform: translate(-50%,0%); border: 1px solid #ececec; box-shadow: 3px 3px #EEEEEE;}
 .info_change>li {width: 855px;  padding: 10px; display: flex; }
-.info_change>li .change_box {width: 120px; height: 40px; line-height: 40px; padding-left: 10px; float: left; font-weight: bold}
+.info_change>li .change_box {width: 120px; height: 40px; line-height: 40px; padding-left: 10px; float: left; font-weight: bold; font-size: 15px;}
 .info_change>li>span {width: 400px; height: 40px; line-height: 40px; float: left; }
 .info_change>li>div { border: 1px solid #ececec; box-shadow: 3px 3px #EEEEEE;}
 
