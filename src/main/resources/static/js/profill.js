@@ -19,9 +19,15 @@ $(function (){
     $('.change_ok').click(function ()
     {
 
-        let passC        = $("#passwordChange").val();
-        let passCheakC   = $(".passcheck").val();
-        let nickC        = $("#nickChange").val();
+        let passC        = $("#passwordChange").val();  //비밀번호
+        let passCheakC   = $(".passcheck").val();       //비밀번호 확인
+        let nickC        = $("#nickChange").val();      //닉네임.
+
+        //텍스트 에어리어 엔터 <br>로 변환
+        let intro        = $('#intro').val();
+        intro = intro.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+
         var message = '';
         const reg = /\s/g; //공백판별
         var conformNick  = 0;
