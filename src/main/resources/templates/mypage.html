@@ -29,7 +29,8 @@
                         <div class="pic_edit">
                             <img src="../img/edit_icon.png" alt="set">
                         </div>
-                        <div class="profil_name">구독자 님의 회원카드</div>
+                        <div class="profil_name" >구독자 님의 회원카드</div>
+<!--                        <div class="profil_name" th:text="${profillData.u_nick}+' 님의 회원카드'">구독자 님의 회원카드</div>-->
                         <ul class="profil_menu">
                             <li class="btn_profill">프로필</li>
                             <li class="btn_writeNovel">연재소설</li>
@@ -56,6 +57,7 @@
                         <div class="self_intro">
                             <div class="sf_intro">자기소개</div>
                             <div class="my_intro">s</div>
+<!--                            <div class="my_intro" th:utext="${profillMapper.u_myself}">s</div>-->
                         </div>
                         <ul class="self_info">
                             <li>
