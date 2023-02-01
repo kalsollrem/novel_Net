@@ -20,9 +20,9 @@ public interface ProfillMapper
     List<NovelVO> getProfillNovelList(@Param("u_num") String u_num);
 
     //자기소개(게스트용)
-    @Select("select u_myself,u_pic, u_nick from user where u_num = #{u_num}")
-    ArrayList<UserVO> getMyself(@Param("u_num") String u_num);
+    @Select("select u_myself,u_pic,u_nick from user where u_num = #{u_num}")
+    List<UserVO> getMyself(@Param("u_num") String u_num);
 
     @Select("select u_num, u_nick , u_mail, u_pass, u_pic, u_myself from user where u_num = #{u_num}")
-    ArrayList<UserVO> getProfill(@Param("u_num") String u_num);
+    List<UserVO> getProfill(@Param("u_num") String u_num);
 }

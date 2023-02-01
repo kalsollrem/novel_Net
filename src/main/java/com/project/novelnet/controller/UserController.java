@@ -138,7 +138,7 @@ public class UserController {
                               HttpSession session) throws Exception
     {
         String u_num = "20";
-        ArrayList<UserVO> profillData;
+        List<UserVO> profillData;
 
         if (manageService.isInteger(user) == false){
             return "redirect:/novelnet";
