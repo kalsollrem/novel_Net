@@ -153,9 +153,11 @@ public class UserController {
             model.addAttribute("novelVO", novelVO);
 
             //보여줄 유저 데이터 확보(게스트는 프로필+사진)
+            //여기문제있음
             if(user == u_num){ profillData = profillMapper.getProfill(u_num); } //자신
             else             { profillData = profillMapper.getMyself(user);   } //게스트
             model.addAttribute("profillData", profillData);
+            System.out.println(profillData);
 
             return "mypage";
         }
