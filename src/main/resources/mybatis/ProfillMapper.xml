@@ -19,7 +19,7 @@
         select * from(
             select
                 A.n_num, A.u_num, A.n_title,
-                B.u_nick, B.u_pic, IFNULL(C.n_stop,0)as n_stop
+                B.u_nick, B.u_pic, IFNULL(C.n_stop,0)as n_stop, ifnull(date_format(D.n_date, '%Y년 %m월 %d일'), 'none' )as n_date
             from
                 (select n_num, u_num, n_title from novel ) A
             left join
@@ -30,6 +30,10 @@
                 (select n_num, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
             on
                 A.n_num = C.n_num
+            LEFT JOIN
+                (select * from (select n_num, m_date as n_date from memo order by n_date desc LIMIT 18446744073709551615) datapack  group by n_num) D
+            on
+                A.n_num = D.n_num
             where
                 A.u_num = #{u_num}
             order by
