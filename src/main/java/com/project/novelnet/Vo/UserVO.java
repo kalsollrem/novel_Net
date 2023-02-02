@@ -8,6 +8,7 @@ public class UserVO {
     private String u_mail;    //메일주소
     private String u_pass;    //비번
     private String u_nick;    //닉네임
+    private String u_pic;     //사진
     private String u_ok;      //메일인증확인
     private Integer u_level;  //인증레벨
     private String u_age;     //유저나이(사용안함)

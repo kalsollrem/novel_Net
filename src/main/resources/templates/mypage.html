@@ -24,7 +24,8 @@
                 <div class="profile">
                     <div class="profile_data">
                         <div class="profil_pic">
-                            <img src="../img/profill.png" alt="프로필" >
+                            <img th:if="${profillData.u_pic} != null"  th:src="'../userImg/'+${profillData.u_pic}" alt="프로필" onerror="this.src='../img/profill.jpg'">
+                            <img th:unless="${profillData.u_pic} != null" src="../img/profill.png" alt="프로필" >
                         </div>
                         <div class="pic_edit">
                             <img src="../img/edit_icon.png" alt="set">

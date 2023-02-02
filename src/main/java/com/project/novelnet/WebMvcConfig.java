@@ -14,5 +14,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/noteImg/**")
                 .addResourceLocations("file:///C:/code/KimJeonghyun/novelNet/src/main/resources/static/noteImg/");
+        registry.addResourceHandler("/userImg/**")
+                .addResourceLocations("file:///C:/code/KimJeonghyun/novelNet/src/main/resources/static/userImg/");
     }
 }
