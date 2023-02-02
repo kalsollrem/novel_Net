@@ -42,14 +42,9 @@
                     <div class="my_novel">
                         <div class="my_novels"><h3>구독자 님의 소설</h3></div>
                         <ul class="novel_list">
-                            <li> <b>아카데미</b> <span class="up_date">8월 27일</span> </li>
-                            <li> <b>아카데미</b> <span class="up_date">8월 27일</span> </li>
-                            <li> <b>아카데미</b> <span class="up_date">8월 27일</span> </li>
-                            <li> <b>아카데미</b> <span class="up_date">8월 27일</span> </li>
-                            <li> <b>아카데미</b> <span class="up_date">8월 27일</span> </li>
-                            <li> <b>아카데미</b> <span class="up_date">8월 27일</span> </li>
-                            <li> <b>아카데미</b> <span class="up_date">8월 27일</span> </li>
-
+                            <th:block th:each="novelVO : ${novelVO}">
+                                <li> <b>[[${novelVO.n_title}]]</b> <span class="up_date">8월 27일</span> </li>
+                            </th:block>
                         </ul>
                     </div>
                     <div class="myself">
