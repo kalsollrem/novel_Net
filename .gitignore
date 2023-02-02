@@ -40,3 +40,4 @@ build/
 out
 gen
 /src/main/resources/static/noteImg/
+/src/main/resources/static/userImg/
