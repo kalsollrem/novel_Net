@@ -138,14 +138,14 @@ public class UserController {
                               HttpSession session) throws Exception
     {
         String u_num = "20";
-        List<UserVO> profillData;
+        UserVO profillData;
 
         if (manageService.isInteger(user) == false){
             return "redirect:/novelnet";
         }else
         {
             //선호태그
-            List<TagVO> tvo = profillMapper.likeTagAndRcnt(u_num);
+            TagVO tvo = profillMapper.likeTagAndRcnt(u_num);
             model.addAttribute("tvo",tvo);
 
             //내 소설 리스트

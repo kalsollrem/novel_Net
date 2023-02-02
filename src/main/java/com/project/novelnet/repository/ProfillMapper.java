@@ -14,15 +14,15 @@ import java.util.List;
 public interface ProfillMapper
 {
     //선호 장르+총댓글
-    List<TagVO> likeTagAndRcnt(@Param("u_num") String u_num);
+    TagVO likeTagAndRcnt(@Param("u_num") String u_num);
 
     //프로필 주인의 소설
     List<NovelVO> getProfillNovelList(@Param("u_num") String u_num);
 
     //자기소개(게스트용)
-    @Select("select u_myself,u_pic,u_nick from user where u_num = #{u_num}")
-    List<UserVO> getMyself(@Param("u_num") String u_num);
+    @Select("select u_myself,u_pic,u_nick, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
+    UserVO getMyself(@Param("u_num") String u_num);
 
-    @Select("select u_num, u_nick , u_mail, u_pass, u_pic, u_myself from user where u_num = #{u_num}")
-    List<UserVO> getProfill(@Param("u_num") String u_num);
+    @Select("select u_num, u_nick , u_mail, u_pass, u_pic, u_myself, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
+    UserVO getProfill(@Param("u_num") String u_num);
 }

@@ -4,15 +4,16 @@ import lombok.Data;
 
 @Data
 public class UserVO {
-    private Integer u_num;   //Integer에서 String로 바꿈.
-    private String u_mail;
-    private String u_pass;
-    private String u_nick;
-    private String u_ok;
-    private Integer u_level;
-    private String u_age;
-    private String u_like;
-    private String u_myself;
-    private String u_code;
+    private Integer u_num;    //Integer에서 String로 바꿈.
+    private String u_mail;    //메일주소
+    private String u_pass;    //비번
+    private String u_nick;    //닉네임
+    private String u_ok;      //메일인증확인
+    private Integer u_level;  //인증레벨
+    private String u_age;     //유저나이(사용안함)
+    private String u_like;    //선호(사용안함)
+    private String u_myself;  //자기소개
+    private String u_regdate; //가입일
+    private String u_code;    //이메일코드
 
 }
