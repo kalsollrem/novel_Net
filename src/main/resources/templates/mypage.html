@@ -79,7 +79,7 @@
                         <li>
                             <div class="change_box">닉네임</div>
                             <div class="change_nick">
-                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요.">
+                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." th:value="${profillData.u_nick}">
                             </div>
                         </li>
                         <li>
@@ -98,14 +98,14 @@
                         </li>
                         <li>
                             <div class="change_box">이메일</div>
-                            <div class="change_mail">
-                                e-mail@ruu.kr
+                            <div class="change_mail" th:text="${profillData.u_mail}">
+
                             </div>
                         </li>
                         <li>
                             <div class="change_box">자기소개</div>
                             <div class="change_intro">
-                                <textarea name="intro" id="intro" placeholder="자기소개"></textarea>
+                                <textarea name="intro" id="intro" placeholder="자기소개" th:value="${profillData.u_myself}"></textarea>
                             </div>
                         </li>
                         <li>
