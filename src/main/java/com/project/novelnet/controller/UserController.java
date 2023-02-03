@@ -152,12 +152,14 @@ public class UserController {
             List<NovelVO> novelVO = profillMapper.getProfillNovelList(u_num);
             model.addAttribute("novelVO", novelVO);
 
+            String who;
+
             //보여줄 유저 데이터 확보(게스트는 프로필+사진)
             //여기문제있음
-            if(user == u_num){ profillData = profillMapper.getProfill(u_num); } //자신
-            else             { profillData = profillMapper.getMyself(user);   } //게스트
+            if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me";} //자신
+            else                  { profillData = profillMapper.getMyself(user);   who="you";} //게스트
             model.addAttribute("profillData", profillData);
-            System.out.println(profillData);
+            System.out.println(who +":"+ profillData);
 
             return "mypage";
         }

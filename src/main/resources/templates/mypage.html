@@ -98,14 +98,14 @@
                         </li>
                         <li>
                             <div class="change_box">이메일</div>
-                            <div class="change_mail" th:text="${profillData.u_mail}">
-
+                            <div class="change_mail">
+                                [[${profillData.u_mail}]]
                             </div>
                         </li>
                         <li>
                             <div class="change_box">자기소개</div>
                             <div class="change_intro">
-                                <textarea name="intro" id="intro" placeholder="자기소개" th:value="${profillData.u_myself}"></textarea>
+                                <textarea name="intro" id="intro" placeholder="자기소개">[[${profillData.u_myself}]]</textarea>
                             </div>
                         </li>
                         <li>
