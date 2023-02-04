@@ -491,6 +491,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .lu_box .lu_pri            {width: 940px; height: 45px; line-height: 45px; margin-top: 10px; padding-left: 10px; font-size: 13px; font-weight: 500; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
 
 .lu_box .lu_tag            {width: 940px; height: 35px; line-height: 40px; margin-top: 10px; padding-left: 10px;  border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; }
+.lu_box .lu_tag .lu_tag_Box{width: 760px; height: 35px; float: left; }
 .lu_tag .lu_tagcards       {padding-left: 8px; padding-right: 8px; height: 20px; margin-right: 5px; margin-top: 5px;    font-size: 12px;
     line-height: 20px; text-align: center; border-radius:1em; font-weight: bold;
     float: left; border: 2px solid rebeccapurple; color:rebeccapurple;}
