@@ -43,11 +43,11 @@
                     <div class="my_novel">
                         <div class="my_novels"><h3>구독자 님의 소설</h3></div>
                         <ul class="novel_list">
-                            <th:block th:each="novelVO : ${novelVO}">
+                            <th:block th:each="novelList : ${novelList}">
                                 <li>
-                                    <span class="up_title"><b>[[${novelVO.n_title}]]</b></span>
-                                    <span class="up_date" th:if="${novelVO.n_date} != 'none'">[[${novelVO.n_date}]]</span>
-                                    <span class="up_date" th:unless="${novelVO.n_date} != 'none'"> </span>
+                                    <span class="up_title"><b>[[${novelList.n_title}]]</b></span>
+                                    <span class="up_date" th:if="${novelList.n_date} != 'none'">[[${novelList.n_date}]]</span>
+                                    <span class="up_date" th:unless="${novelList.n_date} != 'none'"> </span>
                                 </li>
                             </th:block>
                         </ul>
@@ -138,27 +138,37 @@
                     </div>
                    
                     <div class="list_up">
-                        <div class="lu_box">
-                            <div class="lu_img">
-                                <img src="../img/nover_cover.jpg" alt="표지">
-                            </div>
-                            <div class="lu_data">
-                                <div class="lu_title">소설제목<span>작가명</span></div>
-                                <div class="lu_pri">전회차까지의 이야기</div>
-                                <ul class="lu_record">
-                                    <li><img src="../img/count_view.png" alt="조회수">1003명</li>
-                                    <li><img src="../img/count_book.png" alt="구독">12회차</li>
-                                    <li><img src="../img/count_good.png" alt="추천">50회</li>
-                                </ul>
-                                <div class="lu_tag">
-                                    <div class="lu_tagcards">#현대</div>
-                                    <div class="lu_tagcards">#무협</div>
-                                    <div class="lu_tagcards">#막장</div>
-                                    <div class="lu_tagcards">#판타지</div>
-                                    <div class="lu_update">24분전</div>
+                        <th:block th:each="novelList : ${novelList}">
+                            <div class="lu_box">
+                                <div class="lu_img">
+                                    <img th:src="'../notImg/'+${novelList.getN_cover()}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">
+                                </div>
+                                <div class="lu_data">
+                                    <div class="lu_title overLineTypeA">[[${novelList.getN_title()}]]</div>
+                                    <div class="lu_pri overLineTypeA" th:text="${novelList.getN_introduction()}"></div>
+                                    <ul class="lu_record">
+                                        <li>
+                                            <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count == null}" th:text="0명">
+                                            <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count != null}" th:text="${novelList.getN_count}+'명'">
+                                        </li>
+                                        <li>
+                                            <img src="../img/count_book.png" alt="회차" th:if="${novelList.getN_chapters == null}" th:text="0회차">
+                                            <img src="../img/count_book.png" alt="회차" th:if="${novelList.getN_chapters != null}" th:text="${novelList.getN_chapters}+'회차'">
+                                        </li>
+                                        <li>
+                                            <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good == null}" th:text="0회">
+                                            <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good != null}" th:text="${novelList.getN_good}+'회'">
+                                        </li>
+                                    </ul>
+                                    <div class="lu_tag">
+                                        <div th:utext="${novelList.all_tag}">
+                                            <div class="lu_tagcards overLineTypeA" >#현대</div>
+                                        </div>
+                                        <div class="lu_update" th:if="${novelList.n_date} != 'none'" th:text="${#strings.substring(novelList.n_date, 5)}"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </th:block>
                     </div>
                 
                 </div>

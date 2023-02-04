@@ -184,7 +184,7 @@
             select
                 A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
                 B.u_nick as nick,
-                ifnull(C.n_stop,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
+                ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
                 date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo,
                 E.All_tag
             from
@@ -193,7 +193,7 @@
                 (select u_num, u_nick from user)B
             on A.u_num = b.u_num
             left join
-                (select n_num, sum(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
+                (select n_num, sum(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop from memo where m_type='ep' group by n_num)C
             on A.n_num = C.n_num
             left join
                 (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) D
@@ -236,7 +236,7 @@
             select
             A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
             B.u_nick,
-            ifnull(C.n_stop,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
+            ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
             E.All_tag
             from
             (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover from novel) A
@@ -279,7 +279,7 @@
         select
             A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
             B.u_nick as nick,
-            ifnull(C.n_stop,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
+            ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
             date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo,
             E.All_tag
         from
@@ -351,7 +351,7 @@
         select
         A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
         B.u_nick as nick,
-        ifnull(C.n_stop,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
+        ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
         date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo,
         E.All_tag
         from

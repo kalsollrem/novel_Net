@@ -18,16 +18,17 @@
     <select id="getProfillNovelList" resultType="com.project.novelnet.Vo.NovelVO">
         select * from(
             select
-                A.n_num, A.u_num, A.n_title,
-                B.u_nick, B.u_pic, IFNULL(C.n_stop,0)as n_stop, ifnull(date_format(D.n_date, '%m월 %d일'), 'none' )as n_date , E.All_tag
+                A.n_num, A.u_num, A.n_title, A.n_introduction,
+                B.u_nick, B.u_pic, ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop, IFNULL(C.n_chapters,0)as n_chapters,
+                ifnull(date_format(D.n_date, '%Y년 %m월 %d일'), 'none' )as n_date , E.all_tag, D.n_date as t
             from
-                (select n_num, u_num, n_title from novel ) A
+                (select n_num, u_num, n_title, n_introduction from novel ) A
             left join
                 (select u_num, u_nick, u_pic from user)B
             on
                 A.u_num = b.u_num
             left join
-                (select n_num, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
+                (select n_num, sum(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop, count(case when m_type='ep' then 1 end) as n_chapters from memo where m_type='ep' group by n_num)C
             on
                 A.n_num = C.n_num
             LEFT JOIN
@@ -36,14 +37,21 @@
                 A.n_num = D.n_num
             left join
                 (select n_num, group_concat(h_tag order by t_carte asc separator' ') as All_tag
-                from (select n_num, t_carte, concat(<![CDATA['<div class="searched_tagcard subSearch">',h_tag,'</div>']]>)as h_tag from hashtag)tagChange
+                from (select n_num, t_carte, concat(<![CDATA['<div class="lu_tagcards">',h_tag,'</div>']]>)as h_tag from hashtag)tagChange
                 group by n_num order by h_tag) E
-            on A.n_num = E.n_num
+            on
+                A.n_num = E.n_num
+            left join
+                (select n_num, sum(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)F
+            on
+                A.n_num = F.n_num
             where
                 A.u_num = #{u_num}
-            order by
-                n_num desc
-        )R  where n_stop <![CDATA[ <= ]]> 5
+        )R
+        where
+            n_stop <![CDATA[ <= ]]> 5
+        order by
+            t desc
     </select>
 </mapper>
 

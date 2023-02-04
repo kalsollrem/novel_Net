@@ -149,8 +149,8 @@ public class UserController {
             model.addAttribute("tvo",tvo);
 
             //내 소설 리스트
-            List<NovelVO> novelVO = profillMapper.getProfillNovelList(u_num);
-            model.addAttribute("novelVO", novelVO);
+            List<NovelVO> novelList = profillMapper.getProfillNovelList(u_num);
+            model.addAttribute("novelList", novelList);
 
             String who;
 
