@@ -64,18 +64,20 @@
                             </li>
                             <li>
                                 <div class="sf_bestpic title_position">선호태그</div>
-                                <div class="my_bestpic text_position" th:text="${tvo.h_tag}">무협</div>
+                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}!=null" th:text="${tvo.h_tag}">무협</div>
+                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}==null">없음</div>
                             </li>
                             <li>
                                 <div class="sf_novel_info title_position">총 댓글</div>
-                                <div class="my_novel_info text_position" th:text="${tvo.h_max}+ '개'">x개</div>
+                                <div class="my_novel_info text_position"  th:if="${tvo.h_max}!=null" th:text="${tvo.h_max}+ '개'">x개</div>
+                                <div class="my_novel_info text_position"  th:unless="${tvo.h_max}==null">0 개</div>
                             </li>
                         </ul>
 
                     </div>
                 </div>
                 <div class="serialized_info">
-                    <ul class="info_change">
+                    <ul class="info_change" th:if="${who}=='me'">
                         <li>
                             <div class="change_box">닉네임</div>
                             <div class="change_nick">
@@ -115,7 +117,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="serialized_novel">
+                <div class="serialized_novel" th:if="${who} == 'me'">
                     <div class="list_up">
                         <th:block th:each="novelList : ${novelList}">
                             <div class="lu_box">
@@ -149,7 +151,7 @@
                             </div>
                         </th:block>
                     </div>
-                
+
                 </div>
                 <div class="serialized_reply">
                     <h3>내가 단 댓글 목록</h3>

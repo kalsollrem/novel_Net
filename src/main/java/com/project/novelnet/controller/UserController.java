@@ -138,27 +138,33 @@ public class UserController {
                               HttpSession session) throws Exception
     {
         String u_num = "20";
-        UserVO profillData;
 
         if (manageService.isInteger(user) == false){
             return "redirect:/novelnet";
         }else
         {
             //선호태그
-            TagVO tvo = profillMapper.likeTagAndRcnt(u_num);
+            TagVO tvo = profillMapper.likeTagAndRcnt(user);
             model.addAttribute("tvo",tvo);
+            System.out.println("tvo :"+ tvo);
+
 
             //내 소설 리스트
-            List<NovelVO> novelList = profillMapper.getProfillNovelList(u_num);
+            List<NovelVO> novelList = profillMapper.getProfillNovelList(user);
             model.addAttribute("novelList", novelList);
+            System.out.println("novelList :"+ novelList);
 
-            String who;
+
 
             //보여줄 유저 데이터 확보(게스트는 프로필+사진)
-            //여기문제있음
+            String who;
+            UserVO profillData;
+
             if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me";} //자신
             else                  { profillData = profillMapper.getMyself(user);   who="you";} //게스트
+
             model.addAttribute("profillData", profillData);
+            model.addAttribute("who", who);
             System.out.println(who +":"+ profillData);
 
             return "mypage";
