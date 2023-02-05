@@ -43,105 +43,116 @@
                     <div class="my_novel">
                         <div class="my_novels"><h3>구독자 님의 소설</h3></div>
                         <ul class="novel_list">
-                            <li></li>
+                            <th:block th:each="novelList : ${novelList}">
+                                <li>
+                                    <span class="up_title"><b>[[${novelList.n_title}]]</b></span>
+                                    <span class="up_date" th:if="${novelList.n_date} != 'none'">[[${novelList.n_date}]]</span>
+                                    <span class="up_date" th:unless="${novelList.n_date} != 'none'"> </span>
+                                </li>
+                            </th:block>
                         </ul>
                     </div>
                     <div class="myself">
                         <div class="self_intro">
                             <div class="sf_intro">자기소개</div>
-                            <div class="my_intro">s</div>
+                            <div class="my_intro" th:utext="${profillData.u_myself}">s</div>
                         </div>
                         <ul class="self_info">
                             <li>
                                 <div class="sf_date title_position">가입일</div>
-                                <div class="join_date text_position">2022년 2월 12일</div>
+                                <div class="join_date text_position" th:text="${profillData.u_regdate}">2022년 2월 12일</div>
                             </li>
                             <li>
                                 <div class="sf_bestpic title_position">선호태그</div>
-                                <div class="my_bestpic text_position"  >무협</div>
+                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}!=null" th:text="${tvo.h_tag}">무협</div>
+                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}==null">없음</div>
                             </li>
                             <li>
                                 <div class="sf_novel_info title_position">총 댓글</div>
-                                <div class="my_novel_info text_position">0 개</div>
+                                <div class="my_novel_info text_position"  th:if="${tvo.h_max}!=null" th:text="${tvo.h_max}+ '개'">x개</div>
+                                <div class="my_novel_info text_position"  th:unless="${tvo.h_max}==null">0 개</div>
                             </li>
                         </ul>
 
                     </div>
                 </div>
-                <div class="serialized_info">
-                    <ul class="info_change">
-                        <li>
-                            <div class="change_box">닉네임</div>
-                            <div class="change_nick">
-                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." >
-                            </div>
-                        </li>
-                        <li>
-                            <div class="change_box">비밀번호 변경</div>
-                            <div class="change_password">
-                                <input type="password" class="password" id="passwordChange" maxlength="20">
-                                <span>12자 이상 20자 이하의 비밀번호를 입력해주세요.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="change_box">비밀번호 확인</div>
-                            <div class="change_passcheck">
-                                <input type="password" class="passcheck" maxlength="20">
-                                <span>비밀번호가 일치합니다.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="change_box">이메일</div>
-                            <div class="change_mail">
+<!--                <div class="serialized_info">-->
+<!--                    <ul class="info_change" th:if="${who}=='me'">-->
+<!--                        <li>-->
+<!--                            <div class="change_box">닉네임</div>-->
+<!--                            <div class="change_nick">-->
+<!--                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." th:value="${profillData.u_nick}">-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <div class="change_box">비밀번호 변경</div>-->
+<!--                            <div class="change_password">-->
+<!--                                <input type="password" class="password" id="passwordChange" maxlength="20">-->
+<!--                                <span>12자 이상 20자 이하의 비밀번호를 입력해주세요.</span>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <div class="change_box">비밀번호 확인</div>-->
+<!--                            <div class="change_passcheck">-->
+<!--                                <input type="password" class="passcheck" maxlength="20">-->
+<!--                                <span>비밀번호가 일치합니다.</span>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <div class="change_box">이메일</div>-->
+<!--                            <div class="change_mail">-->
+<!--                                [[${profillData.u_mail}]]-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <div class="change_box">자기소개</div>-->
+<!--                            <div class="change_intro">-->
+<!--                                <textarea name="intro" id="intro" placeholder="자기소개">[[${profillData.u_myself}]]</textarea>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <div class="change_commit">-->
+<!--                                <button type="button" class="change_ok">정보 수정</button>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--                <div class="serialized_novel" th:if="${who} == 'me'">-->
+<!--                    <div class="list_up">-->
+<!--                        <th:block th:each="novelList : ${novelList}">-->
+<!--                            <div class="lu_box">-->
+<!--                                <div class="lu_img">-->
+<!--                                    <img th:src="'../notImg/'+${novelList.getN_cover()}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">-->
+<!--                                </div>-->
+<!--                                <div class="lu_data">-->
+<!--                                    <div class="lu_title overLineTypeA">[[${novelList.getN_title()}]]</div>-->
+<!--                                    <div class="lu_pri overLineTypeA" th:text="${novelList.getN_introduction()}"></div>-->
+<!--                                    <ul class="lu_record">-->
+<!--                                        <li>-->
+<!--                                            <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count == null}" th:text="0명">-->
+<!--                                            <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count != null}" th:text="${novelList.getN_count}+'명'">-->
+<!--                                        </li>-->
+<!--                                        <li>-->
+<!--                                            <img src="../img/count_book.png" alt="회차" th:if="${novelList.getN_chapters == null}" th:text="0회차">-->
+<!--                                            <img src="../img/count_book.png" alt="회차" th:if="${novelList.getN_chapters != null}" th:text="${novelList.getN_chapters}+'회차'">-->
+<!--                                        </li>-->
+<!--                                        <li>-->
+<!--                                            <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good == null}" th:text="0회">-->
+<!--                                            <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good != null}" th:text="${novelList.getN_good}+'회'">-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                    <div class="lu_tag">-->
+<!--                                        <div th:utext="${novelList.all_tag}" class="lu_tag_Box overLineTypeA">-->
+<!--                                            <div class="lu_tagcards" >#현대</div>-->
+<!--                                        </div>-->
+<!--                                        <div class="lu_update" th:if="${novelList.n_date} != 'none'" th:text="${#strings.substring(novelList.n_date, 5)}"></div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </th:block>-->
+<!--                    </div>-->
 
-                            </div>
-                        </li>
-                        <li>
-                            <div class="change_box">자기소개</div>
-                            <div class="change_intro">
-                                <textarea name="intro" id="intro" placeholder="자기소개"></textarea>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="change_commit">
-                                <button type="button" class="change_ok">정보 수정</button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="serialized_novel" >
-                    <div class="list_up">
-                        <th:block >
-                            <div class="lu_box">
-                                <div class="lu_img">
-                                    <img onerror="this.src='../img/write_cover.jpg'">
-                                </div>
-                                <div class="lu_data">
-                                    <div class="lu_title overLineTypeA"></div>
-                                    <div class="lu_pri overLineTypeA"></div>
-                                    <ul class="lu_record">
-                                        <li>
-                                            <img src="../img/count_view.png" alt="조회수"  th:text="0명">
-                                        </li>
-                                        <li>
-                                            <img src="../img/count_book.png" alt="회차"  th:text="0회차">
-                                        </li>
-                                        <li>
-                                            <img src="../img/count_good.png" alt="추천"  th:text="0회">
-                                        </li>
-                                    </ul>
-                                    <div class="lu_tag">
-                                        <div class="lu_tag_Box overLineTypeA">
-                                            <div class="lu_tagcards" >#현대</div>
-                                        </div>
-                                        <div class="lu_update" ></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </th:block>
-                    </div>
-
-                </div>
+<!--                </div>-->
                 <div class="serialized_reply">
                     <h3>내가 단 댓글 목록</h3>
                     <hr class="reply_line">
