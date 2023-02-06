@@ -144,15 +144,15 @@ public class UserController {
         }else
         {
             //선호태그
-//            TagVO tvo = profillMapper.likeTagAndRcnt(user);
-//            model.addAttribute("tvo",tvo);
-//            System.out.println("tvo :"+ tvo);
+            TagVO tvo = profillMapper.likeTagAndRcnt(user);
+            model.addAttribute("tvo",tvo);
+            System.out.println("tvo :"+ tvo);
 
 
             //내 소설 리스트
-//            List<NovelVO> novelList = profillMapper.getProfillNovelList(user);
-//            model.addAttribute("novelList", novelList);
-//            System.out.println("novelList :"+ novelList);
+            List<NovelVO> novelList = profillMapper.getProfillNovelList(user);
+            model.addAttribute("novelList", novelList);
+            System.out.println("novelList :"+ novelList);
 
 
 

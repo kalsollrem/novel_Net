@@ -43,18 +43,24 @@
                     <div class="my_novel">
                         <div class="my_novels"><h3>구독자 님의 소설</h3></div>
                         <ul class="novel_list">
-                            <li></li>
+                            <th:block th:each="novelList : ${novelList}">
+                                <li>
+                                    <span class="up_title"><b>[[${novelList.n_title}]]</b></span>
+                                    <span class="up_date" th:if="${novelList.n_date} != 'none'">[[${novelList.n_date}]]</span>
+                                    <span class="up_date" th:unless="${novelList.n_date} != 'none'"> </span>
+                                </li>
+                            </th:block>
                         </ul>
                     </div>
                     <div class="myself">
                         <div class="self_intro">
                             <div class="sf_intro">자기소개</div>
-                            <div class="my_intro">s</div>
+                            <div class="my_intro" th:utext="${profillData.u_myself}">s</div>
                         </div>
                         <ul class="self_info">
                             <li>
                                 <div class="sf_date title_position">가입일</div>
-                                <div class="join_date text_position">2022년 2월 12일</div>
+                                <div class="join_date text_position" th:text="${profillData.u_regdate}">2022년 2월 12일</div>
                             </li>
                             <li>
                                 <div class="sf_bestpic title_position">선호태그</div>
