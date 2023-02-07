@@ -145,8 +145,13 @@ public class UserController {
         {
             //선호태그
             TagVO tvo = profillMapper.likeTagAndRcnt(user);
+            System.out.println(tvo.getH_max());
+            System.out.println(tvo.getH_tag());
+
+//            if (tvo.getH_max() == null)  { tvo.setH_max("0"); }
+//            if (tvo.getH_tag() == null)  { tvo.setH_tag("없음"); }
+
             model.addAttribute("tvo",tvo);
-            System.out.println("tvo :"+ tvo);
 
 
             //내 소설 리스트

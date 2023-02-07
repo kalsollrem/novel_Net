@@ -64,11 +64,13 @@
                             </li>
                             <li>
                                 <div class="sf_bestpic title_position">선호태그</div>
-                                <div class="my_bestpic text_position"  >무협</div>
+                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}!=null" th:text="${tvo.h_tag}">무협</div>
+                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}==null">없음</div>
                             </li>
                             <li>
                                 <div class="sf_novel_info title_position">총 댓글</div>
-                                <div class="my_novel_info text_position">0 개</div>
+                                <div class="my_novel_info text_position"  th:if="${tvo.r_max}!=null" th:text="${tvo.r_max}+ '개'">x개</div>
+                                <div class="my_novel_info text_position"  th:unless="${tvo.r_max}!=null">0 개</div>
                             </li>
                         </ul>
 

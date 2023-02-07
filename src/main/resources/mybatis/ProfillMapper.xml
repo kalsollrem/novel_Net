@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.novelnet.repository.ProfillMapper">
     <select id="likeTagAndRcnt" resultType="com.project.novelnet.Vo.TagVO">
-        select * from
+        select *, count(*) from
             (select h_tag, u_num, count(*) as h_max from
                  (
                      select A.n_num, A.u_num, B.h_tag
@@ -12,7 +12,7 @@
                  )Des
             group by n_num
             order by h_max desc
-            limit 1)B,(select count(*)h_max from reply where u_num = #{u_num})Ces;
+            limit 1)B,(select count(*)r_max from reply where u_num = #{u_num})Ces;
     </select>
 
     <select id="getProfillNovelList" resultType="com.project.novelnet.Vo.NovelVO">

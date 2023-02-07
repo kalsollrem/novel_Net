@@ -11,4 +11,5 @@ public class TagVO {
 
     //편의용
     String h_max; //최대 갯수의 태그
+    String r_max; //최대 갯수의 태그
 }
