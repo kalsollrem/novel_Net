@@ -147,13 +147,9 @@ public class UserController {
             TagVO tvo = profillMapper.likeTagAndRcnt(user);
             model.addAttribute("tvo",tvo);
 
-
             //내 소설 리스트
             List<NovelVO> novelList = profillMapper.getProfillNovelList(user);
             model.addAttribute("novelList", novelList);
-            System.out.println("novelList :"+ novelList);
-
-
 
             //보여줄 유저 데이터 확보(게스트는 프로필+사진)
             String who;
