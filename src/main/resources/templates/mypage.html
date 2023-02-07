@@ -32,10 +32,10 @@
                         </div>
                         <div class="profil_name" th:text="${profillData.u_nick}+' 님의 회원카드'">구독자 님의 회원카드</div>
                         <ul class="profil_menu">
-                            <li class="btn_profill">프로필</li>
+                            <li class="btn_profillRewrite" th:if="${who}=='me'">정보관리</li>
+                            <li class="btn_myReply" th:if="${who}=='me'">댓글</li>
                             <li class="btn_writeNovel">연재소설</li>
-                            <li class="btn_myReply">댓글</li>
-                            <li class="btn_profillRewrite">정보관리</li>
+                            <li class="btn_profill">프로필</li>
                         </ul>
                     </div>
                 </div> 
@@ -77,11 +77,11 @@
                     </div>
                 </div>
                 <div class="serialized_info">
-                    <ul class="info_change">
+                    <ul class="info_change" th:if="${who}=='me'">
                         <li>
                             <div class="change_box">닉네임</div>
                             <div class="change_nick">
-                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." >
+                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." th:value="${profillData.u_nick}">
                             </div>
                         </li>
                         <li>
@@ -101,13 +101,13 @@
                         <li>
                             <div class="change_box">이메일</div>
                             <div class="change_mail">
-
+                                [[${profillData.u_mail}]]
                             </div>
                         </li>
                         <li>
                             <div class="change_box">자기소개</div>
                             <div class="change_intro">
-                                <textarea name="intro" id="intro" placeholder="자기소개"></textarea>
+                                <textarea name="intro" id="intro" placeholder="자기소개">[[${profillData.u_myself}]]</textarea>
                             </div>
                         </li>
                         <li>
@@ -148,7 +148,6 @@
                             </div>
                         </th:block>
                     </div>
-
                 </div>
                 <div class="serialized_reply">
                     <h3>내가 단 댓글 목록</h3>
