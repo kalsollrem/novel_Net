@@ -5,14 +5,36 @@ $(function (){
     let novel=  $('.serialized_novel')
     let reply=  $('.serialized_reply')
 
+    const urlStr = location.search;
+    const url = new URLSearchParams(urlStr);
+
+    //유저값
+    let user;
+    try       {user   = url.get('user').toString();}
+    catch (e) {location.href='/novelnet'}
+
+    //메뉴 카테고리
+    let type;
+    try       {type   = url.get('type').toString();}
+    catch (e) {type  = 'card'}
+
+    //현재주소 명칭
+    var renewURL = location.pathname ;
+
+    //type값에 따른 메뉴 오픈
+    if (type == 'reply')     {profill.hide(); info.hide(); novel.hide(); reply.show(); }
+    else if (type =='date')  {profill.hide(); info.show(); novel.hide(); reply.hide(); }
+    else if (type =='novels'){profill.hide(); info.hide(); novel.show(); reply.hide(); }
+    else                     {profill.show(); info.hide(); novel.hide(); reply.hide(); }
+
     //프로필 on
-    $('.btn_profill').click(function ()       {profill.show(); info.hide(); novel.hide(); reply.hide();})
+    $('.btn_profill').click(function ()       {profill.show(); info.hide(); novel.hide(); reply.hide(); history.pushState(null,null, renewURL+'?user='+user+'&type=card');})
     //정보관리 on
-    $('.btn_profillRewrite').click(function (){profill.hide(); info.show(); novel.hide(); reply.hide();})
+    $('.btn_profillRewrite').click(function (){profill.hide(); info.show(); novel.hide(); reply.hide(); history.pushState(null,null, renewURL+'?user='+user+'&type=date');})
     //연재소설 on
-    $('.btn_writeNovel').click(function ()    {profill.hide(); info.hide(); novel.show(); reply.hide();})
+    $('.btn_writeNovel').click(function ()    {profill.hide(); info.hide(); novel.show(); reply.hide(); history.pushState(null,null, renewURL+'?user='+user+'&type=novels');})
     //댓글 on
-    $('.btn_myReply').click(function ()       {profill.hide(); info.hide(); novel.hide(); reply.show();})
+    $('.btn_myReply').click(function ()       {profill.hide(); info.hide(); novel.hide(); reply.show(); history.pushState(null,null, renewURL+'?user='+user+'&type=reply');})
 
 
 
