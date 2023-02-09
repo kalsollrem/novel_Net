@@ -390,6 +390,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .profile_data .pic_edit>img {width: 16px; height: 16px; margin-left: 7px; margin-top: 7px;}
 
 .profile_data .profil_name {width: 680px; height: 100%; float: left; font-weight: bold; font-size: 22px; line-height: 140px; margin-left: 20px;}
+.profile_data .profil_name .nameSpace {float: left; max-width: 535px; overflow:hidden;text-overflow:ellipsis; white-space:nowrap;}
 .profile_data .profil_menu {width: 370px; height: 100%; float: right;}
 .profile_data .profil_menu>li {float: right; background-color: black; color: white;
     padding-left: 15px; padding-right: 15px;
@@ -427,7 +428,8 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .profile_main .my_novel     {float: left;  width: 400px; height: 600px; position: relative; }
 .profile_main .my_novel .my_novels {width: 340px; height: 50px; line-height: 50px; margin-left: 20px; margin-top: 20px; padding-left: 20px; font-size: 18px; position: absolute; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
-
+.profile_main .my_novel .my_novels>h3 {float: left; max-width: 270px; overflow:hidden;text-overflow:ellipsis; white-space:nowrap;}
+.profile_main .my_novel .my_novels>h5 {float: left; margin-top: 2px; margin-left: 5px; font-size: 12px}
 .profile_main .my_novel .novel_list   {width: 360px; height: 400px; position: absolute; border: 1px solid #ECECEC; margin-top: 80px; margin-left: 20px; overflow:auto; overflow-x:hidden; box-shadow: 3px 3px #EEEEEE;}
 
 .profile_main .my_novel .novel_list::-webkit-scrollbar       { overflow-x:hidden; width: 5px; background-color: #EEEEEC;}
@@ -478,11 +480,12 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .serialized_novel .list_up .lu_box {width: 1150px; height: 240px; margin-left: 20px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; margin-top: 10px;}
 .lu_box .lu_img     {width: 200px; height: 100%; float: left;}
-.lu_box .lu_img>img {width: 150px; height: 220px; margin: 10px 0px 0px 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; border-bottom-right-radius: 3em;}
+.lu_box .lu_img>a>img {width: 150px; height: 220px; margin: 10px 0px 0px 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; border-bottom-right-radius: 3em;}
 .lu_box .lu_data    {width: 970px; height: 100%; margin-left: -20px; float: left;}
 
 .lu_data .lu_title        {width: 940px; line-height: 60px; padding-left: 10px; font-size: 20px; font-weight: bold; height: 60px; margin-top: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE; }
 .lu_data .lu_title>span   {font-size: 15px; font-weight: normal; margin-left: 10px;}
+.lu_data .lu_title>a      {width: 940px; line-height: 60px; font-size: 20px; font-weight: bold; height: 60px; box-shadow: 3px 3px #EEEEEE; }
 
 .lu_box .lu_record        {width: 940px; height: 40px; line-height: 40px; margin-top: 10px; padding-left: 10px; border: 1px solid #ECECEC; box-shadow: 3px 3px #EEEEEE;}
 .lu_box .lu_record>li     {height: 100%; margin-right: 12px; font-weight: bold; font-size: 14px; float: left;}

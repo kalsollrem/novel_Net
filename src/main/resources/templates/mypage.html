@@ -30,7 +30,7 @@
                         <div class="pic_edit">
                             <img src="../img/edit_icon.png" alt="set">
                         </div>
-                        <div class="profil_name" th:text="${profillData.u_nick}+' 님의 회원카드'">구독자 님의 회원카드</div>
+                        <div class="profil_name"><div class="nameSpace" th:text="${profillData.u_nick}"></div><div> 님의 회원카드</div></div>
                         <ul class="profil_menu">
                             <li class="btn_profillRewrite" th:if="${who}=='me'">정보관리</li>
                             <li class="btn_myReply" th:if="${who}=='me'">댓글</li>
@@ -41,7 +41,7 @@
                 </div> 
                 <div class="profile_main">
                     <div class="my_novel">
-                        <div class="my_novels"><h3>구독자 님의 소설</h3></div>
+                        <div class="my_novels"><h3>[[${profillData.u_nick}]]</h3><h5>님의 소설</h5></div>
                         <ul class="novel_list">
                             <th:block th:each="novelList : ${novelList}">
                                 <li>
@@ -119,30 +119,39 @@
                 </div>
                 <div class="serialized_novel" >
                     <div class="list_up">
-                        <th:block >
+                        <th:block th:each="novelList : ${novelList}">
                             <div class="lu_box">
                                 <div class="lu_img">
-                                    <img onerror="this.src='../img/write_cover.jpg'">
+                                    <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
+                                        <img th:src="'../notImg/'+${novelList.getN_cover()}" th:alt="${novelList.n_title}" onerror="this.src='../img/write_cover.jpg'">
+                                    </a>
                                 </div>
                                 <div class="lu_data">
-                                    <div class="lu_title overLineTypeA"></div>
-                                    <div class="lu_pri overLineTypeA"></div>
+                                    <div class="lu_title overLineTypeA">
+                                        <a class="overLineTypeA" th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
+                                            [[${novelList.getN_title()}]]
+                                        </a>
+                                    </div>
+                                    <div class="lu_pri overLineTypeA" th:text="${novelList.getN_introduction()}"></div>
                                     <ul class="lu_record">
                                         <li>
-                                            <img src="../img/count_view.png" alt="조회수"  th:text="0명">
+                                            <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count == null}" th:text="0명">
+                                            <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count != null}" th:text="${novelList.getN_count}+'명'">
                                         </li>
                                         <li>
-                                            <img src="../img/count_book.png" alt="회차"  th:text="0회차">
+                                            <img src="../img/count_book.png" alt="회차" th:if="${novelList.getN_chapters == null}" th:text="0회차">
+                                            <img src="../img/count_book.png" alt="회차" th:if="${novelList.getN_chapters != null}" th:text="${novelList.getN_chapters}+'회차'">
                                         </li>
                                         <li>
-                                            <img src="../img/count_good.png" alt="추천"  th:text="0회">
+                                            <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good == null}" th:text="0회">
+                                            <img src="../img/count_good.png" alt="추천" th:if="${novelList.getN_good != null}" th:text="${novelList.getN_good}+'회'">
                                         </li>
                                     </ul>
                                     <div class="lu_tag">
-                                        <div class="lu_tag_Box overLineTypeA">
+                                        <div th:utext="${novelList.all_tag}" class="lu_tag_Box overLineTypeA">
                                             <div class="lu_tagcards" >#현대</div>
                                         </div>
-                                        <div class="lu_update" ></div>
+                                        <div class="lu_update" th:if="${novelList.n_date} != 'none'" th:text="${#strings.substring(novelList.n_date, 5)}"></div>
                                     </div>
                                 </div>
                             </div>
