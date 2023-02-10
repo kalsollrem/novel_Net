@@ -401,7 +401,45 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 /* 내 댓글관리 */
 .serialized_reply           {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none;}
 .serialized_reply>h3        {width: 200px; height: 50px; line-height: 50px; text-align: center; background-color: #333; color: #ececec; border-radius: 0.5em; margin-bottom: 10px;}
-.reply_line                 {width: 200px; border: 1px solid #ececec; margin-top: 2px;}
+
+.serialized_reply .myReply_box  {width: 100%; box-sizing: border-box; border: 2px solid rgb(172, 169, 169); border-radius: 10px; margin-top: 10px;}
+
+.myReply_box .novel_name        {width: 100%; height: 35px; line-height: 35px; padding-left: 5px; padding-right: 5px; font-weight: bold; box-sizing: border-box; border-bottom: 1px solid gainsboro; font-size: 20px;}
+
+.myReply_box .box_firstLine     {width: 100%; height: 20px; }
+.myReply_box .box_firstLine>div {float: left;}
+
+.myReply_box .box_firstLine .chapter_name     {height: 15px; line-height: 15px; padding-left: 5px; padding-right: 5px; margin-top: 8px; box-sizing: border-box; font-size: 13px; color: #767679; float: left;}
+.myReply_box .box_firstLine .chapter_name>div {float: left;}
+.myReply_box .box_firstLine .chapter_name .chapter_name_box {max-width: 800px; height: 15px; line-height: 15px; box-sizing: border-box; font-size: 13px; color: #767679;}
+.myReply_box .box_firstLine .chapter_date                   {width: 10%; height: 15px; line-height: 18px; padding-left: 5px; padding-right: 5px; margin-top: 8px; box-sizing: border-box; font-size: 11px; color: #0a9722; float:left ;}
+
+.myReply_box .myReply_to_Who {width: 100%; height: 15px; line-height: 15px; padding-left: 5px; padding-right: 5px; margin-top: 10px; box-sizing: border-box; font-size: 13px; color: #767679;}
+             .myReply_to_Who .giho        {color: #312e2c; line-height: 15px; font-size: 10px; float: left; margin-right: 3px;}
+             .myReply_to_Who .who_name    {max-width: 700px; color: #312e2c; line-height: 15px; font-size: 12px; float: left;}
+             .myReply_to_Who .toYou       {color: #312e2c; line-height: 15px; font-size: 11px; float: left; margin-left: 3px;}
+
+.myReply_box .myReply_memo   {width: 100%; padding: 5px; box-sizing: border-box; font-size: 15px; color: #333333;  margin-top: 5px;}
+.myReply_box .myReply_menubar{width: 100%; height: 20px; line-height: 20px; padding: 5px; font-size: 13px; margin-bottom: 7px;}
+
+.myReply_box .myReply_Date          {width: 40%; float: left; margin-right: 10px;}
+.myReply_box .myReply_Date>div      {float: left; padding: 1px 8px 1px 8px; margin-right: 7px ; border-radius: 10px; box-sizing: border-box; font-size: 12px;}
+.myReply_box .myReply_Date>div>img  {border: 0px; box-sizing: border-box; width: 15px; margin-top: 2px; margin-left: 2px;}
+
+.myReply_box .myReply_control_box         {width: 50%; float: right; margin-right: 10px;}
+.myReply_box .myReply_control_box>div     {float: right; padding: 1px 8px 1px 8px; margin-right: 8px ; border-radius: 10px; box-sizing: border-box; font-size: 12px;}
+.myReply_box .myReply_control_box>div>img {border: 0px; box-sizing: border-box; width: 15px; margin-top: 2px; margin-left: 2px;}
+
+    /* 리플 박스 옵션 */
+    .reply_ellipsis        {overflow: hidden; text-overflow:ellipsis; white-space:nowrap;}
+    .reply_otp_333         {border:2px solid #333 ;}
+    .reply_otp_purple      {border:2px solid #8463F5 ; color: #6046b8;}
+    .reply_otp_orange      {border:2px solid orange ; color: rgb(207, 137, 6);}
+    .reply_otp_yellowgreen {border:2px solid yellowgreen ; color: green;}
+    .reply_otp_yellow      {border:2px solid yellow ; color: yellow;}
+    .reply_otp_red         {border:2px solid red ; color: rgb(196, 10, 10);}
+    .reply_line {width: 200px; border: 1px solid #ececec; margin-top: 2px;}
+
 
 /* 내 정보관리 */
 .serialized_info            {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none;}
