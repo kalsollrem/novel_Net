@@ -438,7 +438,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
     .reply_otp_yellowgreen {border:2px solid yellowgreen ; color: green;}
     .reply_otp_yellow      {border:2px solid yellow ; color: yellow;}
     .reply_otp_red         {border:2px solid red ; color: rgb(196, 10, 10);}
-    .reply_line {width: 200px; border: 1px solid #ececec; margin-top: 2px;}
+    .reply_line            {width: 200px; border: 1px solid #ececec; margin-top: 2px;}
 
 
 /* 내 정보관리 */
