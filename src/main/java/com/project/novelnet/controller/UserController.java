@@ -1,5 +1,6 @@
 package com.project.novelnet.controller;
 import com.project.novelnet.Vo.NovelVO;
+import com.project.novelnet.Vo.ReplyVO;
 import com.project.novelnet.Vo.TagVO;
 import com.project.novelnet.Vo.UserVO;
 import com.project.novelnet.repository.NovelRepository;
@@ -154,8 +155,9 @@ public class UserController {
             //보여줄 유저 데이터 확보(게스트는 프로필+사진)
             String who;
             UserVO profillData;
+            ArrayList<ReplyVO> replyVOS;
 
-            if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me";} //자신
+            if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me"; replyVOS = profillMapper.getMyAllReply(u_num); model.addAttribute("replyVOS", replyVOS);} //자신
             else                  { profillData = profillMapper.getMyself(user);   who="you";} //게스트
 
             model.addAttribute("profillData", profillData);

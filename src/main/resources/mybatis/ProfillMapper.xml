@@ -53,5 +53,28 @@
         order by
             t desc
     </select>
+
+
+    <!-- 프로필 작성자 리플 전부 가져오기, stopCnt가 기준치(현재는5) 이상이면 보이지 않게하기 -->
+    <select id="getMyAllReply" resultType="com.project.novelnet.Vo.ReplyVO">
+        select A.r_num, A.r_rnum, A.r_memo, A.m_num, A.n_num, date_format(A.r_date, '%Y년 %m월 %d일 - %H:%i')as r_date,
+               ifnull(A.r_good, 0)as r_good, ifnull(A.r_bad, 0) as r_bad, ifnull(A.r_baby, 0) as r_baby,
+               IFNULL(B.m_title,'존재하지 않는 소설입니다.')as m_title,
+               IFNULL(C.n_title,'삭제된 게시글 입니다.')as n_title,
+               IFNULL(D.nick,'')as nick, E.n_stop as stopCnt
+        from reply A
+        left join memo B
+        on A.m_num = B.m_num
+        left join (select n_num, n_title from novel) C
+        on A.n_num = C.n_num
+        left join (select AA.r_num as p, AA.u_num as u, BB.u_nick as nick from reply AA
+        left join (select u_num, u_nick from user) BB
+                   on AA.u_num = BB.u_num) D
+        on D.p = A.r_rnum
+        left join (select n_num, sum(b_stop) as n_stop from memo where m_type='ep' group by n_num)E
+        on A.n_num = E.n_num
+        where A.u_num = #{u_num}
+        order by r_date desc
+    </select>
 </mapper>
 
