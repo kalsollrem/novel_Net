@@ -431,7 +431,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .myReply_box .myReply_control_box>div>img {border: 0px; box-sizing: border-box; width: 15px; margin-top: 2px; margin-left: 2px;}
 
     /* 리플 박스 옵션 */
-    .reply_ellipsis        {overflow: hidden; text-overflow:ellipsis; white-space:nowrap;}
+    .reply_ellipsis        {overflow: hidden; text-overflow:ellipsis; white-space:nowrap;}/* 초과시 ... 옵션*/
     .reply_otp_333         {border:2px solid #333 ;}
     .reply_otp_purple      {border:2px solid #8463F5 ; color: #6046b8;}
     .reply_otp_orange      {border:2px solid orange ; color: rgb(207, 137, 6);}
