@@ -1,6 +1,7 @@
 package com.project.novelnet.repository;
 
 import com.project.novelnet.Vo.NovelVO;
+import com.project.novelnet.Vo.ReplyVO;
 import com.project.novelnet.Vo.TagVO;
 import com.project.novelnet.Vo.UserVO;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,12 @@ public interface ProfillMapper
 
     @Select("select u_num, u_nick , u_mail, u_pass, u_pic, u_myself, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
     UserVO getProfill(@Param("u_num") String u_num);
+
+
+    @Select("select A.*, B.m_title, C.n_title from reply A " +
+            "left join memo B " +
+            "on A.m_num = B.m_num " +
+            "left join novel C " +
+            "on A.n_num = C.n_num;")
+    ArrayList<ReplyVO> getMyAllReply(@Param("u_num") String u_num);
 }
