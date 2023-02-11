@@ -8,7 +8,8 @@ $(function(){
     let n_num   = url.get('n_num').toString();
     let m_num   = url.get('chapter').toString();
     let sort    = url.get('sort').toString();    if (sort == null) {sort = "asc"}
-    let page    = url.get('page').toString();    if (page == null) {sort = "1"}
+    let page    = url.get('page').toString();    if (page == null) {page = "1"}
+    let rbt     = url.get('rbt').toString();     if (rbt  == null) {rbt  = "none"}
     let MnN = n_num+"/"+m_num;
 
 
@@ -55,6 +56,18 @@ $(function(){
 
     //댓글버튼
     var memuSwitch = 0;
+
+    //프로필에서 건너왔을경우
+    if (rbt != 'none')
+    {
+        $(".viewer_memo").hide(); $(".reply_zone").show();
+        $(".reply_button").css("color","#5B32DF");
+        $(".replyB_img").attr("src", "../img/reply_on.png");
+        sessionStorage.setItem("R_ZONE", MnN);
+        memuSwitch=1;
+        var offset = $("#focus_"+rbt).offset();
+        $('html').animate({scrollTop : offset.top-200}, 400);
+    }
 
     //댓글버튼 켜짐여부
     if (sessionStorage.getItem("R_ZONE") == MnN)

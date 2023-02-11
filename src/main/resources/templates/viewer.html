@@ -153,7 +153,7 @@
             <div class="reply_table" th:each="reply : ${replyVOList}">
                 <div th:if="${reply.r_rnum == '0'}">
                     <div class="replyLendingZone" th:id="'reply_'+${reply.r_num}"></div>
-                    <div class="reply">
+                    <div class="reply" th:id="'focus_'+${reply.r_num}">
                         <div class="user_nick">
                             <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
                             <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>
@@ -174,7 +174,7 @@
                     <div class="reply_arrow">
                         <img src="../img/arrow_right.png" alt="#">
                     </div>
-                    <div class="reply to_reply">
+                    <div class="reply to_reply" th:id="'focus_'+${reply.r_num}">
                         <div class="user_nick">
                             <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
                             <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>                                <div class="nickname" th:text="${reply.nick}">작성자</div>

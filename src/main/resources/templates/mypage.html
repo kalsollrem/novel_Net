@@ -166,12 +166,16 @@
                     <!--리플 박스-->
                     <th:block th:each="replyVOS : ${replyVOS}">
                         <div class="myReply_box">
-                            <div class="novel_name reply_ellipsis" th:if="${replyVOS.stopCnt} <= 5 " th:text="${replyVOS.n_title}"> 글제목 </div>
+                            <div class="novel_name reply_ellipsis" th:if="${replyVOS.stopCnt} <= 5 ">
+                                <a th:href="@{/novelnet/novel(n_num=${replyVOS.n_num},page=1,sort='asc')}" th:text="${replyVOS.n_title}">글제목</a>
+                            </div>
                             <div class="novel_name reply_ellipsis" th:unless="${replyVOS.stopCnt} <= 5 " > 블라인드 처리된 소설입니다 </div>
                             <div class="box_firstLine">
                                 <div class="chapter_name">
                                     <div>[</div>
-                                    <div class="chapter_name_box reply_ellipsis" th:if="${replyVOS.stopCnt} <= 5 "    th:text="${replyVOS.m_title}">소제목</div>
+                                    <div class="chapter_name_box reply_ellipsis" th:if="${replyVOS.stopCnt} <= 5 ">
+                                        <a th:href="@{/novelnet/view(n_num=${replyVOS.n_num},chapter=${replyVOS.m_num},sort='asc',page='1',type='ep',rbt=${replyVOS.r_num})}" th:text="${replyVOS.m_title}"></a>
+                                    </div>
                                     <div class="chapter_name_box reply_ellipsis" th:unless="${replyVOS.stopCnt} <= 5 " >블라인드 처리된 글입니다.</div>
                                     <div>]</div>
                                 </div>
@@ -181,7 +185,7 @@
                                 <div class="myReply_to_Who" th:if="${replyVOS.nick}!=''">
                                     <div class="giho">▶</div>
                                     <div class="who_name reply_ellipsis" th:text="${replyVOS.nick}">작성자</div>
-                                    <div class="toYou"> 님께</div>
+                                    <div class="toYou"> 님에게</div>
                                 </div>
                                 <div class="myReply_to_Who" th:unless="${replyVOS.nick}!=''">
                                     <div class="giho">▶</div>
@@ -193,9 +197,12 @@
                             </div>
                             <div class="myReply_menubar">
                                 <div class="myReply_Date">
-                                    <div class="myReply_rereply reply_otp_333"><span>△</span> 대댓글 ([[${replyVOS.r_good}]]건)</div>
-                                    <div class="myReply_good reply_otp_purple"><img src="../img/good.png" alt="추천" th:text="'추천('+${replyVOS.r_good}+'건)'"></div>
-                                    <div class="myReply_bed reply_otp_orange"><img src="../img/bad.png" alt="비추" th:text="'추천('+${replyVOS.r_good}+'건)'">비추(0건)</div>
+                                    <div class="myReply_rereply reply_otp_333" th:if="${replyVOS.rRcnt}>0">
+                                        <span>▧</span>
+                                        <a th:href="@{/novelnet/view(n_num=${replyVOS.n_num},chapter=${replyVOS.m_num},sort='desc',page='1',type='ep',rbt=${replyVOS.r_num})}">대댓글 ([[${replyVOS.rRcnt}]]건)</a>
+                                    </div>
+                                    <div class="myReply_good reply_otp_purple"><img src="../img/good_Down.png" alt="추천" th:text="'추천( '+${replyVOS.r_good}+'건 )'"></div>
+                                    <div class="myReply_bed reply_otp_orange"><img src="../img/bad.png" alt="비추" th:text="'비추천( '+${replyVOS.r_bad}+'건 )'"></div>
                                 </div>
                                 <div class="myReply_control_box">
                                     <div class="myReply_delete reply_otp_red">삭제</div>

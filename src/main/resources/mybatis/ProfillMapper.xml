@@ -61,7 +61,7 @@
                ifnull(A.r_good, 0)as r_good, ifnull(A.r_bad, 0) as r_bad, ifnull(A.r_baby, 0) as r_baby,
                IFNULL(B.m_title,'존재하지 않는 소설입니다.')as m_title,
                IFNULL(C.n_title,'삭제된 게시글 입니다.')as n_title,
-               IFNULL(D.nick,'')as nick, E.n_stop as stopCnt
+               IFNULL(D.nick,'')as nick, E.n_stop as stopCnt, IFNULL(F.rRcnt,'0') as rRcnt
         from reply A
         left join memo B
         on A.m_num = B.m_num
@@ -73,6 +73,8 @@
         on D.p = A.r_rnum
         left join (select n_num, sum(b_stop) as n_stop from memo where m_type='ep' group by n_num)E
         on A.n_num = E.n_num
+        left join (select r_rnum, count(r_rnum) as rRcnt from reply group by r_rnum)F
+        on A.r_num = F.r_rnum
         where A.u_num = #{u_num}
         order by r_date desc
     </select>

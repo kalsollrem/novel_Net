@@ -23,4 +23,5 @@ public class ReplyVO {
     String n_title;     //소설제목
     String m_title;     //챕터제목
     String stopCnt;     //챕터제목
+    String rRcnt;         //대댓글갯수
 }
