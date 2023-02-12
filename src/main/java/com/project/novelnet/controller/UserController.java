@@ -138,11 +138,12 @@ public class UserController {
                               @Param("user") String user,
                               HttpSession session) throws Exception
     {
-        String u_num = "20";
+        String u_num;
+        try {u_num= (String)session.getAttribute("U_NUM").toString();}
+        catch (Exception e) {u_num = null;}
 
-        if (manageService.isInteger(user) == false){
-            return "redirect:/novelnet";
-        }else
+        //유저 존재여부 확인
+        if (manageService.isInteger(user) == true && profillMapper.findProfillOK(user) == 1)
         {
             //선호태그
             TagVO tvo = profillMapper.likeTagAndRcnt(user);
@@ -165,6 +166,9 @@ public class UserController {
             System.out.println(who +":"+ profillData);
 
             return "mypage";
+        }else
+        {
+            return "redirect:/novelnet";
         }
     }
 

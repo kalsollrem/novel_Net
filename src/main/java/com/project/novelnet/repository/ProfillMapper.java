@@ -20,6 +20,10 @@ public interface ProfillMapper
     //프로필 주인의 소설
     List<NovelVO> getProfillNovelList(@Param("u_num") String u_num);
 
+    //프로필 존재확인
+    @Select("select count(u_num) from user where u_num = #{u_num}")
+    public int findProfillOK(@Param("u_num") String u_num);
+
     //자기소개(게스트용)
     @Select("select u_myself,u_pic,u_nick, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
     UserVO getMyself(@Param("u_num") String u_num);
