@@ -205,8 +205,8 @@
                                     <div class="myReply_bed reply_otp_orange"><img src="../img/bad.png" alt="비추" th:text="'비추천( '+${replyVOS.r_bad}+'건 )'"></div>
                                 </div>
                                 <div class="myReply_control_box">
-                                    <div class="myReply_delete reply_otp_red">삭제</div>
-                                    <div class="myReply_update reply_otp_yellowgreen">수정</div>
+                                    <div class="myReply_delete reply_otp_red" th:id="'num'+${replyVOS.r_num}">삭제</div>
+<!--                                    <div class="myReply_update reply_otp_yellowgreen">수정</div>-->
                                 </div>
                             </div>
                         </div>

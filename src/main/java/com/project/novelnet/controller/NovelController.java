@@ -608,6 +608,30 @@ public class NovelController {
         return state;
     }
 
+    //댓글삭제
+    @PostMapping("/replyDelete.do")
+    @ResponseBody
+    public String replyDelete(HttpSession session,
+                             @RequestParam(value = "r_num", required = false) String r_num,
+                             HttpServletRequest request)throws Exception
+    {
+        String id;
+        try                 { id = (String)session.getAttribute("U_NUM").toString();}
+        catch (Exception e) { return "fail";}
+
+        if (id != null)
+        {
+            int ok = novelMapper.deleteMyReply(r_num, id);
+
+            if (ok >0){ return "ok"; }
+            else      { return "fail";}
+        }
+        else
+        {
+            return "fail";
+        }
+    }
+
 
     //댓글 신고
     @PostMapping("/stopReply.do")

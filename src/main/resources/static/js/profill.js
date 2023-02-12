@@ -36,6 +36,26 @@ $(function (){
     //댓글 on
     $('.btn_myReply').click(function ()       {profill.hide(); info.hide(); novel.hide(); reply.show(); history.pushState(null,null, renewURL+'?user='+user+'&type=reply');})
 
+    //댓글 삭제
+    $('.myReply_delete').click(function ()
+    {
+        let id = (this.id).substr(3);
+
+        $.ajax({
+            url:'/replyDelete.do',
+            type:'post',
+            data : {"r_num":id},
+            success:function(s){
+                if (s == 'ok') { alert('댓글이 삭제되었습니다.'); }
+                else           { alert('댓글 삭제에 실패하였습니다.'); }
+
+                location.reload();
+            },
+            error:function(){
+                alert("댓글 삭제에 실패하였습니다.");
+            }
+        });
+    });
 
 
     $('.change_ok').click(function ()

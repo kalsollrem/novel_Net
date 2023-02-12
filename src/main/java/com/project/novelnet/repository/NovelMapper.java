@@ -140,6 +140,10 @@ public interface NovelMapper {
     @Select("select count(r_num)as cnt from reply where n_num = #{n_num} and m_num = #{m_num} ")
     public int getReplyCount(String m_num, String n_num);
 
+    //내 댓글 삭제
+    @Delete("delete from reply where r_num = #{r_num} and u_num = #{u_num}")
+    public int deleteMyReply(@Param("r_num")String r_num,@Param("u_num")String u_num);
+
     //조회수증가
     @Update("UPDATE memo SET m_count = m_count+1 WHERE m_num = #{m_num}")
     public void countUp(String m_num);
