@@ -39,9 +39,9 @@
                             <li th:if="${pickList.noType == 0}">
                                 <a th:href="@{/novelnet/novel(n_num=${pickList.n_num},page=1,sort='asc')}">
                                     <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}" onerror="this.src='../img/write_cover.jpg'"></span>
-                                    <span class="novel_title" th:text="${pickList.n_title}"></span>
+                                    <span class="novel_title overLineTypeA" th:title="${pickList.n_title}" th:text="${pickList.n_title}"></span>
                                 </a>
-                                <span class="writer_name" th:text="${pickList.nick}">작가명</span>
+                                <span class="writer_name overLineTypeA" th:text="${pickList.nick}">작가명</span>
                             </li>
                         </th:block>
                         <!-- 5개로 늘리면 맞음 -->
@@ -59,14 +59,14 @@
                                 <img th:src="'../noteImg/'+${bestCount.n_cover}" th:alt="${bestCount.n_title}" onerror="this.src='../img/write_cover.jpg'">
                             </a>
                             <div class="novel_date">
-                                <div class="novel_name">
-                                    <a th:href="@{/novelnet/novel(n_num=${bestCount.n_num},page=1,sort='asc')}"><h3 th:text="${bestCount.n_title}">제목</h3></a>
+                                <div class="novel_name overLineTypeA">
+                                    <a class="overLineTypeA" th:title="${bestCount.n_title}" th:href="@{/novelnet/novel(n_num=${bestCount.n_num},page=1,sort='asc')}"><h3 th:text="${bestCount.n_title}">제목</h3></a>
                                 </div>
-                                <div class="writer_name">
-                                    <h4 th:text="${bestCount.nick}">작가</h4>
+                                <div class="writer_name overLineTypeA">
+                                    <h4 class="overLineTypeA" th:text="${bestCount.nick}">작가</h4>
                                 </div>
                                 <div class="novel_tags">
-                                    <h6 th:text="${bestCount.n_introduction}">내용</h6>
+                                    <h6 class="overLineTypeC" th:text="${bestCount.n_introduction}">내용</h6>
                                 </div>
                             </div>
                         </div>
@@ -78,14 +78,14 @@
                                 <img th:src="'../noteImg/'+${bestGood.n_cover}" th:alt="${bestGood.n_title}" onerror="this.src='../img/write_cover.jpg'">
                             </a>
                             <div class="novel_date">
-                                <div class="novel_name">
-                                    <a th:href="@{/novelnet/novel(n_num=${bestGood.n_num},page=1,sort='asc')}"><h3 th:text="${bestGood.n_title}">제목</h3></a>
+                                <div class="novel_name overLineTypeA">
+                                    <a class="overLineTypeA" th:title="${bestGood.n_title}" th:href="@{/novelnet/novel(n_num=${bestGood.n_num},page=1,sort='asc')}"><h3 th:text="${bestGood.n_title}">제목</h3></a>
                                 </div>
-                                <div class="writer_name">
-                                    <h4 th:text="${bestGood.nick}">작가</h4>
+                                <div class="writer_name overLineTypeA">
+                                    <h4 class="overLineTypeA" th:text="${bestGood.nick}">작가</h4>
                                 </div>
                                 <div class="novel_tags">
-                                    <h6 th:text="${bestGood.n_introduction}">내용</h6>
+                                    <h6 class="overLineTypeC" th:text="${bestGood.n_introduction}">내용</h6>
                                 </div>
                             </div>
                         </div>
@@ -97,14 +97,14 @@
                                 <img th:src="'../noteImg/'+${bestBookmark.n_cover}" onerror="this.src='../img/write_cover.jpg'" th:alt="${bestBookmark.n_title}">
                             </a>
                             <div class="novel_date">
-                                <div class="novel_name">
-                                    <a th:href="@{/novelnet/novel(n_num=${bestBookmark.n_num},page=1,sort='asc')}"><h3 th:text="${bestBookmark.n_title}">제목</h3></a>
+                                <div class="novel_name overLineTypeA">
+                                    <a class="overLineTypeA" th:title="${bestBookmark.n_title}" th:href="@{/novelnet/novel(n_num=${bestBookmark.n_num},page=1,sort='asc')}"><h3 class="overLineTypeA" th:text="${bestBookmark.n_title}">제목</h3></a>
                                 </div>
                                 <div class="writer_name">
-                                    <h4 th:text="${bestBookmark.nick}">작가</h4>
+                                    <h4 class="overLineTypeA" th:text="${bestBookmark.nick}">작가</h4>
                                 </div>
                                 <div class="novel_tags">
-                                    <h6 th:text="${bestBookmark.n_introduction}">내용</h6>
+                                    <h6 class="overLineTypeC" th:text="${bestBookmark.n_introduction}">내용</h6>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                 <div class="pd_tal_hold">
                                     <a th:href="@{/novelnet/novel(n_num=${pickList.n_num},page=1,sort='asc')}">
                                         <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}"  onerror="this.src='../img/write_cover.jpg'"></span>
-                                        <span class="novel_title" th:text="${pickList.n_title}"></span>
+                                        <span class="novel_title" th:title="${pickList.n_title}" th:text="${pickList.n_title}"></span>
                                     </a>
                                     <span class="writer_name" th:text="${pickList.nick}">작가명</span>
                                 </div>
