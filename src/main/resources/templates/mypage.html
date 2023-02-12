@@ -133,7 +133,7 @@
                                             [[${novelList.getN_title()}]]
                                         </a>
                                     </div>
-                                    <div class="lu_pri overLineTypeA" th:text="${novelList.getN_introduction()}"></div>
+                                    <div class="lu_pri overLineTypeA" th:title="${novelList.getN_introduction}" th:text="${novelList.getN_introduction()}"></div>
                                     <ul class="lu_record">
                                         <li>
                                             <img src="../img/count_view.png" alt="조회수" th:if="${novelList.getN_count == null}" th:text="0명">

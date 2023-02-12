@@ -66,7 +66,7 @@
                                     <h4 class="overLineTypeA" th:text="${bestCount.nick}">작가</h4>
                                 </div>
                                 <div class="novel_tags">
-                                    <h6 class="overLineTypeC" th:text="${bestCount.n_introduction}">내용</h6>
+                                    <h6 class="overLineTypeC" th:title="${bestCount.n_introduction}" th:text="${bestCount.n_introduction}">내용</h6>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                     <h4 class="overLineTypeA" th:text="${bestGood.nick}">작가</h4>
                                 </div>
                                 <div class="novel_tags">
-                                    <h6 class="overLineTypeC" th:text="${bestGood.n_introduction}">내용</h6>
+                                    <h6 class="overLineTypeC" th:title="${bestGood.n_introduction}" th:text="${bestGood.n_introduction}">내용</h6>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                     <h4 class="overLineTypeA" th:text="${bestBookmark.nick}">작가</h4>
                                 </div>
                                 <div class="novel_tags">
-                                    <h6 class="overLineTypeC" th:text="${bestBookmark.n_introduction}">내용</h6>
+                                    <h6 class="overLineTypeC" th:title="${bestBookmark.n_introduction}" th:text="${bestBookmark.n_introduction}">내용</h6>
                                 </div>
                             </div>
                         </div>

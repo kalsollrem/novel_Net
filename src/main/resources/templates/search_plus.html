@@ -92,7 +92,7 @@
                                     </a>
                                     <div class="st_writter" th:text="${novelList.nick}">작가명</div>
                                 </div>
-                                <div class="searched_pri" th:classappend="overLineTypeC" th:text="${novelList.n_introduction}">
+                                <div class="searched_pri" th:title="${novelList.n_introduction}" th:classappend="overLineTypeC" th:text="${novelList.n_introduction}">
                                     소설 줄거리
                                 </div>
                                 <ul class="searched_count">
