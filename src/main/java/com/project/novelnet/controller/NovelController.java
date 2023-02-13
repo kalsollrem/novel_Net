@@ -582,7 +582,7 @@ public class NovelController {
         System.out.println(r_rnum);
         if(session.getAttribute("U_NUM") == null)
         {
-            u_num = "0";
+            return "댓글 작성 실패";
         }
         else
         {

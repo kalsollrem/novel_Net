@@ -150,6 +150,10 @@
                 </div>
             </div>
             <!-- 리플 다는 구간 -->
+            <th:block>
+                <input type="hidden" class="user_num" th:if="${session.U_NUM}==null" th:value="none">
+                <input type="hidden" class="user_num" th:unless="${session.U_NUM}==null" th:value="${session.U_NUM}">
+            </th:block>
             <div class="reply_table" th:each="reply : ${replyVOList}">
                 <div th:if="${reply.r_rnum == '0'}">
                     <div class="replyLendingZone" th:id="'reply_'+${reply.r_num}"></div>

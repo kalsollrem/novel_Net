@@ -46,7 +46,11 @@
                         <ul class="novel_list">
                             <th:block th:each="novelList : ${novelList}">
                                 <li>
-                                    <span class="up_title"th:title="${novelList.n_title}"><b>[[${novelList.n_title}]]</b></span>
+                                    <span class="up_title"th:title="${novelList.n_title}">
+                                        <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
+                                            <b>[[${novelList.n_title}]]</b>
+                                        </a>
+                                    </span>
                                     <span class="up_date" th:if="${novelList.n_date} != 'none'">[[${novelList.n_date}]]</span>
                                     <span class="up_date" th:unless="${novelList.n_date} != 'none'"> </span>
                                 </li>
