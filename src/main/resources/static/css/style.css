@@ -105,12 +105,12 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .contents .main_content .hot_novel .novel_what                           {width: 390px; height: 60px; margin:5px 5px 5px 5px;}
 .contents .main_content .hot_novel .novel_what >h3                       {line-height: 50px;}
-.contents .main_content .hot_novel .novel_choose                         {width: 390px; height: 120px; margin-left: 5px; margin-right: 5px; margin-bottom: 10px; }
-.contents .main_content .hot_novel .novel_choose img                     {float: left; width: 80px; height: 120px; margin-right: 8px; margin-top: 5px; border-radius: 0.2em;}
+.contents .main_content .hot_novel .novel_choose                         {width: 390px; height: 120px; margin-left: 5px; margin-right: 5px; margin-bottom: 15px; }
+.contents .main_content .hot_novel .novel_choose img                     {float: left; width: 80px; height: 120px; margin-right: 8px; border-radius: 0.2em;}
 .contents .main_content .hot_novel .novel_choose .novel_date             {float: left; box-shadow: 2px 2px ghostwhite; border: 1px solid #eeeee0; box-sizing: border-box; padding-left: 5px; padding-right: -5px; border-radius: 0.5em;}
-.contents .main_content .hot_novel .novel_choose .novel_date .novel_name {width: 290px; height: 40px; display: flex;}
-.contents .main_content .hot_novel .novel_choose .novel_date .writer_name{width: 290px; height: 40px; display: flex;}
-.contents .main_content .hot_novel .novel_choose .novel_date .novel_tags {width: 290px; height: 45px; display: flex; padding-top: 5px;}
+.contents .main_content .hot_novel .novel_choose .novel_date .novel_name {width: 290px; height: 30px; display: flex;}
+.contents .main_content .hot_novel .novel_choose .novel_date .writer_name{width: 290px; height: 30px; display: flex;}
+.contents .main_content .hot_novel .novel_choose .novel_date .novel_tags {width: 285px; height: 45px; display: flex; padding-top: 5px; margin-right: 5px; margin-bottom: 10px;}
 
 
 .contents .main_content .hot_novel .novel_choose .novel_date .novel_name>a {margin-top: 8px;}
@@ -121,7 +121,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 
 
-.recomend_tag                  {width: 1200px; height: 405px;  margin-top: 20px;}
+.recomend_tag                  {width: 1200px; height: 405px;  margin-top: 40px;}
 .recomend_tag .recomend_pd_tal {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; margin-bottom: 5px;}
 .recomend_tag .recomend_pd_novel                 {width: 100%; height: 350px;}
 .recomend_tag .recomend_pd_novel>li              {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px;  position: relative;}

@@ -132,7 +132,8 @@ public class NovelController {
         memoVO.setN_num(nwForm.getWrite_number());
         novelRepository.memoSave(memoVO);
 
-        return  "redirect:/novelnet/novel?n_num="+nwForm.getWrite_number()+"&page="+nwForm.getPage()+"&sort="+nwForm.getSort();
+        return  "redirect:/novelnet/view?n_num="+nwForm.getWrite_number()+"&sort="+nwForm.getSort()
+                +"&page="+nwForm.getPage()+"&chapter="+memoVO.getM_num();
     }
 
     //이미지 업로드 로직. 배포전에 WebMvcConfig를 비롯해 경로수정할것.
@@ -186,7 +187,7 @@ public class NovelController {
         {
             sort = "asc";
         }
-        if (manageService.isInteger(n_num) == false || manageService.isInteger(chapter) == false || chapter == null || n_num ==null)
+        if (manageService.isInteger(n_num) == false || manageService.isInteger(chapter) == false || chapter == null || n_num ==null || session.getAttribute("U_NUM") == null)
         {
             return "redirect:/novelnet/";
         }
