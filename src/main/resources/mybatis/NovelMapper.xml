@@ -79,7 +79,7 @@
 
     <!--  게시물 검색 + 번호매기기  -->
     <select id="getMemoDate" resultType="com.project.novelnet.Vo.MemoVO">
-        (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
+        (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, date_format(A.m_date, '%y.%m.%d') as m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
                 IFNULL(B.cheak ,0)as cheak, IFNULL(C.cnt,0)as r_cnt
         FROM (SELECT @ep:=#{page}-1)as n, memo A
         LEFT JOIN (Select m_num, count(mr_num) as cheak from m_record where u_num = #{u_num} group by m_num) B
@@ -96,7 +96,7 @@
             </otherwise>
         </choose>)
         Union all
-        (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
+        (SELECT @ep:=@ep+1 AS ep, A.m_num, A.m_title, date_format(A.m_date, '%y.%m.%d') as m_date, A.m_count, A.m_good, A.b_stop, A.m_type,
                 IFNULL(B.cheak ,0)as cheak, IFNULL(C.cnt,0)as r_cnt
         FROM (SELECT @ep:=#{page}-1)as n, memo A
         LEFT JOIN (Select m_num, count(mr_num) as cheak from m_record where u_num = #{u_num} group by m_num) B

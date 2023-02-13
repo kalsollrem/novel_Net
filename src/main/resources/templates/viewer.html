@@ -170,7 +170,7 @@
                             <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>
                             <div class="nickname" th:text="${reply.nick}">작성자</div>
                         </div>
-                        <div class="reply_date" th:text="${#strings.substring(reply.r_date,5 ,10)}">수정일</div>
+                        <div class="reply_date" th:text="${reply.r_date}">수정일</div>
                         <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
                             <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
@@ -190,7 +190,7 @@
                             <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
                             <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>                                <div class="nickname" th:text="${reply.nick}">작성자</div>
                         </div>
-                        <div class="reply_date" th:text="${#strings.substring(reply.r_date,5 ,10)}">수정일</div>
+                        <div class="reply_date" th:text="${reply.r_date}">수정일</div>
                         <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
                             <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>

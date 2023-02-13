@@ -125,16 +125,14 @@ public class NovelController {
     public String novelWrite(NovelWriteForm nwForm, HttpSession session)
     {
         MemoVO memoVO = new MemoVO();
-        for (int i = 0; i<40 ; i++)
-        {
-            memoVO.setM_title(nwForm.getWrite_title()+" "+i+"번째");
-            memoVO.setM_memo(nwForm.getWrite_memo()+" "+i+"번째");
-            memoVO.setM_type(nwForm.getWrite_type());
-            memoVO.setN_num(nwForm.getWrite_number());
-            novelRepository.memoSave(memoVO);
-        }
 
-        return "redirect:/novelnet?novel="+ memoVO.getM_num();
+        memoVO.setM_title(nwForm.getWrite_title());
+        memoVO.setM_memo(nwForm.getWrite_memo());
+        memoVO.setM_type(nwForm.getWrite_type());
+        memoVO.setN_num(nwForm.getWrite_number());
+        novelRepository.memoSave(memoVO);
+
+        return  "redirect:/novelnet/novel?n_num="+nwForm.getWrite_number()+"&page="+nwForm.getPage()+"&sort="+nwForm.getSort();
     }
 
     //이미지 업로드 로직. 배포전에 WebMvcConfig를 비롯해 경로수정할것.

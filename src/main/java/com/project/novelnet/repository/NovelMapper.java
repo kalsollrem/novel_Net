@@ -128,7 +128,7 @@ public interface NovelMapper {
     //댓글조회
     //ASC  = [ ORDER BY IF(r_rnum = 0, r_num, r_rnum)asc, r_num ]
     //DESC = [ ORDER BY IF(r_rnum = 0, r_num, r_rnum)desc, r_rnum!=0, r_num asc ]
-    @Select("select A.r_num, A.u_num, A.r_rnum, A.r_memo, A.m_num, A.n_num, A.r_date, A.r_good, A.r_bad, A.r_baby, B.u_pic, B.u_nick as nick " +
+    @Select("select A.r_num, A.u_num, A.r_rnum, A.r_memo, A.m_num, A.n_num, date_format(A.r_date, '%Y년 %m월 %d일') as r_date, A.r_good, A.r_bad, A.r_baby, B.u_pic, B.u_nick as nick " +
             "from reply A " +
             "inner join user B " +
             "on A.u_num = B.u_num " +
