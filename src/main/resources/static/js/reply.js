@@ -299,7 +299,10 @@ function r_updateOn(rum){
     if(userOK != "none")
     {
         r_rnum = rum.substr(3);
-        let insideText = $('#'+rum+'_inside').html();
+        let insideText = $('#'+rum+'_inside').text();
+        let insideImg  = $('#'+rum+'_inside >img ').name();
+
+        alert(insideImg)
 
         console.log(r_rnum);
         if (whereW != ('u'+r_rnum))
