@@ -1,6 +1,7 @@
 
 let r_rnum = 0;
 let icon;
+let userOK;
 
 $(function(){
     const urlStr = location.search;
@@ -13,7 +14,7 @@ $(function(){
     let MnN = n_num+"/"+m_num;
 
     //유저 권한
-    let userOK; try{userOK = $('.user_num').val() }   catch (e) {userOK  = "none"}
+    try{if($('.user_num').val() != 'none') userOK = $('.user_num').val() }   catch (e) {userOK  = "none"}
     if(userOK == null || userOK == 'none')  {$('#reply_0').hide()}
 
     //추천 버튼 세션
@@ -27,7 +28,7 @@ $(function(){
     }
 
     $(".memo_good").click(function(){
-        if(userOK != null && userOK!= 'none')
+        if(userOK != "none")
         {
             var updown = "up";
             var Gss = sessionStorage.getItem("G:"+MnN);
@@ -113,7 +114,7 @@ $(function(){
 
     //ReplyWrite
     $(".reply_commit").click(function(){
-        if(userOK != null && userOK!= 'none')
+        if(userOK != "none")
         {
             let reply_memo = "";
 
@@ -170,7 +171,7 @@ let whereW = 0;
 
 function answer_r(rum)
 {
-    if(userOK != null && userOK!= 'none')
+    if(userOK != "none")
     {
         r_rnum = rum;
         console.log(r_rnum);
@@ -217,7 +218,7 @@ $(function (){
 
 
 function r_warning(r){
-    if(userOK != null && userOK!= 'none')
+    if(userOK != "none")
     {
         $.ajax({
             url:'/stopReply.do',
@@ -236,7 +237,7 @@ function r_warning(r){
 };
 
 function updownlike(r){
-    if(userOK != null && userOK!= 'none')
+    if(userOK != "none")
     {
         var cheak = 1;
         var word = r.split('_');

@@ -173,7 +173,7 @@
                         <div class="reply_date" th:text="${reply.r_date}">수정일</div>
                         <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
-                            <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
+                            <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.u_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
                             <div class="re_reply reply_box"><span th:id="${reply.r_num}" class="answer_r" onclick="answer_r(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">▣ 답글</span></div>
@@ -188,12 +188,13 @@
                     <div class="reply to_reply" th:id="'focus_'+${reply.r_num}">
                         <div class="user_nick">
                             <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
-                            <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>                                <div class="nickname" th:text="${reply.nick}">작성자</div>
+                            <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>
+                            <div class="nickname" th:text="${reply.nick}">작성자</div>
                         </div>
                         <div class="reply_date" th:text="${reply.r_date}">수정일</div>
                         <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
-                            <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
+                            <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.u_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
                         </div>
