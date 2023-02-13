@@ -769,6 +769,8 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .reply .reply_gb .reply_good    {color: #8463F5;}
 .reply .reply_gb .reply_bad     {color: rgb(233, 142, 99);}
 .reply .reply_gb .reply_singo   {color: red; border: 0px;}
+.reply .reply_gb .reply_delete  {color: red; border: 0px;}
+.reply .reply_gb .reply_update  {color: darkgreen; border: 0px;}
 
 /* 댓글 버튼 옵션 : 내 댓글 */
 .reply .reply_my .re_reply      {color: gray;}
@@ -819,6 +821,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .reply_write .replay_make .reply_commit {width: 20%; height: 107px; font-size: 16px; float: left; background-color: #333; color: white; box-sizing: border-box; border: 1px solid #333;}
 .reply_write .replay_make .reply_commit:hover {background-color: #23272B;}
+.reply_write .replay_make .replyUpdateOn {display: none;}
 
 .dragBlock {
     -webkit-user-select:none;

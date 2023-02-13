@@ -113,7 +113,7 @@ $(function(){
     });
 
     //ReplyWrite
-    $(".reply_commit").click(function(){
+    $(".replyWriteOn").click(function(){
         if(userOK != "none")
         {
             let reply_memo = "";
@@ -140,6 +140,30 @@ $(function(){
         }
     });
 
+    //댓글 수정 버튼의 경우
+    $("#reply_updateBtn").click(function(){
+        if(userOK != "none")
+        {
+            let reply_memo = "";
+
+            if (icon ==null || icon ==""){ reply_memo = $("#reply_area").val(); }
+            else {reply_memo = icon + $("#reply_area").val();}
+
+            $.ajax({
+                url:'/replyUpdate.do',
+                type:'post',
+                data : {"reply_memo":reply_memo,
+                    "r_num":r_rnum},
+                success:function(s){
+                    if (s == 'ok')     {location.reload();}
+                    else               {alert("수정에 실패하였습니다.")}
+                },
+                error:function(){
+                    alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다.");
+                }
+            });
+        }
+    });
 
     //목록버튼
     var listSwitch = 0;
@@ -176,21 +200,36 @@ function answer_r(rum)
         r_rnum = rum;
         console.log(r_rnum);
         // $('#reply_0').empty();
-        if (whereW != r_rnum)
+        if (whereW != ('r'+r_rnum))
         {
+            icon = "";
+            $(".imoticon_zone").empty();
+            if (icon == null || icon == ""){ $(".imoticon_zone").slideUp(); }
+            $(".replyUpdateOn").hide();
+            $(".replyWriteOn").show();
+            $("#reply_area").text('');
+            $("#up_"+r_rnum).css("font-weight", "normal");
+
+
             $("#"+r_rnum).css("color", "red");
             $(".reply_write").css("margin-top", "10px");
-            whereW = r_rnum;
+            whereW = 'r'+r_rnum;
             console.log("위치는"+whereW)
             $('#reply_'+r_rnum).after($('.reply_write'));
         }
         else
         {
+            icon = "";
+            $(".imoticon_zone").empty();
+            if (icon == null || icon == ""){ $(".imoticon_zone").slideUp(); }
+            $("#reply_area").text('');
+
             $("#"+r_rnum).css("color", "#333333");
             $(".reply_write").css("margin-top", "0px");
             whereW = 0;
             console.log("위치는"+whereW);
             $('#reply_0').after($('.reply_write'));
+            r_rnum =0;
         }
     }
 }
@@ -233,6 +272,68 @@ function r_warning(r){
                 alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다.");
             }
         });
+    }
+};
+
+//댓글삭제
+function r_delete(r){
+    if(userOK != "none")
+    {
+        $.ajax({
+            url:'/replyDelete.do',
+            type:'post',
+            data : {"r_num":r.substring(3)},
+            success:function(s){
+                if (s == 'ok')     {location.reload();}
+                else               {alert("삭제에 실패하였습니다.")}
+            },
+            error:function(){
+                alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다.");
+            }
+        });
+    }
+};
+
+//댓글수정용 창 이동
+function r_updateOn(rum){
+    if(userOK != "none")
+    {
+        r_rnum = rum.substr(3);
+        let insideText = $('#'+rum+'_inside').html();
+
+        console.log(r_rnum);
+        if (whereW != ('u'+r_rnum))
+        {
+            $(".replyUpdateOn").show();
+            $(".replyWriteOn").hide();
+            $("#reply_area").text(insideText);
+            icon = "";
+            $(".imoticon_zone").empty();
+            if (icon == null || icon == ""){ $(".imoticon_zone").hide(); }
+
+            $("#"+r_rnum).css("color", "#333333");
+            $("#up_"+r_rnum).css("font-weight", "bold");
+            $(".reply_write").css("margin-top", "10px");
+            whereW = 'u'+r_rnum;
+            console.log("위치는"+whereW)
+            $('#reply_'+r_rnum).after($('.reply_write'));
+        }
+        else
+        {
+            $(".replyUpdateOn").hide();
+            $(".replyWriteOn").show();
+            $("#reply_area").text('');
+            icon = "";
+            $(".imoticon_zone").empty();
+            if (icon == null || icon == ""){ $(".imoticon_zone").hide(); }
+
+            $("#up_"+r_rnum).css("font-weight", "normal");
+            $(".reply_write").css("margin-top", "0px");
+            whereW = 0;
+            console.log("위치는"+whereW);
+            $('#reply_0').after($('.reply_write'));
+            r_rnum =0;
+        }
     }
 };
 

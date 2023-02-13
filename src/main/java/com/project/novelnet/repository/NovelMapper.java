@@ -144,6 +144,9 @@ public interface NovelMapper {
     @Delete("delete from reply where r_num = #{r_num} and u_num = #{u_num}")
     public int deleteMyReply(@Param("r_num")String r_num,@Param("u_num")String u_num);
 
+    @Update("UPDATE reply SET r_memo = #{r_memo} WHERE r_num = #{r_num} and u_num = #{u_num}")
+    public int UpdateMyReply(@Param("r_num")String r_num, @Param("r_memo")String r_memo, @Param("u_num")String u_num);
+
     //조회수증가
     @Update("UPDATE memo SET m_count = m_count+1 WHERE m_num = #{m_num}")
     public void countUp(String m_num);

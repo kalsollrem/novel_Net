@@ -151,7 +151,8 @@
                         <div class="imoticon_zone"></div>
                         <div class="replay_make">
                             <textarea name="reply_memo" id="reply_area" rows="5" placeholder="댓글을 입력해 보세요."></textarea>
-                            <input type="button" value="댓글 입력" class="reply_commit" id="reply_commit">
+                            <input type="button" value="댓글 입력" class="reply_commit replyWriteOn" id="reply_commit">
+                            <input type="button" value="수정"     class="reply_commit replyUpdateOn"id="reply_updateBtn">
                         </div>
                     </form>
                 </div>
@@ -171,9 +172,11 @@
                             <div class="nickname" th:text="${reply.nick}">작성자</div>
                         </div>
                         <div class="reply_date" th:text="${reply.r_date}">수정일</div>
-                        <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
+                        <div class="reply_memo" th:id="'up_'+${reply.r_num}+'_inside'" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
                             <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.u_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
+                            <div class="reply_delete reply_box" th:id="'dl_'+${reply.r_num}" onclick="r_delete(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◆삭제</div>
+                            <div class="reply_update reply_box" th:id="'up_'+${reply.r_num}" onclick="r_updateOn(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◎수정</div>
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
                             <div class="re_reply reply_box"><span th:id="${reply.r_num}" class="answer_r" onclick="answer_r(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">▣ 답글</span></div>
@@ -182,6 +185,7 @@
                     </div>
                 </div>
                 <div th:unless="${reply.r_rnum == '0'}">
+                    <div class="replyLendingZone" th:id="'reply_'+${reply.r_num}"></div>
                     <div class="reply_arrow">
                         <img src="../img/arrow_right.png" alt="#">
                     </div>
@@ -192,9 +196,11 @@
                             <div class="nickname" th:text="${reply.nick}">작성자</div>
                         </div>
                         <div class="reply_date" th:text="${reply.r_date}">수정일</div>
-                        <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
+                        <div class="reply_memo" th:id="'up_'+${reply.r_num}+'_inside'" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
-                            <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.u_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
+                            <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}"  onclick="r_warning(this.id)" th:if="${reply.u_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
+                            <div class="reply_delete reply_box" th:id="'dl_'+${reply.r_num}" onclick="r_delete(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◆삭제</div>
+                            <div class="reply_update reply_box" th:id="'up_'+${reply.r_num}" onclick="r_updateOn(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◎수정</div>
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
                         </div>

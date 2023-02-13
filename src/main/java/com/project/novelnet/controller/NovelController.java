@@ -631,6 +631,31 @@ public class NovelController {
         }
     }
 
+    //댓글수정
+    @PostMapping("/replyUpdate.do")
+    @ResponseBody
+    public String replyUpdate(HttpSession session,
+                              @RequestParam(value = "r_num", required = false) String r_num,
+                              @RequestParam(value = "reply_memo", required = false) String r_memo,
+                              HttpServletRequest request)throws Exception
+    {
+        String id;
+        try                 { id = (String)session.getAttribute("U_NUM").toString();}
+        catch (Exception e) { return "fail";}
+
+        if (id != null)
+        {
+            int ok = novelMapper.UpdateMyReply(r_num, r_memo, id);
+
+            if (ok >0){ return "ok"; }
+            else      { return "fail";}
+        }
+        else
+        {
+            return "fail";
+        }
+    }
+
 
     //댓글 신고
     @PostMapping("/stopReply.do")
