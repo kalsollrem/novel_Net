@@ -94,22 +94,20 @@ $(function(){
 
     //댓글버튼 클릭시
     $(".reply_button").click(function(){
-        if(userOK != null && userOK!= 'none') {
-            if (memuSwitch == 0) {
-                $(".viewer_memo").hide();
-                $(".reply_zone").show();
-                $(".reply_button").css("color", "#5B32DF");
-                $(".replyB_img").attr("src", "../img/reply_on.png");
-                sessionStorage.setItem("R_ZONE", MnN);
-                memuSwitch = 1;
-            } else {
-                $(".reply_zone").hide();
-                $(".viewer_memo").show();
-                $(".reply_button").css("color", "#333333");
-                $(".replyB_img").attr("src", "../img/reply_off.png");
-                sessionStorage.removeItem("R_ZONE");
-                memuSwitch = 0;
-            }
+        if (memuSwitch == 0) {
+            $(".viewer_memo").hide();
+            $(".reply_zone").show();
+            $(".reply_button").css("color", "#5B32DF");
+            $(".replyB_img").attr("src", "../img/reply_on.png");
+            sessionStorage.setItem("R_ZONE", MnN);
+            memuSwitch = 1;
+        } else {
+            $(".reply_zone").hide();
+            $(".viewer_memo").show();
+            $(".reply_button").css("color", "#333333");
+            $(".replyB_img").attr("src", "../img/reply_off.png");
+            sessionStorage.removeItem("R_ZONE");
+            memuSwitch = 0;
         }
     });
 

@@ -80,7 +80,7 @@
         </div>
     </div>
     <div class="chapter_guide">
-        <div class="nebiOpt"><img src="../img/singo.png" alt="신고"></div>
+        <div class="nebiOpt" th:if="${session.U_NUM}!=null"><img src="../img/singo.png" alt="신고"></div>
         <ul class="guide_nebi">
             <!-- 이전화 버튼 -->
             <th:block th:if="${#strings.equals(param.type, 'gong')}">
@@ -91,11 +91,18 @@
                 <li><a th:unless="${back}" th:href="${back}"><br></a></li>
             </th:block>
             <!-- 이전화 버튼 -->
+
+            <!-- 댓글 버튼 -->
             <li class="reply_button"><img src="../img/reply_off.png" alt="댓글" class="replyB_img"> 댓글</li>
+            <!-- 댓글 버튼 -->
+
+            <!-- 추천 버튼 -->
             <li class="memo_good"><img class="good_img" src="../img/good_Down.png" alt="추천">
                 <span class="memo_good_text" th:text="'('+${memoVO.getM_good()}+'개)'">(100)</span>
                 <input type="hidden" class="good_value" th:value="${memoVO.getM_good()}">
             </li>
+            <!-- 추천 버튼 -->
+
             <!-- 다음화 버튼 -->
             <th:block th:if="${#strings.equals(param.type, 'gong')}">
                 <li><a th:unless="${next}" th:href="${next}"><br></a></li>
@@ -166,10 +173,10 @@
                         <div class="reply_date" th:text="${#strings.substring(reply.r_date,5 ,10)}">수정일</div>
                         <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
-                            <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)">■신고</div>
+                            <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
-                            <div class="re_reply reply_box"><span th:id="${reply.r_num}" class="answer_r" onclick="answer_r(this.id)">▣ 답글</span></div>
+                            <div class="re_reply reply_box"><span th:id="${reply.r_num}" class="answer_r" onclick="answer_r(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">▣ 답글</span></div>
 <!--                            <div class="re_reply_count reply_box" th:if="${reply.r_baby != '0'}"><span>△</span> <span th:text="'대댓글 ('+${reply.r_baby}+'건)'"></span></div>-->
                         </div>
                     </div>
@@ -186,7 +193,7 @@
                         <div class="reply_date" th:text="${#strings.substring(reply.r_date,5 ,10)}">수정일</div>
                         <div class="reply_memo" th:utext="${reply.r_memo}">내용</div>
                         <div class="reply_gb">
-                            <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)">■신고</div>
+                            <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
                         </div>
