@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+/* 마스터 페이지 */
+    /* border선 색상용 */
+    .borderLine_black {border: 3px solid rgb(77, 76, 75);}
+    .borderLeft_black {border-left: 2px solid rgb(77, 76, 75);}
+    .borderLine_sky   {border: 3px solid rgb(53, 165, 230);}
+    .borderLeft_sky   {border-left: 2px solid rgb(53, 165, 230);}
+    
+.master_novelWarning   {display: none;} /* 소설 신고 목록 */
+.master_replyWarning   {display: none;} /* 댓글 신고 목록 */
+.master_userManagement {display: block;} /* 소설 신고 */
+
+
+.masterFrame {width: 1200px; margin: auto; }
+.masterMenu {width: 100%-5px; display: flex; padding-left: 5px; margin-bottom: 10px; box-sizing: border-box;}
+.masterMenu >li {width: 15%; background-color: rgb(77, 75, 74); font-size: 20px; text-align: center; font-weight: bold; height: 50px; line-height: 50px; margin: 5px 10px 5px 0px; border-radius: 15px;  box-sizing: border-box; color: rgb(250, 250, 250);}
+
+.warning_memo >li {width: 100%; box-sizing: border-box; display: flex; margin-bottom: 10px; border-radius: 10px;}
+.warning_memo >li .mw_LeftSide   {width: 88%;  float: left; margin-right: 25px;}
+.warning_memo >li .mw_SwitchSide {width: 10%; min-height: 100px; text-align: center;}
+
+.mw_LeftSide .mw_titleLine {width: 100%-10px; margin: 5px; border: 1px solid rgb(206, 202, 202); padding: 5px; border-radius: 10px;} 
+             .mw_titleLine .mw_novelTitle {width: 100%; font-size: 15px; font-weight: bold;}
+             .mw_titleLine .mw_memoTitel  {width: 100%; font-size: 13px;}
+             .mw_titleLine > hr {width: 100%;}
+             /* 유저 경고일때 옵션 */
+             .mw_titleLine .mw_warningTitelUp {width: 100%; font-size: 15px; font-weight: bold;}
+             .mw_titleLine .mw_warningTitel   {width: 100%; font-size: 15px; }
+             .mw_titleLine .mw_warningTitel .miniTotal  { margin-right: 10px; font-size: 13px; font-weight: 100;}
+             
+.mw_LeftSide .mw_shingoLine { width: 100%; display: flex;} 
+.mw_LeftSide .mw_shingoLine .SingoName {margin: 5px 0px 0px 5px; border: 1px solid rgb(206, 202, 202); padding: 3px; border-radius: 5px;} 
+             /* 유저 프로필 볼때 옵션 */
+.mw_LeftSide .mw_shingoLine .mw_userNickName {margin: 5px 0px 0px 5px; border: 0px solid rgb(206, 202, 202); padding: 3px; padding-left: 10px; padding-right: 10px; border-radius: 5px; line-height: 200%; font-weight: bold;} 
+.mw_LeftSide .mw_shingoLine .mw_userImageZone {margin: 0px 0px 0px 5px; border: 0px ; width: 40px; height: 40px;} 
+.mw_LeftSide .mw_shingoLine .mw_userImageZone>button {border: 0px; width: 100%; height: 100%; border: 0px;} 
+.mw_LeftSide .mw_shingoLine .mw_userImageZone>button>img {border: 0px; border-radius: 5px; width: 100%; height: 100%;} 
+
+.mw_LeftSide .mw_profillLine       {width: 100%-10; margin: 5px; padding: 5px; display: flex; border: 1px solid rgb(206, 202, 202);; box-sizing: border-box; border-radius: 10px;}
+             .mw_profillLine .mw_userNick   {width: 81%; float: left; }
+             .mw_profillLine .mw_date       {width: 18%; float: left; margin-left: 7px; text-align: center; border-left: 1px solid rgb(206, 202, 202);;}
+
+.mw_LeftSide .mw_why                {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202);; box-sizing: border-box; border-radius: 10px; min-height: 30px;}
+.mw_LeftSide .mw_reply_inside       {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202);; box-sizing: border-box; border-radius: 10px; min-height: 30px;}
+
+
+.mw_SwitchSide .mw_WarnningCnt {text-align:left; margin-left: 10px; margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold;}
+.mw_SwitchSide .mw_WarnningCnt>span {font-size: 13px; margin-left: 5px;}
+.mw_SwitchSide >button         {width: 100px; margin: 3px 0px 5px 0px; padding: 8px; border: 0px; border-radius: 5px; color: white; background-color: #333; font-size: 13px;}
+
+.mw_SwitchSide .levelChangeZone {text-align:left; margin-left: 10px; margin-top: 13px; margin-bottom: 5px; font-size: 16px; font-weight: bold;}
+.mw_SwitchSide .levelChangeZone #levelChange  {width: 60px; height: 25px;  box-sizing: border-box; padding-top: 3px; font-size: 15px; padding-bottom: 3px; border-radius: 5px;}
+.mw_SwitchSide .levelChangeZone .levelChangeOK{width: 35px; height: 22px; border: 0px; background-color: #333; color: white; box-sizing: border-box; border-radius: 5px; }
