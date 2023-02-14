@@ -7,24 +7,53 @@
 .borderLine_sky   {border: 3px solid rgb(53, 165, 230);}
 .borderLeft_sky   {border-left: 2px solid rgb(53, 165, 230);}
 
-.master_novelWarning   {display: none;} /* 소설 신고 목록 */
+.master_novelWarning   {display: block;} /* 소설 신고 목록 */
 .master_replyWarning   {display: none;} /* 댓글 신고 목록 */
-.master_userManagement {display: block;} /* 소설 신고 */
+.master_userManagement {display: none;} /* 소설 신고 */
 
+/* 검색창 */
 .masterSearch {width: 500px; margin: auto; margin-bottom: 10px; box-sizing: border-box; border-radius: 5px; border: 3px solid rgb(77, 76, 75); padding: 10px; float: left;}
 .masterSearch .leftSearchSpace {float: left;}
 .masterSearch #searchOtp   {width: 100px; height: 25px; border-radius: 5px; border: 1px solid gray; padding-left: 5px;}
 .masterSearch #searchSpace {width: 300px; height: 25px; border-radius: 5px; border: 1px solid gray; padding-left: 5px;}
 .masterSearch .rightSearchSpace> button      {width: 50px; height: 25px; line-height: 25px; text-align: center;  border-radius: 5px; border: 0px solid gray; margin-top: 1px; margin-left: 5px; background-color: #333; color: white;}
+.masterSearch .rightSearchSpace> button:hover{background-color: rgb(187, 58, 58);}
 
+/* 정렬창 */
+.masterSort {width: 178px; height: 53px; margin: auto; margin-bottom: 10px; box-sizing: border-box; border-radius: 5px; border: 3px solid rgb(77, 76, 75); padding: 10px; float: left; text-align: center; margin-left: 5px;}
+.masterSort .leftSearchSpace {float: left;}
+.masterSort #sortOtp   {width: 150px; height: 25px; border-radius: 5px; border: 1px solid gray; padding-left: 5px;}
 
+/* PD픽 추가 */
+.masterChoiceSwitch {width: 140px; height: 53px; font-weight: bold; color: white; line-height: 33px; margin: auto;
+    margin-bottom: 10px; box-sizing: border-box; border-radius: 5px; background-color: rgba(102, 10, 56, 0.582); padding: 10px;
+    float: right; text-align: center; margin-left: 10px;}
+
+.masterChoice {width: 100%; margin: auto; margin-bottom: 10px; box-sizing: border-box; border-radius: 5px; border: 3px solid rgb(75, 77, 77); padding: 10px; float: right; text-align: center; display: none;}
+.masterChoice >li {width: 100%-6px; height: 22px; margin-bottom: 5px; padding: 5px; padding-left: 10px; border-bottom: 1px solid rgb(77, 76, 75); }
+.masterChoice >li>.pdChoiceName {float: left; max-width: 90%; font-size: 14px; line-height: 22px;}
+.masterChoice >li>.pdChoiceBtnZone {float: right; width: 8%;}
+.masterChoice >li>.pdChoiceBtnZone>button {width: 70px; height: 23px; background-color: rgb(141, 52, 46); color: white; border: 0px; border-radius: 5px;}
+
+/* 신고목록 관리 페이지 틀 옵션 */
 .masterFrame {width: 1200px; margin: auto; }
 .masterMenu {width: 100%-5px; display: flex; padding-left: 5px; margin-bottom: 10px; box-sizing: border-box;}
 .masterMenu >li {width: 15%; background-color: rgb(77, 75, 74); font-size: 20px; text-align: center; font-weight: bold; height: 50px; line-height: 50px; margin: 5px 10px 5px 0px; border-radius: 15px;  box-sizing: border-box; color: rgb(250, 250, 250);}
+.masterMenu >li:hover {background-color: rgb(187, 58, 58);;}
 
 .warning_memo >li {width: 100%; box-sizing: border-box; display: flex; margin-bottom: 10px; border-radius: 10px;}
-.warning_memo >li .mw_LeftSide   {width: 88%;  float: left; margin-right: 25px;}
+.warning_memo >li .mw_LeftSide   {float: left; width: 88%; margin-right: 25px;}
 .warning_memo >li .mw_SwitchSide {width: 10%; min-height: 100px; text-align: center;}
+
+
+/* 마스터 페이지 소설 관리 페이지 틀 옵션 */
+.novelManagement_List >li {width: 100%; box-sizing: border-box; display: flex; margin-bottom: 10px; border-radius: 10px;}
+.novelManagement_List >li .picSide       {width: 10%;  float: left; margin-right: 10px; margin-left: 5px; margin-top: 10px;}
+.novelManagement_List >li .mw_LeftSide   {width: 79%;  float: left; margin-right: 25px; margin-top: 10px;}
+.novelManagement_List >li .mw_SwitchSide {width: 10%; min-height: 100px; text-align: center;}
+.picSide >img {width: 100%; margin: 5px; border-radius: 10px;}
+
+
 
 .mw_LeftSide .mw_titleLine {width: 100%-10px; margin: 5px; border: 1px solid rgb(206, 202, 202); padding: 5px; border-radius: 10px;}
 .mw_titleLine .mw_novelTitle {width: 100%; font-size: 15px; font-weight: bold;}
@@ -38,23 +67,38 @@
 .mw_LeftSide .mw_shingoLine { width: 100%; display: flex;}
 .mw_LeftSide .mw_shingoLine .SingoName {margin: 5px 0px 0px 5px; border: 1px solid rgb(206, 202, 202); padding: 3px; border-radius: 5px;}
 /* 유저 프로필 볼때 옵션 */
-.mw_LeftSide .mw_shingoLine .mw_userNickName {margin: 5px 0px 0px 5px; border: 0px solid rgb(206, 202, 202); padding: 3px; padding-left: 10px; padding-right: 10px; border-radius: 5px; line-height: 200%; font-weight: bold;}
-.mw_LeftSide .mw_shingoLine .mw_userImageZone {margin: 0px 0px 0px 5px; border: 0px ; width: 40px; height: 40px;}
-.mw_LeftSide .mw_shingoLine .mw_userImageZone>button {border: 0px; width: 100%; height: 100%; border: 0px;}
-.mw_LeftSide .mw_shingoLine .mw_userImageZone>button>img {border: 0px; border-radius: 5px; width: 100%; height: 100%;}
+.mw_shingoLine .mw_userNickName {margin: 5px 0px 0px 5px; border: 0px solid rgb(206, 202, 202); padding: 3px; padding-left: 10px; padding-right: 10px; border-radius: 5px; line-height: 200%; font-weight: bold;}
+.mw_shingoLine .mw_userImageZone {margin: 0px 0px 0px 5px; border: 0px ; width: 40px; height: 40px;}
+.mw_shingoLine .mw_userImageZone>button {border: 0px; width: 100%; height: 100%; border: 0px;}
+.mw_shingoLine .mw_userImageZone>button>img {border: 0px; border-radius: 5px; width: 100%; height: 100%;}
 
-.mw_LeftSide .mw_profillLine       {width: 100%-10; margin: 5px; padding: 5px; display: flex; border: 1px solid rgb(206, 202, 202);; box-sizing: border-box; border-radius: 10px;}
+.mw_LeftSide .mw_profillLine                {width: 100%-10; margin: 5px; padding: 5px; display: flex; border: 1px solid rgb(206, 202, 202);; box-sizing: border-box; border-radius: 10px;}
 .mw_profillLine .mw_userNick   {width: 81%; float: left; }
 .mw_profillLine .mw_date       {width: 18%; float: left; margin-left: 7px; text-align: center; border-left: 1px solid rgb(206, 202, 202);;}
+.mw_LeftSide .mw_why                        {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202); box-sizing: border-box; border-radius: 10px; min-height: 30px;}
 
-.mw_LeftSide .mw_why                {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202);; box-sizing: border-box; border-radius: 10px; min-height: 30px;}
-.mw_LeftSide .mw_reply_inside       {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202);; box-sizing: border-box; border-radius: 10px; min-height: 30px;}
+/* 소설관리용 옵션 */
+.mw_profillLine .mw_mailData        {width: 81%; float: left; font-size: 14px; text-size-adjust: auto; }
+.mw_profillLine .mw_mailData>span   {font-size: 12px; max-width: 500px; }
+.mw_profillLine .mw_miniFrame       {width: 12%; float: left; margin-left: 7px; text-align: center; border-left: 1px solid rgb(206, 202, 202); font-size: 10px; line-height: 200%;}
+/* maxHightOpt 추가 제거로 줄 조정 */
+.maxHightOpt1          {max-height: 30px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
+.maxHightOpt4          {max-height: 80px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;}
+
+/* 소설관리용 내부창 */
+.mw_LeftSide .mw_reply_inside       {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202); box-sizing: border-box; border-radius: 10px; min-height: 30px;}
+.mw_LeftSide .mw_novelPri           {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202); box-sizing: border-box; border-radius: 10px; min-height: 67px; font-size: 14px;}
+.mw_LeftSide .mw_noveltag           {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202); box-sizing: border-box; border-radius: 10px; min-height: 30px; font-size: 14px; line-height: 150%;}
+
 
 
 .mw_SwitchSide .mw_WarnningCnt {text-align:left; margin-left: 10px; margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold;}
 .mw_SwitchSide .mw_WarnningCnt>span {font-size: 13px; margin-left: 5px;}
 .mw_SwitchSide >button         {width: 100px; margin: 3px 0px 5px 0px; padding: 8px; border: 0px; border-radius: 5px; color: white; background-color: #333; font-size: 13px;}
+.mw_SwitchSide >button:hover   {background-color: rgb(187, 58, 58);}
+.mw_SwitchSide .mw_PdPickBtn{margin-top: 5px;}
 
 .mw_SwitchSide .levelChangeZone {text-align:left; margin-left: 10px; margin-top: 13px; margin-bottom: 5px; font-size: 16px; font-weight: bold;}
 .mw_SwitchSide .levelChangeZone #levelChange  {width: 60px; height: 25px;  box-sizing: border-box; padding-top: 3px; font-size: 15px; padding-bottom: 3px; border-radius: 5px;}
 .mw_SwitchSide .levelChangeZone .levelChangeOK{width: 35px; height: 22px; border: 0px; background-color: #333; color: white; box-sizing: border-box; border-radius: 5px; }
+

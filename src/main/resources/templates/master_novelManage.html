@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="kr">
+    <head>
+        <meta charset="UTF-8">
+        <title>노벨넷</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/masterStyle.css">
+    </head>
+    <body>
+        <div class="wrap">
+            <header> 
+                <div class="logo">
+                    <img src="../img/logo.png" alt="소설넷">
+                </div>
+                <ul class="menu">
+                    <li><a href="#">자유</a></li>
+                    <li><a href="#">유료</a></li>
+                    <li><a href="#">랭킹</a></li>
+                    <li><a href="#">내서재</a></li>
+                </ul>
+                <div class="myInfo">
+                    <ul class="info_front">
+                        <li><a href="#"><img src="../img/write.png"alt="글쓰기"></a></li>
+                        <li><a href="#"><img src="../img/search.png"alt="검색"></a></li>
+                        <li><span><a href="#"><img src="../img/profill.png"alt="프로필"></a></span></li>
+                    </ul>
+                    <ul class="info_menu">
+                        <li><span class="infobox dragNone" id="login_on">로그인</span></li>
+                        <li><span class="infobox dragNone" id="join_on">회원가입</span></li>
+                        <li><span class="infobox dragNone" id="pass_find_on">아이디/패스워드 찾기</span></li>
+                        <li><span class="infobox dragNone" id="gongji_on">공지사항</span></li>
+                    </ul>
+                </div>
+            </header>
+            <div class="masterFrame">
+                <ul class="masterMenu">
+                    <li>소설 신고 목록</li>
+                    <li>댓글 신고 목록</li>
+                    <li>유저 관리</li>
+                    <li>소설관리</li>
+                    <li>공지</li>
+                </ul>
+                <div class="masterSearch">
+                    <div class="leftSearchSpace">
+                        <select name="searchOtp" id="searchOtp">
+                            <option value="user_nickname">닉네임</option>
+                            <option value="novel_name">소설제목</option>
+                            <option value="hashtag">태그</option>
+                        </select>
+                        <input type="text" id="searchSpace">
+                    </div>
+                    <div class="rightSearchSpace">
+                        <button id="masterSearchbtn">검색</button>
+                    </div>
+                </div>
+                <div class="masterSort">
+                    <div class="leftSearchSpace">
+                        <select name="sortOtp" id="sortOtp">
+                            <option value="date_up">신고일(최근순)</option>
+                            <option value="date_down">신고일(오래된순)</option>
+                            <option value="w_up">신고수(오름차순)</option>
+                            <option value="w_down">신고수(내림차순)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="masterChoiceSwitch">▼ PD픽 리스트</div>
+                <ul class="masterChoice">
+                    <li>
+                        <div class="pdChoiceName maxHightOpt1">1. 소설명</div>
+                        <div class="pdChoiceBtnZone"><button class="delPDpick">삭제</button> </div>
+                    </li>
+                    <li>
+                        <div class="pdChoiceName maxHightOpt1">1. 소설명</div>
+                        <div class="pdChoiceBtnZone"><button class="delPDpick">삭제</button> </div>
+                    </li>
+                </ul>
+
+                <div class="master_novelManagement">
+                    <ul class="novelManagement_List">
+                        <li class="borderLine_black">
+                            <div class="picSide">
+                                <img src="../img/nover_cover.jpg" alt="북커버">
+                            </div>
+                            <div class="mw_LeftSide">
+                                <div class="mw_titleLine">
+                                    <div class="mw_novelTitle">제목입니다</div>
+                                </div>
+                                <div class="mw_profillLine">
+                                    <div class="mw_mailData">
+                                        닉네임
+                                        <span>(z1104@twidle.com)</span>
+                                    </div>
+                                    <div class="mw_miniFrame mw_good">추천 100</div>
+                                    <div class="mw_miniFrame mw_viww">1000 뷰</div>
+                                    <div class="mw_miniFrame mw_stop">50 신고</div>
+                                </div>
+                                <div class="mw_novelPri maxHightOpt4">소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리</div>
+                                <div class="mw_noveltag maxHightOpt1">태그, 리스트, 옙</div>
+                            </div>
+                            <div class="mw_SwitchSide borderLeft_black">
+                                <button class="mw_PdPickBtn">Pd픽 선정</button>
+                                <button class="mw_ImgChangeBtn">이미지 변경</button>
+                                <button class="mw_novelStopBtn">소설 정지</button>
+                                <button class="mw_WarnningDelBtn">정지 해제</button>
+                                <button class="mw_UserDelBtn">유저 정지</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="ep_paging">
+                        <div class="paging_card">←</div>
+                        <div class="paging_card">◁</div>
+                        <div class="paging_card">1</div>
+                        <div class="paging_card">2</div>
+                        <div class="paging_card">3</div>
+                        <div class="paging_card">4</div>
+                        <div class="paging_card">5</div>
+                        <div class="paging_card">▷</div>
+                        <div class="paging_card">→</div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <footer>
+            <div class="notice">
+                <div class="notice_frame">
+                    <span class="notice_memo_gong"><b>공지</b></span>
+                    <div class="new_gong">new</div>
+                    <span class="notice_memo">정기 시스템 점검 예정 (AM 01:00 - 04:00)</span>
+                </div>
+            </div>
+            <div class="footer_info">
+                <div class="footer_info_frame">
+                    <div class="copyright">
+                        <div class="mono_logo"> 
+                            <img src="../img/mono_logo.png">
+                        </div>
+                        <ul class="copyright_c">
+                            <li>본 사이트의 등록된 컨텐츠는 사이트 및 원 저작자에게 권리가 있는 컨텐츠이며, 무단 복제/전송/수정/배포는 법적 처벌을 받을 수 있습니다.</li>
+                            <li><span class="copyright_c_mini">Copyright(c) 노벨넷 2022. All rights reserved</span></li>
+                        </ul>
+                    </div>
+                    <ul class="copyright_memo">
+                        <li>주식회사 노벨넷 대표 김정현 사업자등록번호 210-81-75711 통신판매업 제2021-김제요촌-013145호</li>
+                        <li>주소 김제시 요촌동 81-42번지, T플로어 3층</li>
+                        <li>고객센터 : 063-588-0011 helpNovel@gmail.com 운영시간 AM10:00 - PM 06:00 (휴게시간 PM 0:30 - 2:00)</li>
+                    </ul>
+                </div>  
+            </div>
+        </footer>
+    </body>
+</html>
