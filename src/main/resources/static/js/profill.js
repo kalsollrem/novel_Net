@@ -2,7 +2,7 @@ $(function (){
 
     let profill     =  $('.profile_main')
     let info =  $('.serialized_info')
-    let novel=  $('.serialized_novel')
+    let novel=  $('.serialized_novel_switch')
     let reply=  $('.serialized_reply')
 
     const urlStr = location.search;
