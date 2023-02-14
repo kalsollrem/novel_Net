@@ -199,7 +199,6 @@ function answer_r(rum)
     {
         r_rnum = rum;
         console.log(r_rnum);
-        // $('#reply_0').empty();
         if (whereW != ('r'+r_rnum))
         {
             icon = "";
@@ -208,8 +207,8 @@ function answer_r(rum)
             $(".replyUpdateOn").hide();
             $(".replyWriteOn").show();
             $("#reply_area").text('');
-            $("#up_"+r_rnum).css("font-weight", "normal");
 
+            $("[id*='up_']").not("[id*='_inside']").css("font-weight", "normal");
 
             $("#"+r_rnum).css("color", "red");
             $(".reply_write").css("margin-top", "10px");
@@ -225,6 +224,9 @@ function answer_r(rum)
             $("#reply_area").text('');
 
             $("#"+r_rnum).css("color", "#333333");
+            $("[id*='up_']").not("[id*='_inside']").css("font-weight", "normal");
+
+
             $(".reply_write").css("margin-top", "0px");
             whereW = 0;
             console.log("위치는"+whereW);
@@ -238,13 +240,14 @@ function answer_r(rum)
 //이모티콘 창 관리
 function imo_on(e){
     var imo = e;
-    console.log(imo);
+    let alt        = $('#'+e).attr('alt');
 
     if (icon == null || icon == ""){ $(".imoticon_zone").slideDown(); }
 
     $(".imoticon_zone").empty();
-    $(".imoticon_zone").prepend('<img src=\"../imoticon/'+imo+'.jpg\" className=\"imo01\" alt=\"뿅\">')
-    icon = '<img src=\"../imoticon/'+imo+'.jpg\" className=\"imo01\" alt=\"뿅\" style=\"width: 120px; height: 120px;\">'+'<br>'
+    $(".imoticon_zone").prepend('<img src=\"../imoticon/'+imo+'.jpg\" className=\"'+imo+'\" alt=\"'+alt+'\">')
+    icon = '<img src=\"../imoticon/'+imo+'.jpg\" className=\"'+imo+'\" alt=\"'+alt+'\" style=\"width: 120px; height: 120px;\">'+'<br>'
+
 };
 
 $(function (){
@@ -300,20 +303,26 @@ function r_updateOn(rum){
     {
         r_rnum = rum.substr(3);
         let insideText = $('#'+rum+'_inside').text();
-        let insideImg  = $('#'+rum+'_inside >img ').name();
-
-        alert(insideImg)
+        let insideImg  = $('#'+rum+'_inside>img ').attr('src').substr(12,6);
+        let alt        = $('#'+rum+'_inside>img ').attr('alt');
 
         console.log(r_rnum);
         if (whereW != ('u'+r_rnum))
         {
+            //버튼변경
             $(".replyUpdateOn").show();
             $(".replyWriteOn").hide();
-            $("#reply_area").text(insideText);
-            icon = "";
-            $(".imoticon_zone").empty();
-            if (icon == null || icon == ""){ $(".imoticon_zone").hide(); }
 
+            //내부채우기
+            $("#reply_area").text(insideText);
+
+            //이미지존 채우기
+            $(".imoticon_zone").slideDown();
+            $(".imoticon_zone").empty();
+            $(".imoticon_zone").prepend('<img src=\"../imoticon/'+insideImg+'.jpg\" className=\"'+insideImg+'\" alt=\"'+alt+'\">')
+            icon = '<img src=\"../imoticon/'+insideImg+'.jpg\" className=\"'+insideImg+'\" alt=\"'+alt+'\" style=\"width: 120px; height: 120px;\">'+'<br>'
+
+            //css작업
             $("#"+r_rnum).css("color", "#333333");
             $("#up_"+r_rnum).css("font-weight", "bold");
             $(".reply_write").css("margin-top", "10px");
