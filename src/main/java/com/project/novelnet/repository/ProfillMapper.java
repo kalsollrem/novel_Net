@@ -37,5 +37,5 @@ public interface ProfillMapper
     UserVO getProfill(@Param("u_num") String u_num);
 
     //리플가져오기
-    ArrayList<ReplyVO> getMyAllReply(@Param("u_num") String u_num);
+    ArrayList<ReplyVO> getMyAllReply(@Param("u_num") String u_num ,@Param("start") int start);
 }

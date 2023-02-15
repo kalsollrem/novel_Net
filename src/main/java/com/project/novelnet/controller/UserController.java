@@ -141,6 +141,7 @@ public class UserController {
     public String profillPage(Model model,
                               @Param("user") String user,
                               @Param("page") String page,
+                              @Param("page") String pageR,
                               HttpSession session) throws Exception
     {
         String u_num;
@@ -153,51 +154,92 @@ public class UserController {
             TagVO tvo = profillMapper.likeTagAndRcnt(user);
             model.addAttribute("tvo",tvo);
 
+            //소설페이지
+            if(page == null || page == "0")                     {page    = "1"; }
+            else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
+
+            //댓글페이지
+            if(pageR == null || pageR == "0")                   {pageR   = "1"; }
+            else{ if(manageService.isInteger(pageR) == false)   {pageR   = "1";}}
+
+                    //소설페이징처리
+                    int count, allPage,nowCase,allCase,leftPage,rightPage,displayPage,start;
+
+                    count = profillMapper.getProfillNoveCnt(user);
+
+                    pageingService.setNowPage(page);
+                    pageingService.setTotalCount(count);
+
+                    allPage     = pageingService.getAllPage();
+                    nowCase     = pageingService.getNowCase();
+                    allCase     = pageingService.getAllCase();
+                    leftPage    = pageingService.getLeftPage();
+                    rightPage   = pageingService.getRightPage();
+                    displayPage = pageingService.getDisplayPage();
+
+                    System.out.println("전채 간격 " + allCase);
+                    System.out.println("현재 간격 " + nowCase);
+                    System.out.println("전 버튼 " + leftPage);
+                    System.out.println("후 버튼 " + rightPage);
+                    System.out.println("하단에 나온 페이지 " + displayPage);
+
+                    model.addAttribute("allPage", allPage);
+                    model.addAttribute("nowCase", nowCase);
+                    model.addAttribute("allCase", allCase);
+                    model.addAttribute("leftPage", leftPage);
+                    model.addAttribute("rightPage", rightPage);
+                    model.addAttribute("displayPage", displayPage);
+
+                    //시작페이지처리
+                    start = (Integer.parseInt(page)-1)*10;
+
+            //내 소설 리스트
+            List<NovelVO> novelList = profillMapper.getProfillNovelList(user,start);
+            model.addAttribute("novelList", novelList);
+
             //보여줄 유저 데이터 확보(게스트는 프로필+사진)
             String who;
             UserVO profillData;
             ArrayList<ReplyVO> replyVOS;
 
             //프로필 데이터 입력
-            if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me"; replyVOS = profillMapper.getMyAllReply(u_num); model.addAttribute("replyVOS", replyVOS);} //자신
-            else                  { profillData = profillMapper.getMyself(user);   who="you";} //게스트
+            if(user.equals(u_num))  //자신
+            {
+                profillData = profillMapper.getProfill(u_num);
+                who="me";
 
-            //페이징 처리
-            if(page == null || page == "0")                     {page    = "1";   }
-            else{
-                if(manageService.isInteger(page) == false){page = "1"; }
+                count = profillMapper.getProfillNoveCnt(user);
+
+                pageingService.setNowPage(pageR);
+                pageingService.setTotalCount(count);
+
+                allPage     = pageingService.getAllPage();
+                nowCase     = pageingService.getNowCase();
+                allCase     = pageingService.getAllCase();
+                leftPage    = pageingService.getLeftPage();
+                rightPage   = pageingService.getRightPage();
+                displayPage = pageingService.getDisplayPage();
+
+                System.out.println("댓글 전채 간격 " + allCase);
+                System.out.println("댓글 현재 간격 " + nowCase);
+                System.out.println("댓글 전 버튼 " + leftPage);
+                System.out.println("댓글 후 버튼 " + rightPage);
+                System.out.println("댓글 하단에 나온 페이지 " + displayPage);
+
+                model.addAttribute("allPage", allPage);
+                model.addAttribute("nowCase", nowCase);
+                model.addAttribute("allCase", allCase);
+                model.addAttribute("leftPage", leftPage);
+                model.addAttribute("rightPage", rightPage);
+                model.addAttribute("displayPage", displayPage);
+
+                //시작페이지처리
+                start = (Integer.parseInt(page)-1)*10;
+
+                replyVOS = profillMapper.getMyAllReply(u_num,start);
+                model.addAttribute("replyVOS", replyVOS);
             }
-            int count = profillMapper.getProfillNoveCnt(user);
-
-            pageingService.setNowPage(page);
-            pageingService.setTotalCount(count);
-
-            int allPage     = pageingService.getAllPage();
-            int nowCase     = pageingService.getNowCase();
-            int allCase     = pageingService.getAllCase();
-            int leftPage    = pageingService.getLeftPage();
-            int rightPage   = pageingService.getRightPage();
-            int displayPage = pageingService.getDisplayPage();
-
-            System.out.println("전채 간격 " + allCase);
-            System.out.println("현재 간격 " + nowCase);
-            System.out.println("전 버튼 " + leftPage);
-            System.out.println("후 버튼 " + rightPage);
-            System.out.println("하단에 나온 페이지 " + displayPage);
-
-            model.addAttribute("allPage", allPage);
-            model.addAttribute("nowCase", nowCase);
-            model.addAttribute("allCase", allCase);
-            model.addAttribute("leftPage", leftPage);
-            model.addAttribute("rightPage", rightPage);
-            model.addAttribute("displayPage", displayPage);
-
-            //시작페이지처리
-            int start = (Integer.parseInt(page)-1)*10;
-
-            //내 소설 리스트
-            List<NovelVO> novelList = profillMapper.getProfillNovelList(user,start);
-            model.addAttribute("novelList", novelList);
+            else { profillData = profillMapper.getMyself(user); who="you"; }//게스트
 
 
             model.addAttribute("profillData", profillData);

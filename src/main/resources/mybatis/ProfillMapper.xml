@@ -78,6 +78,7 @@
         on A.r_num = F.r_rnum
         where A.u_num = #{u_num}
         order by r_date desc
+        limit #{start},10
     </select>
 </mapper>
 
