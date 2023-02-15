@@ -39,70 +39,39 @@
                     <li><a href="#">소설관리</a></li>
                     <li><a href="#">공지</a></li>
                 </ul>
-                <div class="masterSearch">
-                    <div class="leftSearchSpace">
-                        <select name="searchOtp" id="searchOtp">
-                            <option value="user_nickname">닉네임</option>
-                            <option value="novel_name">소설제목</option>
-                            <option value="hashtag">태그</option>
-                        </select>
-                        <input type="text" id="searchSpace">
-                    </div>
-                    <div class="rightSearchSpace">
-                        <button id="masterSearchbtn">검색</button>
-                    </div>
-                </div>
-                <div class="masterSort">
-                    <div class="leftSearchSpace">
-                        <select name="sortOtp" id="sortOtp">
-                            <option value="date_up">신고일(최근순)</option>
-                            <option value="date_down">신고일(오래된순)</option>
-                            <option value="w_up">신고수(오름차순)</option>
-                            <option value="w_down">신고수(내림차순)</option>
-                        </select>
-                    </div>
+
+                <div class="GongiSort ">
+                    <div class="gongjiGo"><a href="">공지사항</a></div>
+                    <div class="eventGo"><a href="">이벤트</a></div>
                 </div>
 
-                <div class="masterChoiceSwitch">▼ PD픽 리스트</div>
-                <ul class="masterChoice">
-                    <li>
-                        <div class="pdChoiceName maxHightOpt1">1. 소설명</div>
-                        <div class="pdChoiceBtnZone"><button class="delPDpick">삭제</button> </div>
-                    </li>
-                    <li>
-                        <div class="pdChoiceName maxHightOpt1">1. 소설명</div>
-                        <div class="pdChoiceBtnZone"><button class="delPDpick">삭제</button> </div>
-                    </li>
-                </ul>
-
-                <div class="master_novelManagement">
-                    <ul class="novelManagement_List">
+                <div class="master_Gonji">
+                    <ul class="gongji_List">
                         <li class="borderLine_black">
-                            <div class="picSide">
-                                <img src="../img/nover_cover.jpg" alt="북커버">
+                            <div class="gogji_number">1.</div>
+                            <div class="gogji_title"><a href="#">노블넷의 새로운 공지입니다</a></div>
+                            <div class="gogji_date">2023.01.01</div>
+                            <div class="gogji_button">
+                                <button class="update_gongji">수정</button>
+                                <button class="delete_gongji">삭제</button>
                             </div>
-                            <div class="mw_LeftSide">
-                                <div class="mw_titleLine">
-                                    <div class="mw_novelTitle">제목입니다</div>
-                                </div>
-                                <div class="mw_profillLine">
-                                    <div class="mw_mailData">
-                                        닉네임
-                                        <span>(z1104@twidle.com)</span>
-                                    </div>
-                                    <div class="mw_miniFrame mw_good">추천 100</div>
-                                    <div class="mw_miniFrame mw_viww">1000 뷰</div>
-                                    <div class="mw_miniFrame mw_stop">50 신고</div>
-                                </div>
-                                <div class="mw_novelPri maxHightOpt4">소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리</div>
-                                <div class="mw_noveltag maxHightOpt1">태그, 리스트, 옙</div>
+                        </li>
+                    </ul>
+                    <ul class="event_List">
+                        <li>
+                            <a href="#"><img src="../img/bag_1.jpg" alt="이벤트"></a>
+                            <div class="event_manage">
+                                <div class="event_date">2024 .03 .03</div>
+                                <button class="delete_gongji">삭제</button>
+                                <button class="update_gongji">수정</button>
                             </div>
-                            <div class="mw_SwitchSide borderLeft_black">
-                                <button class="mw_PdPickBtn">Pd픽 선정</button>
-                                <button class="mw_ImgChangeBtn">이미지 변경</button>
-                                <button class="mw_novelStopBtn">소설 정지</button>
-                                <button class="mw_WarnningDelBtn">정지 해제</button>
-                                <button class="mw_UserDelBtn">유저 정지</button>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../img/bag_1.jpg" alt="이벤트"></a>
+                            <div class="event_manage">
+                                <div class="event_date">2024 .03 .03</div>
+                                <button class="delete_gongji">삭제</button>
+                                <button class="update_gongji">수정</button>
                             </div>
                         </li>
                     </ul>

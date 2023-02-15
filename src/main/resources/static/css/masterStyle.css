@@ -1,4 +1,3 @@
-@charset "utf-8";
 
 /* 마스터 페이지 */
 /* border선 색상용 */
@@ -37,8 +36,9 @@
 
 /* 신고목록 관리 페이지 틀 옵션 */
 .masterFrame {width: 1200px; margin: auto; }
-.masterMenu {width: 100%-5px; display: flex; padding-left: 5px; margin-bottom: 10px; box-sizing: border-box;}
-.masterMenu >li {width: 15%; background-color: rgb(77, 75, 74); font-size: 20px; text-align: center; font-weight: bold; height: 50px; line-height: 50px; margin: 5px 10px 5px 0px; border-radius: 15px;  box-sizing: border-box; color: rgb(250, 250, 250);}
+.masterMenu {width: 80%; display: flex; padding-left: 10px;  box-sizing: border-box; margin-top: 30px; margin-bottom: 20px;  margin-left: 19%;}
+.masterMenu >li {width: 15%; background-color: rgb(77, 75, 74); font-size: 19px; text-align: center; font-weight: bold; height: 50px; line-height: 50px; margin: 5px 10px 5px 0px; border-radius: 15px;  box-sizing: border-box; color: rgb(250, 250, 250);}
+.masterMenu >li>a {color: white;}
 .masterMenu >li:hover {background-color: rgb(187, 58, 58);;}
 
 .warning_memo >li {width: 100%; box-sizing: border-box; display: flex; margin-bottom: 10px; border-radius: 10px;}
@@ -102,3 +102,35 @@
 .mw_SwitchSide .levelChangeZone #levelChange  {width: 60px; height: 25px;  box-sizing: border-box; padding-top: 3px; font-size: 15px; padding-bottom: 3px; border-radius: 5px;}
 .mw_SwitchSide .levelChangeZone .levelChangeOK{width: 35px; height: 22px; border: 0px; background-color: #333; color: white; box-sizing: border-box; border-radius: 5px; }
 
+
+
+
+/* 공지 게시판 */
+.GongiSort                     {width: 100%; height: 40px; line-height: 40px; margin-bottom: 10px; margin-top: 50px;}
+.GongiSort .gongjiGo           {width: 100px; height: 100%; float: left; font-size: 20px; text-align: center; background-color: rgb(102, 61, 214); border-radius: 10px; font-weight: bold; margin-left: 5%;}
+.GongiSort .gongjiGo>a         {color: white;}
+.GongiSort .eventGo            {width: 100px; height: 100%; float: left; font-size: 20px; text-align: center; background-color: rgb(61, 132, 214);  border-radius: 10px; font-weight: bold; margin-left: 10px;}
+.GongiSort .eventGo>a          {color: white;}
+
+.gongji_List                   {width: 100%; box-sizing: border-box; border-radius: 10px; padding: 10px; }
+.gongji_List >li               {width: 90%;  box-sizing: border-box; display: flex; margin-bottom: 10px; border-radius: 5px; margin-left: 5%; margin-right: 5%;}
+.gongji_List >li .gogji_number {width: 30px; line-height: 35px; border-right: 2px solid rgb(77, 76, 75); text-align: center;}
+.gongji_List >li .gogji_title  {width: 80%; line-height: 35px; text-align: left; margin-left: 20px; }
+.gongji_List >li .gogji_title:hover  {font-weight:bold; color: rgb(228, 83, 83);}
+.gongji_List >li .gogji_date   {width: 100px; line-height: 35px; border-left: 2px solid rgb(77, 76, 75); text-align: center; margin-left: 55px; float: right; font-size: 14px;}
+.gongji_List >li .gogji_button {width: 100px; line-height: 35px; border-left: 2px solid rgb(77, 76, 75); text-align: center; margin-left: 10px; float: right; }
+.gongji_List >li .gogji_button>button {width: 40px; height: 30px; margin-top: 2px; line-height: 25px; text-align: center; float: left; border: 0px; margin-left: 3px;}
+.gongji_List >li .gogji_button .update_gongji {background-color: rgb(143, 221, 123); color: rgb(37, 37, 37); font-weight: bold; border-radius: 7px;}
+.gongji_List >li .gogji_button .delete_gongji {background-color: rgb(228, 83, 83); color: rgb(37, 37, 37); font-weight: bold; border-radius: 7px;}
+.gongji_List >li .gogji_button>button:hover {border: 3px solid rgb(47, 51, 37);}
+
+.event_List                   {width: 100%; box-sizing: border-box; border-radius: 10px; padding: 10px; }
+.event_List >li               {width: 90%;  box-sizing: border-box; display: block; margin-bottom: 20px; border-radius: 5px; margin-left: 5%; margin-right: 5%;}
+.event_List >li>a>img           {width: 100%; height: 160px;}
+.event_List >li .event_manage {width: 100%; height: 30px; background-color: gainsboro;}
+.event_List >li .event_manage .event_date    {width: 80%; float: left; margin-left: 10px; height: 100%; line-height: 30px; font-weight:bolder;}
+
+.event_List >li .event_manage>button {width: 40px; height: 25px; margin-top: 2px; line-height: 27px; text-align: center; float: right; border: 0px; margin-right: 5px; font-weight: bold; border-radius: 7px; box-sizing: border-box;}
+.event_List >li .event_manage .update_gongji {background-color: rgb(143, 221, 123); color: rgb(37, 37, 37); }
+.event_List >li .event_manage .delete_gongji {background-color: rgb(228, 83, 83); color: rgb(37, 37, 37); }
+.event_List >li .event_manage>button:hover {background-color: #f5eb69;}
