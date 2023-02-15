@@ -153,18 +153,17 @@ public class UserController {
             TagVO tvo = profillMapper.likeTagAndRcnt(user);
             model.addAttribute("tvo",tvo);
 
-            //내 소설 리스트
-            List<NovelVO> novelList = profillMapper.getProfillNovelList(user);
-            model.addAttribute("novelList", novelList);
-
             //보여줄 유저 데이터 확보(게스트는 프로필+사진)
             String who;
             UserVO profillData;
             ArrayList<ReplyVO> replyVOS;
 
+            //프로필 데이터 입력
+            if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me"; replyVOS = profillMapper.getMyAllReply(u_num); model.addAttribute("replyVOS", replyVOS);} //자신
+            else                  { profillData = profillMapper.getMyself(user);   who="you";} //게스트
 
             //페이징 처리
-            if(page    == null)                     {page    = "1";   }
+            if(page == null || page == "0")                     {page    = "1";   }
             else{
                 if(manageService.isInteger(page) == false){page = "1"; }
             }
@@ -196,10 +195,10 @@ public class UserController {
             //시작페이지처리
             int start = (Integer.parseInt(page)-1)*10;
 
+            //내 소설 리스트
+            List<NovelVO> novelList = profillMapper.getProfillNovelList(user,start);
+            model.addAttribute("novelList", novelList);
 
-            //프로필 데이터 입력
-            if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me"; replyVOS = profillMapper.getMyAllReply(u_num); model.addAttribute("replyVOS", replyVOS);} //자신
-            else                  { profillData = profillMapper.getMyself(user);   who="you";} //게스트
 
             model.addAttribute("profillData", profillData);
             model.addAttribute("who", who);

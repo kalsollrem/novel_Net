@@ -179,7 +179,7 @@ public class NovelController {
     {
         System.out.println("유저번호 :"+session.getAttribute("U_NUM") +  "\n 소설번호 : " + n_num);
 
-        if (page == null || page =="")
+        if (page == null || page =="" ||page=="0")
         {
             page = "1";
         }
@@ -461,7 +461,7 @@ public class NovelController {
                             @RequestParam(value = "type",   required = false) String type,
                             HttpServletRequest request)throws Exception{
 
-        if (page == null || manageService.isInteger(page) == false)
+        if (page == null || manageService.isInteger(page) == false || page=="0" || page=="")
         {
             page = "1";
         }
@@ -1002,7 +1002,7 @@ public class NovelController {
         }
 
 
-        if(page    == null)                     {page    = "1";   }
+        if(page    == null || page == "0" ||page==""){page    = "1";   }
         else{
           if(manageService.isInteger(page) == false){page = "1"; }
         }

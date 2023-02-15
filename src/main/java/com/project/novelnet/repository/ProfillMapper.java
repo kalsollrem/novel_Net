@@ -18,7 +18,7 @@ public interface ProfillMapper
     TagVO likeTagAndRcnt(@Param("u_num") String u_num);
 
     //프로필 주인의 소설
-    List<NovelVO> getProfillNovelList(@Param("u_num") String u_num);
+    List<NovelVO> getProfillNovelList(@Param("u_num") String u_num,@Param("start") int start);
 
     //프로필 주인의 소설 갯수 새기
     @Select("select count(n_num) from novel where u_num = #{u_num} and n_stop<=5")

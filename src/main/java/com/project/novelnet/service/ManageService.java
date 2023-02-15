@@ -7,8 +7,8 @@ public class ManageService {
     //정수 확인 클래스
     public boolean isInteger(String strValue) {
         try {
-            Integer.parseInt(strValue);
-            return true;
+            if(Integer.parseInt(strValue)>=0) {return true;}
+            else                              {return false;}
         } catch (NumberFormatException ex) {
             return false;
         }

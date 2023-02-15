@@ -52,6 +52,7 @@
             n_stop <![CDATA[ <= ]]> 5
         order by
             t desc
+        limit #{start},10
     </select>
 
 

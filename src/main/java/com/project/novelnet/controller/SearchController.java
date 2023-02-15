@@ -42,7 +42,7 @@ public class SearchController
 
         if(keyword == null)                   {keyword = "";    }
 
-        if(page    == null)                   {page    = "1";   }
+        if(page    == null ||page=="0" ||page=="")      {page    = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
 
         if(sort==null)                        {sort  = "n_date";}  //날짜
@@ -295,7 +295,7 @@ public class SearchController
         }
 
         //페이지
-        if(page    == null)                             {page = "1";   }
+        if(page    == null || page=="0" ||page=="")     {page = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
 
 
