@@ -55,7 +55,7 @@
                                     <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
                                         <div class="st_title" th:title="${novelList.n_title}" th:text="${novelList.n_title}">소설제목</div>
                                     </a>
-                                    <div class="st_writter" th:text="${novelList.nick}">작가명</div>
+                                    <div class="st_writter"><a th:href="@{/novelnet/profill(user=${novelList.u_num})}" th:text="${novelList.nick}"></a></div>
                                     <div class="delete_button"><img src="../img/delete_button.png" alt="삭제" th:id="${novelList.n_num}" class="delete_button_num"></div>
                                 </div>
                                 <div class="searched_pri" th:title="${novelList.n_introduction}" th:classappend="overLineTypeC" th:text="${novelList.n_introduction}">

@@ -325,8 +325,11 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .search_list .search_novel .novel_data {height: 100%; width: 1075px;  float: left; margin-left: 25px;}
 .search_list .search_novel .novel_data .searched_title { width: 100%; height: 40px; line-height: 40px; }
-.searched_title .st_title {height: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left;}
-.searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px;}
+.searched_title .st_title {height: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left; max-width: 60%; max-height:40px;
+                           overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.searched_title .st_writter {height: 100%; line-height: 52px; font-size: 15px; color: gray; float: left; margin-left: 10px;
+                             max-width: 38%; max-height:40px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.searched_title .st_writter>a {color: gray; line-height: 52px; font-size: 15px;}
 
 
 .search_list .search_novel .novel_data .searched_tag {width: 100%; height: 40px; overflow-y: hidden; display: inline-block; position: relative;}
@@ -623,7 +626,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .book_list .search_novel .novel_data .book_next>a {font-size: 13px; color: white; text-align: center;}
 
 .book_list .search_novel .novel_data .no_update {width: 100px;  height: 30px; float: right;
-    margin-right: 5px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
+    margin-right: 3px; margin-top: 7px; border: 1px solid silver; font-size: 13px;
     text-align: center; line-height: 30px; border-radius:0.2em;}
 
 

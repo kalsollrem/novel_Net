@@ -41,7 +41,7 @@
                                     <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}" onerror="this.src='../img/write_cover.jpg'"></span>
                                     <span class="novel_title overLineTypeA" th:title="${pickList.n_title}" th:text="${pickList.n_title}"></span>
                                 </a>
-                                <span class="writer_name overLineTypeA" th:text="${pickList.nick}">작가명</span>
+                                <span class="writer_name overLineTypeA"><a th:href="@{/novelnet/profill(user=${pickList.u_num})}" th:text="${pickList.nick}"></a></span>
                             </li>
                         </th:block>
                         <!-- 5개로 늘리면 맞음 -->
@@ -63,7 +63,7 @@
                                     <a class="overLineTypeA" th:title="${bestCount.n_title}" th:href="@{/novelnet/novel(n_num=${bestCount.n_num},page=1,sort='asc')}"><h3 th:text="${bestCount.n_title}">제목</h3></a>
                                 </div>
                                 <div class="writer_name overLineTypeA">
-                                    <h4 class="overLineTypeA" th:text="${bestCount.nick}">작가</h4>
+                                    <h4 class="overLineTypeA"><a th:href="@{/novelnet/profill(user=${bestCount.u_num})}" th:text="${bestCount.nick}"></a></h4>
                                 </div>
                                 <div class="novel_tags">
                                     <h6 class="overLineTypeC" th:title="${bestCount.n_introduction}" th:text="${bestCount.n_introduction}">내용</h6>
@@ -82,7 +82,7 @@
                                     <a class="overLineTypeA" th:title="${bestGood.n_title}" th:href="@{/novelnet/novel(n_num=${bestGood.n_num},page=1,sort='asc')}"><h3 th:text="${bestGood.n_title}">제목</h3></a>
                                 </div>
                                 <div class="writer_name overLineTypeA">
-                                    <h4 class="overLineTypeA" th:text="${bestGood.nick}">작가</h4>
+                                    <h4 class="overLineTypeA" ><a th:href="@{/novelnet/profill(user=${bestGood.u_num})}" th:text="${bestGood.nick}"></a></h4>
                                 </div>
                                 <div class="novel_tags">
                                     <h6 class="overLineTypeC" th:title="${bestGood.n_introduction}" th:text="${bestGood.n_introduction}">내용</h6>
@@ -101,7 +101,7 @@
                                     <a class="overLineTypeA" th:title="${bestBookmark.n_title}" th:href="@{/novelnet/novel(n_num=${bestBookmark.n_num},page=1,sort='asc')}"><h3 class="overLineTypeA" th:text="${bestBookmark.n_title}">제목</h3></a>
                                 </div>
                                 <div class="writer_name">
-                                    <h4 class="overLineTypeA" th:text="${bestBookmark.nick}">작가</h4>
+                                    <h4 class="overLineTypeA" ><a th:href="@{/novelnet/profill(user=${bestBookmark.u_num})}" th:text="${bestBookmark.nick}"></a></h4>
                                 </div>
                                 <div class="novel_tags">
                                     <h6 class="overLineTypeC" th:title="${bestBookmark.n_introduction}" th:text="${bestBookmark.n_introduction}">내용</h6>
@@ -121,7 +121,7 @@
                                         <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}"  onerror="this.src='../img/write_cover.jpg'"></span>
                                         <span class="novel_title" th:title="${pickList.n_title}" th:text="${pickList.n_title}"></span>
                                     </a>
-                                    <span class="writer_name" th:text="${pickList.nick}">작가명</span>
+                                    <span class="writer_name" ><a th:href="@{/novelnet/profill(user=${pickList.u_num})}" th:text="${pickList.nick}"></a></span>
                                 </div>
                             </li>
                         </th:block>
