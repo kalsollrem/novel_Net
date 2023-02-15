@@ -8,16 +8,10 @@ $(function(){
     let page;
 
     //주소값 없을시
-    try{
-        newOld      = url.get('newOld').toString();
-        category    = url.get('category').toString();
-        page        = url.get('page').toString();
-    }catch (err)
-    {
-        newOld       = "desc";
-        category     = "all";
-        page         = "1";
-    }
+    try{newOld     = url.get('newOld').toString();}   catch (e) {newOld  = "desc"}
+    try{category   = url.get('category').toString();} catch (e) {category  = "all"}
+    try{page       = url.get('page').toString();}     catch (e) {page  = "1"}
+
 
     //검색어칸 설정
     try {
@@ -26,11 +20,6 @@ $(function(){
     }catch (e) {
         keyword = "";
     }
-
-    console.log(keyword);
-    console.log(newOld);
-    console.log(category);
-    console.log(page);
 
 
     //메뉴 css설정
@@ -49,6 +38,10 @@ $(function(){
         $("#book_new").addClass('book_none');
         $("#book_fin").addClass('book_none');
     }
+
+    //페이징(CSS)
+    $("#cardNum_"+page+">a").css('font-weight', 'bold');
+    $("#cardNum_"+page+">a").css('color', 'red');
 
     //메뉴 클릭
     $(".book_all").click(function()

@@ -18,6 +18,20 @@ $(function (){
     try       {type   = url.get('type').toString();}
     catch (e) {type  = 'card'}
 
+    //페이징(글)
+    let page;
+    try       {page   = url.get('page').toString();}
+    catch (e) {page  = 1}
+    $("#cardNum_"+page+">a").css('font-weight', 'bold');
+    $("#cardNum_"+page+">a").css('color', 'red');
+
+    //페이징(댓글)
+    let pageR;
+    try       {pageR   = url.get('pageR').toString();}
+    catch (e) {pageR  = 1}
+    $("#cardNumR_"+pageR+">a").css('font-weight', 'bold');
+    $("#cardNumR_"+pageR+">a").css('color', 'red');
+
     //현재주소 명칭
     var renewURL = location.pathname ;
 

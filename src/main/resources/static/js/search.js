@@ -33,6 +33,12 @@ $(function (){
     catch (e)   { keyword = ""; }
     $("#search").val(keyword);
 
+    //페이징(글)
+    let page;
+    try       {page   = url.get('page').toString();}
+    catch (e) {page  = 1}
+    $("#cardNum_"+page+">a").css('font-weight', 'bold');
+    $("#cardNum_"+page+">a").css('color', 'red');
 
     if (sort == "view"){
         $('.date_date>img').attr('src','../img/date_off.png');

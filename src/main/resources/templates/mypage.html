@@ -173,12 +173,12 @@
                                 </th:block>
                             </div>
                             <div class="paging_num">
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}==0"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+1))}" th:text="(${nowCase}-1)*5+1">1</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}>=(${nowCase}-1)*5+1"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+1))}" th:text="(${nowCase}-1)*5+1">1</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+2)" th:if="${allPage}>=(${nowCase}-1)*5+2"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+2))}" th:text="(${nowCase}-1)*5+2">2</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+3)" th:if="${allPage}>=(${nowCase}-1)*5+3"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+3))}" th:text="(${nowCase}-1)*5+3">3</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+4)" th:if="${allPage}>=(${nowCase}-1)*5+4"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+4))}" th:text="(${nowCase}-1)*5+4">4</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+5)" th:if="${allPage}>=(${nowCase}-1)*5+5"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+5))}" th:text="(${nowCase}-1)*5+5">5</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}==0"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+1))}" th:text="(${nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${nowCase}-1)*5+1)" th:if="${allPage}>=(${nowCase}-1)*5+1"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+1))}" th:text="(${nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${nowCase}-1)*5+2)" th:if="${allPage}>=(${nowCase}-1)*5+2"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+2))}" th:text="(${nowCase}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${nowCase}-1)*5+3)" th:if="${allPage}>=(${nowCase}-1)*5+3"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+3))}" th:text="(${nowCase}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${nowCase}-1)*5+4)" th:if="${allPage}>=(${nowCase}-1)*5+4"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+4))}" th:text="(${nowCase}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${nowCase}-1)*5+5)" th:if="${allPage}>=(${nowCase}-1)*5+5"><a th:href="@{/novelnet/profill(user=${user},type='novels',page=((${nowCase}-1)*5+5))}" th:text="(${nowCase}-1)*5+5">5</a></div>
                             </div>
                             <div class="paging_right">
                                 <th:block th:if="${nowCase} < ${allCase} and ${allCase} != 0">
@@ -250,12 +250,12 @@
                                 </th:block>
                             </div>
                             <div class="paging_num">
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCaseR}-1)*5+1)" th:if="${allPageR}==0"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+1))}" th:text="(${nowCaseR}-1)*5+1">1</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCaseR}-1)*5+1)" th:if="${allPageR}>=(${nowCaseR}-1)*5+1"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+1))}" th:text="(${nowCaseR}-1)*5+1">1</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCaseR}-1)*5+2)" th:if="${allPageR}>=(${nowCaseR}-1)*5+2"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+2))}" th:text="(${nowCaseR}-1)*5+2">2</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCaseR}-1)*5+3)" th:if="${allPageR}>=(${nowCaseR}-1)*5+3"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+3))}" th:text="(${nowCaseR}-1)*5+3">3</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCaseR}-1)*5+4)" th:if="${allPageR}>=(${nowCaseR}-1)*5+4"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+4))}" th:text="(${nowCaseR}-1)*5+4">4</a></div>
-                                <div class="paging_card" th:name="'cardNum_'+((${nowCaseR}-1)*5+5)" th:if="${allPageR}>=(${nowCaseR}-1)*5+5"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+5))}" th:text="(${nowCaseR}-1)*5+5">5</a></div>
+                                <div class="paging_card" th:id="'cardNumR_'+((${nowCaseR}-1)*5+1)" th:if="${allPageR}==0"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+1))}" th:text="(${nowCaseR}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNumR_'+((${nowCaseR}-1)*5+1)" th:if="${allPageR}>=(${nowCaseR}-1)*5+1"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+1))}" th:text="(${nowCaseR}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNumR_'+((${nowCaseR}-1)*5+2)" th:if="${allPageR}>=(${nowCaseR}-1)*5+2"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+2))}" th:text="(${nowCaseR}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:id="'cardNumR_'+((${nowCaseR}-1)*5+3)" th:if="${allPageR}>=(${nowCaseR}-1)*5+3"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+3))}" th:text="(${nowCaseR}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:id="'cardNumR_'+((${nowCaseR}-1)*5+4)" th:if="${allPageR}>=(${nowCaseR}-1)*5+4"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+4))}" th:text="(${nowCaseR}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:id="'cardNumR_'+((${nowCaseR}-1)*5+5)" th:if="${allPageR}>=(${nowCaseR}-1)*5+5"><a th:href="@{/novelnet/profill(user=${user},type='reply',pageR=((${nowCaseR}-1)*5+5))}" th:text="(${nowCaseR}-1)*5+5">5</a></div>
                             </div>
                             <div class="paging_right">
                                 <th:block th:if="${nowCaseR} < ${allCaseR} and ${allCaseR} != 0">

@@ -38,6 +38,13 @@ $(function (){
     try         { doType    = url.get('doType').toString();   }
     catch (e)   { doType    = ""; }
 
+    //페이징(글)
+    let page;
+    try       {page   = url.get('page').toString();}
+    catch (e) {page  = 1}
+    $("#cardNum_"+page+">a").css('font-weight', 'bold');
+    $("#cardNum_"+page+">a").css('color', 'red');
+
 
     //정렬칸 이미지 변경
     if (sort == "view"){
