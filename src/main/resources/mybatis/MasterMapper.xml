@@ -16,6 +16,8 @@
         <id column="wU_num"  property="wU_num"/>
     </resultMap>
 
+    <!--resultType이 아니라 resultMap을 사용해 연동 -->
+    <!--신고당한 소설 리스트 -->
     <select id="novelShingo" resultMap="ShingoMap">
         SELECT A.mw_num, A.n_num, A.m_num, A.u_num, ifnull(E.u_nick, E.u_mail) as nick, A.w_why, A.mw_date,
                B.b_stop, C.n_title,
