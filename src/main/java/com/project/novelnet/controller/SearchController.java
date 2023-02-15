@@ -169,7 +169,7 @@ public class SearchController
         }
 
         //페이지
-        if(page    == null)                             {page    = "1";   }
+        if(page    == null)                             {page = "1";   }
         else{ if(manageService.isInteger(page) == false){page = "1"; } }
 
 

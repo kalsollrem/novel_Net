@@ -279,8 +279,8 @@
         select
             A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
             B.u_nick as nick,
-            ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop,
-            date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo,
+            ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop, c.n_chapters,
+            date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo, (TIMESTAMPDIFF(HOUR , Od.m_date, now()))as oldTime,
             E.All_tag
         from
             (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover
@@ -314,21 +314,24 @@
             (select u_num, u_nick from user)B
             on A.u_num = b.u_num
         left join
-            (select n_num, sum(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop  from memo where m_type='ep' group by n_num)C
+            (select n_num, sum(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop, count(case when m_type='ep' then 1 end) as n_chapters  from memo where m_type='ep' group by n_num)C
             on A.n_num = C.n_num
         left join
             (select * from (select n_num, m_date from memo order by m_date desc LIMIT 18446744073709551615) datapack group by n_num) D
             on A.n_num = D.n_num
+        left join
+            (select n_num, m_date from memo group by n_num order by m_date asc) Od
+            on A.n_num = Od.n_num
         left join
             (select n_num, group_concat(h_tag order by t_carte asc separator' ') as All_tag
             from (select n_num, t_carte, concat(<![CDATA['<div class="searched_tagcard subSearch">',h_tag,'</div>']]>)as h_tag from hashtag)tagChange
             group by n_num order by h_tag) E
             on A.n_num = E.n_num
             ) as ori
-        where All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
+        where n_chapters>0 and All_tag like CONCAT('%',#{mainTag},'%') and All_tag like CONCAT('%',#{searchTag},'%')
         <choose>
             <when test="doType.equals('newNovel')">
-                and newMemo <![CDATA[<=]]> 720
+                and oldTime <![CDATA[<=]]> 720
             </when>
         </choose>
         <choose>
