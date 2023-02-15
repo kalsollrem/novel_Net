@@ -147,7 +147,7 @@
                             <div class="paging_right">
                                 <th:block th:if="${nowCase} != ${allCase} and ${allCase} != 0">
                                     <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase})*5+1))}">▷</a></div>
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${nowCase})*5+1))}">→</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(sort=${param.sort},mainTag=${param.mainTag},searchType=${param.searchType},searchTag=${param.searchTag},keyword=${param.keyword},page=((${displayPage})))}">→</a></div>
                                 </th:block>
                             </div>
                         </div>

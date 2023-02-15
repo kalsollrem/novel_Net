@@ -41,14 +41,14 @@ public class PageingService
 
 
     public void setPageDate(){
-        //전체 페이지 갯수 25
+        //전체 페이지 갯수
         allPage = totalCount/showMemo;
         if(totalCount%showMemo != 0)
         {
             allPage = allPage+1;
         }
 
-        //전채 책장 간격 3
+        //전채 책장 간격
         allCase = allPage/dividPage;
         if(totalCount%showMemo != 0)
         {
@@ -76,13 +76,12 @@ public class PageingService
         }
 
         //마지막 페이지 용
-        if(nowCase == allCase) {
-            displayPage = allPage - (nowCase-1)*dividPage;
+        if(totalCount%showMemo == 0) {
+            displayPage = totalCount/10;
         }else
         {
-            displayPage = dividPage;
+            displayPage = totalCount/10+1 ;
         }
-
     }
 
     //Getter

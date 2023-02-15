@@ -139,9 +139,9 @@
                             <div class="paging_card" th:name="'cardNum_'+((${nowCase}-1)*5+5)" th:if="${allPage}>=(${nowCase}-1)*5+5"><a th:href="@{/novelnet/searchPlus(sort=${param.sort},mainTag=${param.mainTag},doType=${param.doType},searchTag=${param.searchTag},monopoly=${param.monopoly},page=((${nowCase}-1)*5+5))}" th:text="(${nowCase}-1)*5+5">5</a></div>
                         </div>
                         <div class="paging_right">
-                            <th:block th:if="${nowCase} != ${allCase} and ${allCase} != 0">
-                                <div class="paging_card"><a th:href="@{/novelnet/searchPlus(sort=${param.sort},mainTag=${param.mainTag},doType=${param.doType},searchTag=${param.searchTag},monopoly=${param.monopoly},page=((${nowCase}-1)*5+1))}">▷</a></div>
-                                <div class="paging_card"><a th:href="@{/novelnet/searchPlus(sort=${param.sort},mainTag=${param.mainTag},doType=${param.doType},searchTag=${param.searchTag},monopoly=${param.monopoly},page=((${nowCase}-1)*5+1))}">→</a></div>
+                            <th:block th:if="${nowCase} < ${allCase} and ${allCase} != 0">
+                                <div class="paging_card"><a th:href="@{/novelnet/searchPlus(sort=${param.sort},mainTag=${param.mainTag},doType=${param.doType},searchTag=${param.searchTag},monopoly=${param.monopoly},page=((${nowCase})*5+1))}">▷</a></div>
+                                <div class="paging_card"><a th:href="@{/novelnet/searchPlus(sort=${param.sort},mainTag=${param.mainTag},doType=${param.doType},searchTag=${param.searchTag},monopoly=${param.monopoly},page=((${displayPage})))}">→</a></div>
                             </th:block>
                         </div>
                     </div>
