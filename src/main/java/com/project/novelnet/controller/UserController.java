@@ -141,11 +141,14 @@ public class UserController {
     public String profillPage(Model model,
                               @Param("user") String user,
                               @Param("page") String page,
-                              @Param("page") String pageR,
+                              @Param("pageR") String pageR,
                               HttpSession session) throws Exception
     {
         String u_num;
         try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
+
+        //페이징용 함수
+        int count, allPage,nowCase,allCase,leftPage,rightPage,displayPage,start;
 
         //유저 존재여부 확인
         if (manageService.isInteger(user) == true && profillMapper.findProfillOK(user) == 1)
@@ -163,7 +166,6 @@ public class UserController {
             else{ if(manageService.isInteger(pageR) == false)   {pageR   = "1";}}
 
                     //소설페이징처리
-                    int count, allPage,nowCase,allCase,leftPage,rightPage,displayPage,start;
 
                     count = profillMapper.getProfillNoveCnt(user);
 
@@ -176,12 +178,6 @@ public class UserController {
                     leftPage    = pageingService.getLeftPage();
                     rightPage   = pageingService.getRightPage();
                     displayPage = pageingService.getDisplayPage();
-
-                    System.out.println("전채 간격 " + allCase);
-                    System.out.println("현재 간격 " + nowCase);
-                    System.out.println("전 버튼 " + leftPage);
-                    System.out.println("후 버튼 " + rightPage);
-                    System.out.println("하단에 나온 페이지 " + displayPage);
 
                     model.addAttribute("allPage", allPage);
                     model.addAttribute("nowCase", nowCase);
@@ -208,7 +204,7 @@ public class UserController {
                 profillData = profillMapper.getProfill(u_num);
                 who="me";
 
-                count = profillMapper.getProfillNoveCnt(user);
+                count = profillMapper.getMyReplyCnt(user);
 
                 pageingService.setNowPage(pageR);
                 pageingService.setTotalCount(count);
@@ -220,30 +216,35 @@ public class UserController {
                 rightPage   = pageingService.getRightPage();
                 displayPage = pageingService.getDisplayPage();
 
-                System.out.println("댓글 전채 간격 " + allCase);
-                System.out.println("댓글 현재 간격 " + nowCase);
-                System.out.println("댓글 전 버튼 " + leftPage);
-                System.out.println("댓글 후 버튼 " + rightPage);
-                System.out.println("댓글 하단에 나온 페이지 " + displayPage);
-
-                model.addAttribute("allPage", allPage);
-                model.addAttribute("nowCase", nowCase);
-                model.addAttribute("allCase", allCase);
-                model.addAttribute("leftPage", leftPage);
-                model.addAttribute("rightPage", rightPage);
-                model.addAttribute("displayPage", displayPage);
+                model.addAttribute("allPageR", allPage);
+                model.addAttribute("nowCaseR", nowCase);
+                model.addAttribute("allCaseR", allCase);
+                model.addAttribute("leftPageR", leftPage);
+                model.addAttribute("rightPageR", rightPage);
+                model.addAttribute("displayPageR", displayPage);
 
                 //시작페이지처리
-                start = (Integer.parseInt(page)-1)*10;
+                start = (Integer.parseInt(pageR)-1)*10;
 
                 replyVOS = profillMapper.getMyAllReply(u_num,start);
                 model.addAttribute("replyVOS", replyVOS);
             }
-            else { profillData = profillMapper.getMyself(user); who="you"; }//게스트
+            else
+            {
+                profillData = profillMapper.getMyself(user); who="you";
+
+                model.addAttribute("allPageR", 1);
+                model.addAttribute("nowCaseR", 1);
+                model.addAttribute("allCaseR", 1);
+                model.addAttribute("leftPageR", 1);
+                model.addAttribute("rightPageR", 1);
+                model.addAttribute("displayPageR", 1);
+            }//게스트
 
 
             model.addAttribute("profillData", profillData);
             model.addAttribute("who", who);
+            model.addAttribute("user", user);
             System.out.println(who +":"+ profillData);
 
             return "mypage";

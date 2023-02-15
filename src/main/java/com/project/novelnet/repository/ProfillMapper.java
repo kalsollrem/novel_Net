@@ -36,6 +36,10 @@ public interface ProfillMapper
     @Select("select u_num, u_nick , u_mail, u_pass, u_pic, u_myself, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
     UserVO getProfill(@Param("u_num") String u_num);
 
-    //리플가져오기
+    //댓글 겟스저허;
+    @Select("select count(r_num)as cnt from reply where u_num = #{u_num}")
+    public int getMyReplyCnt(@Param("u_num") String u_num);
+
+    //댓글가져오기
     ArrayList<ReplyVO> getMyAllReply(@Param("u_num") String u_num ,@Param("start") int start);
 }
