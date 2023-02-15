@@ -20,6 +20,10 @@ public interface ProfillMapper
     //프로필 주인의 소설
     List<NovelVO> getProfillNovelList(@Param("u_num") String u_num);
 
+    //프로필 주인의 소설 갯수 새기
+    @Select("select count(n_num) from novel where u_num = #{u_num} and n_stop<=5")
+    public int getProfillNoveCnt(@Param("u_num") String u_num);
+
     //프로필 존재확인
     @Select("select count(u_num) from user where u_num = #{u_num}")
     public int findProfillOK(@Param("u_num") String u_num);
@@ -28,6 +32,7 @@ public interface ProfillMapper
     @Select("select u_myself,u_pic,u_nick, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
     UserVO getMyself(@Param("u_num") String u_num);
 
+    //자기소개(나)
     @Select("select u_num, u_nick , u_mail, u_pass, u_pic, u_myself, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
     UserVO getProfill(@Param("u_num") String u_num);
 

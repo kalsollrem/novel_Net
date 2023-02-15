@@ -8,6 +8,7 @@ import com.project.novelnet.repository.ProfillMapper;
 import com.project.novelnet.repository.UserMapper;
 import com.project.novelnet.service.MailService;
 import com.project.novelnet.service.ManageService;
+import com.project.novelnet.service.PageingService;
 import com.project.novelnet.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class UserController {
 
     @Autowired
     private ManageService manageService;
+
+    @Autowired
+    private PageingService pageingService;
 
     //아이디 중복 검사
     @PostMapping("/idCheck")
@@ -136,11 +140,11 @@ public class UserController {
     @GetMapping("/novelnet/profill")
     public String profillPage(Model model,
                               @Param("user") String user,
+                              @Param("page") String page,
                               HttpSession session) throws Exception
     {
         String u_num;
-        try {u_num= (String)session.getAttribute("U_NUM").toString();}
-        catch (Exception e) {u_num = null;}
+        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
 
         //유저 존재여부 확인
         if (manageService.isInteger(user) == true && profillMapper.findProfillOK(user) == 1)
@@ -158,6 +162,42 @@ public class UserController {
             UserVO profillData;
             ArrayList<ReplyVO> replyVOS;
 
+
+            //페이징 처리
+            if(page    == null)                     {page    = "1";   }
+            else{
+                if(manageService.isInteger(page) == false){page = "1"; }
+            }
+            int count = profillMapper.getProfillNoveCnt(user);
+
+            pageingService.setNowPage(page);
+            pageingService.setTotalCount(count);
+
+            int allPage     = pageingService.getAllPage();
+            int nowCase     = pageingService.getNowCase();
+            int allCase     = pageingService.getAllCase();
+            int leftPage    = pageingService.getLeftPage();
+            int rightPage   = pageingService.getRightPage();
+            int displayPage = pageingService.getDisplayPage();
+
+            System.out.println("전채 간격 " + allCase);
+            System.out.println("현재 간격 " + nowCase);
+            System.out.println("전 버튼 " + leftPage);
+            System.out.println("후 버튼 " + rightPage);
+            System.out.println("하단에 나온 페이지 " + displayPage);
+
+            model.addAttribute("allPage", allPage);
+            model.addAttribute("nowCase", nowCase);
+            model.addAttribute("allCase", allCase);
+            model.addAttribute("leftPage", leftPage);
+            model.addAttribute("rightPage", rightPage);
+            model.addAttribute("displayPage", displayPage);
+
+            //시작페이지처리
+            int start = (Integer.parseInt(page)-1)*10;
+
+
+            //프로필 데이터 입력
             if(user.equals(u_num)){ profillData = profillMapper.getProfill(u_num); who="me"; replyVOS = profillMapper.getMyAllReply(u_num); model.addAttribute("replyVOS", replyVOS);} //자신
             else                  { profillData = profillMapper.getMyself(user);   who="you";} //게스트
 
