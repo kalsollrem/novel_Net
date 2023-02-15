@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.novelnet.repository.MasterMapper">
+    <resultMap type="HashMap" id="ShingoMap">
+        <id column="mw_num"  property="mw_num"/>
+        <id column="n_num"   property="n_num"/>
+        <id column="m_num"   property="m_num"/>
+        <id column="u_num"   property="u_num"/>
+        <id column="nick"    property="nick"/>
+        <id column="w_why"   property="w_why"/>
+        <id column="mw_date" property="mw_date"/>
+        <id column="b_stop"  property="b_stop"/>
+        <id column="n_title" property="n_title"/>
+        <id column="wNick"   property="wNick"/>
+        <id column="U_LEVEL" property="U_LEVEL"/>
+        <id column="wU_num"  property="wU_num"/>
+    </resultMap>
+
+    <select id="novelShingo" resultMap="ShingoMap">
+        SELECT A.mw_num, A.n_num, A.m_num, A.u_num, ifnull(E.u_nick, E.u_mail) as nick, A.w_why, A.mw_date,
+               B.b_stop, C.n_title,
+               D.U_NUM as wU_num, D.U_NICK as wNick, D.U_LEVEL
+        FROM m_warning A
+        left join (select m_num, b_stop from memo) B
+        on A.m_num = B.m_num
+        left join (select n_title, n_num, u_num as writter from novel)C
+        on A.n_num = c.n_num
+        LEFT JOIN (SELECT U_NUM, U_NICK, U_LEVEL from user) D
+        ON c.writter = D.u_num
+        LEFT JOIN (SELECT U_NUM, U_NICK, u_mail from user) E
+        ON A.u_num = E.u_num;
+    </select>
+
+</mapper>
+

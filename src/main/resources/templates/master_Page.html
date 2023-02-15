@@ -1,38 +1,15 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>노벨넷</title>
+        <title>관리자 페이지</title>
         <link rel="stylesheet" href="../css/style.css">
         <script src="../js/jquery-3.6.0.min.js"></script>
-        <script src="../js/js.js"></script>
     </head>
     <body>
+        <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
         <div class="wrap">
-            <header> 
-                <div class="logo">
-                    <img src="../img/logo.png" alt="소설넷">
-                </div>
-                <ul class="menu">
-                    <li><a href="#">자유</a></li>
-                    <li><a href="#">유료</a></li>
-                    <li><a href="#">랭킹</a></li>
-                    <li><a href="#">내서재</a></li>
-                </ul>
-                <div class="myInfo">
-                    <ul class="info_front">
-                        <li><a href="#"><img src="../img/write.png"alt="글쓰기"></a></li>
-                        <li><a href="#"><img src="../img/search.png"alt="검색"></a></li>
-                        <li><span><a href="#"><img src="../img/profill.png"alt="프로필"></a></span></li>
-                    </ul>
-                    <ul class="info_menu">
-                        <li><span class="infobox dragNone" id="login_on">로그인</span></li>
-                        <li><span class="infobox dragNone" id="join_on">회원가입</span></li>
-                        <li><span class="infobox dragNone" id="pass_find_on">아이디/패스워드 찾기</span></li>
-                        <li><span class="infobox dragNone" id="gongji_on">공지사항</span></li>
-                    </ul>
-                </div>
-            </header>
+            <header th:replace="/include/header.html :: header"></header>
             <div class="masterFrame">
                 <ul class="masterMenu">
                     <li><a href="#">소설 신고 목록</a></li>
@@ -59,11 +36,13 @@
                     <ul class="warning_memo">
                         <li class="borderLine_black">
                             <div class="mw_LeftSide">
-                                <div class="mw_shingoLine">
+                                <div class="mw_shingoLine" >
                                     <div class="SingoName">신고자</div>
                                 </div>
                                 <div class="mw_titleLine">
-                                    <div class="mw_novelTitle">제목입니다</div>
+                                    <th:block th:each="list : ${list}">
+                                        <div class="mw_novelTitle" th:text="${list.n_title}">제목입니다</div>
+                                    </th:block>
                                     <div class="mw_memoTitel">소제목입니다</div>
                                 </div>
                                 <div class="mw_profillLine">
