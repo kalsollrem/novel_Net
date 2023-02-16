@@ -4,7 +4,6 @@ import com.project.novelnet.repository.MasterMapper;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
 import org.apache.ibatis.annotations.Param;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 
 @Controller
@@ -80,7 +77,7 @@ public class MasterController {
 
 
         model.addAttribute("list",list);
-        return "master_Page";
+        return "master_novelDeclaration";
     }
 
 
