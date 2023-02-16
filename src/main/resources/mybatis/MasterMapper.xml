@@ -14,39 +14,39 @@
         <id column="wNick"   property="wNick"/>
         <id column="U_LEVEL" property="U_LEVEL"/>
         <id column="wU_num"  property="wU_num"/>
+        <id column="wU_mail"  property="wU_mail"/>
     </resultMap>
 
     <!--resultType이 아니라 resultMap을 사용해 연동 -->
     <!--신고당한 소설 리스트 -->
     <select id="novelShingo" resultMap="ShingoMap">
-        SELECT A.mw_num, A.n_num, A.m_num, A.u_num, ifnull(E.u_nick, E.u_mail) as nick, A.w_why, date_format(A.mw_date, '%y. %m. %d. (%H:%i)')as mw_date,
+        SELECT A.mw_num, A.n_num, A.m_num, A.u_num, E.nick, A.w_why, date_format(A.mw_date, '%y. %m. %d. (%H:%i)')as mw_date,
                F.b_stop, C.n_title, B.m_title,
-               D.U_NUM as wU_num, D.U_NICK as wNick, D.U_LEVEL
+               D.U_NUM as wU_num, D.wNick, D.U_LEVEL ,D.wU_mail
         FROM m_warning A
         left join (select m_num, m_title from memo) B
         on A.m_num = B.m_num
         left join (select n_title, n_num, u_num as writter from novel)C
         on A.n_num = c.n_num
-        LEFT JOIN (SELECT U_NUM, U_NICK, U_LEVEL from user) D
+        LEFT JOIN (SELECT U_NUM, U_NICK as wNick, u_mail as wU_mail, U_LEVEL from user) D
         ON c.writter = D.u_num
-        LEFT JOIN (SELECT U_NUM, U_NICK, u_mail from user) E
+        LEFT JOIN (SELECT U_NUM, ifnull(u_nick, u_mail) as nick from user) E
         ON A.u_num = E.u_num
         LEFT JOIN (SELECT m_num, count(mw_num) as b_stop from m_warning group by m_num) F
         ON A.m_num = F.m_num
         <choose>
             <when test="searchType.equals('nick')">
-                WHERE BY nick = #{keyword}
+                WHERE E.nick like CONCAT('%',#{keyword},'%')
             </when>
             <when test="searchType.equals('title')">
-                WHERE BY n_title = #{keyword}
+                WHERE C.n_title like CONCAT('%',#{keyword},'%')
             </when>
             <when test="searchType.equals('wNick')">
-                WHERE BY wNick = #{keyword}
+                WHERE D.wNick like CONCAT('%',#{keyword},'%')
             </when>
             <when test="searchType.equals('novelNum')">
-                WHERE BY n_num = #{keyword}
+                WHERE A.n_num = #{keyword}
             </when>
-            <otherwise></otherwise>
         </choose>
         ORDER BY mw_date DESC
         Limit #{start},10
@@ -55,27 +55,29 @@
     <select id="novelShingoCnt" resultType="int">
         SELECT count(A.mw_num) as cnt
         FROM m_warning A
-        left join (select m_num, b_stop from memo) B
+        left join (select m_num, m_title from memo) B
         on A.m_num = B.m_num
         left join (select n_title, n_num, u_num as writter from novel)C
         on A.n_num = c.n_num
-        LEFT JOIN (SELECT U_NUM, U_NICK, U_LEVEL from user) D
+        LEFT JOIN (SELECT U_NUM, U_NICK as wNick, u_mail as wU_mail, U_LEVEL from user) D
         ON c.writter = D.u_num
-        LEFT JOIN (SELECT U_NUM, U_NICK, u_mail from user) E
+        LEFT JOIN (SELECT U_NUM, ifnull(u_nick, u_mail) as nick from user) E
         ON A.u_num = E.u_num
         LEFT JOIN (SELECT m_num, count(mw_num) as b_stop from m_warning group by m_num) F
-        ON A.m_num = F.m_num;
+        ON A.m_num = F.m_num
         <choose>
             <when test="searchType.equals('nick')">
-                WHERE BY nick = #{keyword}
+                WHERE E.nick like CONCAT('%',#{keyword},'%')
             </when>
             <when test="searchType.equals('title')">
-                WHERE BY n_title = #{keyword}
+                WHERE C.n_title like CONCAT('%',#{keyword},'%')
             </when>
             <when test="searchType.equals('wNick')">
-                WHERE BY wNick = #{keyword}
+                WHERE D.wNick like CONCAT('%',#{keyword},'%')
             </when>
-            <otherwise></otherwise>
+            <when test="searchType.equals('novelNum')">
+                WHERE A.n_num = #{keyword}
+            </when>
         </choose>
     </select>
 

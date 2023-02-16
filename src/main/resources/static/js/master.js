@@ -1,5 +1,19 @@
 $(function (){
 
+    //이메일로보기 & 닉네임으로보기 전환
+    $(".typeNick").click(function(){ $(".typeNick").hide(); $(".typeMail").show(); });
+    $(".typeMail").click(function(){ $(".typeMail").hide(); $(".typeNick").show(); });
+
+
+    //검색키
+    $("#masterSearchbtn").click(function(){
+        let keyword     = $('#searchSpace').val();
+        let searchType  = $('#searchOtp').val();
+        location.href   = '/master/novelDeclaration?searchType='+searchType+'&keyword='+keyword+'&page=1';
+    });
+
+
+
     //유저 정지 및 정지해제
     $(".mw_UserDelBtn").click(function()
     {
@@ -41,6 +55,14 @@ $(function (){
             }
         });
     });
+
+    //모아보기
+    $(".mw_novelSet").click(function()
+    {
+        location.href = '/master/novelDeclaration?searchType=novelNum&keyword='+$(this).val()+'&page=1';
+    });
+
+
 
 
 })

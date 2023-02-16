@@ -1048,12 +1048,12 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .borderLine_sky   {border: 3px solid rgb(53, 165, 230);}
 .borderLeft_sky   {border-left: 2px solid rgb(53, 165, 230);}
 
-.master_novelWarning   {display: block;} /* 소설 신고 목록 */
+.master_novelWarning   {display: block; min-height: 600px;} /* 소설 신고 목록 */
 .master_replyWarning   {display: none;} /* 댓글 신고 목록 */
 .master_userManagement {display: none;} /* 소설 신고 */
 
 /* 검색창 */
-.masterSearch {width: 500px; margin: auto; margin-bottom: 10px; box-sizing: border-box; border-radius: 5px; border: 3px solid rgb(77, 76, 75); padding: 10px; float: left;}
+.masterSearch {width: 500px; margin: auto; margin-bottom: 10px; box-sizing: border-box; border-radius: 5px; border: 3px solid rgb(77, 76, 75); padding: 10px; float: left; z-index: 50;}
 .masterSearch .leftSearchSpace {float: left;}
 .masterSearch #searchOtp   {width: 100px; height: 25px; border-radius: 5px; border: 1px solid gray; padding-left: 5px;}
 .masterSearch #searchSpace {width: 300px; height: 25px; border-radius: 5px; border: 1px solid gray; padding-left: 5px;}
@@ -1081,7 +1081,8 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .masterMenu {width: 80%; display: flex; padding-left: 10px;  box-sizing: border-box; margin-top: 30px; margin-bottom: 20px;  margin-left: 19%;}
 .masterMenu >li {width: 15%; background-color: rgb(77, 75, 74); font-size: 19px; text-align: center; font-weight: bold; height: 50px; line-height: 50px; margin: 5px 10px 5px 0px; border-radius: 15px;  box-sizing: border-box; color: rgb(250, 250, 250);}
 .masterMenu >li>a {color: white;}
-.masterMenu >li:hover {background-color: rgb(187, 58, 58);;}
+.masterMenu >li:hover {background-color: rgb(187, 58, 58);}
+.anvoerline {width: 1200px; height: 3px; margin-top: 80px}
 
 .warning_memo >li {width: 100%; box-sizing: border-box; display: flex; margin-bottom: 10px; border-radius: 10px;}
 .warning_memo >li .mw_LeftSide   {float: left; width: 88%; margin-right: 25px;}
@@ -1097,7 +1098,7 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 
 
 
-.mw_LeftSide .mw_titleLine {width: 100%-10px; margin: 5px; border: 1px solid rgb(206, 202, 202); padding: 5px; border-radius: 10px;}
+.mw_LeftSide  .mw_titleLine {width: 100%-10px; margin: 5px; border: 1px solid rgb(206, 202, 202); padding: 5px; border-radius: 10px;}
 .mw_titleLine .mw_novelTitle {width: 100%; font-size: 15px; font-weight: bold;}
 .mw_titleLine .mw_memoTitel  {width: 100%; font-size: 13px;}
 .mw_titleLine > hr {width: 100%;}
@@ -1110,6 +1111,7 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .mw_LeftSide .mw_shingoLine .SingoName {margin: 5px 0px 0px 5px; border: 1px solid rgb(206, 202, 202); padding: 3px; border-radius: 5px;}
 /* 유저 프로필 볼때 옵션 */
 .mw_shingoLine .mw_userNickName {margin: 5px 0px 0px 5px; border: 0px solid rgb(206, 202, 202); padding: 3px; padding-left: 10px; padding-right: 10px; border-radius: 5px; line-height: 200%; font-weight: bold;}
+.mw_profillLine .typeMail{display: none;}
 .mw_shingoLine .mw_userImageZone {margin: 0px 0px 0px 5px; border: 0px ; width: 40px; height: 40px;}
 .mw_shingoLine .mw_userImageZone>button {border: 0px; width: 100%; height: 100%; border: 0px;}
 .mw_shingoLine .mw_userImageZone>button>img {border: 0px; border-radius: 5px; width: 100%; height: 100%;}

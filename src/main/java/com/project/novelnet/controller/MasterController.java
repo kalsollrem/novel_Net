@@ -36,7 +36,7 @@ public class MasterController {
 
 
     //메인페이지
-    @GetMapping("/master/index")
+    @GetMapping("/master/novelDeclaration")
     public String masterIndex(Model model,
                               HttpSession session,
                               NewPageingVO newPageingVO,
@@ -57,6 +57,8 @@ public class MasterController {
         else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
 
         if(searchType == null || searchType.replace(" ","") == "")  {searchType = "";}
+        model.addAttribute("searchType",searchType);
+
         if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
 
 
