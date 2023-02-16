@@ -31,5 +31,15 @@ public interface UserMapper {
     @Select("select u_pass from user where u_mail = #{u_mail}")
     public String getLostId(@Param("u_mail")String u_mail);
 
+    //유저인증
+    @Select("select u_num from user where u_code = #{u_code}")
+    public String UesrJoinFind(@Param("u_code")String u_code);
+
+    //유저변경
+    @Update("update user set u_ok = '1', u_code = 'done' where u_num = #{u_num}")
+    public int UesrJoinEnd(@Param("u_num")String u_num);
+
+
+
 
 }

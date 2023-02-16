@@ -1,5 +1,6 @@
 package com.project.novelnet.service;
 
+import com.project.novelnet.Vo.NewPageingVO;
 import com.project.novelnet.Vo.PageingVO;
 import org.springframework.stereotype.Service;
 
@@ -93,4 +94,16 @@ public class PageingService
     public int getDisplayPage() {return displayPage;}
     public void setNowPage(String nowPage){ this.nowPage = Integer.parseInt(nowPage); }
     public void setNowPage(int nowPage)   { this.nowPage = nowPage; }
+
+    public NewPageingVO setNewPageingVO(NewPageingVO newPageingVO)
+    {
+        newPageingVO.setAllPage(allPage);
+        newPageingVO.setNowCase(nowCase);
+        newPageingVO.setAllCase(allCase);
+        newPageingVO.setLeftPage(leftPage);
+        newPageingVO.setRightPage(rightPage);
+        newPageingVO.setDisplayPage(displayPage);
+
+        return newPageingVO;
+    }
 }

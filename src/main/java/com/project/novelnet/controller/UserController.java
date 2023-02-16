@@ -114,14 +114,19 @@ public class UserController {
 
     //유저인증 메일 서비스
     @GetMapping("/novelnet/JoinCheak")
-    public String JoinCheak(@RequestParam String code,Model model)throws Exception{
+    public String JoinCheak(@Param("code") String code,Model model)throws Exception{
         System.out.println("코드 : "+code);
 
-        if(code != null)
+        String ok = "none";
+        try  {ok = userMapper.UesrJoinFind(code);}
+        catch (Exception e) {}
+
+        if (ok != "none")
         {
-            novelRepository.UesrOK(code);
+            int propit = userMapper.UesrJoinEnd(ok);
+            if(propit > 0){ model.addAttribute("message", "가입에 성공하였습니다. 메일 인증시 정식가입됩니다."); }
+            else          { model.addAttribute("message", "가입에 실패하였습니다. 코드를 다시 확인해주세요."); }
         }
-        model.addAttribute("message", "가입에 성공하였습니다. 메일 인증시 정식가입됩니다.");
         model.addAttribute("searchUrl", "/novelnet");
         return "message";
     }

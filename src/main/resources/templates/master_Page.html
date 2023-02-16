@@ -12,19 +12,19 @@
             <header th:replace="/include/header.html :: header"></header>
             <div class="masterFrame">
                 <ul class="masterMenu">
-                    <li><a href="#">소설 신고 목록</a></li>
-                    <li><a href="#">댓글 신고 목록</a></li>
-                    <li><a href="#">유저 관리</a></li>
-                    <li><a href="#">소설관리</a></li>
-                    <li><a href="#">공지</a></li>
+                    <li><a th:href="@{/master/novelDeclaration(page=1,sort='asc')}">소설 신고 목록</a></li>
+                    <li><a th:href="@{/master/replyDeclaration(page=1,sort='asc')}">댓글 신고 목록</a></li>
+                    <li><a th:href="@{/master/userManagement(page=1,sort='asc')}">유저 관리</a></li>
+                    <li><a th:href="@{/master/novelManagement(page=1,sort='asc')}">소설관리</a></li>
+                    <li><a th:href="@{/master/notification(page=1,sort='asc')}">공지</a></li>
                 </ul>
                 <div class="masterSearch">
                     <div class="leftSearchSpace">
                         <select name="searchOtp" id="searchOtp">
-                            <option value="user_nickname">닉네임</option>
-                            <option value="novel_name">소설제목</option>
-                            <option value="user_email">이메일</option>
-                            <option value="shingo_user">신고자</option>
+                            <option value="all">전체</option>
+                            <option value="wNick">닉네임</option>
+                            <option value="title">소설제목</option>
+                            <option value="nick">신고자</option>
                         </select>
                         <input type="text" id="searchSpace">
                     </div>
@@ -34,63 +34,62 @@
                 </div>
                 <div class="master_novelWarning">
                     <ul class="warning_memo">
-                        <li class="borderLine_black">
-                            <div class="mw_LeftSide">
-                                <div class="mw_shingoLine" >
-                                    <div class="SingoName">신고자</div>
+                        <th:block th:each="list : ${list}">
+                            <li class="borderLine_black">
+                                <div class="mw_LeftSide">
+                                    <div class="mw_shingoLine">
+                                        <div class="SingoName">신고자 : [[${list.nick}]]</div>
+                                    </div>
+                                    <div class="mw_titleLine">
+                                        <input hidden th:id="'novelNum-'+${list.n_num}">
+                                        <div class="mw_novelTitle">
+                                            <a th:href="@{/novelnet/novel(n_num=${list.n_num},page=1,sort='asc')}" th:text="${list.n_title}">
+                                                제목입니다
+                                            </a>
+                                        </div>
+                                        <div class="mw_memoTitel">
+                                            <a th:href="@{/novelnet/view(n_num=${list.n_num},chapter=${list.m_num},sort='asc',page='1')}" th:utext="${list.m_title}"></a>
+                                        </div>
+                                    </div>
+                                    <div class="mw_profillLine">
+                                        <input hidden th:id="'WuserNum-'+${list.wU_num}">
+                                        <div class="mw_userNick" th:text="${list.wNick}">닉네임</div>
+                                        <div class="mw_date" th:text="${list.mw_date}">19.10.05</div>
+                                    </div>
+                                    <div class="mw_why" th:text="${list.w_why}"></div>
                                 </div>
-                                <div class="mw_titleLine">
-                                    <th:block th:each="list : ${list}">
-                                        <div class="mw_novelTitle" th:text="${list.n_title}">제목입니다</div>
-                                    </th:block>
-                                    <div class="mw_memoTitel">소제목입니다</div>
+                                <div class="mw_SwitchSide borderLeft_black">
+                                    <div class="mw_WarnningCnt">누적 :<span th:text="${list.b_stop}+'회'">10회</span></div>
+                                    <button class="mw_UserDelBtn">유저 정지</button>
+                                    <button class="mw_WarnningDelBtn">경고 삭제</button>
+                                    <button class="mw_novelSet">경고 모아보기</button>
                                 </div>
-                                <div class="mw_profillLine">
-                                    <div class="mw_userNick">닉네임</div>
-                                    <div class="mw_date">19.10.05</div>
-                                </div>
-                                <div class="mw_why"></div>
-                            </div>
-                            <div class="mw_SwitchSide borderLeft_black">
-                                <div class="mw_WarnningCnt">누적 :<span>10회</span></div>
-                                <button class="mw_UserDelBtn">유저 정지</button>
-                                <button class="mw_WarnningDelBtn">경고 삭제</button>
-                                <button class="mw_novelSet">경고 모아보기</button>
-                            </div>
-                        </li>
-                        <li class="borderLine_black">
-                            <div class="mw_LeftSide">
-                                <div class="mw_shingoLine">
-                                    <div class="SingoName">신고자</div>
-                                </div>
-                                <div class="mw_titleLine">
-                                    <div class="mw_novelTitle">제목입니다</div>
-                                    <div class="mw_memoTitel">소제목입니다</div>
-                                </div>
-                                <div class="mw_profillLine">
-                                    <div class="mw_userNick">닉네임</div>
-                                    <div class="mw_date">19.10.05</div>
-                                </div>
-                                <div class="mw_why"></div>
-                            </div>
-                            <div class="mw_SwitchSide borderLeft_black">
-                                <div class="mw_WarnningCnt">누적 :<span>10000회</span></div>
-                                <button class="mw_UserDelBtn">유저 정지</button>
-                                <button class="mw_WarnningDelBtn">경고 삭제</button>
-                                <button class="mw_novelSet">경고 모아보기</button>
-                            </div>
-                        </li>
+                            </li>
+                        </th:block>
                     </ul>
-                    <div class="ep_paging">
-                        <div class="paging_card">←</div>
-                        <div class="paging_card">◁</div>
-                        <div class="paging_card">1</div>
-                        <div class="paging_card">2</div>
-                        <div class="paging_card">3</div>
-                        <div class="paging_card">4</div>
-                        <div class="paging_card">5</div>
-                        <div class="paging_card">▷</div>
-                        <div class="paging_card">→</div>
+                    <div class="paging">
+                        <div class="paging_box">
+                            <div class="paging_left">
+                                <th:block th:if="${paging.nowCase}!=1">
+                                    <div class="paging_card"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=1)}">←</a></div>
+                                    <div class="paging_card"><a th:href="@{/novelnet/search(searchType=${param.searchType},keyword=${param.keyword},page=${paging.leftPage})}">◁</a></div>
+                                </th:block>
+                            </div>
+                            <div class="paging_num">
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+1)" th:if="${paging.allPage}==0"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+1))}" th:text="(${paging.nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+1)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+1"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+1))}" th:text="(${paging.nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+2)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+2"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+2))}" th:text="(${paging.nowCase}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+3)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+3"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+3))}" th:text="(${paging.nowCase}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+4)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+4"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+4))}" th:text="(${paging.nowCase}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
+                            </div>
+                            <div class="paging_right">
+                                <th:block th:if="${paging.nowCase} != ${paging.allCase} and ${paging.allCase} != 0">
+                                    <div class="paging_card"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase})*5+1))}">▷</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.displayPage})))}">→</a></div>
+                                </th:block>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="master_replyWarning">
