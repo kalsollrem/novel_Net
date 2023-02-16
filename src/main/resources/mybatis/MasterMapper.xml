@@ -43,6 +43,9 @@
             <when test="searchType.equals('wNick')">
                 WHERE BY wNick = #{keyword}
             </when>
+            <when test="searchType.equals('novelNum')">
+                WHERE BY n_num = #{keyword}
+            </when>
             <otherwise></otherwise>
         </choose>
         ORDER BY mw_date DESC

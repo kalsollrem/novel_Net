@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -32,6 +35,7 @@ public class MasterController {
 
 
 
+    //메인페이지
     @GetMapping("/master/index")
     public String masterIndex(Model model,
                               HttpSession session,
@@ -75,5 +79,24 @@ public class MasterController {
 
         model.addAttribute("list",list);
         return "master_Page";
+    }
+
+
+    //유저 강등
+    @PostMapping("/userStop.do")
+    @ResponseBody
+    public int memoDelete (@RequestParam("u_num") String  u_num,
+                           @RequestParam("switchUD") int switchUD,
+                           HttpSession session)throws Exception
+    {
+        //1:성공, 0:실패
+        int answer = 0;
+
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+            answer = masterMapper.UserLevelChanger(switchUD,u_num);
+//        }
+
+        //작성자 권한 확인
+        return answer;
     }
 }

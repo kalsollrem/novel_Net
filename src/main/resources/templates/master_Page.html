@@ -5,6 +5,8 @@
         <title>관리자 페이지</title>
         <link rel="stylesheet" href="../css/style.css">
         <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/index.js"></script>
+        <script src="../js/master.js"></script>
     </head>
     <body>
         <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
@@ -41,7 +43,6 @@
                                         <div class="SingoName">신고자 : [[${list.nick}]]</div>
                                     </div>
                                     <div class="mw_titleLine">
-                                        <input hidden th:id="'novelNum-'+${list.n_num}">
                                         <div class="mw_novelTitle">
                                             <a th:href="@{/novelnet/novel(n_num=${list.n_num},page=1,sort='asc')}" th:text="${list.n_title}">
                                                 제목입니다
@@ -52,17 +53,17 @@
                                         </div>
                                     </div>
                                     <div class="mw_profillLine">
-                                        <input hidden th:id="'WuserNum-'+${list.wU_num}">
-                                        <div class="mw_userNick" th:text="${list.wNick}">닉네임</div>
+                                        <div class="mw_userNick">[[${list.wNick}]]<span th:if="${list.U_LEVEL}=='1'">(정지)</span></div>
                                         <div class="mw_date" th:text="${list.mw_date}">19.10.05</div>
                                     </div>
                                     <div class="mw_why" th:text="${list.w_why}"></div>
                                 </div>
                                 <div class="mw_SwitchSide borderLeft_black">
                                     <div class="mw_WarnningCnt">누적 :<span th:text="${list.b_stop}+'회'">10회</span></div>
-                                    <button class="mw_UserDelBtn">유저 정지</button>
-                                    <button class="mw_WarnningDelBtn">경고 삭제</button>
-                                    <button class="mw_novelSet">경고 모아보기</button>
+                                    <button class="mw_UserDelBtn"   id="mw_UserDown"  th:value="${list.wU_num}" th:if="${list.U_LEVEL}=='0'">유저 정지</button>
+                                    <button class="mw_UserDelBtn"   id="mw_UserUp"    th:value="${list.wU_num}" th:if="${list.U_LEVEL}=='1'">정지 해제</button>
+                                    <button class="mw_WarnningDelBtn" th:value="${list.wU_num}">경고 삭제</button>
+                                    <button class="mw_novelSet"       th:value="${list.n_num}">경고 모아보기</button>
                                 </div>
                             </li>
                         </th:block>
