@@ -1,5 +1,6 @@
 package com.project.novelnet.repository;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -19,6 +20,10 @@ public interface MasterMapper {
     //유저 레벨 변환
     @Update("update user set u_level=#{level} where u_num=#{u_num}")
     public int UserLevelChanger(@Param("level")int level, @Param("u_num")String u_num);
+
+    //유저 레벨 변환
+    @Delete("delete from m_warning where mw_num = #{mw_num}")
+    public int warningDel(@Param("mw_num")int mw_num);
 
 
 }

@@ -99,4 +99,22 @@ public class MasterController {
         //작성자 권한 확인
         return answer;
     }
+
+
+    //경고삭제
+    @PostMapping("/warnningDel.do")
+    @ResponseBody
+    public int warnningDel (@RequestParam("mw_num") int mw_num,
+                            HttpSession session)throws Exception
+    {
+        //1:성공, 0:실패
+        int answer = 0;
+
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+            answer = masterMapper.warningDel(mw_num);
+//        }
+
+        //작성자 권한 확인
+        return answer;
+    }
 }

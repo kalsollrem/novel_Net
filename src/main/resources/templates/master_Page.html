@@ -62,7 +62,7 @@
                                     <div class="mw_WarnningCnt">누적 :<span th:text="${list.b_stop}+'회'">10회</span></div>
                                     <button class="mw_UserDelBtn"   id="mw_UserDown"  th:value="${list.wU_num}" th:if="${list.U_LEVEL}=='0'">유저 정지</button>
                                     <button class="mw_UserDelBtn"   id="mw_UserUp"    th:value="${list.wU_num}" th:if="${list.U_LEVEL}=='1'">정지 해제</button>
-                                    <button class="mw_WarnningDelBtn" th:value="${list.wU_num}">경고 삭제</button>
+                                    <button class="mw_WarnningDelBtn" th:value="${list.mw_num}">경고 삭제</button>
                                     <button class="mw_novelSet"       th:value="${list.n_num}">경고 모아보기</button>
                                 </div>
                             </li>
