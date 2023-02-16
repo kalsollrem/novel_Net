@@ -55,7 +55,7 @@ $(function(){
             $(".login").fadeIn();
         }else
         {
-            alert("내가 쓴 글목록으로 location.href걸것");
+            location.href='/novelnet/goMyProfill';
         }
     })
 

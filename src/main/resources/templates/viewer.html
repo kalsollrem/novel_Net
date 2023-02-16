@@ -52,6 +52,7 @@
 <div class="wrap dragBlock">
     <!---------------- 메뉴바 ---------------->
     <div class="viewer_guide">
+        <input type="hidden" class="myLevel" th:value="${U_level}">
         <div class="write_update_btn" th:if="${updateOK}==1"><img class="update_btn" src="/img/write_update.png" alt="수정/삭제"></div>
         <div class="guide_menu">
             <div class="home_button">
@@ -80,7 +81,7 @@
         </div>
     </div>
     <div class="chapter_guide">
-        <div class="nebiOpt" th:if="${session.U_NUM}!=null"><img src="../img/singo.png" alt="신고"></div>
+        <div class="nebiOpt" th:if="${session.U_NUM}!=null and ${session.U_LEVEL}!='1'"><img src="../img/singo.png" alt="신고"></div>
         <ul class="guide_nebi">
             <!-- 이전화 버튼 -->
             <th:block th:if="${#strings.equals(param.type, 'gong')}">
@@ -127,34 +128,37 @@
             <!-- 리플 다는 구간 -->
             <div class="replyLendingZone" id="reply_0">
                 <div class="reply_write">
-                    <form action="/replyWrite.do" method="post">
-                        <!-- 넘겨줄 값 -->
-                        <input type="hidden" name="r_rnum" value="0">
-                        <!-- 넘겨줄 값 -->
-                        <div class="imoticon_add">
-                            <div class="reply_imoticon">
-                                <img src="../imoticon/imo001.jpg" id="imo001" onclick="imo_on(this.id)" alt="뿅">
-                                <img src="../imoticon/imo002.jpg" id="imo002" onclick="imo_on(this.id)" alt="아루">
-                                <img src="../imoticon/imo003.jpg" id="imo003" onclick="imo_on(this.id)" alt="몰루">
-                                <img src="../imoticon/imo004.jpg" id="imo004" onclick="imo_on(this.id)" alt="더줘">
-                                <img src="../imoticon/imo005.jpg" id="imo005" onclick="imo_on(this.id)" alt="노휴먼">
-                                <img src="../imoticon/imo006.jpg" id="imo006" onclick="imo_on(this.id)" alt="두잇">
-                                <img src="../imoticon/imo007.jpg" id="imo007" onclick="imo_on(this.id)" alt="퍼엉">
-                                <img src="../imoticon/imo008.jpg" id="imo008" onclick="imo_on(this.id)" alt="에라">
-                                <img src="../imoticon/imo009.jpg" id="imo009" onclick="imo_on(this.id)" alt="개추">
-                                <img src="../imoticon/imo010.jpg" id="imo010" onclick="imo_on(this.id)" alt="원펀">
-                                <div class="imoticon_delete">
-                                    <img class="deleteImo" src="../img/delete_2.png" alt="삭제">
+                    <div class="stop_move" th:if="${U_level}=='1'">현재 유저님께서는 경고 누적에의해 일부 기능이 사용 불가능한 상태입니다.</div>
+                    <th:block th:if="${U_level}!='1'">
+                        <form action="/replyWrite.do" method="post">
+                            <!-- 넘겨줄 값 -->
+                            <input type="hidden" name="r_rnum" value="0">
+                            <!-- 넘겨줄 값 -->
+                            <div class="imoticon_add">
+                                <div class="reply_imoticon">
+                                    <img src="../imoticon/imo001.jpg" id="imo001" onclick="imo_on(this.id)" alt="뿅">
+                                    <img src="../imoticon/imo002.jpg" id="imo002" onclick="imo_on(this.id)" alt="아루">
+                                    <img src="../imoticon/imo003.jpg" id="imo003" onclick="imo_on(this.id)" alt="몰루">
+                                    <img src="../imoticon/imo004.jpg" id="imo004" onclick="imo_on(this.id)" alt="더줘">
+                                    <img src="../imoticon/imo005.jpg" id="imo005" onclick="imo_on(this.id)" alt="노휴먼">
+                                    <img src="../imoticon/imo006.jpg" id="imo006" onclick="imo_on(this.id)" alt="두잇">
+                                    <img src="../imoticon/imo007.jpg" id="imo007" onclick="imo_on(this.id)" alt="퍼엉">
+                                    <img src="../imoticon/imo008.jpg" id="imo008" onclick="imo_on(this.id)" alt="에라">
+                                    <img src="../imoticon/imo009.jpg" id="imo009" onclick="imo_on(this.id)" alt="개추">
+                                    <img src="../imoticon/imo010.jpg" id="imo010" onclick="imo_on(this.id)" alt="원펀">
+                                    <div class="imoticon_delete">
+                                        <img class="deleteImo" src="../img/delete_2.png" alt="삭제">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="imoticon_zone"></div>
-                        <div class="replay_make">
-                            <textarea name="reply_memo" id="reply_area" rows="5" placeholder="댓글을 입력해 보세요."></textarea>
-                            <input type="button" value="댓글 입력" class="reply_commit replyWriteOn" id="reply_commit">
-                            <input type="button" value="수정"     class="reply_commit replyUpdateOn"id="reply_updateBtn">
-                        </div>
-                    </form>
+                            <div class="imoticon_zone"></div>
+                            <div class="replay_make">
+                                <textarea name="reply_memo" id="reply_area" rows="5" placeholder="댓글을 입력해 보세요."></textarea>
+                                <input type="button" value="댓글 입력" class="reply_commit replyWriteOn" id="reply_commit">
+                                <input type="button" value="수정"     class="reply_commit replyUpdateOn"id="reply_updateBtn">
+                            </div>
+                        </form>
+                    </th:block>
                 </div>
             </div>
             <!-- 리플 다는 구간 -->
@@ -173,7 +177,7 @@
                         </div>
                         <div class="reply_date" th:text="${reply.r_date}">수정일</div>
                         <div class="reply_memo" th:id="'up_'+${reply.r_num}+'_inside'" th:utext="${reply.r_memo}">내용</div>
-                        <div class="reply_gb">
+                        <div class="reply_gb" th:if="${U_level}!='1'">
                             <div class="reply_singo reply_box"  th:id="'re_'+${reply.r_num}" onclick="r_warning(this.id)" th:if="${reply.u_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
                             <div class="reply_delete reply_box" th:id="'dl_'+${reply.r_num}" onclick="r_delete(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◆삭제</div>
                             <div class="reply_update reply_box" th:id="'up_'+${reply.r_num}" onclick="r_updateOn(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◎수정</div>
@@ -197,7 +201,7 @@
                         </div>
                         <div class="reply_date" th:text="${reply.r_date}">수정일</div>
                         <div class="reply_memo" th:id="'up_'+${reply.r_num}+'_inside'" th:utext="${reply.r_memo}">내용</div>
-                        <div class="reply_gb">
+                        <div class="reply_gb" th:if="${U_level}!='1'">
                             <div class="reply_singo reply_box" th:id="'re_'+${reply.r_num}"  onclick="r_warning(this.id)" th:if="${reply.u_num} != ${session.U_NUM} and ${session.U_NUM}!=null">■신고</div>
                             <div class="reply_delete reply_box" th:id="'dl_'+${reply.r_num}" onclick="r_delete(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◆삭제</div>
                             <div class="reply_update reply_box" th:id="'up_'+${reply.r_num}" onclick="r_updateOn(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◎수정</div>

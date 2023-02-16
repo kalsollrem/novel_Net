@@ -148,7 +148,17 @@ public class UserController {
         return "redirect:/novelnet";
     }
 
+    //내 프로필 바로가기
+    @GetMapping("/novelnet/goMyProfill")
+    public String goMyProfillPage(HttpSession session) throws Exception
+    {
+        String u_num;
+        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {return "redirect:/novelnet";}
 
+        return "redirect:/novelnet/profill?user="+u_num+"&type=novels";
+    }
+
+    //프로필 페이지
     @GetMapping("/novelnet/profill")
     public String profillPage(Model model,
                               @Param("user") String user,

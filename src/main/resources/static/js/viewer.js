@@ -5,6 +5,7 @@ $(function(){
     let chapter;
     let sort;
     let page;
+    let myLevel = $('.myLevel').val();
 
     try         { n_num = url.get('n_num').toString(); }
     catch (err) { n_num = "";    }

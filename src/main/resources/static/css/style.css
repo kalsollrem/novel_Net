@@ -809,6 +809,9 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .reply_write .imoticon_add .imoticon_delete       {width: 50px; height: 50px; float: right; }
 .reply_write .imoticon_add .imoticon_delete>img   {width: 40px; height: 40px; margin: 5px 0px 0px 5px; }
 
+            /* 정지상태 안내문 */
+            .reply_write .stop_move {text-align: center; height: 30px; line-height: 45px; font-weight: bold;}
+
 .reply_write .imoticon_zone       {width: 100%; height: 140px; margin: 10px 0px 10px 0px; background-color: #ececec; border-top: 1px solid gainsboro; display: none;}
 .reply_write .imoticon_zone>img   {width: 120px; height: 120px; margin: 10px 0px 0px 15px; border: 1px solid #ececec; box-sizing: border-box;}
 
