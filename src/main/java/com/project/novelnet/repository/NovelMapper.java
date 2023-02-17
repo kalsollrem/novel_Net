@@ -128,9 +128,9 @@ public interface NovelMapper {
     //댓글조회
     //ASC  = [ ORDER BY IF(r_rnum = 0, r_num, r_rnum)asc, r_num ]
     //DESC = [ ORDER BY IF(r_rnum = 0, r_num, r_rnum)desc, r_rnum!=0, r_num asc ]
-    @Select("select A.r_num, A.u_num, A.r_rnum, A.r_memo, A.m_num, A.n_num, date_format(A.r_date, '%Y년 %m월 %d일') as r_date, A.r_good, A.r_bad, A.r_baby, B.u_pic, B.u_nick as nick " +
+    @Select("select A.r_num, A.u_num, A.r_rnum, A.r_memo, A.m_num, A.n_num, date_format(A.r_date, '%Y년 %m월 %d일') as r_date, A.r_good, A.r_bad, A.r_baby, A.r_state, B.u_pic, B.u_nick as nick " +
             "from reply A " +
-            "inner join user B " +
+            "left join user B " +
             "on A.u_num = B.u_num " +
             "where n_num = #{n_num} and m_num = #{m_num} " +
             "ORDER BY IF(r_rnum = 0, r_num, r_rnum)asc, r_num")
@@ -141,7 +141,7 @@ public interface NovelMapper {
     public int getReplyCount(String m_num, String n_num);
 
     //내 댓글 삭제
-    @Delete("delete from reply where r_num = #{r_num} and u_num = #{u_num}")
+    @Update("update reply set r_memo='', u_num='none', r_good='0', r_bad='0', r_baby='0' where r_num = #{r_num} and u_num = #{u_num}")
     public int deleteMyReply(@Param("r_num")String r_num,@Param("u_num")String u_num);
 
     @Update("UPDATE reply SET r_memo = #{r_memo} WHERE r_num = #{r_num} and u_num = #{u_num}")

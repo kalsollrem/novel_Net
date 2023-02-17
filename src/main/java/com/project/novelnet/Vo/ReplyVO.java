@@ -9,6 +9,7 @@ public class ReplyVO {
     String r_rnum;  //대댓글 번호
     String r_memo;  //댓글내용
     Integer r_baby; //대댓글 갯수
+    String r_state; //블라인드 처리 여부
 
     String m_num;   //작성 게시물
     String n_num;   //작성 소설

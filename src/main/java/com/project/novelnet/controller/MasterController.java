@@ -32,21 +32,21 @@ public class MasterController {
 
 
 
-    //메인페이지
+    //신고소설 관리
     @GetMapping("/master/novelDeclaration")
-    public String masterIndex(Model model,
-                              HttpSession session,
-                              NewPageingVO newPageingVO,
-                              @Param("page")       String page,
-                              @Param("searchType") String searchType,
-                              @Param("keyword")    String keyword)throws Exception
+    public String masterNovelDeclaration(Model model,
+                                       HttpSession session,
+                                       NewPageingVO newPageingVO,
+                                       @Param("page")       String page,
+                                       @Param("searchType") String searchType,
+                                       @Param("keyword")    String keyword)throws Exception
     {
         //아이디 처리
         try                 {u_num= (String)session.getAttribute("U_NUM").toString();}
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "3"){System.out.println("나가");}}
+        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9"){System.out.println("관리자(9레벨)가아님");}}
         catch (Exception e) {System.out.println("나가");}
 
         //변수 처리
@@ -115,5 +115,56 @@ public class MasterController {
 
         //작성자 권한 확인
         return answer;
+    }
+
+
+    //신고리플 관리
+    @GetMapping("/master/replyDeclaration")
+    public String masterReplyDeclaration(Model model,
+                                          HttpSession session,
+                                          NewPageingVO newPageingVO,
+                                          @Param("page")       String page,
+                                          @Param("searchType") String searchType,
+                                          @Param("keyword")    String keyword)throws Exception
+    {
+        //아이디 처리
+        try                 {u_num= (String)session.getAttribute("U_NUM").toString();}
+        catch (Exception e) {u_num = null;}
+
+        //레벨확인
+        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9") {System.out.println("관리자(9레벨)가아님");}}
+        catch (Exception e) {System.out.println("나가");}
+
+        //변수 처리
+        if(page == null || page == "0")                     {page    = "1"; }
+        else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
+
+        if(searchType == null || searchType.replace(" ","") == "")  {searchType = "";}
+        model.addAttribute("searchType",searchType);
+
+        if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
+
+
+        //페이징처리
+        int allPageCnt = masterMapper.replyShingoCnt(searchType,keyword);
+        pageingService.setNowPage(page);
+        pageingService.setTotalCount(allPageCnt);
+        newPageingVO = pageingService.setNewPageingVO(newPageingVO);
+
+        model.addAttribute("paging", newPageingVO);
+
+
+        //시작페이지처리
+        int start = (Integer.parseInt(page)-1)*10;
+        List<Map<String, Object>> list = masterMapper.replyShingo(searchType,keyword,start);
+        System.out.println("총"+allPageCnt+"개/");
+        System.out.println(list);
+
+
+        model.addAttribute("list",list);
+
+
+
+        return "master_replyDeclaration";
     }
 }

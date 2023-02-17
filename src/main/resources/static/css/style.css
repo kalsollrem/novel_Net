@@ -771,6 +771,16 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .reply .reply_my        { width: 100%; height: 20px; line-height: 20px; font-size: 14px; margin-top: 10px; color:#333; }
 .reply .reply_box       { line-height: 20px; font-size: 12px; padding-left: 5px; padding-right: 5px; float: right; border-right: 1px solid #ececec;}
 
+/* 삭제 댓글용 */
+.opt_delReply                   {background-color: rgb(252, 188, 237 , 0.8); color: white; padding-top: 30px; padding-bottom: 30px; }
+.opt_delReply .delteImg         {height: 100px; font-size: 50px; font-weight: bold; text-align: center; line-height: 100px; }
+.opt_delReply .delteText        {height: 30px; font-size: 25px; font-weight: bold; text-align: center; line-height: 0px;}
+
+/* 블라인드용 */
+.opt_blindReply                   {background-color: rgb(63, 60, 62, 0.8); color: white; padding-top: 30px; padding-bottom: 30px; }
+.opt_blindReply .delteImg         {height: 100px; font-size: 50px; font-weight: bold; text-align: center; line-height: 100px; }
+.opt_blindReply .delteText        {height: 30px; font-size: 25px; font-weight: bold; text-align: center; line-height: 0px;}
+
 /* 댓글 버튼 옵션 : 타인 댓글 */
 .reply .reply_gb .re_reply_count{color: #333333;}
 .reply .reply_gb .re_reply      {color: gray;}
@@ -791,8 +801,8 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .reply_zone       .to_reply     {width: 750px; margin-left: 50px; }                   /* 대 댓글용 */
 .serialized_reply .to_reply     {width: 1160px; margin-left: 50px; padding-top: 5px;} /* 대 댓글용 */
 
-.reply_zone       .reply_arrow  {width: 30px; height: 30px; float: left; margin-top: 10px;}
-.serialized_reply .reply_arrow  {width: 30px; height: 30px; float: left; margin-top: 10px;}
+.reply_zone       .reply_arrow  {width: 30px; height: 30px; float: left; margin-top: 5px;}
+.serialized_reply .reply_arrow  {width: 30px; height: 30px; float: left; margin-top: 5px;}
 .reply_arrow>img                {width: 18px; height: 18px; position: absolute; margin: -2px 0px 0px 25px;}
 
 .profilOnlyArrow                {width: 30px; height: 30px; float: left; margin-top: 10px;}

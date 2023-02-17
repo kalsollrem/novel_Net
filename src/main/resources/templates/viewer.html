@@ -169,7 +169,7 @@
             <div class="reply_table" th:each="reply : ${replyVOList}">
                 <div th:if="${reply.r_rnum == '0'}">
                     <div class="replyLendingZone" th:id="'reply_'+${reply.r_num}"></div>
-                    <div class="reply" th:id="'focus_'+${reply.r_num}">
+                    <div class="reply" th:id="'focus_'+${reply.r_num}" th:if="${reply.u_num}!='none' and ${reply.r_state}==null">
                         <div class="user_nick">
                             <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
                             <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>
@@ -187,13 +187,21 @@
 <!--                            <div class="re_reply_count reply_box" th:if="${reply.r_baby != '0'}"><span>△</span> <span th:text="'대댓글 ('+${reply.r_baby}+'건)'"></span></div>-->
                         </div>
                     </div>
+                    <div class="reply opt_delReply" th:if="${reply.u_num}=='none' and ${reply.r_state}!='blind'">
+                        <div class="delteImg">BOOM!</div>
+                        <div class="delteText">삭제된 댓글입니다</div>
+                    </div>
+                    <div class="reply opt_blindReply" th:if="${reply.r_state}=='blind'">
+                        <div class="delteImg">- BLIND -</div>
+                        <div class="delteText">본 댓글은 운영진에 의해 블라인드 처리되었습니다</div>
+                    </div>
                 </div>
                 <div th:unless="${reply.r_rnum == '0'}">
                     <div class="replyLendingZone" th:id="'reply_'+${reply.r_num}"></div>
                     <div class="reply_arrow">
                         <img src="../img/arrow_right.png" alt="#">
                     </div>
-                    <div class="reply to_reply" th:id="'focus_'+${reply.r_num}">
+                    <div class="reply to_reply" th:id="'focus_'+${reply.r_num}" th:if="${reply.u_num}!='none' and ${reply.r_state}==null">
                         <div class="user_nick">
                             <div class="user_pic" th:if="${reply.pic}==null"><img src="../img/profill.png" alt="프로필"></div>
                             <div class="user_pic" th:unless="${reply.pic}==null"><img th:src="../nottImg/+${reply.pic}" alt="프로필"></div>
@@ -208,6 +216,14 @@
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
                         </div>
+                    </div>
+                    <div class="reply to_reply opt_delReply" th:id="'focus_'+${reply.r_num}" th:if="${reply.u_num}=='none' and ${reply.r_state}!='blind'">
+                        <div class="delteImg">BOOM!</div>
+                        <div class="delteText">삭제된 댓글입니다</div>
+                    </div>
+                    <div class="reply to_reply opt_blindReply" th:id="'focus_'+${reply.r_num}" th:if="${reply.r_state}=='blind'">
+                        <div class="delteImg">- BLIND -</div>
+                        <div class="delteText">본 댓글은 운영진에 의해 블라인드 처리되었습니다</div>
                     </div>
                 </div>
             </div>

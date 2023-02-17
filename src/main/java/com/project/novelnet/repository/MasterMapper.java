@@ -17,6 +17,19 @@ public interface MasterMapper {
     //소설당 신고 갯수
     public int novelShingoCnt(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //신고된 댓글 리스트 보기
+    public List<Map<String, Object>> replyShingo(@Param("searchType")String searchType, @Param("keyword")String keyword ,@Param("start")int start);
+
+    //소설당 댓글 갯수
+    public int replyShingoCnt(@Param("searchType")String searchType, @Param("keyword")String keyword);
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
+
     //유저 레벨 변환
     @Update("update user set u_level=#{level} where u_num=#{u_num}")
     public int UserLevelChanger(@Param("level")int level, @Param("u_num")String u_num);
