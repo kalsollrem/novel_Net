@@ -1,5 +1,7 @@
 package com.project.novelnet.repository;
 
+import com.project.novelnet.Vo.MasterVO.MasterNovel;
+import com.project.novelnet.Vo.MasterVO.MasterReply;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -12,7 +14,8 @@ import java.util.*;
 @Repository
 public interface MasterMapper {
     //신고된 소설 리스트 보기
-    public List<Map<String, Object>> novelShingo(@Param("searchType")String searchType, @Param("keyword")String keyword ,@Param("start")int start);
+    //List<Map<String, Object>>에서 VO로 변경
+    List<MasterNovel> novelShingo(@Param("searchType")String searchType, @Param("keyword")String keyword , @Param("start")int start);
 
     //소설당 신고 갯수
     public int novelShingoCnt(@Param("searchType")String searchType, @Param("keyword")String keyword);
@@ -21,7 +24,7 @@ public interface MasterMapper {
     //------------------------------------------------------------------------------------------------------------------------------------------------
 
     //신고된 댓글 리스트 보기
-    public List<Map<String, Object>> replyShingo(@Param("searchType")String searchType, @Param("keyword")String keyword ,@Param("start")int start);
+    List<MasterReply> replyShingo(@Param("searchType")String searchType, @Param("keyword")String keyword , @Param("start")int start);
 
     //소설당 댓글 갯수
     public int replyShingoCnt(@Param("searchType")String searchType, @Param("keyword")String keyword);

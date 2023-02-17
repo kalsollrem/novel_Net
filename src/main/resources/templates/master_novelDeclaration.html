@@ -86,7 +86,7 @@
                             <div class="paging_left">
                                 <th:block th:if="${paging.nowCase}!=1">
                                     <div class="paging_card"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=1)}">←</a></div>
-                                    <div class="paging_card"><a th:href="@{/novelnet/search(searchType=${param.searchType},keyword=${param.keyword},page=${paging.leftPage})}">◁</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/novelDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=${paging.leftPage})}">◁</a></div>
                                 </th:block>
                             </div>
                             <div class="paging_num">

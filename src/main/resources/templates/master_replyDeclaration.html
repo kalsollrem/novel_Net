@@ -37,39 +37,71 @@
 <!--                <div class="anvoerline" thif="${paging.allPage}==0"></div>-->
                 <div class="master_replyWarning">
                     <ul class="warning_memo">
+                        <th:block th:each="list : ${list}">
                         <!-- 리플용 -->
                         <li class="borderLine_sky">
                             <div class="mw_LeftSide">
                                 <div class="mw_shingoLine">
-                                    <div class="SingoName">신고자</div>
+                                    <div class="SingoName" th:if="${list.nick}==null">존재하지 않는 사용자입니다.</div>
+                                    <div class="SingoName" th:unless="${list.nick}==null">신고자 : [[${list.nick}]]</div>
                                 </div>
                                 <div class="mw_titleLine">
-                                    <div class="mw_novelTitle">제목입니다</div>
-                                    <div class="mw_memoTitel">소제목입니다</div>
+                                    <div class="mw_novelTitle" th:if="${list.n_title}!=null">
+                                        <a th:href="@{/novelnet/novel(n_num=${list.n_num},page=1,sort='asc')}" th:text="${list.n_title}">소설 제목</a>
+                                    </div>
+                                    <div class="mw_novelTitle" th:unless="${list.n_title}!=null">
+                                        <a>삭제된 소설입니다.</a>
+                                    </div>
+                                    <div class="mw_memoTitel" th:if="${list.m_title}!=null">
+                                        <a th:href="@{/novelnet/view(n_num=${list.n_num},chapter=${list.m_num},sort='asc',page='1')}" th:utext="${list.m_title}"></a>
+                                    </div>
+                                    <div class="mw_memoTitel" th:unless="${list.m_title}!=null">
+                                        <a>삭제된 챕터입니다.</a>
+                                    </div>
                                 </div>
                                 <div class="mw_profillLine">
-                                    <div class="mw_userNick">닉네임</div>
-                                    <div class="mw_date">19.10.05</div>
+                                    <div class="mw_userNick typeNick" th:if="${list.wNick}!=null">
+                                        <a th:href="@{/novelnet/profill(user=${list.wU_num})}" th:text="${list.wNick}"></a>
+                                        <span th:if="${list.U_LEVEL}=='1'">(정지)</span>
+                                    </div>
+                                    <div class="mw_userNick typeMail" th:if="${list.wNick}!=null">
+                                        <a th:href="@{/novelnet/profill(user=${list.wU_num})}" th:text="${list.wU_mail}"></a><span th:if="${list.U_LEVEL}=='1'">(정지)</span>
+                                    </div>
+                                    <div class="mw_userNick" th:if="${list.wNick}==null">(존재하지 않는 유저입니다)</div>
+                                    <div class="mw_date" th:text="${list.r_date}">19.10.05</div>
                                 </div>
-                                <div class="mw_reply_inside">댓글 내용 입니다</div>
+                                <div class="mw_reply_inside" th:utext="${list.r_memo}">댓글 내용 입니다</div>
                             </div>
                             <div class="mw_SwitchSide borderLeft_sky">
                                 <div class="mw_WarnningCnt">누적 :<span>5회</span></div>
-                                <button class="mw_UserDelBtn">유저 정지</button>
-                                <button class="mw_WarnningDelBtn">경고 삭제</button>
+                                <button class="mw_UserDelBtn"   id="mw_UserDown"  th:value="${list.wU_num}" th:if="${list.U_LEVEL}=='0' and ${list.wU_num}!=null">유저 정지</button>
+                                <button class="mw_UserDelBtn"   id="mw_UserUp"    th:value="${list.wU_num}" th:if="${list.U_LEVEL}=='1' and ${list.wU_num}!=null">정지 해제</button>
                             </div>
                         </li>
+                        </th:block>
                     </ul>
-                    <div class="ep_paging">
-                        <div class="paging_card">←</div>
-                        <div class="paging_card">◁</div>
-                        <div class="paging_card">1</div>
-                        <div class="paging_card">2</div>
-                        <div class="paging_card">3</div>
-                        <div class="paging_card">4</div>
-                        <div class="paging_card">5</div>
-                        <div class="paging_card">▷</div>
-                        <div class="paging_card">→</div>
+                    <div class="paging">
+                        <div class="paging_box">
+                            <div class="paging_left">
+                                <th:block th:if="${paging.nowCase}!=1">
+                                    <div class="paging_card"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=1)}">←</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=${paging.leftPage})}">◁</a></div>
+                                </th:block>
+                            </div>
+                            <div class="paging_num">
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+1)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+1"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+1))}" th:text="(${paging.nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+2)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+2"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+2))}" th:text="(${paging.nowCase}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+3)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+3"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+3))}" th:text="(${paging.nowCase}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+4)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+4"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+4))}" th:text="(${paging.nowCase}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
+                            </div>
+                            <div class="paging_right">
+                                <th:block th:if="${paging.nowCase} != ${paging.allCase} and ${paging.allCase} != 0">
+                                    <div class="paging_card"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase})*5+1))}">▷</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.displayPage})))}">→</a></div>
+                                </th:block>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

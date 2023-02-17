@@ -1,4 +1,6 @@
 package com.project.novelnet.controller;
+import com.project.novelnet.Vo.MasterVO.MasterNovel;
+import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NewPageingVO;
 import com.project.novelnet.repository.MasterMapper;
 import com.project.novelnet.service.ManageService;
@@ -71,7 +73,7 @@ public class MasterController {
 
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
-        List<Map<String, Object>> list = masterMapper.novelShingo(searchType,keyword,start);
+        List<MasterNovel> list = masterMapper.novelShingo(searchType,keyword,start);
         System.out.println("총"+allPageCnt+"개/");
         System.out.println(list);
 
@@ -156,7 +158,7 @@ public class MasterController {
 
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
-        List<Map<String, Object>> list = masterMapper.replyShingo(searchType,keyword,start);
+        List<MasterReply> list = masterMapper.replyShingo(searchType,keyword,start);
         System.out.println("총"+allPageCnt+"개/");
         System.out.println(list);
 
