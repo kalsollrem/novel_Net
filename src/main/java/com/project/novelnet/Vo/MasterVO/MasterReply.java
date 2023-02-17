@@ -23,4 +23,5 @@ public class MasterReply {
     String n_title;
     String m_num;
     String m_title;
+    int bad_cnt;
 }

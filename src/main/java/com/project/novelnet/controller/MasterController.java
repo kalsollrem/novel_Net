@@ -169,4 +169,22 @@ public class MasterController {
 
         return "master_replyDeclaration";
     }
+
+    //댓글 블라인드
+    @PostMapping("/blindDel.do")
+    @ResponseBody
+    public int blindDel (@RequestParam("r_num") String r_num,
+                         HttpSession session)throws Exception
+    {
+        //1:성공, 0:실패
+        int answer = 0;
+
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        answer = masterMapper.replyBlind(r_num);
+//        }
+
+        //작성자 권한 확인
+        return answer;
+    }
+
 }

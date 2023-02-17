@@ -29,6 +29,10 @@ public interface MasterMapper {
     //소설당 댓글 갯수
     public int replyShingoCnt(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
+    //댓글 블라인드 처리
+    @Update("update reply set r_state='blind' where r_num=#{r_num}")
+    public int replyBlind(@Param("r_num")String r_num);
+
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,6 +44,11 @@ public interface MasterMapper {
     //유저 레벨 변환
     @Delete("delete from m_warning where mw_num = #{mw_num}")
     public int warningDel(@Param("mw_num")int mw_num);
+
+
+
+    //======================================================================
+
 
 
 }
