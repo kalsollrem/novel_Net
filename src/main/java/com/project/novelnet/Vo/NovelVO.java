@@ -28,6 +28,7 @@ public class NovelVO {
     private String  nick;              //작성자 닉네임
     private String  u_mail;            //작성자 메일
     private String  u_pic;             //작성자 프로필사진
+    private Integer u_level ;          //작성자 레벨
     private String  all_tag;           //모든 태그
     private Integer noType ;           //union ALL 사용시 나눌때 사용
     private Integer ep_count;          //조회수 합산용

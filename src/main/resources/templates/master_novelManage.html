@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/index.js"></script>
-    <script src="../js/master/master.js"></script>
+    <script src="../js/master/masterNovelManage.js"></script>
 </head>
     <body>
     <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
@@ -23,9 +23,9 @@
                 <div class="masterSearch">
                     <div class="leftSearchSpace">
                         <select name="searchOtp" id="searchOtp">
-                            <option value="user_nickname">닉네임</option>
-                            <option value="novel_name">소설제목</option>
-                            <option value="hashtag">태그</option>
+                            <option value="nick">닉네임</option>
+                            <option value="title">소설제목</option>
+                            <option value="tag">태그</option>
                         </select>
                         <input type="text" id="searchSpace">
                     </div>
@@ -58,7 +58,7 @@
 
                 <div class="master_novelManagement">
                     <ul class="novelManagement_List">
-                        <li class="borderLine_black" th:each="list : ${list}">
+                        <li class="borderLine_black" th:each="list : ${list}" >
                             <div class="picSide">
                                 <a th:href="@{/novelnet/novel(n_num=${list.n_num},page=1,sort='asc')}">
                                     <img th:src="'../noteImg/'+${list.n_cover}" th:alt="${list.n_title}" onerror="this.src='../img/write_cover.jpg'">
@@ -74,7 +74,6 @@
                                 </div>
                                 <div class="mw_profillLine">
                                     <div class="mw_mailData" th:utext="${list.nick} + ' <span>('+${list.u_mail}+')</span>'">
-
                                     </div>
                                     <div class="mw_miniFrame mw_good" th:text="'추천 '+${list.n_good}">추천 100</div>
                                     <div class="mw_miniFrame mw_viww" th:text="${list.n_count}+ '뷰'">1000 뷰</div>
@@ -85,11 +84,12 @@
                                 </div>
                             </div>
                             <div class="mw_SwitchSide borderLeft_black">
-                                <button class="mw_PdPickBtn" th:value="${list.n_num}">Pd픽 선정</button>
-                                <button class="mw_ImgChangeBtn" th:value="${list.n_cover}">이미지 변경</button>
-                                <button class="mw_novelStopBtn" th:value="${list.n_num}">소설 정지</button>
-                                <button class="mw_WarnningDelBtn" th:value="${list.n_num}">정지 해제</button>
-                                <button class="mw_UserDelBtn" th:value="${list.u_num}">유저 정지</button>
+                                <button class="mw_PdPickBtn"        th:value="${list.n_num}">  Pd픽 선정</button>
+                                <button class="mw_ImgChangeBtn"     th:value="${list.n_cover}">이미지 변경</button>
+                                <button class="mw_novelStopBtn"     th:if="${list.n_stop}==0" th:value="${list.n_num}">소설 정지</button>
+                                <button class="mw_novelOnBtn"       th:if="${list.n_stop}>0" th:value="${list.n_num}">정지 해제</button>
+                                <button class="mw_UserDelBtn mw_UserDown"     th:value="${list.u_num}" th:if="${list.u_level}=='0'">유저 강등</button>
+                                <button class="mw_UserDelBtn mw_UserUp"       th:value="${list.u_num}" th:if="${list.u_level}=='1'">강등 해제</button>
                             </div>
                         </li>
                     </ul>
@@ -97,21 +97,21 @@
                         <div class="paging_box">
                             <div class="paging_left">
                                 <th:block th:if="${paging.nowCase}!=1">
-                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=1)}">←</a></div>
-                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=${paging.leftPage})}">◁</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=1)}">←</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=${paging.leftPage})}">◁</a></div>
                                 </th:block>
                             </div>
                             <div class="paging_num">
-                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+1)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+1"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+1))}" th:text="(${paging.nowCase}-1)*5+1">1</a></div>
-                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+2)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+2"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+2))}" th:text="(${paging.nowCase}-1)*5+2">2</a></div>
-                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+3)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+3"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+3))}" th:text="(${paging.nowCase}-1)*5+3">3</a></div>
-                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+4)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+4"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+4))}" th:text="(${paging.nowCase}-1)*5+4">4</a></div>
-                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+1)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+1"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+1))}" th:text="(${paging.nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+2)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+2"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+2))}" th:text="(${paging.nowCase}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+3)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+3"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+3))}" th:text="(${paging.nowCase}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+4)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+4"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+4))}" th:text="(${paging.nowCase}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
                             </div>
                             <div class="paging_right">
                                 <th:block th:if="${paging.nowCase} == ${paging.allCase} and ${paging.allCase} != 0">
-                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase})*5+1))}">▷</a></div>
-                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.displayPage})))}">→</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase})*5+1))}">▷</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.displayPage})))}">→</a></div>
                                 </th:block>
                             </div>
                         </div>

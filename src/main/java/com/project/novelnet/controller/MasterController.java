@@ -85,9 +85,9 @@ public class MasterController {
 
 
     //유저 강등
-    @PostMapping("/userStop.do")
+    @PostMapping("/userManage.do")
     @ResponseBody
-    public int memoDelete (@RequestParam("u_num") String  u_num,
+    public int userStop   (@RequestParam("u_num") String  u_num,
                            @RequestParam("switchUD") int switchUD,
                            HttpSession session)throws Exception
     {
@@ -101,6 +101,7 @@ public class MasterController {
         //작성자 권한 확인
         return answer;
     }
+
 
 
     //경고삭제
@@ -190,7 +191,7 @@ public class MasterController {
 
 
     //소설관리
-    @GetMapping("/master/userManagement")
+    @GetMapping("/master/novelManagement")
     public String masterNovelManage(Model model,
                                          HttpSession session,
                                          NewPageingVO newPageingVO,
@@ -241,5 +242,24 @@ public class MasterController {
 
         return "master_novelManage";
     }
+
+    //소설 정지 앤 해제
+    @PostMapping("/masterNovelSwitch.do")
+    @ResponseBody
+    public int masterNovelSwitch   (@RequestParam("n_num") int  n_num,
+                                    @RequestParam("switchUD") int switchUD,
+                                    HttpSession session)throws Exception
+    {
+        //1:성공, 0:실패
+        int answer = 0;
+
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        answer = masterMapper.masterNovelSwitch(n_num,switchUD);
+//        }
+
+        //작성자 권한 확인
+        return answer;
+    }
+
 
 }

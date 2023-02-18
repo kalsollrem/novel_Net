@@ -50,7 +50,14 @@ public interface MasterMapper {
 
     //======================================================================
 
+    //마스터 페이지용 소설 갯수 새기
     public int novelCnt(@Param("searchType")String searchType, @Param("keyword")String keyword , @Param("sort")String sort);
+
+    //마스터 소설 리스트
     List<NovelVO> masterNovelList(@Param("searchType")String searchType, @Param("keyword")String keyword , @Param("sort")String sort, @Param("start")int start);
+
+    //소설 정지&정지해제
+    @Update("update memo set b_stop = #{b_stop} where n_num=#{n_num}")
+    public int masterNovelSwitch(@Param("n_num") int n_num, @Param("b_stop")int b_stop);
 
 }

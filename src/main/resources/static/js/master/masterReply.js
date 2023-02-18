@@ -22,7 +22,7 @@ $(function (){
         else                        { switchUD = 1;}
 
         $.ajax({
-            url:'/userStop.do',
+            url:'/userManage.do',
             type:'post',
             data : {"u_num":$(this).val(),
                     "switchUD":switchUD},

@@ -224,11 +224,11 @@
 
     <select id="masterNovelList" resultType="com.project.novelnet.Vo.NovelVO">
         select  A.n_num, A.n_introduction,  A.n_title, A.n_cover,
-                C.u_num, IFNULL(C.nick,'탈퇴한 유저입니다')as nick, C.u_pic, IFNULL(C.u_mail,'')as u_mail,
+                C.u_num, IFNULL(C.nick,'탈퇴한 유저입니다')as nick, C.u_pic, IFNULL(C.u_mail,'')as u_mail, C.u_level,
                 D.all_tag, ifnull(E.n_chapters,0) as n_chapters, ifnull(E.n_count,0) as n_count, ifnull(E.n_good,0) as n_good, ifnull(E.n_stop,0) as n_stop, E.m_num,
                 ifnull(F.shingoCnt,0) as shingoCnt
         from (select n_num, n_introduction, n_title, n_cover, u_num from novel)A
-        left join (select u_num, u_nick as nick, u_pic, u_mail from user) C
+        left join (select u_num, u_nick as nick, u_pic, u_mail,u_level from user) C
         on A.u_num = C.u_num
         inner join
                 (select n_num, group_concat(h_tag order by t_carte asc separator' ' ) as All_tag
