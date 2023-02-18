@@ -893,6 +893,8 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 /* 정지 안내문 */
 .stop_message  {text-align: center; margin-top: 50px; width: 100%; background-color: #2C2B3B; border-radius: 30px; margin-bottom: 50px;}
 .stop_message > a> img {width: 500px;}
+.stop_message2  {text-align: center; margin-top: 50px; width: 100%; border: 5px solid #eeb6b6;  box-sizing: border-box; border-radius: 30px; margin-bottom: 50px;}
+.stop_message2 > a> img {width: 500px;}
 /* 정지 안내문 */
 
 /* 뷰어 */
@@ -1104,7 +1106,7 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .novelManagement_List >li .picSide       {width: 10%;  float: left; margin-right: 10px; margin-left: 5px; margin-top: 10px;}
 .novelManagement_List >li .mw_LeftSide   {width: 79%;  float: left; margin-right: 25px; margin-top: 10px;}
 .novelManagement_List >li .mw_SwitchSide {width: 10%; min-height: 100px; text-align: center;}
-.picSide >img {width: 100%; margin: 5px; border-radius: 10px;}
+.picSide >a>img {width: 100%; margin: 5px; border-radius: 10px;}
 
 
 
@@ -1143,7 +1145,7 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .mw_LeftSide .mw_reply_inside       {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202); box-sizing: border-box; border-radius: 10px; min-height: 30px;}
 .mw_LeftSide .mw_novelPri           {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202); box-sizing: border-box; border-radius: 10px; min-height: 67px; font-size: 14px;}
 .mw_LeftSide .mw_noveltag           {width: 100%-10px; margin: 5px; padding: 5px; border: 1px solid rgb(206, 202, 202); box-sizing: border-box; border-radius: 10px; min-height: 30px; font-size: 14px; line-height: 150%;}
-
+.mw_noveltag >span                  {margin: 0px 3px 0px 3px; min-width: 30px; float: left}
 
 
 .mw_SwitchSide .mw_WarnningCnt {text-align:left; margin-left: 10px; margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold;}

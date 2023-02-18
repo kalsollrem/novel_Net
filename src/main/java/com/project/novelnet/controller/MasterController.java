@@ -2,6 +2,7 @@ package com.project.novelnet.controller;
 import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NewPageingVO;
+import com.project.novelnet.Vo.NovelVO;
 import com.project.novelnet.repository.MasterMapper;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
@@ -185,6 +186,60 @@ public class MasterController {
 
         //작성자 권한 확인
         return answer;
+    }
+
+
+    //소설관리
+    @GetMapping("/master/userManagement")
+    public String masterNovelManage(Model model,
+                                         HttpSession session,
+                                         NewPageingVO newPageingVO,
+                                         @Param("page")       String page,
+                                         @Param("searchType") String searchType,
+                                         @Param("keyword")    String keyword,
+                                         @Param("sort")       String sort)throws Exception
+    {
+        //아이디 처리
+        try                 {u_num= (String)session.getAttribute("U_NUM").toString();}
+        catch (Exception e) {u_num = null;}
+
+        //레벨확인
+        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9") {System.out.println("관리자(9레벨)가아님");}}
+        catch (Exception e) {System.out.println("나가");}
+
+        //변수 처리
+        if(page == null || page == "0")                     {page    = "1"; }
+        else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
+
+        if(searchType == null || searchType.replace(" ","") == "")  {searchType = "";}
+        model.addAttribute("searchType",searchType);
+
+        if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
+
+        if(sort == null || sort == "")                      {sort    = "all"; }
+
+
+        //페이징처리
+        int allPageCnt = masterMapper.novelCnt(searchType,keyword, sort);
+        pageingService.setNowPage(page);
+        pageingService.setTotalCount(allPageCnt);
+        newPageingVO = pageingService.setNewPageingVO(newPageingVO);
+
+        model.addAttribute("paging", newPageingVO);
+
+
+        //시작페이지처리
+        int start = (Integer.parseInt(page)-1)*10;
+        List<NovelVO> list = masterMapper.masterNovelList(searchType,keyword, sort, start);
+        System.out.println("총"+allPageCnt+"개/");
+        System.out.println(list);
+
+
+        model.addAttribute("list",list);
+
+
+
+        return "master_novelManage";
     }
 
 }

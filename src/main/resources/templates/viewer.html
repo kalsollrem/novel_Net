@@ -84,10 +84,11 @@
         <div class="nebiOpt" th:if="${session.U_NUM}!=null and ${session.U_LEVEL}!='1'"><img src="../img/singo.png" alt="신고"></div>
         <ul class="guide_nebi">
             <!-- 이전화 버튼 -->
-            <th:block th:if="${#strings.equals(param.type, 'gong')}">
+            <th:block th:if="${memoVO.m_type == 'gong'}">
+                <li><a th:if="${back}"><br></a></li>
                 <li><a th:unless="${back}" th:href="${back}"><br></a></li>
             </th:block>
-            <th:block th:unless="${#strings.equals(param.type, 'gong')}">
+            <th:block th:unless="${memoVO.m_type == 'gong'}">
                 <li><a th:if="${back}"     th:href="${back}">◀ 이전화</a></li>
                 <li><a th:unless="${back}" th:href="${back}"><br></a></li>
             </th:block>
@@ -105,10 +106,11 @@
             <!-- 추천 버튼 -->
 
             <!-- 다음화 버튼 -->
-            <th:block th:if="${#strings.equals(param.type, 'gong')}">
+            <th:block th:if="${memoVO.m_type == 'gong'}">
+                <li><a th:unless="${next}" ><br></a></li>
                 <li><a th:unless="${next}" th:href="${next}"><br></a></li>
             </th:block>
-            <th:block th:unless="${#strings.equals(param.type, 'gong')}">
+            <th:block th:unless="${memoVO.m_type == 'gong'}">
                 <li><a th:if="${next}"     th:href="${next}">다음화 ▶</a></li>
                 <li><a th:unless="${next}" th:href="${next}"><br></a></li>
             </th:block>

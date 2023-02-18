@@ -26,9 +26,11 @@ public class NovelVO {
     private Integer rnum ;             //마지막으로 본 에피소드의 번호, 탑100화면에선 번호따는데도 쓰임.
     private Integer nextNum ;          //다음글 m_num
     private String  nick;              //작성자 닉네임
+    private String  u_mail;            //작성자 메일
     private String  u_pic;             //작성자 프로필사진
     private String  all_tag;           //모든 태그
     private Integer noType ;           //union ALL 사용시 나눌때 사용
     private Integer ep_count;          //조회수 합산용
     private Integer newMemo;           //신규 등록 여부. 24미만일경우 NEW띄울때 사용.
+    private Integer shingoCnt;         //신고숫자
 }

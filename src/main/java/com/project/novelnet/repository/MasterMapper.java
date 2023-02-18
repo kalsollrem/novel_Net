@@ -2,6 +2,7 @@ package com.project.novelnet.repository;
 
 import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
+import com.project.novelnet.Vo.NovelVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -49,6 +50,7 @@ public interface MasterMapper {
 
     //======================================================================
 
-
+    public int novelCnt(@Param("searchType")String searchType, @Param("keyword")String keyword , @Param("sort")String sort);
+    List<NovelVO> masterNovelList(@Param("searchType")String searchType, @Param("keyword")String keyword , @Param("sort")String sort, @Param("start")int start);
 
 }

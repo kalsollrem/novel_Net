@@ -173,5 +173,106 @@
     </select>
 
 
+
+
+
+<!---->
+<!---->
+<!---->
+
+    <select id="novelCnt" resultType="int">
+        select  count(A.n_num) as t
+        from (select n_num, n_title, u_num from novel)A
+        left join (select u_num, u_nick as nick, u_mail from user) C
+        on A.u_num = C.u_num
+        inner join
+        (select n_num, group_concat(h_tag order by t_carte asc separator' ' ) as tag_Line
+        from (select n_num, t_carte, concat(<![CDATA['<',h_tag,'>']]>)as h_tag from hashtag)tagChange
+        group by n_num order by h_tag) DD
+        on A.n_num = DD.n_num
+        left join (select n_num, m_num, count(m_count) as n_chapters, count(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop from memo group by n_num) E
+        on A.n_num = E.n_num
+        left join (select n_num, count(mw_num)as shingoCnt from m_warning group by n_num) F
+        on A.n_num = F.n_num
+        where A.n_num is not null
+        <choose>
+            <when test="searchType.equals('nick')">
+                and C.nick like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('title')">
+                and A.n_title like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('tag')">
+                and DD.tag_Line like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('novelNum')">
+                and A.n_num = #{keyword}
+            </when>
+        </choose>
+        <choose>
+            <when test="sort.equals('shingoD')">
+                order by F.shingoCnt desc
+            </when>
+            <when test="sort.equals('shingoA')">
+                order by F.shingoCnt asc
+            </when>
+            <when test="sort.equals('Stop')">
+                and E.n_stop>0
+            </when>
+        </choose>
+    </select>
+
+    <select id="masterNovelList" resultType="com.project.novelnet.Vo.NovelVO">
+        select  A.n_num, A.n_introduction,  A.n_title, A.n_cover,
+                C.u_num, IFNULL(C.nick,'탈퇴한 유저입니다')as nick, C.u_pic, IFNULL(C.u_mail,'')as u_mail,
+                D.all_tag, ifnull(E.n_chapters,0) as n_chapters, ifnull(E.n_count,0) as n_count, ifnull(E.n_good,0) as n_good, ifnull(E.n_stop,0) as n_stop, E.m_num,
+                ifnull(F.shingoCnt,0) as shingoCnt
+        from (select n_num, n_introduction, n_title, n_cover, u_num from novel)A
+        left join (select u_num, u_nick as nick, u_pic, u_mail from user) C
+        on A.u_num = C.u_num
+        inner join
+                (select n_num, group_concat(h_tag order by t_carte asc separator' ' ) as All_tag
+                from (select n_num, t_carte, concat(<![CDATA['<span>[',h_tag,']</span>']]>)as h_tag from hashtag)tagChange
+                group by n_num order by h_tag) D
+        on A.n_num = D.n_num
+        inner join
+        (select n_num, group_concat(h_tag order by t_carte asc separator' ' ) as tag_Line
+        from (select n_num, t_carte, concat(<![CDATA['<',h_tag,'>']]>)as h_tag from hashtag)tagChange
+        group by n_num order by h_tag) DD
+        on A.n_num = DD.n_num
+        left join (select n_num, m_num, count(m_count) as n_chapters, count(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop from memo group by n_num) E
+        on A.n_num = E.n_num
+        left join (select n_num, count(mw_num)as shingoCnt from m_warning group by n_num) F
+        on A.n_num = F.n_num
+        where A.n_num is not null
+        <choose>
+            <when test="searchType.equals('nick')">
+                and C.nick like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('title')">
+                and A.n_title like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('tag')">
+                and DD.tag_Line like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('novelNum')">
+                and A.n_num = #{keyword}
+            </when>
+        </choose>
+        <choose>
+            <when test="sort.equals('shingoD')">
+                order by F.shingoCnt desc
+            </when>
+            <when test="sort.equals('shingoA')">
+                order by F.shingoCnt asc
+            </when>
+            <when test="sort.equals('stop')">
+                and E.n_stop>0
+            </when>
+        </choose>
+        limit 0,10
+    </select>
+
+
 </mapper>
 
