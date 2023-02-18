@@ -34,4 +34,5 @@ public class NovelVO {
     private Integer ep_count;          //조회수 합산용
     private Integer newMemo;           //신규 등록 여부. 24미만일경우 NEW띄울때 사용.
     private Integer shingoCnt;         //신고숫자
+    private Integer pd_num;            //피디픽 여부
 }

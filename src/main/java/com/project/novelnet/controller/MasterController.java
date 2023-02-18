@@ -3,6 +3,7 @@ import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NewPageingVO;
 import com.project.novelnet.Vo.NovelVO;
+import com.project.novelnet.Vo.PdPickVO;
 import com.project.novelnet.repository.MasterMapper;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
@@ -233,11 +234,14 @@ public class MasterController {
         int start = (Integer.parseInt(page)-1)*10;
         List<NovelVO> list = masterMapper.masterNovelList(searchType,keyword, sort, start);
         System.out.println("총"+allPageCnt+"개/");
-        System.out.println(list);
+
 
 
         model.addAttribute("list",list);
 
+        //pd픽 관리
+        List<PdPickVO> pdPick = masterMapper.pdPickList();
+        model.addAttribute("pdPick",pdPick);
 
 
         return "master_novelManage";
@@ -261,5 +265,22 @@ public class MasterController {
         return answer;
     }
 
+    //소설 정지 앤 해제
+    @PostMapping("/pdPickChoice.do")
+    @ResponseBody
+    public int masterPdPickChoice   (@RequestParam("n_num") int  n_num,
+                                    @RequestParam("switchUD") int switchUD,
+                                    HttpSession session)throws Exception
+    {
+        //1:성공, 0:실패
+        int answer = 0;
 
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+            if(switchUD == 0){answer = masterMapper.pdPickChoice(n_num);}
+            else             {answer = masterMapper.pdPickDelete(n_num);}
+//        }
+
+        //작성자 권한 확인
+        return answer;
+    }
 }

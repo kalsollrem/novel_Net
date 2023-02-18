@@ -3,17 +3,17 @@ $(function (){
 
     //검색키
     $("#masterSearchbtn").click(function(){
-        let keyword     = $('.searchSpace').val();
+        let keyword     = $('.searchSpace').val(); if(keyword == null){ keyword = '';}
         let searchType  = $('#searchOtp').val();
         let sort        = $('#sortOtp').val();
-        location.href   = '/master/novelDeclaration?searchType='+searchType+'&keyword='+keyword+'$sort='+sort+'&page=1';
+        location.href   = '/master/novelManagement?searchType='+searchType+'&keyword='+keyword+'&sort='+sort+'&page=1';
     });
 
     //PD픽 메뉴 스위치
     let pdPickListSwitch = 0;
     $(".masterChoiceSwitch").click(function (){
-        if(pdPickListSwitch == 0) {$(".masterChoice").slideDown; pdPickListSwitch =1;}
-        else                      {$(".masterChoice").slideDown; pdPickListSwitch =0;}
+        if(pdPickListSwitch == 0) {$(".masterChoice").show(); pdPickListSwitch =1;}
+        else                      {$(".masterChoice").hide(); pdPickListSwitch =0;}
     })
 
     //소설 정지
@@ -71,7 +71,27 @@ $(function (){
         });
     });
 
+    //PD픽 선정
+    $(".mw_PdPickBtn").click(function(){
+        let switchUD=0;
+        $.ajax({
+            url:'/pdPickChoice.do', type:'post',
+            data : {"n_num":$(this).val(), "switchUD":switchUD},
+            success:function(s){location.reload(); },
+            error:function(){alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다."); }
+        });
+    });
 
+    //PD픽 삭제
+    $(".pdDelBtn").click(function(){
+        let switchUD=1;
+        $.ajax({
+            url:'/pdPickChoice.do', type:'post',
+            data : {"n_num":$(this).val(), "switchUD":switchUD},
+            success:function(s){location.reload(); },
+            error:function(){alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다."); }
+        });
+    });
 
 
 })

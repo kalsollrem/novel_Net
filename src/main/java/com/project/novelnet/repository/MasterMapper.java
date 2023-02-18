@@ -3,10 +3,8 @@ package com.project.novelnet.repository;
 import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NovelVO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.project.novelnet.Vo.PdPickVO;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -59,5 +57,16 @@ public interface MasterMapper {
     //소설 정지&정지해제
     @Update("update memo set b_stop = #{b_stop} where n_num=#{n_num}")
     public int masterNovelSwitch(@Param("n_num") int n_num, @Param("b_stop")int b_stop);
+
+    //pd픽 가져오기
+    List<PdPickVO> pdPickList();
+
+    //pd픽 선정
+    @Insert("INSERT INTO pd_pick (n_num) VALUES (#{n_num})")
+    public int pdPickChoice(@Param("n_num")int n_num);
+
+    //pd픽 해제
+    @Delete("delete from pd_pick where n_num = #{n_num}")
+    public int pdPickDelete(@Param("n_num")int n_num);
 
 }

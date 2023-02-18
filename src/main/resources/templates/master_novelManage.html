@@ -46,16 +46,13 @@
 
                 <div class="masterChoiceSwitch">▼ PD픽 리스트</div>
                 <ul class="masterChoice">
-                    <li>
-                        <div class="pdChoiceName maxHightOpt1">1. 소설명</div>
-                        <div class="pdChoiceBtnZone"><button class="delPDpick">삭제</button> </div>
-                    </li>
-                    <li>
-                        <div class="pdChoiceName maxHightOpt1">1. 소설명</div>
-                        <div class="pdChoiceBtnZone"><button class="delPDpick">삭제</button> </div>
+                    <li th:each="pdPick : ${pdPick}">
+                        <div class="pdChoiceName maxHightOpt1" th:text="${pdPick.number}+'. '+${pdPick.n_title}"></div>
+                        <div class="pdChoiceBtnZone"><button class="delPDpick pdDelBtn"th:value="${pdPick.n_num}">삭제</button> </div>
                     </li>
                 </ul>
 
+                <div class="anvoerline" th:if="${paging.allPage}==0"></div>
                 <div class="master_novelManagement">
                     <ul class="novelManagement_List">
                         <li class="borderLine_black" th:each="list : ${list}" >
@@ -79,13 +76,14 @@
                                     <div class="mw_miniFrame mw_viww" th:text="${list.n_count}+ '뷰'">1000 뷰</div>
                                     <div class="mw_miniFrame mw_stop" th:text="${list.shingoCnt}+' 신고'">50 신고</div>
                                 </div>
-                                <div class="mw_novelPri maxHightOpt4" th:text="${list.n_introduction}">소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리소설 줄거리</div>
+                                <div class="mw_novelPri maxHightOpt4" th:text="${list.n_introduction}">소설 줄거리</div>
                                 <div class="mw_noveltag "th:utext="${list.all_tag}">
                                 </div>
                             </div>
                             <div class="mw_SwitchSide borderLeft_black">
-                                <button class="mw_PdPickBtn"        th:value="${list.n_num}">  Pd픽 선정</button>
                                 <button class="mw_ImgChangeBtn"     th:value="${list.n_cover}">이미지 변경</button>
+                                <button class="mw_PdPickBtn"        th:if="${list.pd_num}==0" th:value="${list.n_num}">  Pd픽 선정</button>
+                                <button class="mw_pdDelBtn pdDelBtn"th:if="${list.pd_num}!=0" th:value="${list.n_num}">  Pd픽 삭제</button>
                                 <button class="mw_novelStopBtn"     th:if="${list.n_stop}==0" th:value="${list.n_num}">소설 정지</button>
                                 <button class="mw_novelOnBtn"       th:if="${list.n_stop}>0" th:value="${list.n_num}">정지 해제</button>
                                 <button class="mw_UserDelBtn mw_UserDown"     th:value="${list.u_num}" th:if="${list.u_level}=='0'">유저 강등</button>
@@ -109,7 +107,7 @@
                                 <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
                             </div>
                             <div class="paging_right">
-                                <th:block th:if="${paging.nowCase} == ${paging.allCase} and ${paging.allCase} != 0">
+                                <th:block th:if="${paging.nowCase} <= ${paging.allCase} and ${paging.allCase} != 0">
                                     <div class="paging_card"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase})*5+1))}">▷</a></div>
                                     <div class="paging_card"><a th:href="@{/master/novelManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.displayPage})))}">→</a></div>
                                 </th:block>

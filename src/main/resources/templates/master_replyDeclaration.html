@@ -99,7 +99,7 @@
                                 <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
                             </div>
                             <div class="paging_right">
-                                <th:block th:if="${paging.nowCase} == ${paging.allCase} and ${paging.allCase} != 0">
+                                <th:block th:if="${paging.nowCase} <= ${paging.allCase} and ${paging.allCase} != 0">
                                     <div class="paging_card"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.nowCase})*5+1))}">▷</a></div>
                                     <div class="paging_card"><a th:href="@{/master/replyDeclaration(searchType=${param.searchType},keyword=${param.keyword},page=((${paging.displayPage})))}">→</a></div>
                                 </th:block>
