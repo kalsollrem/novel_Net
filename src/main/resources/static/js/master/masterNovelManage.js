@@ -3,7 +3,7 @@ $(function (){
 
     //검색키
     $("#masterSearchbtn").click(function(){
-        let keyword     = $('.searchSpace').val(); if(keyword == null){ keyword = '';}
+        let keyword     = $('.searchSpace').val();
         let searchType  = $('#searchOtp').val();
         let sort        = $('#sortOtp').val();
         location.href   = '/master/novelManagement?searchType='+searchType+'&keyword='+keyword+'&sort='+sort+'&page=1';
