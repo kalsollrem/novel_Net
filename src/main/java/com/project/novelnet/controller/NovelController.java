@@ -496,9 +496,9 @@ public class NovelController {
             model.addAttribute("U_level",level);
         }
 
-//        String stop = novelMapper.novelStopCheak(n_num);
-//        try                 {if (stop != "0")        { return "redirect:/novelnet";} }
-//        catch (Exception e) {System.out.println("no"); return "redirect:/novelnet";}
+        int stop = novelMapper.novelStopCheak(n_num);
+        System.out.println("정지수="+  stop);
+        if (stop > 0)        { return "redirect:/novelnet";}
 
         if (m_num == null || manageService.isInteger(m_num) == false || n_num == null || manageService.isInteger(n_num) == false)
         {
@@ -852,6 +852,10 @@ public class NovelController {
         if (n_num == null || n_num.matches("-?\\d+(\\.\\d+)?") == false ){ return "redirect:/novelnet"; } //소설데이터 검색 실패시
         else
         {
+            int stop = novelMapper.novelStopCheak(n_num);
+            System.out.println("정지수="+  stop);
+            if (stop > 0)        { return "redirect:/novelnet";}
+
             //소설 데이터 검색
             System.out.println("책 번호 : " + n_num);
             NovelVO novelVO = new NovelVO();

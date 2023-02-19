@@ -23,8 +23,8 @@ public interface NovelMapper {
     public int cheakMemo(@Param("m_num")String m_num);
 
     //정지상태 체크
-    @Select("select sum(b_stop) as n_stop from memo where n_num=#{n_num} group by n_num")
-    public String novelStopCheak(@Param("n_num")String n_num);
+    @Select("select stopPoint from novel where n_num=#{n_num}")
+    public int novelStopCheak(@Param("n_num")String n_num);
 
     //소설 게시물 보기
     @Select("select m_num, m_title, m_memo, m_date, m_count, m_good, b_stop, m_type, " +
