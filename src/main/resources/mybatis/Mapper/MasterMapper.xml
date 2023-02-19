@@ -109,8 +109,8 @@
                C.m_num, C.m_title,
                D.n_num, D.n_title,
                CNT.bad_cnt
-        from (select rw_num, r_num, u_num from r_warning)A
-        left join (select r_num, u_num, r_memo, m_num, n_num, r_date, r_bad, r_state from reply) B
+          from (select rw_num, r_num, u_num from r_warning)A
+        left join (select r_num, u_num, r_memo, m_num, n_num, r_date, r_bad, ifnull(r_state, 'ok')as r_state  from reply) B
                on A.r_num = B.r_num
         left join (select m_num, m_title from memo)C
                on C.m_num = B.m_num
@@ -122,7 +122,7 @@
                ON a.u_num = UB.u_num
         left join(select r_num, count(r_num) as bad_cnt from r_warning group by r_num) CNT
                on A.r_num = CNT.r_num
-        where UA.u_num is not null and A.r_num != 'none' and B.r_state != 'blind' or B.r_state is null
+        where UA.u_num is not null and A.r_num != 'none' and B.r_state != 'blind'
         <choose>
             <when test="searchType.equals('nick')">
                 and UB.nick like CONCAT('%',#{keyword},'%')
@@ -143,9 +143,9 @@
 
 
     <select id="replyShingoCnt" resultType="int">
-        SELECT count(A.rw_num) as cnt
-        from (select rw_num, r_num, u_num from r_warning)A
-        left join (select r_num, u_num, m_num, n_num, r_date, r_bad, r_state from reply) b
+        select count(rw_num) as cnt
+             from (select rw_num, r_num, u_num from r_warning)A
+        left join (select r_num, u_num, r_memo, m_num, n_num, r_date, r_bad, ifnull(r_state, 'ok')as r_state  from reply) B
                on A.r_num = B.r_num
         left join (select m_num, m_title from memo)C
                on C.m_num = B.m_num
@@ -155,7 +155,9 @@
                ON b.u_num = UA.u_num
         LEFT JOIN (SELECT U_NUM, ifnull(u_nick, u_mail) as nick from user) UB
                ON a.u_num = UB.u_num
-        where UA.u_num is not null and A.r_num != 'none' and B.r_state != 'blind' or B.r_state is null
+        left join(select r_num, count(r_num) as bad_cnt from r_warning group by r_num) CNT
+               on A.r_num = CNT.r_num
+        where UA.u_num is not null and A.r_num != 'none' and B.r_state != 'blind'
         <choose>
             <when test="searchType.equals('nick')">
                 and UB.nick like CONCAT('%',#{keyword},'%')

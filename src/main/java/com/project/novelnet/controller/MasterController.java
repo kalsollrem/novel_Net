@@ -63,7 +63,6 @@ public class MasterController {
         if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
 
 
-
         //페이징처리
         int allPageCnt = masterMapper.novelShingoCnt(searchType,keyword);
         pageingService.setNowPage(page);
@@ -150,11 +149,16 @@ public class MasterController {
         if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
 
 
+        System.out.println(keyword);
         //페이징처리
         int allPageCnt = masterMapper.replyShingoCnt(searchType,keyword);
         pageingService.setNowPage(page);
         pageingService.setTotalCount(allPageCnt);
         newPageingVO = pageingService.setNewPageingVO(newPageingVO);
+
+        System.out.println("allPage:" + newPageingVO.getAllPage());
+        System.out.println("nowCase:" + newPageingVO.getNowCase());
+        System.out.println("allCase:" + newPageingVO.getAllCase());
 
         model.addAttribute("paging", newPageingVO);
 
@@ -223,9 +227,14 @@ public class MasterController {
 
         //페이징처리
         int allPageCnt = masterMapper.novelCnt(searchType,keyword, sort);
+        System.out.println(allPageCnt);
         pageingService.setNowPage(page);
         pageingService.setTotalCount(allPageCnt);
         newPageingVO = pageingService.setNewPageingVO(newPageingVO);
+
+        System.out.println("allPage:" + newPageingVO.getAllPage());
+        System.out.println("nowCase:" + newPageingVO.getNowCase());
+        System.out.println("allCase:" + newPageingVO.getAllCase());
 
         model.addAttribute("paging", newPageingVO);
 

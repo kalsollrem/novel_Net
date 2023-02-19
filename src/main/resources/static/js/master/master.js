@@ -7,7 +7,7 @@ $(function (){
 
     //검색키
     $("#masterSearchbtn").click(function(){
-        let keyword     = $('.searchSpace').val(); if(keyword == null){ keyword = '';}
+        let keyword     = $('#searchSpace').val();
         let searchType  = $('#searchOtp').val();
         location.href   = '/master/novelDeclaration?searchType='+searchType+'&keyword='+keyword+'&page=1';
     });

@@ -201,6 +201,13 @@ public class UserController {
                     rightPage   = pageingService.getRightPage();
                     displayPage = pageingService.getDisplayPage();
 
+                    System.out.println("allPage:" + allPage);
+                    System.out.println("nowCase:" + nowCase);
+                    System.out.println("allCase:" + allCase);
+                    System.out.println("leftPage:" + leftPage);
+                    System.out.println("rightPage:" + rightPage);
+                    System.out.println("displayPage:" + displayPage);
+
                     model.addAttribute("allPage", allPage);
                     model.addAttribute("nowCase", nowCase);
                     model.addAttribute("allCase", allCase);
