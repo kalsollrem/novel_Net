@@ -3,7 +3,7 @@ $(function (){
 
     //검색키
     $("#masterSearchbtn").click(function(){
-        let keyword     = $('.searchSpace').val();
+        let keyword     = $('#searchSpace').val();
         let searchType  = $('#searchOtp').val();
         let sort        = $('#sortOtp').val();
         location.href   = '/master/novelManagement?searchType='+searchType+'&keyword='+keyword+'&sort='+sort+'&page=1';
@@ -19,6 +19,7 @@ $(function (){
     //소설 정지
     $(".mw_novelStopBtn").click(function()
     {
+        alert($(this).val());
         let switchUD=1;
         $.ajax({
             url:'/masterNovelSwitch.do',
@@ -30,7 +31,7 @@ $(function (){
     });
 
 
-    //소설 정지
+    //소설 정지 해제
     $(".mw_novelOnBtn").click(function()
     {
         let switchUD=0;

@@ -265,7 +265,7 @@ public class MasterController {
     {
         //1:성공, 0:실패
         int answer = 0;
-
+        System.out.println(n_num+'/'+ switchUD);
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
         answer = masterMapper.masterNovelSwitch(n_num,switchUD);
 //        }

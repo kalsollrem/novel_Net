@@ -55,8 +55,8 @@ public interface MasterMapper {
     List<NovelVO> masterNovelList(@Param("searchType")String searchType, @Param("keyword")String keyword , @Param("sort")String sort, @Param("start")int start);
 
     //소설 정지&정지해제
-    @Update("update memo set b_stop = #{b_stop} where n_num=#{n_num}")
-    public int masterNovelSwitch(@Param("n_num") int n_num, @Param("b_stop")int b_stop);
+    @Update("update novel set stopPoint = #{stopPoint} where n_num=#{n_num}")
+    public int masterNovelSwitch(@Param("n_num") int n_num, @Param("stopPoint")int stopPoint);
 
     //pd픽 가져오기
     List<PdPickVO> pdPickList();

@@ -84,8 +84,8 @@
                                 <button class="mw_ImgChangeBtn"     th:value="${list.n_cover}">이미지 변경</button>
                                 <button class="mw_PdPickBtn"        th:if="${list.pd_num}==0" th:value="${list.n_num}">  Pd픽 선정</button>
                                 <button class="mw_pdDelBtn pdDelBtn"th:if="${list.pd_num}!=0" th:value="${list.n_num}">  Pd픽 삭제</button>
-                                <button class="mw_novelStopBtn"     th:if="${list.n_stop}==0" th:value="${list.n_num}">소설 정지</button>
-                                <button class="mw_novelOnBtn"       th:if="${list.n_stop}>0" th:value="${list.n_num}">정지 해제</button>
+                                <button class="mw_novelStopBtn"     th:if="${list.stopPoint}==0" th:value="${list.n_num}">소설 정지</button>
+                                <button class="mw_novelOnBtn"       th:if="${list.stopPoint}>0"  th:value="${list.n_num}">정지 해제</button>
                                 <button class="mw_UserDelBtn mw_UserDown"     th:value="${list.u_num}" th:if="${list.u_level}=='0'">유저 강등</button>
                                 <button class="mw_UserDelBtn mw_UserUp"       th:value="${list.u_num}" th:if="${list.u_level}=='1'">강등 해제</button>
                             </div>

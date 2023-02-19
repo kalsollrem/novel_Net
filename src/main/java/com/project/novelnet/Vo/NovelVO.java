@@ -13,6 +13,7 @@ public class NovelVO {
     private String n_monopoly;      //독점 플랫폼 여부
     private String n_fin;           //완결여부
     private Integer n_stop;         //신고횟수
+    private Integer stopPoint;      //정지여부
 
     private Integer n_good;         //추천
     private Integer n_count ;       //조회수

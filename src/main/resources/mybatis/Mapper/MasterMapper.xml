@@ -192,7 +192,7 @@
         from (select n_num, t_carte, concat(<![CDATA['<',h_tag,'>']]>)as h_tag from hashtag)tagChange
         group by n_num order by h_tag) DD
         on A.n_num = DD.n_num
-        left join (select n_num, m_num, count(m_count) as n_chapters, count(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop from memo group by n_num) E
+        left join (select n_num, m_num, count(m_count) as n_chapters, count(m_count) as n_count, sum(m_good) as n_good from memo group by n_num) E
         on A.n_num = E.n_num
         left join (select n_num, count(mw_num)as shingoCnt from m_warning group by n_num) F
         on A.n_num = F.n_num
@@ -225,11 +225,12 @@
     </select>
 
     <select id="masterNovelList" resultType="com.project.novelnet.Vo.NovelVO">
-        select  A.n_num, A.n_introduction,  A.n_title, A.n_cover,
+        select  A.n_num, A.n_introduction,  A.n_title, A.n_cover, A.stopPoint,
                 C.u_num, IFNULL(C.nick,'탈퇴한 유저입니다')as nick, C.u_pic, IFNULL(C.u_mail,'')as u_mail, C.u_level,
-                D.all_tag, ifnull(E.n_chapters,0) as n_chapters, ifnull(E.n_count,0) as n_count, ifnull(E.n_good,0) as n_good, ifnull(E.n_stop,0) as n_stop, E.m_num,
+                D.all_tag, ifnull(E.n_chapters,0) as n_chapters, ifnull(E.n_count,0) as n_count, ifnull(E.n_good,0) as n_good,
+                E.m_num,
                 ifnull(F.shingoCnt,0) as shingoCnt, ifnull(G.pd_num,0) as pd_num
-        from (select n_num, n_introduction, n_title, n_cover, u_num from novel)A
+        from (select n_num, n_introduction, n_title, n_cover, u_num, stopPoint from novel)A
         left join (select u_num, u_nick as nick, u_pic, u_mail,u_level from user) C
         on A.u_num = C.u_num
         inner join
@@ -242,7 +243,7 @@
         from (select n_num, t_carte, concat(<![CDATA['<',h_tag,'>']]>)as h_tag from hashtag)tagChange
         group by n_num order by h_tag) DD
         on A.n_num = DD.n_num
-        left join (select n_num, m_num, count(m_count) as n_chapters, count(m_count) as n_count, sum(m_good) as n_good, sum(b_stop) as n_stop from memo group by n_num) E
+        left join (select n_num, m_num, count(m_count) as n_chapters, count(m_count) as n_count, sum(m_good) as n_good from memo group by n_num) E
         on A.n_num = E.n_num
         left join (select n_num, count(mw_num)as shingoCnt from m_warning group by n_num) F
         on A.n_num = F.n_num
