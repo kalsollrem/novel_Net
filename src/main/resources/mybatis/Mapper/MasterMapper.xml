@@ -287,11 +287,11 @@
 
     <select id="masterUserList" resultType="com.project.novelnet.Vo.UserVO">
         select
-            A.u_num, A.u_nick, A.u_mail, A.u_regdate, A.u_myself, A.u_level, A.u_pic,
-            ifnull(B.reRcnt, 0)as reRcnt,
-            ifnull(C.goRcnt, 0)as goRcnt,
-            ifnull(D.reNcnt, 0)as reNcnt,
-            ifnull(E.goNcnt, 0)as goNcnt
+            A.u_num, A.u_nick, A.u_mail, date_format(A.u_regdate, '%y. %m. %d. (%H:%i)')as u_regdate, A.u_myself, A.u_level, A.u_pic,
+            ifnull(B.reRcnt, '0')as reRcnt,
+            ifnull(C.goRcnt, '0')as goRcnt,
+            ifnull(D.reNcnt, '0')as reNcnt,
+            ifnull(E.goNcnt, '0')as goNcnt
         from        (select u_num, u_nick, u_mail, u_regdate, u_myself, u_level, u_pic from user)A
         left join   (select sum(A.cnt)as reRcnt, B.u_num from (select count(r_num) as cnt, r_num, rw_num from r_warning group by r_num)A
                      left join (select r_num, u_num from reply )B

@@ -336,8 +336,10 @@ public class MasterController {
 
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
-        List<UserVO> list = masterMapper.masterUserList("","","",0);
+        List<UserVO> list = masterMapper.masterUserList("","","",start);
         System.out.println("총"+allPageCnt+"개/");
+        System.out.println(list);
+
 
         model.addAttribute("list",list);
 

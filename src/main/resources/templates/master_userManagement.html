@@ -23,9 +23,9 @@
                 <div class="masterSearch">
                     <div class="leftSearchSpace">
                         <select name="searchOtp" id="searchOtp">
-                            <option value="wNick" th:selected="'wNick'">닉네임</option>
-                            <option value="title" th:selected="'title'">소설제목</option>
-                            <option value="nick"  th:selected="'nick'">신고자</option>
+                            <option value="all"  th:selected="'all'">전체</option>
+                            <option value="nick" th:selected="'nick'">닉네임</option>
+                            <option value="mail" th:selected="'mail'">메일</option>
                         </select>
                         <input type="text" class="searchSpace">
                     </div>
@@ -37,55 +37,73 @@
                 <div class="anvoerline"></div>
                 <div class="master_userManagement">
                     <ul class="warning_memo">
-                        <li class="borderLine_black">
+                        <li class="borderLine_black" th:each="list : ${list}">
                             <div class="mw_LeftSide">
                                 <div class="mw_shingoLine">
                                     <div class="mw_userImageZone">
-                                        <button onclick="window.open('../img/profill.png')">
-                                            <img src="../img/profill.png" alt="프로필">
+                                        <button th:value="${list.u_pic}">
+                                            <img th:if="${list.u_pic}==null" src="../img/profill.png">
+                                            <img th:if="${list.u_pic}!=null" th:src="'../userimg/'+${list.u_pic}" th:alt="${list.u_nick}" onerror="this.src='../img/profill.png'">
                                         </button>
                                     </div>
-                                    <div class="mw_userNickName">[ NickName ]</div>
+                                    <div class="mw_userNickName">
+                                        <a th:href="@{/novelnet/profill(user=${list.u_num})}" th:text="'[ '+${list.u_mail}+ ' ]'"></a>
+                                        <span th:if="${list.u_level}=='1'">(정지)</span>
+                                    </div>
                                 </div>
                                 <div class="mw_profillLine">
-                                    <div class="mw_userNick">아이디</div>
-                                    <div class="mw_date">19.10.05</div>
+                                    <div class="mw_userNick"><a th:href="@{/novelnet/profill(user=${list.u_num})}" th:text="${list.u_nick}"></a></div>
+                                    <div class="mw_date" th:text="${list.u_regdate}"></div>
                                 </div>
                                 <div class="mw_titleLine">
                                     <div class="mw_warningTitelUp">신고 현황</div>
                                     <div class="mw_warningTitel">
-                                        <span>소설 : 5회 (총 10회)</span>
-                                        <span>/</span>
-                                        <span>댓글 : 5회 (총 10회)</span>
+                                        <span th:text="'▶ 소설 : 신고수 '+${list.goNcnt}+' 회 / '"></span>
+                                        <span th:text="'신고받음 '+${list.reNcnt}+' 회'"></span>
+                                        <br>
+                                        <span th:text="'▶ 댓글 : 신고수 '+${list.goRcnt}+' 회 / '"></span>
+                                        <span th:text="'신고받음 '+${list.reRcnt}+' 회'"></span>
                                     </div>
                                 </div>
-                                <div class="mw_reply_inside">자기소개</div>
+                                <div class="mw_reply_inside" th:text="${list.u_myself}">자기소개</div>
                             </div>
                             <div class="mw_SwitchSide borderLeft_black">
                                 <div class="levelChangeZone">
                                     <select name="levelChange" id="levelChange">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+                                        <option value="0" th:selected="${list.u_level}==0">일반</option>
+                                        <option value="1" th:selected="${list.u_level}==1">정지</option>
+                                        <option value="9" th:selected="${list.u_level}==9">관리</option>
                                     </select>
                                     <button class="levelChangeOK">변경</button>
                                 </div>
-                                <button class="mw_GoMypageBtn">마이페이지</button>
-                                <button class="mw_UserDelBtn">유저 정지</button>
-                                <button class="mw_WarnningDelBtn">경고 삭제</button>
+                                <button class="mw_GoMypageBtn" th:onclick="|location.href='@{/novelnet/profill(user=${list.u_num})}'|">마이페이지</button>
+                                <button class="mw_UserDelBtn" th:value="${list.u_num}">유저 정지</button>
+                                <button class="mw_WarnningDelBtn" th:value="${list.u_num}">경고 삭제</button>
                             </div>
                         </li>
                     </ul>
-                    <div class="ep_paging">
-                        <div class="paging_card">←</div>
-                        <div class="paging_card">◁</div>
-                        <div class="paging_card">1</div>
-                        <div class="paging_card">2</div>
-                        <div class="paging_card">3</div>
-                        <div class="paging_card">4</div>
-                        <div class="paging_card">5</div>
-                        <div class="paging_card">▷</div>
-                        <div class="paging_card">→</div>
+                    <div class="paging">
+                        <div class="paging_box">
+                            <div class="paging_left">
+                                <th:block th:if="${paging.nowCase}!=1">
+                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=1)}">←</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=${paging.leftPage})}">◁</a></div>
+                                </th:block>
+                            </div>
+                            <div class="paging_num">
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+1)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+1"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+1))}" th:text="(${paging.nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+2)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+2"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+2))}" th:text="(${paging.nowCase}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+3)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+3"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+3))}" th:text="(${paging.nowCase}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+4)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+4"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+4))}" th:text="(${paging.nowCase}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
+                            </div>
+                            <div class="paging_right">
+                                <th:block th:if="${paging.nowCase} < ${paging.allCase} and ${paging.allCase} > 0">
+                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.nowCase})*5+1))}">▷</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/userManagement(searchType=${param.searchType},keyword=${param.keyword},sort=${param.sort},page=((${paging.displayPage})))}">→</a></div>
+                                </th:block>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
