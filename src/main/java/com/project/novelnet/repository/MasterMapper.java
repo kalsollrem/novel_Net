@@ -4,6 +4,7 @@ import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NovelVO;
 import com.project.novelnet.Vo.PdPickVO;
+import com.project.novelnet.Vo.UserVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +36,12 @@ public interface MasterMapper {
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------------------------------------
 
+    //유저 데이터 가져오기
+    List<UserVO> masterUserList(@Param("searchType")String searchType, @Param("keyword")String keyword ,@Param("sort")String sort, @Param("start")int start);
+
+    //유저 인원수 파악
+    @Select("select count(u_num) from user")
+    public int userCnt();
 
     //유저 레벨 변환
     @Update("update user set u_level=#{level} where u_num=#{u_num}")

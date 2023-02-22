@@ -7,21 +7,20 @@ import lombok.Setter;
 @Data
 public class MasterNovel {
 
-
-    String mw_num;
-    String n_num;
-    String m_num;
-    String u_num;
-    String nick;
-    String w_why;
-    String mw_date;
-    String b_stop;
-    String n_title;
-    String m_title;
-    String wNick;
-    String U_LEVEL;
-    String wU_num;
-    String wU_mail;
+    private String mw_num;
+    private String n_num;
+    private String m_num;
+    private String u_num;
+    private String nick;
+    private String w_why;
+    private String mw_date;
+    private String b_stop;
+    private String n_title;
+    private String m_title;
+    private String wNick;
+    private String U_LEVEL;
+    private String wU_num;
+    private String wU_mail;
 
 
 }

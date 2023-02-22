@@ -7,21 +7,21 @@ import lombok.Setter;
 @Data
 public class MasterReply {
 
-    String rw_num;
-    String r_num;
-    String nick;
-    String r_memo;
-    String r_date;
-    String r_bad;
-    String r_state;
-    String u_num;
-    String wNick;
-    String wU_mail;
-    String U_LEVEL;
-    String wU_num;
-    String n_num;
-    String n_title;
-    String m_num;
-    String m_title;
-    int bad_cnt;
+    private String rw_num;
+    private String r_num;
+    private String nick;
+    private String r_memo;
+    private String r_date;
+    private String r_bad;
+    private String r_state;
+    private String u_num;
+    private String wNick;
+    private String wU_mail;
+    private String U_LEVEL;
+    private String wU_num;
+    private String n_num;
+    private String n_title;
+    private String m_num;
+    private String m_title;
+    private int bad_cnt;
 }

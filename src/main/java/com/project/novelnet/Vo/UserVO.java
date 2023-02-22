@@ -17,4 +17,9 @@ public class UserVO {
     private String u_regdate; //가입일
     private String u_code;    //이메일코드
 
+    private Integer geRcnt;   //내가 댓글 신고한 횟수
+    private Integer reRcnt;   //내가 댓글 신고당한 횟수
+    private Integer geNcnt;   //내가 소설 신고한 횟수
+    private Integer reNcnt;   //내가 소설 신고당한 횟수
+
 }

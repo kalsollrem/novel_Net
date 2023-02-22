@@ -284,5 +284,72 @@
         on A.n_num = B.n_num
     </select>
 
+
+    <select id="masterUserList" resultType="com.project.novelnet.Vo.UserVO">
+        select
+            A.u_num, A.u_nick, A.u_mail, A.u_regdate, A.u_myself, A.u_level, A.u_pic,
+            ifnull(B.reRcnt, 0)as reRcnt,
+            ifnull(C.goRcnt, 0)as goRcnt,
+            ifnull(D.reNcnt, 0)as reNcnt,
+            ifnull(E.goNcnt, 0)as goNcnt
+        from        (select u_num, u_nick, u_mail, u_regdate, u_myself, u_level, u_pic from user)A
+        left join   (select sum(A.cnt)as reRcnt, B.u_num from (select count(r_num) as cnt, r_num, rw_num from r_warning group by r_num)A
+                     left join (select r_num, u_num from reply )B
+                     on A.r_num = B.r_num
+                     group by B.u_num )B
+        on A.u_num = B.u_num
+        left join   (select count(u_num)as goRcnt, u_num from r_warning group by u_num)C
+        on A.u_num = C.u_num
+        left join   (select B.u_num, sum(A.Ncnt)as reNcnt from(select n_num, count(n_num) as Ncnt from m_warning group by n_num)A
+                     left join (select u_num, n_num from novel)B
+                     on A.n_num = B.n_num
+                     group by B.u_num)D
+        on A.u_num = D.u_num
+        left join   (select u_num, count(u_num) as goNcnt from m_warning group by u_num) E
+        on A.u_num = E.u_num
+        where A.u_num is not null
+        <choose>
+            <when test="searchType.equals('nick')">
+                and A.u_nick like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('mail')">
+                and A.u_mail like CONCAT('%',#{keyword},'%')
+            </when>
+        </choose>
+        <choose>
+            <when test="sort.equals('reRcntA')">
+                order by B.reRcnt asc
+            </when>
+            <when test="sort.equals('reRcntD')">
+                order by B.reRcnt desc
+            </when>
+            <when test="sort.equals('goRcntA')">
+                order by C.goRcnt asc
+            </when>
+            <when test="sort.equals('goRcntD')">
+                order by C.goRcnt desc
+            </when>
+            <when test="sort.equals('reNcntA')">
+                order by D.reNcnt asc
+            </when>
+            <when test="sort.equals('reNcntD')">
+                order by D.reNcnt desc
+            </when>
+            <when test="sort.equals('goNcntA')">
+                order by E.goNcnt asc
+            </when>
+            <when test="sort.equals('goNcntD')">
+                order by E.goNcnt desc
+            </when>
+            <when test="sort.equals('stop')">
+                and A.u_level = 1
+            </when>
+            <when test="sort.equals('alive')">
+                and A.u_level != 1
+            </when>
+        </choose>
+        limit 0,10
+    </select>
+
 </mapper>
 

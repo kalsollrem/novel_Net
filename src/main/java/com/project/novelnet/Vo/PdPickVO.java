@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class PdPickVO {
-    String number;
-    String pd_num;
-    String n_num;
-    String n_title;
+    private String number;
+    private String pd_num;
+    private String n_num;
+    private String n_title;
 }

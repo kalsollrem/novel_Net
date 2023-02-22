@@ -4,6 +4,7 @@ import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NewPageingVO;
 import com.project.novelnet.Vo.NovelVO;
 import com.project.novelnet.Vo.PdPickVO;
+import com.project.novelnet.Vo.UserVO;
 import com.project.novelnet.repository.MasterMapper;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
@@ -323,28 +324,22 @@ public class MasterController {
 
         if(sort == null || sort == "")                      {sort    = "all"; }
 
-//
-//        //페이징처리
-//        int allPageCnt = masterMapper.novelCnt(searchType,keyword, sort);
-//        pageingService.setNowPage(page);
-//        pageingService.setTotalCount(allPageCnt);
-//        newPageingVO = pageingService.setNewPageingVO(newPageingVO);
-//
-//        model.addAttribute("paging", newPageingVO);
-//
-//
-//        //시작페이지처리
-//        int start = (Integer.parseInt(page)-1)*10;
-//        List<NovelVO> list = masterMapper.masterNovelList(searchType,keyword, sort, start);
-//        System.out.println("총"+allPageCnt+"개/");
-//
-//
-//
-//        model.addAttribute("list",list);
-//
-//        //pd픽 관리
-//        List<PdPickVO> pdPick = masterMapper.pdPickList();
-//        model.addAttribute("pdPick",pdPick);
+
+        //페이징처리
+        int allPageCnt = masterMapper.userCnt();
+        pageingService.setNowPage(page);
+        pageingService.setTotalCount(allPageCnt);
+        newPageingVO = pageingService.setNewPageingVO(newPageingVO);
+
+        model.addAttribute("paging", newPageingVO);
+
+
+        //시작페이지처리
+        int start = (Integer.parseInt(page)-1)*10;
+        List<UserVO> list = masterMapper.masterUserList("","","",0);
+        System.out.println("총"+allPageCnt+"개/");
+
+        model.addAttribute("list",list);
 
 
         return "master_userManagement";
