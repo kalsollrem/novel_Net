@@ -347,6 +347,9 @@
             <when test="sort.equals('alive')">
                 and A.u_level != 1
             </when>
+            <otherwise>
+                order by A.u_regdate desc
+            </otherwise>
         </choose>
         limit #{start},10
     </select>

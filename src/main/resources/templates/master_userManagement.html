@@ -33,6 +33,21 @@
                         <button id="masterSearchbtn">검색</button>
                     </div>
                 </div>
+                <div class="masterUserSort">
+                    <div class="leftSearchSpace">
+                        <select name="sortOtp" id="sortOtp">
+                            <option value="date"    th:selected="${param.sort}=='date'">최근 가입한 순서</option>
+                            <option value="reRcntA" th:selected="${param.sort}=='reRcntA'">댓글 : 신고받은 수(최근순)</option>
+                            <option value="reRcntD" th:selected="${param.sort}=='reRcntD'">댓글 : 신고받은 수(오래된순)</option>
+                            <option value="goRcntA" th:selected="${param.sort}=='goRcntA'">댓글 : 신고한 수(최근순)</option>
+                            <option value="goRcntD" th:selected="${param.sort}=='goRcntD'">댓글 : 신고한 수(오래된순)</option>
+                            <option value="reNcntA" th:selected="${param.sort}=='reNcntA'">소설 : 신고받은 수(최근순)</option>
+                            <option value="reNcntD" th:selected="${param.sort}=='reNcntD'">소설 : 신고받은 수(오래된순)</option>
+                            <option value="goNcntA" th:selected="${param.sort}=='goNcntA'">소설 : 신고한 수(최근순)</option>
+                            <option value="goNcntD" th:selected="${param.sort}=='goNcntD'">소설 : 신고한 수(오래된순)</option>
+                        </select>
+                    </div>
+                </div>
 <!--                <div class="anvoerline" thif="${paging.allPage}==0"></div>-->
                 <div class="anvoerline"></div>
                 <div class="master_userManagement">

@@ -273,6 +273,7 @@ $(function(){
         }
         else
         {
+            alert("회원가입 신청이 완료되었습니다! 가입하신 메일을 확인하여 인증해주세요!")
             joinform.submit();
         }
     })
