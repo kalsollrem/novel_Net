@@ -275,7 +275,7 @@
                 and E.n_stop>0
             </when>
         </choose>
-        limit 0,10
+        limit #{start},10
     </select>
 
     <select id="pdPickList" resultType="com.project.novelnet.Vo.PdPickVO">
@@ -348,7 +348,7 @@
                 and A.u_level != 1
             </when>
         </choose>
-        limit 0,10
+        limit #{start},10
     </select>
 
 </mapper>
