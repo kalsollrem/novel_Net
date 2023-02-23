@@ -45,6 +45,9 @@
                             <option value="reNcntD" th:selected="${param.sort}=='reNcntD'">소설 : 신고받은 수(오래된순)</option>
                             <option value="goNcntA" th:selected="${param.sort}=='goNcntA'">소설 : 신고한 수(최근순)</option>
                             <option value="goNcntD" th:selected="${param.sort}=='goNcntD'">소설 : 신고한 수(오래된순)</option>
+                            <option value="stop"    th:selected="${param.sort}=='stop'">정지 유저</option>
+                            <option value="alive"   th:selected="${param.sort}=='alive'">미정지 유저</option>
+                            <option value="noOk"    th:selected="${param.sort}=='noOk'">미인증 유저</option>
                         </select>
                     </div>
                 </div>
@@ -64,6 +67,7 @@
                                     <div class="mw_userNickName">
                                         <a th:href="@{/novelnet/profill(user=${list.u_num})}" th:text="'[ '+${list.u_mail}+ ' ]'"></a>
                                         <span th:if="${list.u_level}=='1'">(정지)</span>
+                                        <span th:if="${list.u_ok}=='0'">(미인증)</span>
                                     </div>
                                 </div>
                                 <div class="mw_profillLine">
@@ -80,7 +84,7 @@
                                         <span th:text="'신고받음 '+${list.reRcnt}+' 회'"></span>
                                     </div>
                                 </div>
-                                <div class="mw_reply_inside" th:text="${list.u_myself}">자기소개</div>
+                                <div class="mw_myself" th:text="${list.u_myself}">자기소개</div>
                             </div>
                             <div class="mw_SwitchSide borderLeft_black">
                                 <div class="levelChangeZone">
@@ -91,9 +95,14 @@
                                     </select>
                                     <button class="levelChangeOK">변경</button>
                                 </div>
-                                <button class="mw_GoMypageBtn" th:onclick="|location.href='@{/novelnet/profill(user=${list.u_num})}'|">마이페이지</button>
-                                <button class="mw_UserDelBtn" th:value="${list.u_num}">유저 정지</button>
-                                <button class="mw_WarnningDelBtn" th:value="${list.u_num}">경고 삭제</button>
+                                <div class="button_zone">
+                                    <button class="mw_GoMypageBtn button13" th:onclick="|location.href='@{/novelnet/profill(user=${list.u_num})}'|">마이페이지</button>
+                                    <button class="mw_UserStopBtn button13" th:value="${list.u_num}" th:if="${list.u_level}==0">유저 정지</button>
+                                    <button class="mw_UserAliveBtn button13" th:value="${list.u_num}"th:if="${list.u_level}==1">정지 해제</button>
+                                    <button class="mw_seeNovelBtn button10" th:value="${list.u_num}">소설 신고 목록</button>
+                                    <button class="mw_seeReplyBtn button10" th:value="${list.u_num}">댓글 신고 목록</button>
+                                    <button class="mw_userjoinOut button13" th:value="${list.u_num}">유저 삭제</button>
+                                </div>
                             </div>
                         </li>
                     </ul>

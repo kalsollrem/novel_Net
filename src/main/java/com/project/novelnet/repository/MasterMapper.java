@@ -40,8 +40,7 @@ public interface MasterMapper {
     List<UserVO> masterUserList(@Param("searchType")String searchType, @Param("keyword")String keyword ,@Param("sort")String sort, @Param("start")int start);
 
     //유저 인원수 파악
-    @Select("select count(u_num) from user")
-    public int userCnt();
+    public int userCnt(@Param("searchType")String searchType, @Param("keyword")String keyword ,@Param("sort")String sort);
 
     //유저 레벨 변환
     @Update("update user set u_level=#{level} where u_num=#{u_num}")

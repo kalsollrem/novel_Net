@@ -317,16 +317,16 @@ public class MasterController {
         if(page == null || page == "0")                     {page    = "1"; }
         else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
 
-        if(searchType == null || searchType.replace(" ","") == "")  {searchType = "";}
+        if(searchType == null || searchType.replace(" ","") == "")  {searchType = "all";}
         model.addAttribute("searchType",searchType);
 
         if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
 
-        if(sort == null || sort == "")                      {sort    = "all"; }
+        if(sort == null || sort == "")                      {sort    = "date"; }
 
 
         //페이징처리
-        int allPageCnt = masterMapper.userCnt();
+        int allPageCnt = masterMapper.userCnt(searchType,keyword,sort);
         pageingService.setNowPage(page);
         pageingService.setTotalCount(allPageCnt);
         newPageingVO = pageingService.setNewPageingVO(newPageingVO);
@@ -336,7 +336,7 @@ public class MasterController {
 
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
-        List<UserVO> list = masterMapper.masterUserList("","","",start);
+        List<UserVO> list = masterMapper.masterUserList(searchType,keyword,sort,start);
         System.out.println("총"+allPageCnt+"개/");
         System.out.println(list);
 
