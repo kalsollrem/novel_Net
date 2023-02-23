@@ -426,6 +426,18 @@ public class MasterController {
 //        model.addAttribute("pdPick",pdPick);
 
 
-        return "master_notification.html";
+        return "master_notification";
+    }
+
+
+    //공지사항
+    @GetMapping("/master/write")
+    public String masterWrite(Model model,
+                               HttpSession session,
+                               NewPageingVO newPageingVO)throws Exception
+    {
+
+
+        return "master_write";
     }
 }

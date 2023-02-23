@@ -5,7 +5,7 @@
     <title>Index</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/modal.js"></script>
+    <script src="../js/masterWrite.js"></script>
     <script src="../js/summernote/summernote-ko-KR.js"></script>
     <script src="../js/summernote/summernote-lite.js"></script>
     <link rel="stylesheet" href="../css/summernote/summernote-lite.css">
@@ -29,7 +29,11 @@
                         </div>
                         <div class="write_title">
                             <h4>제목 : </h4>
-                            <input type="text" name="write_title" id="write_title">
+                            <input type="text" name="write_title" id="write_title2">
+                            <select class="gongType" name="gongType">
+                                <option value="gong">공지</option>
+                                <option value="event">이벤트</option>
+                            </select>
                         </div>
                         <div class="write_area">
                             <textarea id="summernote" name="write_memo"></textarea>
