@@ -104,6 +104,22 @@ public class MasterController {
     }
 
 
+    //회원삭제
+    @PostMapping("/userOut.do")
+    @ResponseBody
+    public int userOut(@RequestParam("u_num") int u_num) throws Exception {
+        //1:성공, 0:실패
+        int answer = 0;
+
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        answer = masterMapper.deleteUser(u_num);
+//        }
+
+        //작성자 권한 확인
+        return answer;
+    }
+
+
 
     //경고삭제
     @PostMapping("/warnningDel.do")
@@ -224,6 +240,7 @@ public class MasterController {
         if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
 
         if(sort == null || sort == "")                      {sort    = "all"; }
+        model.addAttribute("sort",sort);
 
 
         //페이징처리
@@ -323,6 +340,7 @@ public class MasterController {
         if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
 
         if(sort == null || sort == "")                      {sort    = "date"; }
+        model.addAttribute("sort",sort);
 
 
         //페이징처리

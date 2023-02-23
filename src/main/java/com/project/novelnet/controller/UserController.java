@@ -282,5 +282,4 @@ public class UserController {
             return "redirect:/novelnet";
         }
     }
-
 }

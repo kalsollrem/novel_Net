@@ -23,11 +23,11 @@
                 <div class="masterSearch">
                     <div class="leftSearchSpace">
                         <select name="searchOtp" id="searchOtp">
-                            <option value="nick">닉네임</option>
-                            <option value="title">소설제목</option>
-                            <option value="tag">태그</option>
+                            <option value="nick" th:selected="${searchType}=='nick'">닉네임</option>
+                            <option value="title" th:selected="${searchType}=='title'">소설제목</option>
+                            <option value="tag" th:selected="${searchType}=='tag'">태그</option>
                         </select>
-                        <input type="text" class="searchSpace" id="searchSpace">
+                        <input type="text" class="searchSpace" id="searchSpace" th:value="${param.keyword}">
                     </div>
                     <div class="rightSearchSpace">
                         <button id="masterSearchbtn">검색</button>
@@ -36,10 +36,10 @@
                 <div class="masterSort">
                     <div class="leftSearchSpace">
                         <select name="sortOtp" id="sortOtp">
-                            <option value="all">전체</option>
-                            <option value="shingoD">신고수(내림차순)</option>
-                            <option value="shingoA">신고수(오름차순)</option>
-                            <option value="stop">정지</option>
+                            <option th:selected="${sort}=='novelN'" value="novelN">소설번호(내림차순)</option>
+                            <option th:selected="${sort}=='shingoD'" value="shingoD">신고수(내림차순)</option>
+                            <option th:selected="${sort}=='shingoA'" value="shingoA">신고수(오름차순)</option>
+                            <option th:selected="${sort}=='stop'" value="stop">정지</option>
                         </select>
                     </div>
                 </div>

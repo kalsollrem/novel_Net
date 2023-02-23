@@ -50,6 +50,9 @@ public interface MasterMapper {
     @Delete("delete from m_warning where mw_num = #{mw_num}")
     public int warningDel(@Param("mw_num")int mw_num);
 
+    //유저삭제
+    @Delete("delete from user where u_num = #{u_num}")
+    public int deleteUser(@Param("u_num")int u_num);
 
 
     //======================================================================

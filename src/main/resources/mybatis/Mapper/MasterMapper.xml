@@ -196,7 +196,7 @@
 
     <select id="novelCnt" resultType="int">
         select  count(A.n_num) as t
-        from (select n_num, n_title, u_num from novel)A
+        from (select n_num, n_title, u_num, stopPoint from novel)A
         left join (select u_num, u_nick as nick, u_mail from user) C
         on A.u_num = C.u_num
         inner join
@@ -231,7 +231,7 @@
                 order by F.shingoCnt asc
             </when>
             <when test="sort.equals('stop')">
-                and E.n_stop>0
+                and A.stopPoint>0
             </when>
         </choose>
     </select>
@@ -284,8 +284,11 @@
                 order by F.shingoCnt asc
             </when>
             <when test="sort.equals('stop')">
-                and E.n_stop>0
+                and A.stopPoint>0
             </when>
+            <otherwise>
+                order by A.n_num desc
+            </otherwise>
         </choose>
         limit #{start},10
     </select>
@@ -360,7 +363,7 @@
                 and A.u_level != 1
             </when>
             <when test="sort.equals('noOk')">
-                and A.ok = 0
+                and A.u_ok = 0 order by A.u_ok desc
             </when>
             <otherwise>
                 order by A.u_regdate desc
@@ -428,7 +431,7 @@
                 and A.u_level != 1
             </when>
             <when test="sort.equals('noOk')">
-                and A.ok = 0
+                and A.u_ok = 0
             </when>
         </choose>
     </select>

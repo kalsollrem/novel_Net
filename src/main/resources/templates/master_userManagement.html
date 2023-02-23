@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../css/style.css">
         <script src="../js/jquery-3.6.0.min.js"></script>
         <script src="../js/index.js"></script>
-        <script src="../js/master/masterReply.js"></script>
+        <script src="../js/master/masterUserManage.js"></script>
     </head>
     <body>
         <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
@@ -23,11 +23,10 @@
                 <div class="masterSearch">
                     <div class="leftSearchSpace">
                         <select name="searchOtp" id="searchOtp">
-                            <option value="all"  th:selected="'all'">전체</option>
-                            <option value="nick" th:selected="'nick'">닉네임</option>
-                            <option value="mail" th:selected="'mail'">메일</option>
+                            <option value="nick" th:selected="${searchType}=='nick'">닉네임</option>
+                            <option value="mail" th:selected="${searchType}=='mail'">메일</option>
                         </select>
-                        <input type="text" class="searchSpace">
+                        <input type="text" class="searchSpace" th:value="${param.keyword}">
                     </div>
                     <div class="rightSearchSpace">
                         <button id="masterSearchbtn">검색</button>
@@ -36,22 +35,21 @@
                 <div class="masterUserSort">
                     <div class="leftSearchSpace">
                         <select name="sortOtp" id="sortOtp">
-                            <option value="date"    th:selected="${param.sort}=='date'">최근 가입한 순서</option>
-                            <option value="reRcntA" th:selected="${param.sort}=='reRcntA'">댓글 : 신고받은 수(최근순)</option>
-                            <option value="reRcntD" th:selected="${param.sort}=='reRcntD'">댓글 : 신고받은 수(오래된순)</option>
-                            <option value="goRcntA" th:selected="${param.sort}=='goRcntA'">댓글 : 신고한 수(최근순)</option>
-                            <option value="goRcntD" th:selected="${param.sort}=='goRcntD'">댓글 : 신고한 수(오래된순)</option>
-                            <option value="reNcntA" th:selected="${param.sort}=='reNcntA'">소설 : 신고받은 수(최근순)</option>
-                            <option value="reNcntD" th:selected="${param.sort}=='reNcntD'">소설 : 신고받은 수(오래된순)</option>
-                            <option value="goNcntA" th:selected="${param.sort}=='goNcntA'">소설 : 신고한 수(최근순)</option>
-                            <option value="goNcntD" th:selected="${param.sort}=='goNcntD'">소설 : 신고한 수(오래된순)</option>
-                            <option value="stop"    th:selected="${param.sort}=='stop'">정지 유저</option>
-                            <option value="alive"   th:selected="${param.sort}=='alive'">미정지 유저</option>
-                            <option value="noOk"    th:selected="${param.sort}=='noOk'">미인증 유저</option>
+                            <option value="date"    th:selected="${sort}=='date'">최근 가입한 순서</option>
+                            <option value="reRcntA" th:selected="${sort}=='reRcntA'">댓글 : 신고받은 수(적은순)</option>
+                            <option value="reRcntD" th:selected="${sort}=='reRcntD'">댓글 : 신고받은 수(많은순)</option>
+                            <option value="goRcntA" th:selected="${sort}=='goRcntA'">댓글 : 신고한 수(적은순)</option>
+                            <option value="goRcntD" th:selected="${sort}=='goRcntD'">댓글 : 신고한 수(많은순)</option>
+                            <option value="reNcntA" th:selected="${sort}=='reNcntA'">소설 : 신고받은 수(적은순)</option>
+                            <option value="reNcntD" th:selected="${sort}=='reNcntD'">소설 : 신고받은 수(많은순)</option>
+                            <option value="goNcntA" th:selected="${sort}=='goNcntA'">소설 : 신고한 수(적은순)</option>
+                            <option value="goNcntD" th:selected="${sort}=='goNcntD'">소설 : 신고한 수(많은순)</option>
+                            <option value="stop"    th:selected="${sort}=='stop'">정지 유저</option>
+                            <option value="alive"   th:selected="${sort}=='alive'">미정지 유저</option>
+                            <option value="noOk"    th:selected="${sort}=='noOk'">미인증 유저</option>
                         </select>
                     </div>
                 </div>
-<!--                <div class="anvoerline" thif="${paging.allPage}==0"></div>-->
                 <div class="anvoerline"></div>
                 <div class="master_userManagement">
                     <ul class="warning_memo">
@@ -91,17 +89,17 @@
                                     <select name="levelChange" id="levelChange">
                                         <option value="0" th:selected="${list.u_level}==0">일반</option>
                                         <option value="1" th:selected="${list.u_level}==1">정지</option>
-                                        <option value="9" th:selected="${list.u_level}==9">관리</option>
+                                        <option value="9" th:selected="${list.u_level}==9" th:if="${list.u_ok}==1">관리</option>
                                     </select>
                                     <button class="levelChangeOK">변경</button>
                                 </div>
                                 <div class="button_zone">
                                     <button class="mw_GoMypageBtn button13" th:onclick="|location.href='@{/novelnet/profill(user=${list.u_num})}'|">마이페이지</button>
-                                    <button class="mw_UserStopBtn button13" th:value="${list.u_num}" th:if="${list.u_level}==0">유저 정지</button>
-                                    <button class="mw_UserAliveBtn button13"th:value="${list.u_num}" th:if="${list.u_level}==1">정지 해제</button>
+                                    <button class="mw_UserOutBtn button13"  th:if="${list.u_ok}==0" th:value="${list.u_num}">유저 삭제</button>
+                                    <button class="mw_UserStopBtn button13"  id="mw_UserDown" th:if="${list.u_ok}==1 and ${list.u_level}==0" th:value="${list.u_num}">유저 정지</button>
+                                    <button class="mw_UserAliveBtn button13" id="mw_UserUp"   th:if="${list.u_ok}==1 and ${list.u_level}==1" th:value="${list.u_num}">정지 해제</button>
                                     <button class="mw_seeNovelBtn button10" th:onclick="|location.href='@{/master/novelDeclaration(searchType=userNum,keyword=${list.u_num})}'|">소설 신고 목록</button>
                                     <button class="mw_seeReplyBtn button10" th:onclick="|location.href='@{/master/replyDeclaration(searchType=userNum,keyword=${list.u_num})}'|">댓글 신고 목록</button>
-                                    <button class="mw_userjoinOut button13" th:value="${list.u_num}">유저 삭제</button>
                                 </div>
                             </div>
                         </li>
