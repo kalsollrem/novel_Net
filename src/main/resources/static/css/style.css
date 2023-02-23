@@ -1177,6 +1177,8 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .GongiSort .gongjiGo>a         {color: white;}
 .GongiSort .eventGo            {width: 100px; height: 100%; float: left; font-size: 20px; text-align: center; background-color: rgb(61, 132, 214);  border-radius: 10px; font-weight: bold; margin-left: 10px;}
 .GongiSort .eventGo>a          {color: white;}
+.GongiSort .writeGo            {width: 100px; height: 100%; float: right; font-size: 15px; text-align: center; background-color: black;  border-radius: 10px; font-weight: bold; margin-right: 70px;}
+.GongiSort .writeGo>a          {color: white;}
 
 .gongji_List                   {width: 100%; box-sizing: border-box; border-radius: 10px; padding: 10px; }
 .gongji_List >li               {width: 90%;  box-sizing: border-box; display: flex; margin-bottom: 10px; border-radius: 5px; margin-left: 5%; margin-right: 5%;}

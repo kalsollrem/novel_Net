@@ -6,43 +6,22 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
+        <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
         <div class="wrap">
-            <header> 
-                <div class="logo">
-                    <img src="../img/logo.png" alt="소설넷">
-                </div>
-                <ul class="menu">
-                    <li><a href="#">자유</a></li>
-                    <li><a href="#">유료</a></li>
-                    <li><a href="#">랭킹</a></li>
-                    <li><a href="#">내서재</a></li>
-                </ul>
-                <div class="myInfo">
-                    <ul class="info_front">
-                        <li><a href="#"><img src="../img/write.png"alt="글쓰기"></a></li>
-                        <li><a href="#"><img src="../img/search.png"alt="검색"></a></li>
-                        <li><span><a href="#"><img src="../img/profill.png"alt="프로필"></a></span></li>
-                    </ul>
-                    <ul class="info_menu">
-                        <li><span class="infobox dragNone" id="login_on">로그인</span></li>
-                        <li><span class="infobox dragNone" id="join_on">회원가입</span></li>
-                        <li><span class="infobox dragNone" id="pass_find_on">아이디/패스워드 찾기</span></li>
-                        <li><span class="infobox dragNone" id="gongji_on">공지사항</span></li>
-                    </ul>
-                </div>
-            </header>
+            <header th:replace="/include/header.html :: header"></header>
             <div class="masterFrame">
                 <ul class="masterMenu">
-                    <li><a href="#">소설 신고 목록</a></li>
-                    <li><a href="#">댓글 신고 목록</a></li>
-                    <li><a href="#">유저 관리</a></li>
-                    <li><a href="#">소설관리</a></li>
-                    <li><a href="#">공지</a></li>
+                    <li><a th:href="@{/master/novelDeclaration(page=1)}">소설 신고 목록</a></li>
+                    <li><a th:href="@{/master/replyDeclaration(page=1)}">댓글 신고 목록</a></li>
+                    <li><a th:href="@{/master/userManagement(page=1)}">유저 관리</a></li>
+                    <li><a th:href="@{/master/novelManagement(page=1)}">소설관리</a></li>
+                    <li><a th:href="@{/master/notification(page=1)}">공지</a></li>
                 </ul>
 
                 <div class="GongiSort ">
                     <div class="gongjiGo"><a href="">공지사항</a></div>
                     <div class="eventGo"><a href="">이벤트</a></div>
+                    <div class="writeGo"><a href="">게시물 등록</a></div>
                 </div>
 
                 <div class="master_Gonji">
@@ -57,7 +36,8 @@
                             </div>
                         </li>
                     </ul>
-                    <ul class="event_List">
+                    <!--이벤트 게시물 -->
+                    <ul class="event_List" style="display: none;">
                         <li>
                             <a href="#"><img src="../img/bag_1.jpg" alt="이벤트"></a>
                             <div class="event_manage">
