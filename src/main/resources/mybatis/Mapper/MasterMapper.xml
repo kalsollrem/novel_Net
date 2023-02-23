@@ -67,6 +67,9 @@
             <when test="searchType.equals('novelNum')">
                 WHERE A.n_num = #{keyword}
             </when>
+            <when test="searchType.equals('userNum')">
+                WHERE D.U_NUM  = #{keyword}
+            </when>
         </choose>
         ORDER BY mw_date DESC
         Limit #{start},10
@@ -98,6 +101,9 @@
             </when>
             <when test="searchType.equals('novelNum')">
                 WHERE A.n_num = #{keyword}
+            </when>
+            <when test="searchType.equals('userNum')">
+                WHERE D.U_NUM  = #{keyword}
             </when>
         </choose>
     </select>
@@ -133,6 +139,9 @@
             <when test="searchType.equals('wNick')">
                 and UA.wNick like CONCAT('%',#{keyword},'%')
             </when>
+            <when test="searchType.equals('userNum')">
+                and UA.U_NUM = #{keyword}
+            </when>
             <when test="searchType.equals('novelNum')">
                 and A.r_num = #{keyword}
             </when>
@@ -167,6 +176,9 @@
             </when>
             <when test="searchType.equals('wNick')">
                 and UA.wNick like CONCAT('%',#{keyword},'%')
+            </when>
+            <when test="searchType.equals('userNum')">
+                and UA.U_NUM = #{keyword}
             </when>
             <when test="searchType.equals('novelNum')">
                 and A.r_num = #{keyword}

@@ -98,9 +98,9 @@
                                 <div class="button_zone">
                                     <button class="mw_GoMypageBtn button13" th:onclick="|location.href='@{/novelnet/profill(user=${list.u_num})}'|">마이페이지</button>
                                     <button class="mw_UserStopBtn button13" th:value="${list.u_num}" th:if="${list.u_level}==0">유저 정지</button>
-                                    <button class="mw_UserAliveBtn button13" th:value="${list.u_num}"th:if="${list.u_level}==1">정지 해제</button>
-                                    <button class="mw_seeNovelBtn button10" th:value="${list.u_num}">소설 신고 목록</button>
-                                    <button class="mw_seeReplyBtn button10" th:value="${list.u_num}">댓글 신고 목록</button>
+                                    <button class="mw_UserAliveBtn button13"th:value="${list.u_num}" th:if="${list.u_level}==1">정지 해제</button>
+                                    <button class="mw_seeNovelBtn button10" th:onclick="|location.href='@{/master/novelDeclaration(searchType=userNum,keyword=${list.u_num})}'|">소설 신고 목록</button>
+                                    <button class="mw_seeReplyBtn button10" th:onclick="|location.href='@{/master/replyDeclaration(searchType=userNum,keyword=${list.u_num})}'|">댓글 신고 목록</button>
                                     <button class="mw_userjoinOut button13" th:value="${list.u_num}">유저 삭제</button>
                                 </div>
                             </div>

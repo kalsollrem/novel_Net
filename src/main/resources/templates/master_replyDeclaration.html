@@ -26,6 +26,8 @@
                             <option value="wNick" th:selected="${searchType}=='wNick'">닉네임</option>
                             <option value="title" th:selected="${searchType}=='title'">소설제목</option>
                             <option value="nick"  th:selected="${searchType}=='nick'">신고자</option>
+                            <option value="novelNum"  th:selected="${searchType}=='novelNum'">소설번호</option>
+                            <option value="userNum"  th:selected="${searchType}=='userNum'">유저번호</option>
                         </select>
                         <input type="text" class="searchSpace" th:if="${searchType}!='novelNum'" th:value="${param.keyword}">
                         <input type="text" class="searchSpace" th:if="${searchType}=='novelNum'">
