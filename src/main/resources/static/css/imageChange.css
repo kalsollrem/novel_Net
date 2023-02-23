@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+/* 텍스트 세로 중앙 정렬 */
+.text-Y-aligne {display: flex; justify-content: center; align-items: center;}
+
+/* 프로필과 커버용 */
+.frameA {background-color: #a1c0dae0; width: 500px; padding: 10px; border-radius: 10px;}
+
+.frameA .pic_base                       {width: 500px; min-height: 700px; }
+.frameA .pic_base .img_zone             {width: 100%; min-height: 700px; border-radius: 10px; background-color: aliceblue;}
+.frameA .pic_base >img                  {width: 100%; border-radius: 10px; background-color: aliceblue; display: none;}
+.frameA .control_base                   {width: 500px; height: 50px; }
+.frameA .control_base .file_zone        {width: 480px; height: 40px; margin-left: 10px; margin-top: 13px; background-color: rgb(238, 237, 236); border-radius: 10px;}
+.frameA .control_base .file_zone .fileInput {width: 460px; margin-left: 10px; margin-top: 8px;}
+.frameA .button_zone                    {width: 500px; height: 50px; text-align: center;}
+.frameA .button_zone .chang_Btn         {width: 250px; height: 40px;  margin-top: 5px; background-color: #333; color: white; border: 0px; border-radius: 5px; font-size: 18px;}
+
+/* 운영자용 */
+.frameB {background-color: #a1c0dae0; width: 1060px; padding: 10px; border-radius: 10px;}
+
+.frameB .pic_base                       {min-height: 200px;}
+.frameB .pic_base .img_zone             {width: 1060px; height: 200px; border-radius: 10px; background-color: aliceblue; font-size: 20px; font-style: oblique;}
+.frameB .pic_base >img                  {width: 1060px; border-radius: 10px; background-color: aliceblue; display: none;}
+.frameB .control_base                   {width: 1060px; height: 50px; }
+.frameB .control_base .file_zone        {width: 1060px; height: 40px; margin-left: 0px; margin-top: 13px; background-color: rgb(238, 237, 236); border-radius: 10px;}
+.frameB .control_base .file_zone .fileInput {width: 460px; margin-left: 10px; margin-top: 8px;}
+.frameB .button_zone                    {width: 1060px; height: 50px; text-align: center;}
+.frameB .button_zone .chang_Btn         {width: 250px; height: 40px;  margin-top: 5px; background-color: #333; color: white; border: 0px; border-radius: 5px; font-size: 18px;}

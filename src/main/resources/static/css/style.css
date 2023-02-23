@@ -1011,7 +1011,13 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .write_zone .write_submit >span {margin-top: 10px; line-height: 30px; font-size: 12px; color: rgb(241, 76, 76);}
 .write_zone .write_submit .write_uploads {float: right; height: 30px; padding: 0px 20px 0px 20px; background-color: #333; color: white; border: 0px;}
 
-
+        /* 공지사항 이미지 업로드용 */
+        .write_zone                           {border: 1px solid #ececec; padding: 10px; margin: 20px 0px 20px 0px; border-radius: 0.4em;}
+        .write_zone .eventImgFrame            {border: 1px solid #ececec; padding: 10px; margin: 0px 0px 10px 0px; border-radius: 0.4em; }
+        .write_zone .eventImgFrame .img_zone  {width: 1060px; height: 160px; border: 1px solid #ececec; box-sizing: border-box; margin-left: 50px; border-radius: 5px; text-align: center; font-size: 18px; font-style: oblique; display: flex; justify-content: center; align-items: center;}
+        .write_zone .eventImgFrame .img_zone>img  {width: 1060px; height: 160px; border-radius: 5px;}
+        .write_zone .eventImgFrame .fileUpZone{width: 1060px; height: 40px;  margin-left: 50px; border-radius: 5px; margin-top: 5px; border: 1px solid #ececec; box-sizing: border-box;}
+        .write_zone .eventImgFrame .fileUpZone .fileUp {width: 70%; margin-left: 5px; margin-top: 7px;}
 
 /* 글쓰기 */
 
@@ -1194,8 +1200,8 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 
 .event_List                   {width: 100%; box-sizing: border-box; border-radius: 10px; padding: 10px; }
 .event_List >li               {width: 90%;  box-sizing: border-box; display: block; margin-bottom: 20px; border-radius: 5px; margin-left: 5%; margin-right: 5%;}
-.event_List >li>a>img           {width: 100%; height: 160px;}
-.event_List >li .event_manage {width: 100%; height: 30px; background-color: gainsboro;}
+.event_List >li>a>img         {width: 1060px; height: 160px;}
+.event_List >li .event_manage {width: 1060px; height: 30px; background-color: gainsboro;}
 .event_List >li .event_manage .event_date    {width: 80%; float: left; margin-left: 10px; height: 100%; line-height: 30px; font-weight:bolder;}
 
 .event_List >li .event_manage>button {width: 40px; height: 25px; margin-top: 2px; line-height: 27px; text-align: center; float: right; border: 0px; margin-right: 5px; font-weight: bold; border-radius: 7px; box-sizing: border-box;}
