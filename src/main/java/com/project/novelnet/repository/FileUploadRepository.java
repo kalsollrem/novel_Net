@@ -9,4 +9,6 @@ public interface FileUploadRepository {
     public void fileUpload(MultipartFile multipartFile, int n_num);
 
     public String eventFileUpload(MultipartFile multipartFile);
+
+    public void  deleteFile(String fileName);
 }

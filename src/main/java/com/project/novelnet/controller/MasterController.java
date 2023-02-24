@@ -437,16 +437,23 @@ public class MasterController {
     }
 
 
-    //공지사항
+    //공지 작성 페이지
     @GetMapping("/master/write")
     public String masterWrite(Model model,
+                               MasterMemoVO masterMemoVO,
                                HttpSession session,
                                NewPageingVO newPageingVO)throws Exception
     {
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        model.addAttribute("memoVO",masterMemoVO);
+        model.addAttribute("type","write");
+        model.addAttribute("link","/masterWrite.do");
         return "master_write";
+//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
+//        }
     }
 
-
+    //공지 작성
     @PostMapping("/masterWrite.do")
     public String masterWrite(HttpSession session,
                               @RequestParam(value = "write_title",required = false) String write_title,
@@ -462,7 +469,7 @@ public class MasterController {
 
             String answer;
 
-            write_title = write_title.replace(" ","");
+            if(write_title.replace(" ","") == "") {write_title = "오늘의 공지";}
             System.out.println("타입 : " +gongType);
 
             masterMemoVO.setU_num("1");
@@ -487,5 +494,84 @@ public class MasterController {
 //            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
 //        }
         return "redirect:/master/view?No="+masterMemoVO.getMa_num();
+    }
+
+    //공지 수정 페이지
+    @GetMapping("/master/rewrite")
+    public String masterReWrite(Model model,
+                                @RequestParam(value = "No",required = false) int No,
+                                MasterMemoVO masterMemoVO,
+                                HttpSession session,
+                                NewPageingVO newPageingVO)throws Exception
+    {
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+
+        masterMemoVO = masterMapper.findGonjiDate(No);
+        model.addAttribute("memoVO",masterMemoVO);
+        model.addAttribute("type","rewrite");
+        model.addAttribute("link","/masterReWrite.do");
+        return "master_write";
+//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
+//        }
+    }
+
+    //공지 수정
+    @PostMapping("/masterReWrite.do")
+    public String masterReWrite(HttpSession session,
+                                  @RequestParam(value = "write_title",required = false) String write_title,
+                                  @RequestParam(value = "write_memo" ,required = false) String write_memo,
+                                  @RequestParam(value = "gongType"   ,required = false) String gongType,
+                                  @RequestParam(value = "number"     ,required = false) int number,
+                                  @RequestParam(value = "imgfile"    ,required = false) MultipartFile imgfile,
+                                  MasterMemoVO masterMemoVO,
+                                  HttpServletRequest request)throws Exception
+    {
+        String answer;
+        String oldCover;
+        try {oldCover = masterMapper.findCover(number);}
+        catch (Exception e) {oldCover = "noImg";}
+
+        if(write_title.replace(" ","") == "") {write_title = "오늘의 공지";}
+        System.out.println("타입 : " +gongType);
+
+        masterMemoVO.setImageOn("off");
+        masterMemoVO.setU_num("1");
+        masterMemoVO.setMa_num(number);
+        masterMemoVO.setMa_title(write_title);
+        masterMemoVO.setMa_memo(write_memo);
+        masterMemoVO.setMa_type(gongType);
+
+        //신규 이미지 저장
+        if (!imgfile.isEmpty())
+        {
+            //기존 이미지가 있을경우 삭제 조치
+            if (oldCover != "noImg") {fileUploadService.deleteFile(oldCover);}
+
+            //이미지 등록
+            answer = fileUploadService.eventFileUpload(imgfile);
+            if (answer != "no")
+            {
+                masterMemoVO.setMa_cover(answer);
+                System.out.println(answer);
+                masterMemoVO.setImageOn("on");
+            }
+        }
+
+        //공지로 바꿀경우 이미지 삭제
+        if (gongType == "gong") { if (oldCover != "noImg") {fileUploadService.deleteFile(oldCover);} }
+
+        int t = masterMapper.reWriteGongJi(masterMemoVO);
+        System.out.println(t);
+
+
+        return "redirect:/master/view?No="+masterMemoVO.getMa_num();
+    }
+
+    //테스트
+    @GetMapping("/ttt")
+    public String ttt()throws Exception
+    {
+        fileUploadService.deleteFile("b740315b-fb72-4a0a-8b0a-2aa0f2b1ec9c.png");
+        return "master_write";
     }
 }

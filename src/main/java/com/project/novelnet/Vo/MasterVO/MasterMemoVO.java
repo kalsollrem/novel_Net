@@ -12,4 +12,5 @@ public class MasterMemoVO {
     private String ma_cover;
     private String ma_date;
     private String ma_type;
+    private String imageOn;
 }

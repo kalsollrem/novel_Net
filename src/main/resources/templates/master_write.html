@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/masterWrite.js"></script>
     <script src="../js/summernote/summernote-ko-KR.js"></script>
     <script src="../js/summernote/summernote-lite.js"></script>
+    <script src="../js/master/masterWrite.js"></script>
     <link rel="stylesheet" href="../css/summernote/summernote-lite.css">
 </head>
 <body>
@@ -20,27 +20,33 @@
             <div class="main_content">
         <!------------ 콘텐츠 영역   ------------------>
                 <div class="write_zone">
-                    <form action="/masterWrite.do" method="post" id="novelRegist" name="novelRegist" enctype="multipart/form-data">
+                    <form th:action="${link}" method="post" id="novelRegist" name="novelRegist" enctype="multipart/form-data">
                         <div class="eventImgFrame">
                             <div class="img_zone">
                                 <span>이미지 사이즈를 1060 x 160픽셀로 맞춰주세요.</span>
-                                <img class="displyImg" style="display: none;"></div>
-                            <div class="fileUpZone"><input type="file" name="imgfile" class="fileUp" accept="image/*"></div>
+                                <img class="displyImg" style="display: none;"                      th:if="${memoVO.ma_type}=='gong'">
+                                <img class="displyImg" th:src="'../noteImg/'+${memoVO.ma_cover}"   th:if="${memoVO.ma_type}=='event'">
+                            </div>
+                            <div class="fileUpZone">
+                                <input type="file" name="imgfile" class="fileUp" accept="image/*">
+                            </div>
                         </div>
+                        <input type="hidden" th:value="${memoVO.ma_num}" name="number" th:if="${type}=='rewrite'">
                         <div class="write_title">
                             <h4>제목 : </h4>
-                            <input type="text" name="write_title" id="write_title2" class="master_title">
+                            <input type="text" name="write_title" id="write_title2" class="master_title" th:value="${memoVO.ma_title}">
                             <select class="gongType" name="gongType">
-                                <option value="gong">공지</option>
-                                <option value="event">이벤트</option>
+                                <option value="gong"  th:selected="${memoVO.ma_type}=='gong'" >공지</option>
+                                <option value="event" th:selected="${memoVO.ma_type}=='event'">이벤트</option>
                             </select>
                         </div>
                         <div class="write_area">
-                            <textarea id="summernote" name="write_memo"></textarea>
+                            <textarea id="summernote" name="write_memo" th:text="${memoVO.ma_memo}"></textarea>
                         </div>
                         <div class="write_submit">
                             <span>※ 담당자는 운영 규정에 따라 작성해 주시길 바랍니다.</span>
-                            <input type="button" value="등록" class="write_uploads">
+                            <input type="button" value="등록" class="write_uploads" th:if="${type}=='write'">
+                            <input type="button" value="수정" class="write_uploads" th:if="${type}=='rewrite'">
                         </div>
                     </form>
                 </div>

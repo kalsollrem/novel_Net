@@ -454,5 +454,30 @@
             </when>
         </choose>
     </insert>
+
+    <!--공지수정  -->
+    <update id="reWriteGongJi" parameterType="com.project.novelnet.Vo.MasterVO.MasterMemoVO">
+        <choose>
+            <when test="imageOn.equals('on')">
+                update mastermemo
+                set
+                    ma_title = #{ma_title},
+                    ma_memo = #{ma_memo},
+                    ma_type = #{ma_type},
+                    ma_date = SYSDATE(),
+                    ma_cover = #{ma_cover}
+                where ma_num=#{ma_num}
+            </when>
+            <when test="imageOn.equals('off')">
+                update mastermemo
+                set
+                    ma_title = #{ma_title},
+                    ma_memo = #{ma_memo},
+                    ma_type = #{ma_type},
+                    ma_date = SYSDATE()
+                where ma_num=#{ma_num}
+            </when>
+        </choose>
+    </update>
 </mapper>
 

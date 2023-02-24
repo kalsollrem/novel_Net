@@ -80,6 +80,18 @@ public interface MasterMapper {
     public int pdPickDelete(@Param("n_num")int n_num);
 
     //==============================================================
+    //공지작성
     public int writeGongji(MasterMemoVO memoVO);
+
+    //공지수정
+    public int reWriteGongJi(MasterMemoVO memoVO);
+
+    //공지 커버찾기
+    @Select("select ma_cover from mastermemo where ma_num = #{ma_num}")
+    public String findCover(@Param("ma_num")int ma_num);
+
+    //공지 정보 찾기
+    @Select("select ma_num, u_num, ma_title, ma_memo, ma_cover, ma_date, ma_type from mastermemo where ma_num=#{ma_num}")
+    public MasterMemoVO findGonjiDate(@Param("ma_num")int ma_num);
 
 }

@@ -61,47 +61,22 @@ $(function (){
     }
 
 
-    // //이미지 첨부
-    // $(".gongType").on("change", function(event)
-    // {
-    //     //selected value
-    //     if($(this).val() == 'event') {$('.eventImgFrame').stop().slideDown(); }
-    //     else
-    //     {
-    //         var reader = new FileReader();
-    //
-    //         var imgFile = $(".fileUp").val();
-    //         var target = event.target.files[0];
-    //         var fileSize;
-    //
-    //
-    //         if (imgFile != "" && imgFile != null) {
-    //             fileSize = document.getElementById("cover").files[0].size;
-    //
-    //             if (!imgFile.match(fileForm))
-    //             {
-    //                 alert("이미지 파일만 업로드 가능합니다. \n" + "지원확장자(jpg, jpeg, png, gif, bmp)");
-    //                 return;
-    //             }
-    //             else if (fileSize >= maxSize)
-    //             {
-    //                 alert("파일 사이즈는 5MB까지 가능합니다.");
-    //                 return;
-    //             }
-    //             else
-    //             {
-    //                 var reader = new FileReader();
-    //                 reader.onload = function (e)
-    //                 {
-    //                     $(".img_zone>span").hide();
-    //                     $(".displyImg").show();
-    //                     $(".displyImg").attr("src", e.target.result);
-    //                 }
-    //                 reader.readAsDataURL(target);
-    //             }
-    //         }
-    //     }
-    // });
+    let type;
+    let URL = location.pathname ;
+    if (URL=='/master/write'){
+        type = 'write';
+    }
+    if (URL=='/master/rewrite')
+    {
+        if($('.gongType').val() == 'event'){
+            $('.eventImgFrame').show();
+            $(".img_zone>span").hide();
+            $(".displyImg").show();
+        }
+        type = 'rewrite';
+    }
+
+
     $(".fileUp").on("change", function(event) {
         var file = event.target.files[0];
         var reader = new FileReader();
@@ -127,14 +102,14 @@ $(function (){
             $(".displyImg").hide();}
     });
 
-
+    //업로드 버튼
     $(".write_uploads").click(function (){
         let title  = $('.master_title').val();
         title = title.replace(' ','');
 
         if(title.length>4)
         {
-            if($(".gongType").val()=='event'){
+            if($(".gongType").val()=='event' && type == 'write'){
                 if($('.fileUp').val() != null && $('.fileUp').val() != "") {$('#novelRegist').submit();}
                 else { alert("이미지 파일이 없습니다")}
             }
@@ -144,44 +119,4 @@ $(function (){
 
     });
 
-    //글작성
-    // $('.write_uploads').click(function (){
-    //     var form = $('.fileUp')[0].files[0];
-    //     var formData = new FormData();
-
-        // let title = $('#write_title2').val();
-        // let text  = $('#summernote').val();
-        // let type  = $('.gongType').val();
-        // let imgfile = $(".fileUp").val();
-
-
-        // $.ajax({
-        //     url:'/masterWrite.do',
-        //     type:'post',
-        //     enctype : 'multipart/form-data', //반드시 enctype 을 멀티파트로 설정
-        //     contentType : false, //false 로 선언 시 content-type 헤더가 multipart/form-data로 전송되게 함
-        //     processData : false, //false로 선언 시 formData를 string으로 변환하지 않음
-        //     data : {formData},
-        //     success:function(s){
-        //         if      (s == 0){console.log('작성 성공'); location.href = '';}
-        //         else            {alert('작성에 실패하였습니다')}
-        //     },
-        //     error:function(){
-        //         alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다.");
-        //     }
-        // });
-    // })
-
-
-    //글수정 기능
-    const title = "";
-    const memo = "";
-    if(title != "" && title != null)   //제목에 값 넣기
-    {
-        $('#write_title').attr('value', title);
-    }
-    if(memo != ""  && memo != null)  //썸머노트 본문에 글넣기
-    {
-        $('#summernote').summernote('editor.insertText', memo);
-    }
 })
