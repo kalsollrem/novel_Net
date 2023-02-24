@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>소설정보</title>
@@ -8,40 +8,27 @@
     <script src="../js/modal.js"></script>
 </head>
 <body>
-    <!-- 회원가입 -->
-
-    <!-- 회원가입 -->
-    <div class="wrap">
-        <header> 
-            <div class="logo">
-                <img src="../img/logo.png" alt="소설넷">
-            </div>
-            <ul class="menu">
-                <li><a href="#">자유</a></li>
-                <li><a href="#">유료</a></li>
-                <li><a href="#">랭킹</a></li>
-                <li><a href="#">내서재</a></li>
-            </ul>
-            <div class="myInfo">
-
-            </div>
-        </header>
+<!-- 모달 레이아웃 -->
+<div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
+<!-- 모달 레이아웃 -->
+<div class="wrap">
+    <header th:replace="/include/header.html :: header"></header>
         <div class="contents">
             <div class="main_content">
         <!------------ 콘텐츠 영역   ------------------>
                 <div class="viewer">
-                    <div class="title">
+                    <div class="title" th:text="${memoVO.ma_title}">
                         공지입니다.
                     </div>
                     <div class="btn_zone">
                         <div class="leftGo">이전글</div>
                         <div class="rightGo">다음글</div>
                     </div>
-                    <div class="memo">
+                    <div class="memo" th:text="${memoVO.ma_memo}">
                         본문입니다.
                     </div>
                     <div class="date">
-                        <span>09.10.12</span>
+                        <span th:text="${memoVO.ma_date}">09.10.12</span>
                     </div>
                     <div class="btn_zone">
                         <div class="leftGo">이전글</div>

@@ -574,4 +574,22 @@ public class MasterController {
         fileUploadService.deleteFile("b740315b-fb72-4a0a-8b0a-2aa0f2b1ec9c.png");
         return "master_write";
     }
+
+    //공지 수정 페이지
+    @GetMapping("/master/view")
+    public String masterView(Model model,
+                            @RequestParam(value = "No",required = false) int No,
+                            MasterMemoVO masterMemoVO,
+                            HttpSession session,
+                            NewPageingVO newPageingVO)throws Exception
+    {
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+
+        masterMemoVO = masterMapper.findGonjiDate(No);
+        model.addAttribute("memoVO",masterMemoVO);
+
+        return "master_view";
+//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
+//        }
+    }
 }
