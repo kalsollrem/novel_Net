@@ -41,6 +41,7 @@ public class MasterController {
     private PageingService pageingService;
 
     String u_num;
+    String u_level;
 
 
 
@@ -58,8 +59,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9"){System.out.println("관리자(9레벨)가아님");}}
-        catch (Exception e) {System.out.println("나가");}
+        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
+        catch (Exception e) {u_level = null;}
+        System.out.println("유저레벨:"+u_level);
+        if(!u_level.equals("9")){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -114,12 +117,13 @@ public class MasterController {
     //회원삭제
     @PostMapping("/userOut.do")
     @ResponseBody
-    public int userOut(@RequestParam("u_num") int u_num) throws Exception {
+    public int userOut(@RequestParam("u_num") int u_num,
+                       HttpSession session) throws Exception {
         //1:성공, 0:실패
         int answer = 0;
 
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
-        answer = masterMapper.deleteUser(u_num);
+            answer = masterMapper.deleteUser(u_num);
 //        }
 
         //작성자 권한 확인
@@ -160,8 +164,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9") {System.out.println("관리자(9레벨)가아님");}}
-        catch (Exception e) {System.out.println("나가");}
+        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
+        catch (Exception e) {u_level = null;}
+        System.out.println("유저레벨:"+u_level);
+        if(!u_level.equals("9")){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -211,7 +217,7 @@ public class MasterController {
         int answer = 0;
 
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
-        answer = masterMapper.replyBlind(r_num);
+            answer = masterMapper.replyBlind(r_num);
 //        }
 
         //작성자 권한 확인
@@ -234,8 +240,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9") {System.out.println("관리자(9레벨)가아님");}}
-        catch (Exception e) {System.out.println("나가");}
+        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
+        catch (Exception e) {u_level = null;}
+        System.out.println("유저레벨:"+u_level);
+        if(!u_level.equals("9")){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -292,7 +300,7 @@ public class MasterController {
         int answer = 0;
         System.out.println(n_num+'/'+ switchUD);
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
-        answer = masterMapper.masterNovelSwitch(n_num,switchUD);
+            answer = masterMapper.masterNovelSwitch(n_num,switchUD);
 //        }
 
         //작성자 권한 확인
@@ -334,8 +342,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9") {System.out.println("관리자(9레벨)가아님");}}
-        catch (Exception e) {System.out.println("나가");}
+        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
+        catch (Exception e) {u_level = null;}
+        System.out.println("유저레벨:"+u_level);
+        if(!u_level.equals("9")){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -386,10 +396,6 @@ public class MasterController {
         try                 {u_num= (String)session.getAttribute("U_NUM").toString();}
         catch (Exception e) {u_num = null;}
 
-        //레벨확인
-        try                 {if((String)session.getAttribute("U_LEVEL").toString() != "9") {System.out.println("관리자(9레벨)가아님");}}
-        catch (Exception e) {System.out.println("나가");}
-
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
         else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
@@ -432,8 +438,13 @@ public class MasterController {
                                HttpSession session,
                                NewPageingVO newPageingVO)throws Exception
     {
-//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        //레벨확인
+        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
+        catch (Exception e) {u_level = null;}
+        System.out.println("유저레벨:"+u_level);
+        if(!u_level.equals("9")){return "redirect:/master/notification?carte="+carte+"&page="+page;}
 
+        //변수정리
         if(page == null || page == "0")                     {page    = "1"; }
         else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
         if(carte == null || carte.replace(" ","") == "")  {carte = "gong";}
@@ -444,8 +455,7 @@ public class MasterController {
         model.addAttribute("carte",carte);
         model.addAttribute("page",page);
         return "master_write";
-//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
-//        }
+
     }
 
     //공지 작성
@@ -492,7 +502,6 @@ public class MasterController {
             int t = masterMapper.writeGongji(masterMemoVO);
             System.out.println(t);
 
-//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
 //        }
         return "redirect:/master/view?No="+masterMemoVO.getMa_num()+"&carte="+gongType+"&page="+page;
     }
@@ -507,7 +516,13 @@ public class MasterController {
                                 HttpSession session,
                                 NewPageingVO newPageingVO)throws Exception
     {
-//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        //레벨확인
+        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
+        catch (Exception e) {u_level = null;}
+        System.out.println("유저레벨:"+u_level);
+        if(!u_level.equals("9")){return "redirect:/master/view?No="+masterMemoVO.getMa_num();}
+
+        //변수정리
         if(page == null || page == "0")                     {page    = "1"; }
         else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
         if(carte == null || carte.replace(" ","") == "")  {carte = "gong";}
@@ -518,8 +533,6 @@ public class MasterController {
         model.addAttribute("type","rewrite");
         model.addAttribute("link","/masterReWrite.do");
         return "master_write";
-//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
-//        }
     }
 
     //공지 수정
@@ -535,7 +548,7 @@ public class MasterController {
                                   MasterMemoVO masterMemoVO,
                                   HttpServletRequest request)throws Exception
     {
-        String answer;
+        String answer="no";
         String oldCover;
 
         if(page == null || page == "0")                     {page    = "1"; }
@@ -592,15 +605,18 @@ public class MasterController {
         String cover;
         u_num = "1";
 
-        //커버 존재시 삭제
-        try {cover = masterMapper.findCover(ma_num);}
-        catch (Exception e) {cover = "none";}
-        if (cover != "none") {fileUploadService.deleteFile(cover);}
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9")
+//        {
+            //커버 존재시 삭제
+            try {cover = masterMapper.findCover(ma_num);}
+            catch (Exception e) {cover = "none";}
+            if (cover != "none") {fileUploadService.deleteFile(cover);}
 
-        //삭제
-        try                 {answer = masterMapper.deleteMasterMemo(ma_num,u_num);}
-        catch (Exception e) {System.out.println("실패");}
-        System.out.println("결과 값" + answer);
+            //삭제
+            try                 {answer = masterMapper.deleteMasterMemo(ma_num,u_num);}
+            catch (Exception e) {System.out.println("실패");}
+            System.out.println("결과 값" + answer);
+//        }
 
         return answer;
     }
@@ -615,8 +631,8 @@ public class MasterController {
                             HttpSession session,
                             NewPageingVO newPageingVO)throws Exception
     {
-        if(No == null) {return "redirect:/novelnet";}
-//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        if(No == null) {return "redirect:/master/notification?carte="+carte+"&page="+page;}
+
 
         if(page == null || page == "0")                     {page    = "1"; }
         else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
@@ -628,7 +644,6 @@ public class MasterController {
         model.addAttribute("carte",carte);
 
         return "master_view";
-//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
-//        }
+
     }
 }

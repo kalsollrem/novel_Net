@@ -24,7 +24,7 @@
                 <div class="GongiSort ">
                     <div class="gongjiGo"><a th:href="@{/master/notification(carte='gong')}">공지사항</a></div>
                     <div class="eventGo"><a th:href="@{/master/notification(carte='event')}">이벤트</a></div>
-                    <div class="writeGo"><a th:href="@{/master/write(carte=${param.carte},page=${param.page})}">게시물 등록</a></div>
+                    <div class="writeGo" th:if="${session.U_LEVEL}=='9'"><a th:href="@{/master/write(carte=${param.carte},page=${param.page})}">게시물 등록</a></div>
                 </div>
 
                 <div class="master_Gonji">
