@@ -1209,3 +1209,14 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .event_List >li .event_manage .update_gongji {background-color: rgb(143, 221, 123); color: rgb(37, 37, 37); }
 .event_List >li .event_manage .delete_gongji {background-color: rgb(228, 83, 83); color: rgb(37, 37, 37); }
 .event_List >li .event_manage>button:hover {background-color: #f5eb69;}
+
+
+/* 공지글 */
+.main_content .viewer                       {margin-bottom: 30px; border: 1px solid gainsboro;}
+.main_content .viewer .title                {height: 50px; border-bottom: 1px solid gainsboro; font-size: 20px; line-height: 50px; padding-left: 5px; font-weight: bold;}
+.main_content .viewer .memo                 {padding: 5px;}
+.main_content .viewer .date                 {padding: 3px 5px 3px 5px; height: 20px; border-bottom: 1px solid gainsboro;}
+.main_content .viewer .date>span            {font-size: 13px; float:right; margin-right: 5px}
+.main_content .viewer .btn_zone             {height: 40px;}
+.main_content .viewer .btn_zone .leftGo     {float: left; height: 30px; margin: 5px 0px 5px 5px; line-height: 30px; font-size: 15px; padding: 0px 5px 0px 5px; background-color: rgb(109, 106, 106); font-weight: bold; color: white; border-radius: 3px;}
+.main_content .viewer .btn_zone .rightGo    {float: right; height: 30px; margin: 5px 5px 5px 0px; line-height: 30px; font-size: 15px; padding: 0px 5px 0px 5px; background-color: rgb(109, 106, 106); font-weight: bold; color: white; border-radius: 3px;}

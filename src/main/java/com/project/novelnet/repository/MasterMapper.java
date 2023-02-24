@@ -1,5 +1,6 @@
 package com.project.novelnet.repository;
 
+import com.project.novelnet.Vo.MasterVO.MasterMemoVO;
 import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NovelVO;
@@ -77,5 +78,8 @@ public interface MasterMapper {
     //pd픽 해제
     @Delete("delete from pd_pick where n_num = #{n_num}")
     public int pdPickDelete(@Param("n_num")int n_num);
+
+    //==============================================================
+    public int writeGongji(MasterMemoVO memoVO);
 
 }

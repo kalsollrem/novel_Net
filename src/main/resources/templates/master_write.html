@@ -20,16 +20,16 @@
             <div class="main_content">
         <!------------ 콘텐츠 영역   ------------------>
                 <div class="write_zone">
-                    <form method="post" action="#" >
+                    <form action="/masterWrite.do" method="post" id="novelRegist" name="novelRegist" enctype="multipart/form-data">
                         <div class="eventImgFrame">
                             <div class="img_zone">
                                 <span>이미지 사이즈를 1060 x 160픽셀로 맞춰주세요.</span>
                                 <img class="displyImg" style="display: none;"></div>
-                            <div class="fileUpZone"><input type="file" class="fileUp"></div>
+                            <div class="fileUpZone"><input type="file" name="imgfile" class="fileUp" accept="image/*"></div>
                         </div>
                         <div class="write_title">
                             <h4>제목 : </h4>
-                            <input type="text" name="write_title" id="write_title2">
+                            <input type="text" name="write_title" id="write_title2" class="master_title">
                             <select class="gongType" name="gongType">
                                 <option value="gong">공지</option>
                                 <option value="event">이벤트</option>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="write_submit">
                             <span>※ 담당자는 운영 규정에 따라 작성해 주시길 바랍니다.</span>
-                            <input type="submit" value="등록" class="write_uploads">
+                            <input type="button" value="등록" class="write_uploads">
                         </div>
                     </form>
                 </div>

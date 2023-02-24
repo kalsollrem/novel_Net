@@ -1,4 +1,5 @@
 package com.project.novelnet.controller;
+import com.project.novelnet.Vo.MasterVO.MasterMemoVO;
 import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
 import com.project.novelnet.Vo.NewPageingVO;
@@ -6,6 +7,7 @@ import com.project.novelnet.Vo.NovelVO;
 import com.project.novelnet.Vo.PdPickVO;
 import com.project.novelnet.Vo.UserVO;
 import com.project.novelnet.repository.MasterMapper;
+import com.project.novelnet.service.FileUploadService;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +33,9 @@ public class MasterController {
 
     @Autowired
     private ManageService manageService;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     @Autowired
     private PageingService pageingService;
@@ -436,8 +443,49 @@ public class MasterController {
                                HttpSession session,
                                NewPageingVO newPageingVO)throws Exception
     {
-
-
         return "master_write";
+    }
+
+
+    @PostMapping("/masterWrite.do")
+    public String masterWrite(HttpSession session,
+                              @RequestParam(value = "write_title",required = false) String write_title,
+                              @RequestParam(value = "write_memo" ,required = false) String write_memo,
+                              @RequestParam(value = "gongType"   ,required = false) String gongType,
+                              @RequestParam(value = "imgfile"    ,required = false) MultipartFile imgfile,
+                              MasterMemoVO masterMemoVO,
+                              HttpServletRequest request)throws Exception
+    {
+
+
+//        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+
+            String answer;
+
+            write_title = write_title.replace(" ","");
+            System.out.println("타입 : " +gongType);
+
+            masterMemoVO.setU_num("1");
+            masterMemoVO.setMa_title(write_title);
+            masterMemoVO.setMa_memo(write_memo);
+            masterMemoVO.setMa_type(gongType);
+
+            //이미지 저장
+            if (!imgfile.isEmpty())
+            {
+                answer = fileUploadService.eventFileUpload(imgfile);
+                if (answer != "no")
+                {
+                    masterMemoVO.setMa_cover(answer);
+                    System.out.println(answer);
+                }
+            } //이미지 저장
+
+            int t = masterMapper.writeGongji(masterMemoVO);
+            System.out.println(t);
+
+//            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
+//        }
+        return "redirect:/master/view?No="+masterMemoVO.getMa_num();
     }
 }

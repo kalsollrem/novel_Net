@@ -436,5 +436,23 @@
         </choose>
     </select>
 
+
+
+    <!-- 공지등록 -->
+    <insert id="writeGongji" parameterType="com.project.novelnet.Vo.MasterVO.MasterMemoVO">
+        <selectKey resultType="int" keyProperty="ma_num" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        <choose>
+            <when test="ma_type.equals('gong')">
+                INSERT INTO mastermemo(u_num, ma_title, ma_memo, ma_type)
+                VALUES (#{u_num},#{ma_title},#{ma_memo},'gong')
+            </when>
+            <when test="ma_type.equals('event')">
+                INSERT INTO mastermemo(u_num, ma_title, ma_memo, ma_cover,ma_type)
+                VALUES (#{u_num},#{ma_title},#{ma_memo},#{ma_cover},'event')
+            </when>
+        </choose>
+    </insert>
 </mapper>
 
