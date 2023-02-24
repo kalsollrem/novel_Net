@@ -567,6 +567,31 @@ public class MasterController {
         return "redirect:/master/view?No="+masterMemoVO.getMa_num();
     }
 
+    //공지 삭제
+    @PostMapping("/masterMemoDelete.do")
+    @ResponseBody
+    public int DeleteMasterMemo(HttpSession session,
+                                @RequestParam(value = "No",required = false) int ma_num,
+                                HttpServletRequest request)throws Exception
+    {
+        int answer = 0;
+        String cover;
+        u_num = "1";
+
+        //커버 존재시 삭제
+        try {cover = masterMapper.findCover(ma_num);}
+        catch (Exception e) {cover = "none";}
+        if (cover != "none") {fileUploadService.deleteFile(cover);}
+
+        //삭제
+        try                 {answer = masterMapper.deleteMasterMemo(ma_num,u_num);}
+        catch (Exception e) {System.out.println("실패");}
+        System.out.println("결과 값" + answer);
+
+        return answer;
+    }
+
+
     //테스트
     @GetMapping("/ttt")
     public String ttt()throws Exception
@@ -578,11 +603,12 @@ public class MasterController {
     //공지 수정 페이지
     @GetMapping("/master/view")
     public String masterView(Model model,
-                            @RequestParam(value = "No",required = false) int No,
+                            @RequestParam(value = "No",required = false) Integer No,
                             MasterMemoVO masterMemoVO,
                             HttpSession session,
                             NewPageingVO newPageingVO)throws Exception
     {
+        if(No == null) {return "redirect:/novelnet";}
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
 
         masterMemoVO = masterMapper.findGonjiDate(No);

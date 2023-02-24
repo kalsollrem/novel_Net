@@ -1212,11 +1212,14 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 
 
 /* 공지글 */
-.main_content .viewer                       {margin-bottom: 30px; border: 1px solid gainsboro;}
-.main_content .viewer .title                {height: 50px; border-bottom: 1px solid gainsboro; font-size: 20px; line-height: 50px; padding-left: 5px; font-weight: bold;}
-.main_content .viewer .memo                 {padding: 5px;}
+.main_content .viewer                       {margin-bottom: 30px; border: 1px solid gainsboro; margin-top: 50px; margin-bottom: 50px;}
+.main_content .viewer .title                {height: 50px; border-bottom: 1px solid gainsboro; font-size: 20px; line-height: 50px; padding-left: 10px; font-weight: bold;}
+.main_content .viewer .memo                 {padding: 5px; margin-top: 15px; margin-bottom: 15px; min-height: 300px;}
 .main_content .viewer .date                 {padding: 3px 5px 3px 5px; height: 20px; border-bottom: 1px solid gainsboro;}
 .main_content .viewer .date>span            {font-size: 13px; float:right; margin-right: 5px}
 .main_content .viewer .btn_zone             {height: 40px;}
-.main_content .viewer .btn_zone .leftGo     {float: left; height: 30px; margin: 5px 0px 5px 5px; line-height: 30px; font-size: 15px; padding: 0px 5px 0px 5px; background-color: rgb(109, 106, 106); font-weight: bold; color: white; border-radius: 3px;}
-.main_content .viewer .btn_zone .rightGo    {float: right; height: 30px; margin: 5px 5px 5px 0px; line-height: 30px; font-size: 15px; padding: 0px 5px 0px 5px; background-color: rgb(109, 106, 106); font-weight: bold; color: white; border-radius: 3px;}
+.main_content .viewer .btn_zone .leftBtn    {float: left; height: 30px; margin: 5px 0px 5px 5px; line-height: 30px; font-size: 15px; padding: 0px 5px 0px 5px; background-color: rgb(109, 106, 106); font-weight: bold; color: white; border-radius: 3px; border: 0px;}
+.main_content .viewer .btn_zone .rightBtn   {float: right; height: 30px; margin: 5px 5px 5px 0px; line-height: 30px; font-size: 15px; padding: 0px 5px 0px 5px;font-weight: bold; color: white; border-radius: 3px; border: 0px;}
+.main_content .viewer .btn_zone .delete     {background-color: rgb(236, 154, 154); }
+.main_content .viewer .btn_zone .Update     {background-color: rgb(114, 223, 150); }
+.main_content .viewer .btn_zone .list       {background-color: rgb(125, 149, 168); }

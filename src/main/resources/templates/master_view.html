@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/modal.js"></script>
+    <script src="../js/master/masterView.js"></script>
 </head>
 <body>
 <!-- 모달 레이아웃 -->
@@ -21,51 +22,28 @@
                         공지입니다.
                     </div>
                     <div class="btn_zone">
-                        <div class="leftGo">이전글</div>
-                        <div class="rightGo">다음글</div>
+                        <button class="leftGo leftBtn"  th:onclick="|location.href='@{/master/view(No=${memoVO.beforeNo})}'|" th:if="${memoVO.beforeNo}!=0">이전글</button>
+                        <button class="rightGo leftBtn" th:onclick="|location.href='@{/master/view(No=${memoVO.nextNo})}'|" th:if="${memoVO.nextNo}!=0">다음글</button>
+                        <button class="list rightBtn">목록</button>
                     </div>
-                    <div class="memo" th:text="${memoVO.ma_memo}">
+                    <div class="memo" th:utext="${memoVO.ma_memo}">
                         본문입니다.
                     </div>
                     <div class="date">
                         <span th:text="${memoVO.ma_date}">09.10.12</span>
                     </div>
                     <div class="btn_zone">
-                        <div class="leftGo">이전글</div>
-                        <div class="rightGo">다음글</div>
+<!--                        thif${memoVO.u_num} == ${session.U_NUM}"-->
+                        <button class="leftGo leftBtn"  th:onclick="|location.href='@{/master/view(No=${memoVO.beforeNo})}'|" th:if="${memoVO.beforeNo}!=0">이전글</button>
+                        <button class="rightGo leftBtn" th:onclick="|location.href='@{/master/view(No=${memoVO.nextNo})}'|" th:if="${memoVO.nextNo}!=0">다음글</button>
+                        <button class="delete rightBtn" th:value="${memoVO.ma_num}">삭제</button>
+                        <button class="Update rightBtn" th:onclick="|location.href='@{/master/rewrite(No=${memoVO.ma_num})}'|">수정</button>
                     </div>
                 </div>
         <!------------ 콘텐츠 영역  ------------------>
             </div>
         </div>
     </div>
-    <footer>
-        <div class="notice">
-            <div class="notice_frame">
-                <span class="notice_memo_gong"><b>공지</b></span>
-                <div class="new_gong">new</div>
-                <span class="notice_memo">정기 시스템 점검 예정 (AM 01:00 - 04:00)</span>
-            </div>
-        </div>
-        <div class="footer_info">
-            <div class="footer_info_frame">
-                <div class="copyright">
-                    <div class="mono_logo"> 
-                        <img src="../img/mono_logo.png">
-                    </div>
-                    <ul class="copyright_c">
-                        <li>본 사이트의 등록된 컨텐츠는 사이트 및 원 저작자에게 권리가 있는 컨텐츠이며, 무단 복제/전송/수정/배포는 법적 처벌을 받을 수 있습니다.</li>
-                        <li><span class="copyright_c_mini">Copyright(c) 노벨넷 2022. All rights reserved</span></li>
-                    </ul>
-                </div>
-                <ul class="copyright_memo">
-                    <li>주식회사 노벨넷 대표 김정현 사업자등록번호 210-81-75711 통신판매업 제2021-김제요촌-013145호</li>
-                    <li>주소 김제시 요촌동 81-42번지, T플로어 3층</li>
-                    <li>고객센터 : 063-588-0011 helpNovel@gmail.com 운영시간 AM10:00 - PM 06:00 (휴게시간 PM 0:30 - 2:00)</li>
-                </ul>
-            </div>  
-        </div>
-    </footer>
-    
+    <footer th:replace="/include/footer.html :: footer_layout"> </footer>
 </body>
 </html>

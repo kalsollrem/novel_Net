@@ -24,6 +24,7 @@
                         <div class="eventImgFrame">
                             <div class="img_zone">
                                 <span>이미지 사이즈를 1060 x 160픽셀로 맞춰주세요.</span>
+                                <img class="displyImg" style="display: none;"                      th:if="${memoVO.ma_type}==null">
                                 <img class="displyImg" style="display: none;"                      th:if="${memoVO.ma_type}=='gong'">
                                 <img class="displyImg" th:src="'../noteImg/'+${memoVO.ma_cover}"   th:if="${memoVO.ma_type}=='event'">
                             </div>

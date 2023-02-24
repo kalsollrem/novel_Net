@@ -91,7 +91,14 @@ public interface MasterMapper {
     public String findCover(@Param("ma_num")int ma_num);
 
     //공지 정보 찾기
-    @Select("select ma_num, u_num, ma_title, ma_memo, ma_cover, ma_date, ma_type from mastermemo where ma_num=#{ma_num}")
+    @Select("select * from(" +
+                "select LEAD(ma_num, 1) OVER (ORDER BY ma_num DESC) AS beforeNo, LAG(ma_num, 1) OVER (ORDER BY ma_num DESC) AS nextNo," +
+                "ma_num, u_num, ma_title, ma_memo, ma_cover, date_format(ma_date, '%y. %m. %d (%H:%i)')as ma_date, ma_type " +
+                "from mastermemo order by ma_num desc) A " +
+            "where ma_num=#{ma_num}")
     public MasterMemoVO findGonjiDate(@Param("ma_num")int ma_num);
+
+    @Delete("delete from mastermemo where ma_num=#{ma_num} and u_num=#{u_num}")
+    public int deleteMasterMemo(@Param("ma_num")int ma_num,@Param("u_num")String u_num);
 
 }
