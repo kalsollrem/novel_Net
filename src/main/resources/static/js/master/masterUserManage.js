@@ -57,6 +57,29 @@ $(function (){
         });
     });
 
+    //유저 정지 및 정지해제
+    $(".levbtn").click(function()
+    {
+        let u_num = $(this).val()
+        let switchUD = $(".levelChange_"+u_num).val();
+        alert(switchUD)
+        alert(u_num)
+
+        $.ajax({
+            url:'/userManage.do',
+            type:'post',
+            data : {"u_num":$(this).val(),
+                    "switchUD":switchUD},
+            success:function(s){
+                if (s == 1)    {console.log("수정성공")};
+                if (s == 0)    {console.log("수정실패")};
+                location.reload();
+            },
+            error:function(){
+                alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다.");
+            }
+        });
+    });
 
 
 })

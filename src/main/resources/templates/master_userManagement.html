@@ -86,12 +86,12 @@
                             </div>
                             <div class="mw_SwitchSide borderLeft_black">
                                 <div class="levelChangeZone">
-                                    <select name="levelChange" id="levelChange">
-                                        <option value="0" th:selected="${list.u_level}==0">일반</option>
-                                        <option value="1" th:selected="${list.u_level}==1">정지</option>
-                                        <option value="9" th:selected="${list.u_level}==9" th:if="${list.u_ok}==1">관리</option>
+                                    <select name="levelChange" id="levelChange" th:class="'levelChange_'+${list.u_num}">
+                                        <option th:value="0" th:selected="${list.u_level}==0">일반</option>
+                                        <option th:value="1" th:selected="${list.u_level}==1">정지</option>
+                                        <option th:value="9" th:selected="${list.u_level}==9" th:if="${list.u_ok}==1">관리</option>
                                     </select>
-                                    <button class="levelChangeOK">변경</button>
+                                    <button class="levelChangeOK levbtn" th:value="${list.u_num}">변경</button>
                                 </div>
                                 <div class="button_zone">
                                     <button class="mw_GoMypageBtn button13" th:onclick="|location.href='@{/novelnet/profill(user=${list.u_num})}'|">마이페이지</button>

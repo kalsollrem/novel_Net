@@ -19,7 +19,6 @@ $(function (){
     //소설 정지
     $(".mw_novelStopBtn").click(function()
     {
-        alert($(this).val());
         let switchUD=1;
         $.ajax({
             url:'/masterNovelSwitch.do',
