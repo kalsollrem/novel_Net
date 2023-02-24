@@ -22,9 +22,9 @@
                         공지입니다.
                     </div>
                     <div class="btn_zone">
-                        <button class="leftGo leftBtn"  th:onclick="|location.href='@{/master/view(No=${memoVO.beforeNo})}'|" th:if="${memoVO.beforeNo}!=0">이전글</button>
-                        <button class="rightGo leftBtn" th:onclick="|location.href='@{/master/view(No=${memoVO.nextNo})}'|" th:if="${memoVO.nextNo}!=0">다음글</button>
-                        <button class="list rightBtn">목록</button>
+                        <button class="leftGo leftBtn"  th:onclick="|location.href='@{/master/view(No=${memoVO.beforeNo},page=${page})}'|" th:if="${memoVO.beforeNo}!=0">이전글</button>
+                        <button class="rightGo leftBtn" th:onclick="|location.href='@{/master/view(No=${memoVO.nextNo},page=${page})}'|" th:if="${memoVO.nextNo}!=0">다음글</button>
+                        <button class="list rightBtn" th:onclick="|location.href='@{/master/notification(carte=${memoVO.ma_type},page=${page})}'|">목록</button>
                     </div>
                     <div class="memo" th:utext="${memoVO.ma_memo}">
                         본문입니다.
@@ -34,10 +34,10 @@
                     </div>
                     <div class="btn_zone">
 <!--                        thif${memoVO.u_num} == ${session.U_NUM}"-->
-                        <button class="leftGo leftBtn"  th:onclick="|location.href='@{/master/view(No=${memoVO.beforeNo})}'|" th:if="${memoVO.beforeNo}!=0">이전글</button>
-                        <button class="rightGo leftBtn" th:onclick="|location.href='@{/master/view(No=${memoVO.nextNo})}'|" th:if="${memoVO.nextNo}!=0">다음글</button>
+                        <button class="leftGo leftBtn"  th:onclick="|location.href='@{/master/view(No=${memoVO.beforeNo},page=${page})}'|" th:if="${memoVO.beforeNo}!=0">이전글</button>
+                        <button class="rightGo leftBtn" th:onclick="|location.href='@{/master/view(No=${memoVO.nextNo},page=${page})}'|" th:if="${memoVO.nextNo}!=0">다음글</button>
                         <button class="delete rightBtn" th:value="${memoVO.ma_num}">삭제</button>
-                        <button class="Update rightBtn" th:onclick="|location.href='@{/master/rewrite(No=${memoVO.ma_num})}'|">수정</button>
+                        <button class="Update rightBtn" th:onclick="|location.href='@{/master/rewrite(No=${memoVO.ma_num},page=${page},carte=${page})}'|">수정</button>
                     </div>
                 </div>
         <!------------ 콘텐츠 영역  ------------------>

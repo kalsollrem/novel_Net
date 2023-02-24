@@ -98,7 +98,14 @@ public interface MasterMapper {
             "where ma_num=#{ma_num}")
     public MasterMemoVO findGonjiDate(@Param("ma_num")int ma_num);
 
+    //공지 삭제
     @Delete("delete from mastermemo where ma_num=#{ma_num} and u_num=#{u_num}")
     public int deleteMasterMemo(@Param("ma_num")int ma_num,@Param("u_num")String u_num);
+
+    //공지사항 게시물 숫자
+    public int findGongListCnt(@Param("carte")String carte);
+
+    //공지사항 게시물 가져오기
+    List<MasterMemoVO> findGongList(@Param("carte")String carte);
 
 }

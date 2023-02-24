@@ -8,6 +8,7 @@ public class MasterMemoVO {
     private int ma_num;
     private int nextNo;
     private int beforeNo;
+    private int indexNo;
     private String u_num;
     private String ma_title;
     private String ma_memo;

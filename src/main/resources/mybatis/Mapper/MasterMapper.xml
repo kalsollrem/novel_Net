@@ -479,5 +479,33 @@
             </when>
         </choose>
     </update>
+
+    <select id="findGongList" resultType="com.project.novelnet.Vo.MasterVO.MasterMemoVO">
+        select ma_num, u_num, ma_title, ma_cover, date_format(ma_date, '%y. %m. %d.')as ma_date, ma_type, @rownum := @rownum + 1 AS indexNo
+        from mastermemo as a, (SELECT @rownum :=0) AS r
+        <choose>
+            <when test="carte.equals('gong')">
+                where ma_type='gong'
+            </when>
+            <when test="carte.equals('event')">
+                where ma_type='event'
+            </when>
+        </choose>
+        order by ma_num desc;
+    </select>
+
+    <select id="findGongListCnt" resultType="int">
+        select count(ma_num)
+        from mastermemo
+        <choose>
+            <when test="carte.equals('gong')">
+                where ma_type='gong'
+            </when>
+            <when test="carte.equals('event')">
+                where ma_type='event'
+            </when>
+        </choose>
+        order by ma_num desc;
+    </select>
 </mapper>
 

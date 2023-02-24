@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>노벨넷</title>
+        <title>노벨넷 - 공지사항</title>
         <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/index.js"></script>
+        <script src="../js/master/master_notification.js"></script>
     </head>
     <body>
         <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
@@ -19,52 +22,60 @@
                 </ul>
 
                 <div class="GongiSort ">
-                    <div class="gongjiGo"><a href="">공지사항</a></div>
-                    <div class="eventGo"><a href="">이벤트</a></div>
-                    <div class="writeGo"><a href="">게시물 등록</a></div>
+                    <div class="gongjiGo"><a th:href="@{/master/notification(carte='gong')}">공지사항</a></div>
+                    <div class="eventGo"><a th:href="@{/master/notification(carte='event')}">이벤트</a></div>
+                    <div class="writeGo"><a th:href="@{/master/write(carte=${param.carte},page=${param.page})}">게시물 등록</a></div>
                 </div>
 
                 <div class="master_Gonji">
-                    <ul class="gongji_List">
-                        <li class="borderLine_black">
-                            <div class="gogji_number">1.</div>
-                            <div class="gogji_title"><a href="#">노블넷의 새로운 공지입니다</a></div>
-                            <div class="gogji_date">2023.01.01</div>
-                            <div class="gogji_button">
-                                <button class="update_gongji">수정</button>
-                                <button class="delete_gongji">삭제</button>
-                            </div>
-                        </li>
+                    <ul class="gongji_List" th:if="${carte}=='gong'">
+                        <th:block th:each="list:${list}">
+                            <li class="borderLine_black">
+                                <div class="gogji_number" th:text="${list.indexNo}+'.'">1.</div>
+                                <div class="gogji_title"><a th:href="@{/master/view(No=${list.ma_num},carte='gong',page=${param.page})}" th:text="${list.ma_title}">노블넷의 새로운 공지입니다</a></div>
+                                <div class="gogji_date" th:text="${list.ma_date}">2023.01.01</div>
+                                <div class="gogji_button" th:if="${session.U_LEVEL}=='9'">
+                                    <button class="update_gongji" th:onclick="|location.href='@{/master/rewrite(No=${list.ma_num},carte=${list.ma_type},page=${param.page})}'|">수정</button>
+                                    <button class="delete_gongji" th:value="${list.ma_num}">삭제</button>
+                                </div>
+                            </li>
+                        </th:block>
                     </ul>
                     <!--이벤트 게시물 -->
-                    <ul class="event_List" style="display: none;">
-                        <li>
-                            <a href="#"><img src="../img/bag_1.jpg" alt="이벤트"></a>
-                            <div class="event_manage">
-                                <div class="event_date">2024 .03 .03</div>
-                                <button class="delete_gongji">삭제</button>
-                                <button class="update_gongji">수정</button>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#"><img src="../img/bag_1.jpg" alt="이벤트"></a>
-                            <div class="event_manage">
-                                <div class="event_date">2024 .03 .03</div>
-                                <button class="delete_gongji">삭제</button>
-                                <button class="update_gongji">수정</button>
-                            </div>
-                        </li>
+                    <ul class="event_List" th:if="${carte}=='event'">
+                        <th:block th:each="list:${list}">
+                            <li>
+                                <a th:href="@{/master/view(No=${list.ma_num},carte='event',page=${param.page})}"><img th:src="'../noteImg/'+${list.ma_cover}" th:alt="${list.ma_title}"></a>
+                                <div class="event_manage">
+                                    <div class="event_date" th:text="${list.ma_date}">2024 .03 .03</div>
+                                    <button class="delete_gongji" th:if="${session.U_LEVEL}=='9'" th:value="${list.ma_num}">삭제</button>
+                                    <button class="update_gongji" th:if="${session.U_LEVEL}=='9'" th:onclick="|location.href='@{/master/rewrite(No=${list.ma_num},carte=${list.ma_type},page=${param.page})}'|">수정</button>
+                                </div>
+                            </li>
+                        </th:block>
                     </ul>
-                    <div class="ep_paging">
-                        <div class="paging_card">←</div>
-                        <div class="paging_card">◁</div>
-                        <div class="paging_card">1</div>
-                        <div class="paging_card">2</div>
-                        <div class="paging_card">3</div>
-                        <div class="paging_card">4</div>
-                        <div class="paging_card">5</div>
-                        <div class="paging_card">▷</div>
-                        <div class="paging_card">→</div>
+                    <div class="paging">
+                        <div class="paging_box">
+                            <div class="paging_left">
+                                <th:block th:if="${paging.nowCase}!=1">
+                                    <div class="paging_card"><a th:href="@{/master/notification(carte=${param.carte},page=1)}">←</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/notification(carte=${param.carte},page=${paging.leftPage})}">◁</a></div>
+                                </th:block>
+                            </div>
+                            <div class="paging_num">
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+1)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+1"><a th:href="@{/master/notification(carte=${param.carte},page=((${paging.nowCase}-1)*5+1))}" th:text="(${paging.nowCase}-1)*5+1">1</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+2)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+2"><a th:href="@{/master/notification(carte=${param.carte},page=((${paging.nowCase}-1)*5+2))}" th:text="(${paging.nowCase}-1)*5+2">2</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+3)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+3"><a th:href="@{/master/notification(carte=${param.carte},page=((${paging.nowCase}-1)*5+3))}" th:text="(${paging.nowCase}-1)*5+3">3</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+4)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+4"><a th:href="@{/master/notification(carte=${param.carte},page=((${paging.nowCase}-1)*5+4))}" th:text="(${paging.nowCase}-1)*5+4">4</a></div>
+                                <div class="paging_card" th:id="'cardNum_'+((${paging.nowCase}-1)*5+5)" th:if="${paging.allPage}>=(${paging.nowCase}-1)*5+5"><a th:href="@{/master/notification(carte=${param.carte},page=((${paging.nowCase}-1)*5+5))}" th:text="(${paging.nowCase}-1)*5+5">5</a></div>
+                            </div>
+                            <div class="paging_right">
+                                <th:block th:if="${paging.nowCase} < ${paging.allCase} and ${paging.allCase} > 0">
+                                    <div class="paging_card"><a th:href="@{/master/notification(carte=${param.carte},page=((${paging.nowCase})*5+1))}">▷</a></div>
+                                    <div class="paging_card"><a th:href="@{/master/notification(carte=${param.carte},page=((${paging.displayPage})))}">→</a></div>
+                                </th:block>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

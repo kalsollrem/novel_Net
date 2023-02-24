@@ -7,16 +7,20 @@ $(function (){
     try       {page   = url.get('page').toString();}
     catch (e) {page  = 1}
 
+    let carte;
+    try       {carte   = url.get('carte').toString();}
+    catch (e) {carte  = 'gong'}
+
 
     //신고삭제
-    $(".delete").click(function()
+    $(".delete_gongji").click(function()
     {
         $.ajax({
             url:'/masterMemoDelete.do',
             type:'post',
             data : {"No":$(this).val()},
             success:function(s){
-                if (s == 1)    {location.href="master/notification?page="+page};
+                if (s == 1)    {location.href="/master/notification?carte="+carte+"&page="+page};
                 if (s == 0)    {alert("삭제에 실패하였습니다")};
             },
             error:function(){

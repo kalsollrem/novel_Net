@@ -380,9 +380,7 @@ public class MasterController {
                                 HttpSession session,
                                 NewPageingVO newPageingVO,
                                 @Param("page")       String page,
-                                @Param("searchType") String searchType,
-                                @Param("keyword")    String keyword,
-                                @Param("sort")       String sort)throws Exception
+                                @Param("carte")      String carte)throws Exception
     {
         //아이디 처리
         try                 {u_num= (String)session.getAttribute("U_NUM").toString();}
@@ -396,41 +394,29 @@ public class MasterController {
         if(page == null || page == "0")                     {page    = "1"; }
         else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
 
-        if(searchType == null || searchType.replace(" ","") == "")  {searchType = "";}
-        model.addAttribute("searchType",searchType);
-
-        if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
-
-        if(sort == null || sort == "")                      {sort    = "all"; }
-        model.addAttribute("sort",sort);
+        if(carte == null || carte.replace(" ","") == "")  {carte = "gong";}
+        model.addAttribute("carte",carte);
 
 
-//        //페이징처리
-//        int allPageCnt = masterMapper.novelCnt(searchType,keyword, sort);
-//        System.out.println(allPageCnt);
-//        pageingService.setNowPage(page);
-//        pageingService.setTotalCount(allPageCnt);
-//        newPageingVO = pageingService.setNewPageingVO(newPageingVO);
-//
-//        System.out.println("allPage:" + newPageingVO.getAllPage());
-//        System.out.println("nowCase:" + newPageingVO.getNowCase());
-//        System.out.println("allCase:" + newPageingVO.getAllCase());
-//
-//        model.addAttribute("paging", newPageingVO);
-//
-//
-//        //시작페이지처리
-//        int start = (Integer.parseInt(page)-1)*10;
-//        List<NovelVO> list = masterMapper.masterNovelList(searchType,keyword, sort, start);
-//        System.out.println("총"+allPageCnt+"개/");
-//
-//
-//
-//        model.addAttribute("list",list);
-//
-//        //pd픽 관리
-//        List<PdPickVO> pdPick = masterMapper.pdPickList();
-//        model.addAttribute("pdPick",pdPick);
+
+        //페이징처리
+        int allPageCnt = masterMapper.findGongListCnt(carte);
+        pageingService.setNowPage(page);
+        pageingService.setTotalCount(allPageCnt);
+        newPageingVO = pageingService.setNewPageingVO(newPageingVO);
+
+        model.addAttribute("paging", newPageingVO);
+
+        //시작페이지처리
+        int start = (Integer.parseInt(page)-1)*10;
+        List<MasterMemoVO> list = masterMapper.findGongList(carte);
+        System.out.println("총"+allPageCnt+"개/");
+
+        model.addAttribute("list",list);
+
+        //pd픽 관리
+        List<PdPickVO> pdPick = masterMapper.pdPickList();
+        model.addAttribute("pdPick",pdPick);
 
 
         return "master_notification";
@@ -440,14 +426,23 @@ public class MasterController {
     //공지 작성 페이지
     @GetMapping("/master/write")
     public String masterWrite(Model model,
+                              @RequestParam(value = "page"       ,required = false) String page,
+                              @RequestParam(value = "carte"       ,required = false) String carte,
                                MasterMemoVO masterMemoVO,
                                HttpSession session,
                                NewPageingVO newPageingVO)throws Exception
     {
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+
+        if(page == null || page == "0")                     {page    = "1"; }
+        else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
+        if(carte == null || carte.replace(" ","") == "")  {carte = "gong";}
+
         model.addAttribute("memoVO",masterMemoVO);
         model.addAttribute("type","write");
         model.addAttribute("link","/masterWrite.do");
+        model.addAttribute("carte",carte);
+        model.addAttribute("page",page);
         return "master_write";
 //            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
 //        }
@@ -459,6 +454,8 @@ public class MasterController {
                               @RequestParam(value = "write_title",required = false) String write_title,
                               @RequestParam(value = "write_memo" ,required = false) String write_memo,
                               @RequestParam(value = "gongType"   ,required = false) String gongType,
+                              @RequestParam(value = "page"       ,required = false) String page,
+                              @RequestParam(value = "carte"       ,required = false) String carte,
                               @RequestParam(value = "imgfile"    ,required = false) MultipartFile imgfile,
                               MasterMemoVO masterMemoVO,
                               HttpServletRequest request)throws Exception
@@ -466,6 +463,10 @@ public class MasterController {
 
 
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+
+            //변수 처리
+            if(page == null || page == "0")                     {page    = "1"; }
+            else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
 
             String answer;
 
@@ -493,18 +494,24 @@ public class MasterController {
 
 //            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
 //        }
-        return "redirect:/master/view?No="+masterMemoVO.getMa_num();
+        return "redirect:/master/view?No="+masterMemoVO.getMa_num()+"&carte="+gongType+"&page="+page;
     }
 
     //공지 수정 페이지
     @GetMapping("/master/rewrite")
     public String masterReWrite(Model model,
                                 @RequestParam(value = "No",required = false) int No,
+                                @RequestParam(value = "page"       ,required = false) String page,
+                                @RequestParam(value = "carte"       ,required = false) String carte,
                                 MasterMemoVO masterMemoVO,
                                 HttpSession session,
                                 NewPageingVO newPageingVO)throws Exception
     {
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
+        if(page == null || page == "0")                     {page    = "1"; }
+        else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
+        if(carte == null || carte.replace(" ","") == "")  {carte = "gong";}
+
 
         masterMemoVO = masterMapper.findGonjiDate(No);
         model.addAttribute("memoVO",masterMemoVO);
@@ -521,6 +528,8 @@ public class MasterController {
                                   @RequestParam(value = "write_title",required = false) String write_title,
                                   @RequestParam(value = "write_memo" ,required = false) String write_memo,
                                   @RequestParam(value = "gongType"   ,required = false) String gongType,
+                                  @RequestParam(value = "page"       ,required = false) String page,
+                                  @RequestParam(value = "carte"      ,required = false) String carte,
                                   @RequestParam(value = "number"     ,required = false) int number,
                                   @RequestParam(value = "imgfile"    ,required = false) MultipartFile imgfile,
                                   MasterMemoVO masterMemoVO,
@@ -528,6 +537,11 @@ public class MasterController {
     {
         String answer;
         String oldCover;
+
+        if(page == null || page == "0")                     {page    = "1"; }
+        else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
+        if(carte == null || carte.replace(" ","") == "")  {carte = "gong";}
+
         try {oldCover = masterMapper.findCover(number);}
         catch (Exception e) {oldCover = "noImg";}
 
@@ -564,7 +578,7 @@ public class MasterController {
         System.out.println(t);
 
 
-        return "redirect:/master/view?No="+masterMemoVO.getMa_num();
+        return "redirect:/master/view?No="+masterMemoVO.getMa_num()+"&carte="+carte+"&page="+page;
     }
 
     //공지 삭제
@@ -591,19 +605,12 @@ public class MasterController {
         return answer;
     }
 
-
-    //테스트
-    @GetMapping("/ttt")
-    public String ttt()throws Exception
-    {
-        fileUploadService.deleteFile("b740315b-fb72-4a0a-8b0a-2aa0f2b1ec9c.png");
-        return "master_write";
-    }
-
-    //공지 수정 페이지
+    //공지 화면 페이지
     @GetMapping("/master/view")
     public String masterView(Model model,
                             @RequestParam(value = "No",required = false) Integer No,
+                            @RequestParam(value = "page"       ,required = false) String page,
+                            @RequestParam(value = "carte"       ,required = false) String carte,
                             MasterMemoVO masterMemoVO,
                             HttpSession session,
                             NewPageingVO newPageingVO)throws Exception
@@ -611,8 +618,14 @@ public class MasterController {
         if(No == null) {return "redirect:/novelnet";}
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
 
+        if(page == null || page == "0")                     {page    = "1"; }
+        else{ if(manageService.isInteger(page) == false)    {page    = "1";}}
+        if(carte == null || carte.replace(" ","") == "")  {carte = "gong";}
+
         masterMemoVO = masterMapper.findGonjiDate(No);
         model.addAttribute("memoVO",masterMemoVO);
+        model.addAttribute("page",page);
+        model.addAttribute("carte",carte);
 
         return "master_view";
 //            return "redirect:/master/write?ma_num="+masterMemoVO.getMa_num();
