@@ -39,7 +39,10 @@ public interface UserMapper {
     @Update("update user set u_ok = '1', u_code = 'done' where u_num = #{u_num}")
     public int UesrJoinEnd(@Param("u_num")String u_num);
 
+    @Select("select u_pic from user where u_num = #{u_num}")
+    public String findUserCover(@Param("u_num")String u_num);
 
-
+    @Update("update user set u_pic=#{u_pic} where u_num=#{u_num}")
+    public int changeProfill(@Param("u_num")String u_num,@Param("u_pic")String u_pic);
 
 }

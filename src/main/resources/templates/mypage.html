@@ -28,7 +28,10 @@
                             <img th:if="${profillData.u_pic} != null"  th:src="'../userImg/'+${profillData.u_pic}" alt="프로필" onerror="this.src='../img/profill.jpg'">
                             <img th:unless="${profillData.u_pic} != null" src="../img/profill.png" alt="프로필" >
                         </div>
-                        <div class="pic_edit" th:if="${who}=='me'">
+<!--                        <div class="pic_edit" th:if="${who}=='me'">-->
+<!--                            <img src="../img/edit_icon.png" alt="set">-->
+<!--                        </div>-->
+                        <div class="pic_edit">
                             <img src="../img/edit_icon.png" alt="set">
                         </div>
                         <div class="profil_name"><div class="nameSpace" th:text="${profillData.u_nick}"></div><div> 님의 회원카드</div></div>

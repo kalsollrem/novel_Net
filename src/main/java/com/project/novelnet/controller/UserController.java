@@ -1,4 +1,5 @@
 package com.project.novelnet.controller;
+import com.project.novelnet.Vo.MasterVO.MasterMemoVO;
 import com.project.novelnet.Vo.NovelVO;
 import com.project.novelnet.Vo.ReplyVO;
 import com.project.novelnet.Vo.TagVO;
@@ -6,15 +7,13 @@ import com.project.novelnet.Vo.UserVO;
 import com.project.novelnet.repository.NovelRepository;
 import com.project.novelnet.repository.ProfillMapper;
 import com.project.novelnet.repository.UserMapper;
-import com.project.novelnet.service.MailService;
-import com.project.novelnet.service.ManageService;
-import com.project.novelnet.service.PageingService;
-import com.project.novelnet.service.UserService;
+import com.project.novelnet.service.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,6 +46,9 @@ public class UserController {
 
     @Autowired
     private PageingService pageingService;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     //아이디 중복 검사
     @PostMapping("/idCheck")
@@ -285,9 +287,62 @@ public class UserController {
 
     //내 프로필 이미지 보기
     @GetMapping("/novelnet/profill/myImg")
-    public String myImg(HttpSession session) throws Exception
+    public String myImg(HttpSession session,
+                        Model model) throws Exception
     {
+        String u_num;
+        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
 
-        return "image_modalA";
+        if (u_num != null){
+            //커버탐색
+            String cover;
+            try {cover = userMapper.findUserCover(u_num);}
+            catch (Exception e){cover = "";}
+
+            System.out.println(cover);
+
+            if(cover != ""){ model.addAttribute("cover",cover); }
+            return "image_modalA";
+        }else
+        {
+            return "image_modalB";
+        }
+    }
+
+    //프로필 등록
+    @PostMapping("/iconChange.do")
+    @ResponseBody
+    public String iconChange(HttpSession session,
+                                @RequestParam(value = "imgfile"    ,required = false) MultipartFile imgfile,
+                                @RequestParam(value = "oldCover"   ,required = false) String oldCover,
+                                MasterMemoVO masterMemoVO,
+                                HttpServletRequest request)throws Exception
+    {
+        int cnt=0;
+        String answer="no";
+
+        System.out.println(imgfile);
+        String u_num;
+        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
+
+        //커버탐색
+        try {if (oldCover != null){cnt = 1;}}
+        catch (Exception e) {cnt = 0;}
+
+        //신규 이미지 저장
+        if (!imgfile.isEmpty())
+        {
+            if (cnt == 1) {fileUploadService.deleteFile(oldCover);}
+
+            //이미지 등록
+            answer = fileUploadService.ProfillUpload(imgfile);
+        }
+
+        if (!answer.equals("no")){
+            int goChange = userMapper.changeProfill(u_num,answer);
+            if(goChange == 1) {answer = "yes";}
+        }
+
+        return answer;
     }
 }

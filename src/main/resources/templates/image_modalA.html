@@ -3,18 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <title>프로필 이미지 변경</title>
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/imageStyle.css">
         <script src="/js/jquery-3.6.0.min.js"></script>
+        <script src="/js/iconUpload.js"></script>
     </head>
     <body>
         <div class="frameA">
             <div class="pic_base">
-                <img src="../img/nover_cover.jpg">
-                <div class="img_zone"></div>
+                <img class="imgTarget" th:src="'/userImg/'+${cover}" alt="이미지" th:if="${cover}!=null or ${cover}!=''">
+                <img class="imgTarget" src="" th:if="${cover}==null or ${cover}==''">
+                <div class="img_zone" id="img_zone"></div>
             </div>
             <div class="control_base">
                 <div class="file_zone">
-                    <input type="file" class="fileInput">
+                    <form method="post" action="/iconChange.do" name="iconChange" id="iconChange">
+                        <input type="hidden" name="oldCover" id="oldCover" th:value="${cover}">
+                        <input type="hidden" class="switch" th:value="off" th:if="${cover}==null">
+                        <input type="hidden" class="switch" th:value="on" th:if="${cover}!=null">
+                        <input type="file" name="imgfile" class="fileInput" onclick="readURL(this)" accept="image/*">
+                        <img src="/img/delete_button.png" alt="초기화" class="empty">
+                    </form>
                 </div>
             </div>
             <div class="button_zone">
