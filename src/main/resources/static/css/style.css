@@ -405,7 +405,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 /* 내 프로필 관리 */
 .profile_main               {width: 100%; height: 600px; margin-top: 30px; margin-bottom: 30px; display: block;}
 /* 내 댓글관리 */
-.serialized_reply           {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none;}
+.serialized_reply           {width: 100%; margin-top: 30px; margin-bottom: 30px; display: none; min-height: 300px;}
 .serialized_reply>h3        {width: 200px; height: 50px; line-height: 50px; text-align: center; background-color: #333; color: #ececec; border-radius: 0.5em; margin-bottom: 10px;}
 
 .serialized_reply .myReply_box  {width: 100%; box-sizing: border-box; border: 2px solid rgb(172, 169, 169); border-radius: 10px; margin-top: 10px;}
@@ -506,7 +506,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 /* 내 연재소설 관리:serialized_novel */
 .serialized_novel_switch  {display: none; margin-bottom: 10px;}
-.serialized_novel         {width: 100%; max-height: 2530px; margin-top: 30px; margin-bottom: 5px; overflow-y: hidden; overflow-x:hidden; border: 1px solid #ECECEC;}
+.serialized_novel         {width: 100%; max-height: 2530px; min-height: 300px; margin-top: 30px; margin-bottom: 5px; overflow-y: hidden; overflow-x:hidden; border: 1px solid #ECECEC;}
 
     /*스크롤설정*/
         /*
@@ -652,7 +652,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .book_info .book_data {height: 100%; width: 965px;  float: left; margin-left: 15px; margin-top: 10px;}
 .book_info .book_data .searched_title { width: 100%; line-height: 40px; font-size: 25px; font-weight: bold; float: left;}
-.book_info .book_data .searched_title .title_name    {float: left; width: 78%;}
+.book_info .book_data .searched_title .title_name    {float: left; width: 78%; overflow-wrap: break-word;}
 .book_info .book_data .searched_title .book_mark_zone{width: 55px; height: 55px; float: right; box-sizing: border-box; border-radius: 0.5em; margin-left: 10px; margin-top: -8px;}
 .book_info .book_data .searched_title .book_mark_zone>img {height: 45px; width: 45px; margin:2px 0px 0px 2px; float: right;}
 .border_pink {border: 4px solid #FFDBEC;}
@@ -706,7 +706,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .another_books .another_bookcase .another_data {width: 390px; height: 120px; margin-top: 8px;}
 .another_data .another_img     {width: 100px; height: 120px; float: left;}
 .another_data .another_img>a>img {height: 120px; width: 90px; margin-left: 5px;}
-.another_data .another_title   {width: 285px; height: 30px; line-height: 30px; padding-left: 5px; float: left;}
+.another_data .another_title   {width: 285px; min-height: 30px; line-height: 30px; padding-left: 5px; float: left; overflow-wrap: break-word;}
 .another_data .another_tag     {width: 275px; line-height: 30px; padding-left: 5px; float:left; min-height: 50px; margin-top: 30px; margin-bottom: 5px; border: 2px solid #ececec; border-radius: 0.3em; padding-bottom: 5px; border-radius: 0.4em;}
 .another_data .another_tag>li  {padding-left: 5px; padding-right: 5px; margin-top: 5px; margin-right: 5px; line-height: 20px; font-size: 13px; color: #666;  background-color: #F2F2F2; float: left; }
 
@@ -720,14 +720,14 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .ep_list .ep_sort .sort_button {height: 60px; width: 150px; line-height: 60px; float: right; text-align: center; font-size: 13px;}
 .ep_list .ep_sort .sort_button >a {float: right;}
 
-.ep_box                         {width: 100%; height: 100px; background-color: white; border-bottom: 1px solid #ECECEC; display: flex;}
+.ep_box                         {width: 100%; min-height: 90px; padding-bottom: 10px; background-color: white; border-bottom: 1px solid #ECECEC; display: flex;}
 .ep_box .read_cheaker           {width: 8px; height: 80px; margin: 10px 0px 0px 5px; float: left;}
 .ep_box .ep_tac                 {width: 700px; height: 100%; float: left; margin-left: 18px; }
-.ep_box .ep_tac .ep_title       {width: 695px; padding-left: 5px; height: 50px; line-height: 50px; font-size: 15px; font-weight: bold; }
+.ep_box .ep_tac .ep_title       {width: 695px; padding-left: 5px; min-height: 39px; font-size: 15px; padding-top:17px;  font-weight: bold; overflow-wrap: break-word;}
 .ep_box .ep_tac .ep_count       {width: 100%; height: 30px; margin-top: 5px; }
 .ep_box .ep_tac .ep_count>li    {height: 100%; margin-left: 5px; margin-right: 12px; line-height: 30px; font-weight: bold; font-size: 12px; float: left; color: gray;}
 .ep_box .ep_tac .ep_count>li>img    {margin-top: 8px; margin-right: 5px; width: 15px; height: 15px; border: 1px solid #333; border-radius: 0.2em;}
-.ep_box .ep_date                    { width: 82px; height: 50px; line-height: 50px; text-align: center; font-weight: bold; float: left; }
+.ep_box .ep_date                    { width: 82px; min-height: 39px; padding-top:17px; font-size: 15px; text-align: center; font-weight: bold; float: left; }
 
 .ep_box .ep_tac .ep_num   {margin-left: 5px; margin-right: 12px; font-weight: bold; font-size: 12px; float: left; color: gray;
     padding-left: 5px; padding-right: 5px; height: 20px; line-height: 20px; margin-top: 11px; background-color: #ECECEC; border-radius: 0.5em; }
@@ -1223,3 +1223,31 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .main_content .viewer .btn_zone .delete     {background-color: rgb(236, 154, 154); }
 .main_content .viewer .btn_zone .Update     {background-color: rgb(114, 223, 150); }
 .main_content .viewer .btn_zone .list       {background-color: rgb(125, 149, 168); }
+
+
+/* 텍스트 세로 중앙 정렬 */
+.text-Y-aligne {display: flex; justify-content: center; align-items: center;}
+
+/* 프로필과 커버용 */
+.frameA {background-color: #a1c0dae0; width: 500px; padding: 10px; border-radius: 10px;}
+
+.frameA .pic_base                       {width: 500px; min-height: 700px; }
+.frameA .pic_base .img_zone             {width: 100%; min-height: 700px; border-radius: 10px; background-color: aliceblue;}
+.frameA .pic_base >img                  {width: 100%; border-radius: 10px; background-color: aliceblue; display: none;}
+.frameA .control_base                   {width: 500px; height: 50px; }
+.frameA .control_base .file_zone        {width: 480px; height: 40px; margin-left: 10px; margin-top: 13px; background-color: rgb(238, 237, 236); border-radius: 10px;}
+.frameA .control_base .file_zone .fileInput {width: 460px; margin-left: 10px; margin-top: 8px;}
+.frameA .button_zone                    {width: 500px; height: 50px; text-align: center;}
+.frameA .button_zone .chang_Btn         {width: 250px; height: 40px;  margin-top: 5px; background-color: #333; color: white; border: 0px; border-radius: 5px; font-size: 18px;}
+
+/* 운영자용 */
+.frameB {background-color: #a1c0dae0; width: 1060px; padding: 10px; border-radius: 10px;}
+
+.frameB .pic_base                       {min-height: 200px;}
+.frameB .pic_base .img_zone             {width: 1060px; height: 200px; border-radius: 10px; background-color: aliceblue; font-size: 20px; font-style: oblique;}
+.frameB .pic_base >img                  {width: 1060px; border-radius: 10px; background-color: aliceblue; display: none;}
+.frameB .control_base                   {width: 1060px; height: 50px; }
+.frameB .control_base .file_zone        {width: 1060px; height: 40px; margin-left: 0px; margin-top: 13px; background-color: rgb(238, 237, 236); border-radius: 10px;}
+.frameB .control_base .file_zone .fileInput {width: 460px; margin-left: 10px; margin-top: 8px;}
+.frameB .button_zone                    {width: 1060px; height: 50px; text-align: center;}
+.frameB .button_zone .chang_Btn         {width: 250px; height: 40px;  margin-top: 5px; background-color: #333; color: white; border: 0px; border-radius: 5px; font-size: 18px;}

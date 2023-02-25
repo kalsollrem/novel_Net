@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/novel_regist.js"></script>
-    <script src="../js/index.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/novel_regist.js"></script>
+    <script src="/js/index.js"></script>
 
 </head>
 <body>
@@ -36,7 +36,7 @@
                             <div class="regist_title">
                                 <span>작품명 : *</span>
                                 <div class="title_zone">
-                                    <input type="text" id="regist_title" name="regist_title" th:value="${novelVO.getN_title()}">
+                                    <input type="text" id="regist_title" name="regist_title" maxlength="300" th:value="${novelVO.getN_title()}">
                                 </div>
                             </div>
                             <div class="regist_class">
@@ -91,7 +91,7 @@
                             <div class="introduction">
                                 <span>작품소개 : *</span>
                                 <div class="introduction_zone">
-                                    <textarea name="novel_introduction" id="novel_introduction" rows="5" th:text="${novelVO.getN_introduction()}"></textarea>
+                                    <textarea name="novel_introduction" id="novel_introduction" rows="5" th:text="${novelVO.getN_introduction()}" maxlength="1450"></textarea>
                                 </div>
                             </div>
                             <div class="cover_set">

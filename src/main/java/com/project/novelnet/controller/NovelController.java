@@ -395,7 +395,7 @@ public class NovelController {
             novelRepository.TagSave(novelVO.getN_num(), hashtag_add);
         }
 
-        return "redirect:/novelnet";
+        return "redirect:/novelnet/novel?n_num="+novelVO.getN_num();
     }
 
 

@@ -42,7 +42,7 @@ public class MasterController {
 
     String u_num;
     String u_level;
-
+    int level;
 
 
     //신고소설 관리
@@ -59,10 +59,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
-        catch (Exception e) {u_level = null;}
+        try                 {level= (Integer)session.getAttribute("U_LEVEL");}
+        catch (Exception e) {level = 0;}
         System.out.println("유저레벨:"+u_level);
-        if(!u_level.equals("9")){return "redirect:/novelnet";}
+        if(level != 9 || level == 0){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -164,10 +164,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
-        catch (Exception e) {u_level = null;}
+        try                 {level= (Integer)session.getAttribute("U_LEVEL");}
+        catch (Exception e) {level = 0;}
         System.out.println("유저레벨:"+u_level);
-        if(!u_level.equals("9")){return "redirect:/novelnet";}
+        if(level != 9 || level == 0){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -240,10 +240,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
-        catch (Exception e) {u_level = null;}
+        try                 {level= (Integer)session.getAttribute("U_LEVEL");}
+        catch (Exception e) {level = 0;}
         System.out.println("유저레벨:"+u_level);
-        if(!u_level.equals("9")){return "redirect:/novelnet";}
+        if(level != 9 || level == 0){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -342,10 +342,10 @@ public class MasterController {
         catch (Exception e) {u_num = null;}
 
         //레벨확인
-        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
-        catch (Exception e) {u_level = null;}
+        try                 {level= (Integer)session.getAttribute("U_LEVEL");}
+        catch (Exception e) {level = 0;}
         System.out.println("유저레벨:"+u_level);
-        if(!u_level.equals("9")){return "redirect:/novelnet";}
+        if(level != 9 || level == 0){return "redirect:/novelnet";}
 
         //변수 처리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -439,10 +439,10 @@ public class MasterController {
                                NewPageingVO newPageingVO)throws Exception
     {
         //레벨확인
-        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
-        catch (Exception e) {u_level = null;}
+        try                 {level= (Integer)session.getAttribute("U_LEVEL");}
+        catch (Exception e) {level = 0;}
         System.out.println("유저레벨:"+u_level);
-        if(!u_level.equals("9")){return "redirect:/master/notification?carte="+carte+"&page="+page;}
+        if(level != 9 || level == 0){return "redirect:/master/notification?carte="+carte+"&page="+page;}
 
         //변수정리
         if(page == null || page == "0")                     {page    = "1"; }
@@ -517,10 +517,10 @@ public class MasterController {
                                 NewPageingVO newPageingVO)throws Exception
     {
         //레벨확인
-        try                 {u_level= (String)session.getAttribute("U_LEVEL").toString();}
-        catch (Exception e) {u_level = null;}
+        try                 {level= (Integer)session.getAttribute("U_LEVEL");}
+        catch (Exception e) {level = 0;}
         System.out.println("유저레벨:"+u_level);
-        if(!u_level.equals("9")){return "redirect:/master/view?No="+masterMemoVO.getMa_num();}
+        if(level != 9 || level == 0){return "redirect:/master/view?No="+masterMemoVO.getMa_num();}
 
         //변수정리
         if(page == null || page == "0")                     {page    = "1"; }

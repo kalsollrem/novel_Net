@@ -282,4 +282,12 @@ public class UserController {
             return "redirect:/novelnet";
         }
     }
+
+    //내 프로필 이미지 보기
+    @GetMapping("/novelnet/profill/myImg")
+    public String myImg(HttpSession session) throws Exception
+    {
+
+        return "image_modalA";
+    }
 }

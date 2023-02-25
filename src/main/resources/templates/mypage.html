@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>프로필</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/profill.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/profill.js"></script>
 </head>
 <body>
     <!-- 모달 레이아웃 -->
@@ -86,7 +86,7 @@
                         <li>
                             <div class="change_box">닉네임</div>
                             <div class="change_nick">
-                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." th:value="${profillData.u_nick}">
+                                <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." maxlength="12" th:value="${profillData.u_nick}">
                             </div>
                         </li>
                         <li>
@@ -112,7 +112,7 @@
                         <li>
                             <div class="change_box">자기소개</div>
                             <div class="change_intro">
-                                <textarea name="intro" id="intro" placeholder="자기소개">[[${profillData.u_myself}]]</textarea>
+                                <textarea name="intro" id="intro" placeholder="자기소개" maxlength="1000">[[${profillData.u_myself}]]</textarea>
                             </div>
                         </li>
                         <li>

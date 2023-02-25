@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/js.js"></script>
-    <script src="../js/summernote/summernote-ko-KR.js"></script>
-    <script src="../js/summernote/summernote-lite.js"></script>
-    <script src="../js/reWrite.js"></script>
-    <link rel="stylesheet" href="../css/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/js.js"></script>
+    <script src="/js/summernote/summernote-ko-KR.js"></script>
+    <script src="/js/summernote/summernote-lite.js"></script>
+    <script src="/js/reWrite.js"></script>
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 </head>
 <body>
     <!-- 모달 레이아웃 -->
@@ -28,7 +28,7 @@
                         <input type="hidden" name="page" th:value="${param.page}">
                         <div class="write_title">
                             <h4>제목 : </h4>
-                            <input type="text" name="write_title" id="write_title" th:value="${memoVo.m_title}">
+                            <input type="text" name="write_title" id="write_title" th:value="${memoVo.m_title}" maxlength="900">
                             <select name="write_type" class="wirte_type">
                                 <option value="ep"   th:selected="${memoVo.m_type}=='ep'" >일반글</option>
                                 <option value="gong" th:selected="${memoVo.m_type}=='gong'">공지</option>
