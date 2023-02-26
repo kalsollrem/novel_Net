@@ -82,6 +82,7 @@
                 </form>
                 <div class="sign_botton">
                     <input type="button" value="가입하기" id="sign_yes">
+                    <input type="button" value="신청중" id="sign_wait">
                 </div>
                 <div class="sign_out">
                     <div class="password_find">비밀번호 찾기</div>
@@ -186,7 +187,7 @@
             <li><span class="infobox dragNone" id="login_on">로그인</span></li>
             <li><span class="infobox dragNone" id="join_on">회원가입</span></li>
             <li><span class="infobox dragNone" id="pass_find_on">아이디/패스워드 찾기</span></li>
-            <li><span class="infobox dragNone gongji_on">공지사항</span></li>
+            <li><span class="infobox dragNone gongji_on"><a th:href="@{/master/notification(carte='gong',page='1')}">공지사항</a></span></li>
         </ul>
         <ul class="info_menu" th:unless="${session.U_NUM == null}">
             <li><span class="infobox dragNone" id="go_info"><a th:href="@{/novelnet/profill(user=${session.U_NUM},type='card')}" th:text="${session.U_NICK}"></a></span></li>

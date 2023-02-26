@@ -33,9 +33,9 @@
                                         <img th:src="'../images/'+${novelList.n_cover}"  onerror="this.src='../img/write_cover.jpg'">
                                         <div class="ranking_num" th:text="${novelList.rnum}">1</div>
                                     </div>
-                                    <div class="ranking_novel_title"><span class="rnt_inside overLineTypeA" th:text="${novelList.n_title}">소설제목</span></div>
+                                    <div class="ranking_novel_title"><span class="rnt_inside overLineTypeA" th:title="${novelList.n_title}">[[${novelList.n_title}]]</span></div>
                                 </a>
-                                <div class="ranking_writer_name overLineTypeA"><a href="#" th:text="${novelList.nick}">작가명</a></div>
+                                <div class="ranking_writer_name overLineTypeA"><a th:href="@{/novelnet/profill(user=${novelList.u_num})}" th:text="${novelList.nick}">작가명</a></div>
                                 <div class="optTagbox">
                                     <div class="tagmark primeTag"   th:if="${novelList.n_type}=='prime'">프라임</div>
                                     <div class="tagmark dockjomTag" th:if="${novelList.n_monopoly}=='only'">독점</div>
@@ -46,40 +46,15 @@
                         </th:block>
                     </ul>
                     <div class="ranking_load">
-                        <button class="ranking_load_button">Next Search</button>
+                        <button class="ranking_load_button goNext" th:if="${next}!='stop'">NEXT 100</button>
+                        <button class="ranking_load_button goPrev" th:if="${next}=='stop'">PREV 100</button>
                     </div>
                 </div>
             <!------------ 콘텐츠 영역  ------------------>
             </div>
         </div>
     </div>
-    <footer>
-        <div class="notice">
-            <div class="notice_frame">
-                <span class="notice_memo_gong"><b>공지</b></span>
-                <div class="new_gong">new</div>
-                <span class="notice_memo">정기 시스템 점검 예정 (AM 01:00 - 04:00)</span>
-            </div>
-        </div>
-        <div class="footer_info">
-            <div class="footer_info_frame">
-                <div class="copyright">
-                    <div class="mono_logo"> 
-                        <img src="../img/mono_logo.png">
-                    </div>
-                    <ul class="copyright_c">
-                        <li>본 사이트의 등록된 컨텐츠는 사이트 및 원 저작자에게 권리가 있는 컨텐츠이며, 무단 복제/전송/수정/배포는 법적 처벌을 받을 수 있습니다.</li>
-                        <li><span class="copyright_c_mini">Copyright(c) 노벨넷 2022. All rights reserved</span></li>
-                    </ul>
-                </div>
-                <ul class="copyright_memo">
-                    <li>주식회사 노벨넷 대표 김정현 사업자등록번호 210-81-75711 통신판매업 제2021-김제요촌-013145호</li>
-                    <li>주소 김제시 요촌동 81-42번지, T플로어 3층</li>
-                    <li>고객센터 : 063-588-0011 helpNovel@gmail.com 운영시간 AM10:00 - PM 06:00 (휴게시간 PM 0:30 - 2:00)</li>
-                </ul>
-            </div>  
-        </div>
-    </footer>
+    <footer th:replace="/include/footer.html :: footer_layout"> </footer>
     
 </body>
 </html>

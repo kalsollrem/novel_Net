@@ -17,12 +17,8 @@ $(function (){
     catch (err) { carte = "allNovel";  }
 
     //페이지 없을시
-    try         { page  = url.get('page').toString(); }
+    try         { page  = url.get('page') }
     catch (err) { page  = 1; }
-    if(Number.isInteger(page) == false)
-    {
-        page = 1
-    }
 
     //상단메뉴 CSS
     if (carte == 'freeNovel' ||carte == 'primeNovel' || carte == 'finNovel')
@@ -41,10 +37,16 @@ $(function (){
         location.href = '/novelnet/best?sort='+sort+'&carte='+this.id+'&page='+page;
     })
 
-    //상단 메뉴 클릭
-    $(".ranking_load_button").click(function (){
-        page = page+1
-        location.href = '/novelnet/best?sort='+sort+'&carte='+carte+'&page='+page;
+    //다음100
+    $(".goNext").click(function (){
+        let next = Number(page) +1;
+        location.href = '/novelnet/best?sort='+sort+'&carte='+carte+'&page='+next;
+    })
+
+    //이전100
+    $(".goPrev").click(function (){
+        let preb = Number(page) -1;
+        location.href = '/novelnet/best?sort='+sort+'&carte='+carte+'&page='+preb;
     })
 
 

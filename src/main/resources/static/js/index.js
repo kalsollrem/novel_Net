@@ -231,6 +231,7 @@ $(function(){
         const contract_ok   = $('#contract_ok').is(':checked');;
         const age_ok        = $('#age_ok').is(':checked');
 
+
         if(id_OK == 0)
         {
             $('#e-mail').focus();
@@ -273,6 +274,10 @@ $(function(){
         }
         else
         {
+            $("#sign_yes").fadeOut()
+            $("#sign_wait").fadeIn()
+            setTimeout(() => $("#sign_yes").fadeIn(), 3000);
+            setTimeout(() => $("#sign_wait").fadeOut(), 2950);
             alert("회원가입 신청이 완료되었습니다! 가입하신 메일을 확인하여 인증해주세요!")
             joinform.submit();
         }

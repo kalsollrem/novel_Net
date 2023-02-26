@@ -1102,12 +1102,24 @@ public class NovelController {
         //카테고리
         if(carte == null)                                { carte = ""; }
 
+        //페이지 처리
+        if (page == null || page =="" || page.equals("0") || page.matches("-?\\d+(\\.\\d+)?") == false)
+        {
+            page = "1";
+        }
+        System.out.println(page);
+
         //시작페이지
         int start = 0;
         if(manageService.isInteger(page) == true)        { start = (Integer.parseInt(page)-1)*100;}
 
         //데이터 검색
         List<NovelVO> novelVOList = searchMapper.bestNovelFinder(sort, carte, start);
+        int next = searchMapper.bestNovelCount(sort, carte, start+100);
+
+        if (next > 0) {model.addAttribute("next", "ok");}
+        else          {model.addAttribute("next", "stop");}
+
         model.addAttribute("novelVOList", novelVOList);
 
         return "best";

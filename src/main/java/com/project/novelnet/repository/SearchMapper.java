@@ -81,4 +81,7 @@ public interface SearchMapper
 
     //베스트 픽 검색
     List<NovelVO> bestNovelFinder(@Param("sort")String sort,@Param("carte")String carte, @Param("start")int start);
+
+    //숫자확인
+    public int bestNovelCount(@Param("sort")String sort,@Param("carte")String carte, @Param("start")int start);
 }

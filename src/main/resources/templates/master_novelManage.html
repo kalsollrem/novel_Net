@@ -13,7 +13,7 @@
     <div class="wrap">
             <header th:replace="/include/header.html :: header"></header>
             <div class="masterFrame">
-                <ul class="masterMenu">
+                <ul class="masterMenu" th:if="${session.U_LEVEL}==9">
                     <li><a th:href="@{/master/novelDeclaration(page=1)}">소설 신고 목록</a></li>
                     <li><a th:href="@{/master/replyDeclaration(page=1)}">댓글 신고 목록</a></li>
                     <li><a th:href="@{/master/userManagement(page=1)}">유저 관리</a></li>
