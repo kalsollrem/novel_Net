@@ -81,7 +81,7 @@
         </div>
     </div>
     <div class="chapter_guide">
-        <div class="nebiOpt" th:if="${session.U_NUM}!=null and ${session.U_LEVEL}!='1'"><img src="../img/singo.png" alt="신고"></div>
+        <div class="nebiOpt" th:if="${session.U_NUM}!=${memoVO.u_num} and ${session.U_LEVEL}!='1'"><img src="../img/singo.png" alt="신고"></div>
         <ul class="guide_nebi">
             <!-- 이전화 버튼 -->
             <th:block th:if="${memoVO.m_type == 'gong'}">

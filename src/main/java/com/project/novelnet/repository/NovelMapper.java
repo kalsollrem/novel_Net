@@ -27,9 +27,11 @@ public interface NovelMapper {
     public int novelStopCheak(@Param("n_num")String n_num);
 
     //소설 게시물 보기
-    @Select("select m_num, m_title, m_memo, m_date, m_count, m_good, b_stop, m_type, " +
-            "(select n_title from novel where n_num=${n_num})as novel_name " +
-            "from memo where n_num = ${n_num} and m_num=#{m_num}")
+    @Select("select A.n_num, A.m_num, A.m_title, A.m_memo, A.m_date, A.m_count, A.m_good, A.b_stop, A.m_type, B.novel_name, B.u_num " +
+            "from(select n_num, m_num, m_title, m_memo, m_date, m_count, m_good, b_stop, m_type from memo)A " +
+            "left join (select n_num, n_title as novel_name, u_num from novel)B " +
+            "on A.n_num = B.n_num " +
+            "where A.n_num = ${n_num} and A.m_num=#{m_num}")
     public MemoVO getMemo(@Param("n_num")String n_num, @Param("m_num")String m_num);
 
     //다음 게시물

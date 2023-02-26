@@ -17,7 +17,7 @@
 
     <!--  게시물 검색 + 번호매기기  -->
     <select id="findBest" resultType="com.project.novelnet.Vo.NovelVO">
-        SELECT A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_fin, b.count, c.u_nick as nick
+        SELECT A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_fin, A.stopPoint, b.count, c.u_nick as nick
         FROM novel A
         <if test="findtype.equals('count')">
             LEFT JOIN (select sum(m_count)as count, n_num from memo group by n_num)B
@@ -33,6 +33,7 @@
         </if>
         LEFT join user C
         on A.u_num = C.u_num
+        where A.stopPoint = 0
         order by count desc
         limit #{limit}
     </select>
@@ -53,24 +54,32 @@
     <!-- close      = 마무리에 들어갈 단어  -->
     <!-- <![CDATA[ < ]]>  = '<'사용시 오류뜸  -->
     <select id="findPdPick" parameterType="java.util.List" resultType="com.project.novelnet.Vo.NovelVO">
-        (select A.n_num, A.u_num, A.n_title, A.n_cover, A.n_monopoly, A.n_stop, B.u_nick as nick, @rownum := 0 AS noType
+        (select A.n_num, A.u_num, A.n_title, A.n_cover, A.n_monopoly, A.n_stop, B.u_nick as nick, A.stopPoint, @rownum := 0 AS noType
         from novel A
         Left join user B
         on A.u_num = B.u_num
         ,(SELECT @rownum :=0) AS r
-        where A.n_num IN
-        <foreach collection="list" item="pdlist" separator="," open="(" close=")" index="index">
-           #{pdlist}
-        </foreach>
+        <choose>
+            <when test="pdlist.size != 0">
+                where A.stopPoint = 0 and A.n_num IN
+                <foreach collection="list" item="pdlist" separator="," open="(" close=")" index="index">
+                    #{pdlist}
+                </foreach>
+            </when>
+            <otherwise>
+                where A.n_num = 0 and A.stopPoint = 0
+            </otherwise>
+        </choose>
         and not n_num is null
+        order by rand()
         limit 6)
         UNION ALL
-        (select A.n_num, A.u_num, A.n_title, A.n_cover, A.n_monopoly, A.n_stop, B.u_nick as nick, @rownum := 1 AS noType
+        (select A.n_num, A.u_num, A.n_title, A.n_cover, A.n_monopoly, A.n_stop, B.u_nick as nick, A.stopPoint, @rownum := 1 AS noType
         from novel A
         Left  join user B
         on A.u_num = B.u_num
         ,(SELECT @rownum := 0) AS r
-        where A.n_monopoly = 'only' and A.n_stop <![CDATA[ < ]]> 5
+        where A.n_monopoly = 'only' and A.stopPoint = 0
         order by rand()
         limit 6)
     </select>
@@ -83,7 +92,7 @@
     select origin.*, @ROWNUM := @ROWNUM + 1 as ROWNUM from(
         select
             B.u_num, B.n_num,
-            A.nick, A.n_title, A.n_cover, A.n_introduction, A.n_fin, A.n_type, A.n_monopoly,
+            A.nick, A.n_title, A.n_cover, A.n_introduction, A.n_fin, A.n_type, A.n_monopoly, A.stopPoint,
             C.m_num as last_chapter,
             D.rnum, D.count as n_count, D.m_good as n_good, IFNULL(D.b_stop,0)as n_stop, D.n_chapters,
             E.All_tag,
@@ -127,12 +136,12 @@
             C.m_num = G.m_num
         <choose>
             <when test="fin.equals('doing')">
-                where n_fin = 'doing'
+                where n_fin = 'doing' and stopPoint=0
             </when>
             <when test="fin.equals('done')">
-                where n_fin = 'done'
+                where n_fin = 'done'  and stopPoint=0
             </when>
-            <otherwise></otherwise>
+            <otherwise>where stopPoint=0</otherwise>
         </choose>
         group by A.n_num
         <choose>
@@ -165,7 +174,7 @@
         from
         (select n_num, u_num from bookmark) A
         left join
-        (select n_num, n_title, n_fin from novel) B
+        (select n_num, n_title, n_fin, stopPoint from novel) B
         on
         A.n_num = B.n_num
         left join
@@ -173,7 +182,7 @@
         on
         A.n_num = C.n_num
         where
-        (n_title like CONCAT('%',#{keyword},'%') or All_tag like CONCAT('%',#{keyword},'%'))
+        (n_title like CONCAT('%',#{keyword},'%') or All_tag like CONCAT('%',#{keyword},'%') and stopPoint=0)
         and u_num = #{u_num};
     </select>
 
@@ -190,7 +199,7 @@
                 date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo,
                 E.All_tag
             from
-                (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover from novel) A
+                (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover from novel where stopPoint = 0) A
             left join
                 (select u_num, u_nick from user)B
             on A.u_num = b.u_num
@@ -243,7 +252,7 @@
             C.n_chapters,
             E.All_tag
             from
-            (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover from novel) A
+            (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover from novel where stopPoint = 0) A
             left join
             (select u_num, u_nick from user)B
             on A.u_num = b.u_num
@@ -282,20 +291,20 @@
         select * from
         (
         select
-            A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
+            A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover, A.stopPoint,
             B.u_nick as nick,
             ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop, C.n_chapters,
             date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo, (TIMESTAMPDIFF(HOUR , Od.m_date, now()))as oldTime,
             E.All_tag
         from
-            (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover
+            (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover, stopPoint
              from novel
             <choose>
                 <when test="novelType.equals('free')">
-                    where n_type = 'free'
+                    where n_type = 'free' and stopPoint = 0
                 </when>
                 <when test="novelType.equals('prime')">
-                    where n_type = 'prime'
+                    where n_type = 'prime' and stopPoint = 0
                 </when>
             </choose>
             <choose>
@@ -357,20 +366,20 @@
         select count(*) from
         (
         select
-        A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover,
+        A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_type, A.n_monopoly, A.n_fin, A.n_cover, A.stopPoint,
         B.u_nick as nick,
         ifnull(C.n_count,0)as n_count , IFNULL(C.n_good,0)as n_good, IFNULL(C.n_stop,0)as n_stop, C.n_chapters,
         date_format(D.m_date, '%Y년 %c월 %d일') as n_date, (TIMESTAMPDIFF(HOUR , D.m_date, now()))as newMemo, (TIMESTAMPDIFF(HOUR , Od.m_date, now()))as oldTime,
         E.All_tag
         from
-        (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover
+        (select n_num, u_num, n_title, n_introduction, n_type, n_monopoly, n_fin, n_cover, stopPoint
         from novel
         <choose>
             <when test="novelType.equals('free')">
-                where n_type = 'free'
+                where n_type = 'free' and stopPoint = 0
             </when>
             <when test="novelType.equals('prime')">
-                where n_type = 'prime'
+                where n_type = 'prime' and stopPoint = 0
             </when>
         </choose>
         <choose>

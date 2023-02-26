@@ -128,7 +128,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .recomend_tag .recomend_pd_novel>li .pd_tal_hold {box-sizing: border-box; box-shadow: 2px 2px ghostwhite; border: 1px solid #eeeee0; padding-bottom: 5px; border-radius: 0.2em;}
 .recomend_tag .recomend_pd_novel>li .img_zone    {width: 180px; height: 250px; display: block;}
 .recomend_tag .recomend_pd_novel>li .img_zone img{width: 170px; height: 245px; margin: 3px 5px 0px 5px; border-radius: 0.2em; border: 1px solid ghostwhite; box-sizing: border-box;}
-.recomend_tag .recomend_pd_novel>li .novel_title {width: 175px; height: 30px; line-height: 30px; font-size: 20px; margin-top: 0px;  display: block; margin-left: 5px;}
+.recomend_tag .recomend_pd_novel>li .novel_title {width: 175px; height: 30px; line-height: 30px; font-size: 20px; margin-top: 0px;  display: block; margin-left: 5px; }
 .recomend_tag .recomend_pd_novel>li .writer_name {width: 175px; height: 25px; line-height: 25px; font-size: 15px; display: block; margin-left: 5px;}
 
 
@@ -591,8 +591,8 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .search_sort {width: 120px; float: right;}
 .search_sort #sort_what { width: 110px; height: 30px; padding-left: 10px;}
 
-.book_list               {width: 100%; }
-.book_list .search_novel { width: 100%; height: 220px; border-bottom: 1px solid silver; margin-top: 20px;}
+.book_list               {width: 100%; min-height: 300px;}
+.book_list .search_novel { width: 100%; min-height: 240px; border-bottom: 1px solid silver; margin-top: 20px;}
 .book_list .search_novel .novel_img {height: 100%; width: 120px; float: left; }
 .book_list .search_novel .novel_img>img {height: 150px; width: 110px; margin-top: 10px; border-bottom-right-radius:1em ; box-shadow: 5px 5px 5px gray;}
 .book_list .search_novel .novel_img>a>img {height: 150px; width: 110px; margin-top: 10px; border-bottom-right-radius:1em ; box-shadow: 5px 5px 5px gray;}
@@ -627,7 +627,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .book_list .search_novel .novel_data .book_next>a {font-size: 13px; color: white; text-align: center;}
 
 .book_list .search_novel .novel_data .no_update {width: 100px;  height: 30px; float: right;
-    margin-right: 3px; margin-top: 7px; border: 1px solid silver; font-size: 13px;
+    margin-right: 3px; margin-top: 10px; border: 1px solid silver; font-size: 13px;
     text-align: center; line-height: 30px; border-radius:0.2em;}
 
 
@@ -1163,9 +1163,9 @@ footer .copyright_memo >li {width: 100%; height: 25px; line-height: 25px; margin
 .mw_SwitchSide >button         {width: 100px; margin: 3px 0px 5px 0px; padding: 8px; border: 0px; border-radius: 5px; color: white; background-color: #333; font-size: 13px;}
 .mw_SwitchSide >button:hover   {background-color: rgb(187, 58, 58);}
 
-.mw_SwitchSide .mw_PdPickBtn   {}
+.mw_SwitchSide .mw_PdPickBtn   {margin-top: 17px;}
 .mw_SwitchSide .mw_ImgChangeBtn{margin-top: 20px;}
-.mw_SwitchSide .mw_pdDelBtn    {background-color: #EE4F4F;}
+.mw_SwitchSide .mw_pdDelBtn    {background-color: #EE4F4F; margin-top: 17px;}
 .mw_SwitchSide .mw_novelOnBtn  {background-color: #EE4F4F;}
 .mw_SwitchSide .mw_UserUp      {background-color: #EE4F4F;}
 

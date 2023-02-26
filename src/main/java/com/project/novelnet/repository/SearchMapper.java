@@ -1,6 +1,7 @@
 package com.project.novelnet.repository;
 
 import com.project.novelnet.Vo.NovelVO;
+import com.project.novelnet.Vo.PdVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -30,10 +31,10 @@ public interface SearchMapper
     List<NovelVO> findBest(@Param("findtype")String findtype, @Param("limit")int limit);
 
     //PD픽 리스트 검색
-    @Select("SELECT pd_pick FROM MASTER")
-    public String PdPickList();
+    @Select("SELECT n_num FROM pd_pick")
+    List<Integer> PdPickList();
 
-    List<NovelVO> findPdPick(List<String> pdlist);
+    List<NovelVO> findPdPick(List<Integer> pdlist);
 
     //독점작 검색
     List<NovelVO> findonlyNovel();

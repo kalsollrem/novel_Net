@@ -17,8 +17,10 @@ public class MemoVO {
     private Integer m_good;
     private Integer b_stop;
 
+
     private Integer r_cnt;  //댓글갯수
     private Integer ep;     //화
     private String  novel_name; //소설이름
+    private String  u_num; //작성자 번호
     private Integer cheak;
 }

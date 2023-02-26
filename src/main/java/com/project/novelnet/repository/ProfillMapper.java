@@ -33,7 +33,7 @@ public interface ProfillMapper
     UserVO getMyself(@Param("u_num") String u_num);
 
     //자기소개(나)
-    @Select("select u_num, u_nick , u_mail, u_pass, u_pic, u_myself, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
+    @Select("select u_num, u_nick , u_mail, u_pass, u_pic, IFNULL(u_myself,'')as u_myself, date_format(u_regdate, '%Y년 %m월 %d일')as u_regdate from user where u_num = #{u_num}")
     UserVO getProfill(@Param("u_num") String u_num);
 
     //댓글 겟스저허;

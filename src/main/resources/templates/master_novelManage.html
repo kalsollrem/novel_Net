@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="mw_SwitchSide borderLeft_black">
-                                <button class="mw_ImgChangeBtn"     th:value="${list.n_cover}">이미지 변경</button>
+<!--                                <button class="mw_ImgChangeBtn"     th:value="${list.n_cover}">이미지 변경</button>-->
                                 <button class="mw_PdPickBtn"        th:if="${list.pd_num}==0" th:value="${list.n_num}">  Pd픽 선정</button>
                                 <button class="mw_pdDelBtn pdDelBtn"th:if="${list.pd_num}!=0" th:value="${list.n_num}">  Pd픽 삭제</button>
                                 <button class="mw_novelStopBtn"     th:if="${list.stopPoint}==0" th:value="${list.n_num}">소설 정지</button>

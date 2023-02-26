@@ -119,7 +119,7 @@
                                 <div class="pd_tal_hold">
                                     <a th:href="@{/novelnet/novel(n_num=${pickList.n_num},page=1,sort='asc')}">
                                         <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}"  onerror="this.src='../img/write_cover.jpg'"></span>
-                                        <span class="novel_title" th:title="${pickList.n_title}" th:text="${pickList.n_title}"></span>
+                                        <span class="novel_title overLineTypeA" th:title="${pickList.n_title}" th:text="${pickList.n_title}"></span>
                                     </a>
                                     <span class="writer_name" ><a th:href="@{/novelnet/profill(user=${pickList.u_num})}" th:text="${pickList.nick}"></a></span>
                                 </div>

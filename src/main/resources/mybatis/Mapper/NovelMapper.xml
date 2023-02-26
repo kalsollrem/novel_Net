@@ -33,7 +33,7 @@
 
     <!--  소설검색  -->
     <select id="getBookDate" resultType="com.project.novelnet.Vo.NovelVO">
-        SELECT n_num, u_num, n_date, n_title, n_introduction, n_cover, n_type, n_monopoly, n_fin,
+        SELECT n_num, u_num, n_date, n_title, n_introduction, n_cover, n_type, n_monopoly, n_fin, stopPoint,
            (SELECT sum(m_good) FROM memo WHERE n_num=#{n_num})AS n_good,
            (SELECT sum(m_count) FROM memo WHERE n_num=#{n_num})AS n_count,
            (SELECT count(n_num) FROM m_warning WHERE n_num=#{n_num})AS n_stop,

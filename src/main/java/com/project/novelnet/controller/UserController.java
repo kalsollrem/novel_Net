@@ -168,8 +168,8 @@ public class UserController {
                               @Param("pageR") String pageR,
                               HttpSession session) throws Exception
     {
-        String u_num;
-        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
+        String u_num ="29";
+//        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
 
         //페이징용 함수
         int count, allPage,nowCase,allCase,leftPage,rightPage,displayPage,start;
@@ -305,7 +305,7 @@ public class UserController {
             return "image_modalA";
         }else
         {
-            return "image_modalB";
+            return "image_warnning";
         }
     }
 

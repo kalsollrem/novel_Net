@@ -69,27 +69,16 @@ public class NovelController {
 
 
         //PD픽과 독점작 조회
-        //리스트 생성
-        List<String> pdlist = new ArrayList<>();
+        //피디픽 설정
+        List<Integer> pdlist =  searchMapper.PdPickList();
+        System.out.println("셋"+pdlist);
+        Collections.shuffle(pdlist);
+        System.out.println("셔플"+pdlist);
 
-        //PD픽 리스트 가져오기
-        String pdnovel = searchMapper.PdPickList();
-
-        //리스트 잘러서 배열 넣기
-        String[] splitPick = pdnovel.split("/");
-        int pdpickCnt = 0;
-        for (int i=0; i<=splitPick.length; i++)  {
-            if(pdpickCnt <= 6)
-            {
-                pdlist.add(splitPick[i]);
-                pdpickCnt++;
-            }
-        }
         List<NovelVO> pickList = searchMapper.findPdPick(pdlist);
 
         //새 리스트에 마이바티스값 삽입
         model.addAttribute("pickList", pickList);
-        System.out.println(pickList);
 
         return "index";
     }
@@ -280,7 +269,7 @@ public class NovelController {
     @GetMapping("/novelnet/regist")
     public String novelRegist(HttpSession session)
     {
-        if ((Integer)session.getAttribute("U_LEVEL")==1)
+        if (session.getAttribute("U_LEVEL")=="1")
         {
             return "userStop";
         }
@@ -867,63 +856,70 @@ public class NovelController {
                 {
                     novelVO = novelMapper.getBookDate(n_num); //정보검색
                     System.out.println(novelVO);
-                    int pageInt = Integer.parseInt(page); //페이지계산용
 
-                    //페이징
-                    PageingVO pageingVO = new PageingVO();
-                    model.addAttribute("paging", novelRepository.novelPaging(n_num, pageInt));
-                    System.out.println(pageingVO);
+                    //정지여부 확인 후 검색 속행
+                    if (novelVO.getStopPoint() ==0)
+                    {
+                        int pageInt = Integer.parseInt(page); //페이지계산용
 
-                    if (page != "1") {
-                        start = (pageInt - 1) * 10;
+                        //페이징
+                        PageingVO pageingVO = new PageingVO();
+                        model.addAttribute("paging", novelRepository.novelPaging(n_num, pageInt));
+                        System.out.println(pageingVO);
+
+                        if (page != "1") {
+                            start = (pageInt - 1) * 10;
+                        }
+
+                        //게시물 검색
+                        List<MemoVO> memoVOList = novelMapper.getMemoDate(n_num, u_num, start, count, page, sort);
+
+                        //북마크여부
+                        int bookmark = searchMapper.cheakBookMark(u_num, n_num);
+
+                        //작가검색
+                        String writer = novelMapper.getWriter(novelVO.getU_num());
+                        if (writer == null || writer == "") {
+                            System.out.println("잘못된 이용자입니다.");
+                            writer = "가입번호 " + novelVO.getU_num() + " 작가님";
+                            model.addAttribute("writer", writer);
+                        } else {
+                            System.out.println(writer);
+                            model.addAttribute("writer", writer);
+                        }
+
+                        //태그검색
+                        List<TagVO> tagVOList = novelMapper.getAllTag(n_num);
+                        if (tagVOList != null) {
+                            System.out.println("태그" + tagVOList);
+                            model.addAttribute("tag", tagVOList);
+                        }
+
+                        //마지막으로 본 게시물 검색
+                        String lastChapter = novelMapper.getLastChapter(n_num, u_num);
+                        System.out.println(lastChapter);
+                        model.addAttribute("lastChpater", lastChapter);
+
+                        //모델에 뷰로 담을 정보 전송
+                        model.addAttribute("memoVOList", memoVOList);
+                        model.addAttribute("novelVO", novelVO);
+                        model.addAttribute("sort", sort);//정렬
+                        model.addAttribute("nowPage", page);//페이지
+                        model.addAttribute("bookmark", bookmark);
+
+                        //작가의 다른 소설 검색
+                        NovelVO subNovel = novelMapper.getAnotherBook(n_num, novelVO.getU_num());
+                        //태그검색
+                        List<TagVO> subTagList = novelMapper.getMiniTag(subNovel.getN_num());
+                        if (subTagList != null) {
+                            model.addAttribute("subtag", subTagList);
+                        }
+                        model.addAttribute("subNovel", subNovel);
+                        return "book_info";
+                    }else
+                    {
+                        return "redirect:/novelnet";
                     }
-
-                    //게시물 검색
-                    List<MemoVO> memoVOList = novelMapper.getMemoDate(n_num, u_num, start, count, page, sort);
-
-                    //북마크여부
-                    int bookmark = searchMapper.cheakBookMark(u_num, n_num);
-
-                    //작가검색
-                    String writer = novelMapper.getWriter(novelVO.getU_num());
-                    if (writer == null || writer == "") {
-                        System.out.println("잘못된 이용자입니다.");
-                        writer = "가입번호 " + novelVO.getU_num() + " 작가님";
-                        model.addAttribute("writer", writer);
-                    } else {
-                        System.out.println(writer);
-                        model.addAttribute("writer", writer);
-                    }
-
-                    //태그검색
-                    List<TagVO> tagVOList = novelMapper.getAllTag(n_num);
-                    if (tagVOList != null) {
-                        System.out.println("태그" + tagVOList);
-                        model.addAttribute("tag", tagVOList);
-                    }
-
-                    //마지막으로 본 게시물 검색
-                    String lastChapter = novelMapper.getLastChapter(n_num, u_num);
-                    System.out.println(lastChapter);
-                    model.addAttribute("lastChpater", lastChapter);
-
-                    //모델에 뷰로 담을 정보 전송
-                    model.addAttribute("memoVOList", memoVOList);
-                    model.addAttribute("novelVO", novelVO);
-                    model.addAttribute("sort", sort);//정렬
-                    model.addAttribute("nowPage", page);//페이지
-                    model.addAttribute("bookmark", bookmark);
-
-                    //작가의 다른 소설 검색
-                    NovelVO subNovel = novelMapper.getAnotherBook(n_num, novelVO.getU_num());
-                    //태그검색
-                    List<TagVO> subTagList = novelMapper.getMiniTag(subNovel.getN_num());
-                    if (subTagList != null) {
-                        model.addAttribute("subtag", subTagList);
-                    }
-                    model.addAttribute("subNovel", subNovel);
-                    return "book_info";
-
                 }
                 catch (Exception e) { e.printStackTrace(); }
             }
