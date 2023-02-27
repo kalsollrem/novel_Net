@@ -241,7 +241,8 @@
                 C.u_num, IFNULL(C.nick,'탈퇴한 유저입니다')as nick, C.u_pic, IFNULL(C.u_mail,'')as u_mail, C.u_level,
                 D.all_tag, ifnull(E.n_chapters,0) as n_chapters, ifnull(E.n_count,0) as n_count, ifnull(E.n_good,0) as n_good,
                 E.m_num,
-                ifnull(F.shingoCnt,0) as shingoCnt, ifnull(G.pd_num,0) as pd_num
+                ifnull(F.shingoCnt,0) as shingoCnt, ifnull(G.pd_num,0) as pd_num ,
+                H.ban_num
         from (select n_num, n_introduction, n_title, n_cover, u_num, stopPoint from novel)A
         left join (select u_num, u_nick as nick, u_pic, u_mail,u_level from user) C
         on A.u_num = C.u_num
@@ -261,6 +262,8 @@
         on A.n_num = F.n_num
         left join (select n_num, pd_num from pd_pick group by n_num) G
         on A.n_num = G.n_num
+        left join (select ban_num, n_num from banner_pick) H
+        on A.n_num = H.n_num
         where A.n_num is not null
         <choose>
             <when test="searchType.equals('nick')">
@@ -297,6 +300,12 @@
         select row_number() over(order by A.pd_num desc) as number, A.pd_num, A.n_num, B.n_title from (select pd_num, n_num from pd_pick)A
         left join (select n_num, n_title from novel)  B
         on A.n_num = B.n_num
+    </select>
+
+    <select id="bannerPickList" resultType="com.project.novelnet.Vo.MasterVO.MasterBannerVO">
+        select row_number() over(order by A.ban_num desc) as number, A.ban_num, A.n_num, B.n_title from (select ban_num, n_num from banner_pick)A
+        left join (select n_num, n_title from novel)  B
+        on A.n_num = B.n_num;
     </select>
 
 

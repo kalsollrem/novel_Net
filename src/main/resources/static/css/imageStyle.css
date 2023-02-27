@@ -28,7 +28,24 @@
 .frameB .button_zone                    {width: 1060px; height: 50px; text-align: center;}
 .frameB .button_zone .chang_Btn         {width: 250px; height: 40px;  margin-top: 5px; background-color: #333; color: white; border: 0px; border-radius: 5px; font-size: 18px;}
 
+/* 배너픽용 */
+.frameC {background-color: #a1c0dae0; width: 1200px; padding: 10px; border-radius: 10px;}
+
+.frameC .pic_base                       {min-height: 130px;}
+.frameC .pic_base .img_zone             {width: 1200px; height: 130px; border-radius: 10px; background-color: aliceblue; font-size: 20px; font-style: oblique; text-align: center; line-height: 130px;}
+.frameC .pic_base >img                  {width: 1200px; height: 130px; border-radius: 10px; background-color: aliceblue; display: none;}
+.frameC .control_base                   {width: 1200px; height: 50px; }
+.frameC .control_base .file_zone        {width: 1000px; height: 40px; margin-left: 100px; margin-top: 13px; background-color: rgb(238, 237, 236); border-radius: 10px;}
+.frameC .control_base .file_zone .fileInput {width: 390px; margin-left: 10px; margin-top: 8px; float: left;}
+.frameC .control_base .file_zone .empty {float: right; width: 30px; height: 30px; margin-right: 10px; margin-top: 5px; border: solid 1px #b8b7b7; box-sizing: border-box; border-radius: 4px;}
+.frameC .button_zone                    {width: 500px; height: 50px; text-align: center; margin-left: 350px;}
+.frameC .button_zone .chang_Btn         {width: 250px; height: 40px;  margin-top: 5px; background-color: #333; color: white; border: 0px; border-radius: 5px; font-size: 18px;}
+.frameC .button_zone  .off              {display: none;}
+
 
 /* 잘못된 경로로 접촉시 */
 .frameA .pic_base .warning              {width: 100%; height: 500px; border-radius: 10px; background-color: aliceblue; display:flex; align-items: center; font-size: 30px; font-weight: bold;}
 .frameA .pic_base .warning .center      {width: 500px;  text-align: center; }
+
+.frameC .pic_base .warning              {width: 100%; height: 230px; border-radius: 10px; background-color: aliceblue; display:flex; align-items: center; font-size: 30px; font-weight: bold;}
+.frameC .pic_base .warning .center      {width: 1200px;  text-align: center; }

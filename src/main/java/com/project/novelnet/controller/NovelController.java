@@ -2,10 +2,8 @@ package com.project.novelnet.controller;
 
 import com.google.gson.JsonObject;
 import com.project.novelnet.Vo.*;
-import com.project.novelnet.repository.NovelMapper;
-import com.project.novelnet.repository.NovelRepository;
-import com.project.novelnet.repository.SearchMapper;
-import com.project.novelnet.repository.WarningMapper;
+import com.project.novelnet.Vo.MasterVO.MasterBannerVO;
+import com.project.novelnet.repository.*;
 import com.project.novelnet.service.FileUploadService;
 import com.project.novelnet.service.ManageService;
 import com.project.novelnet.service.PageingService;
@@ -52,6 +50,9 @@ public class NovelController {
     @Autowired
     private WarningMapper warningMapper;
 
+    @Autowired
+    private MasterMapper masterMapper;
+
 
     //메인페이지
     @GetMapping("/novelnet")
@@ -71,14 +72,19 @@ public class NovelController {
         //PD픽과 독점작 조회
         //피디픽 설정
         List<Integer> pdlist =  searchMapper.PdPickList();
-        System.out.println("셋"+pdlist);
         Collections.shuffle(pdlist);
         System.out.println("셔플"+pdlist);
 
-        List<NovelVO> pickList = searchMapper.findPdPick(pdlist);
-
         //새 리스트에 마이바티스값 삽입
+        List<NovelVO> pickList = searchMapper.findPdPick(pdlist);
         model.addAttribute("pickList", pickList);
+
+
+        //배너픽 선정
+        List<MasterBannerVO> bnlist = masterMapper.bannerRandemSet();
+        model.addAttribute("bnlist",bnlist);
+
+
 
         return "index";
     }

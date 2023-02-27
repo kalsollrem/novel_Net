@@ -36,4 +36,5 @@ public class NovelVO {
     private Integer newMemo;           //신규 등록 여부. 24미만일경우 NEW띄울때 사용.
     private Integer shingoCnt;         //신고숫자
     private Integer pd_num;            //피디픽 여부
+    private Integer ban_num;           //배너픽 여부
 }

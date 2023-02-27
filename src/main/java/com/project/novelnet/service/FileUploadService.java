@@ -28,7 +28,7 @@ public class FileUploadService implements FileUploadRepository {
     public void fileUpload(MultipartFile multipartFile, int n_num) {
         System.out.println("첨부파일명 "+multipartFile.getOriginalFilename());
 
-        String fileRoot         = root;	  //저장될 외부 파일 경로
+        String fileRoot         = "C:\\code\\KimJeonghyun\\novelNet\\src\\main\\resources\\static\\noteImg\\";	  //저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	                                          //오리지날 파일명
         String extension        = originalFileName.substring(originalFileName.lastIndexOf("."));	          //파일 확장자
 
@@ -54,7 +54,7 @@ public class FileUploadService implements FileUploadRepository {
         System.out.println("첨부파일명 "+multipartFile.getOriginalFilename());
         String answer = "no";
 
-        String fileRoot         = root;	  //저장될 외부 파일 경로
+        String fileRoot         = "C:\\code\\KimJeonghyun\\novelNet\\src\\main\\resources\\static\\noteImg\\";	  //저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	                                          //오리지날 파일명
         String extension        = originalFileName.substring(originalFileName.lastIndexOf("."));	          //파일 확장자
 

@@ -1,5 +1,6 @@
 package com.project.novelnet.repository;
 
+import com.project.novelnet.Vo.MasterVO.MasterBannerVO;
 import com.project.novelnet.Vo.MasterVO.MasterMemoVO;
 import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
@@ -70,6 +71,8 @@ public interface MasterMapper {
 
     //pd픽 가져오기
     List<PdPickVO> pdPickList();
+    //pd픽 가져오기
+    List<MasterBannerVO> bannerPickList();
 
     //pd픽 선정
     @Insert("INSERT INTO pd_pick (n_num) VALUES (#{n_num})")
@@ -78,6 +81,30 @@ public interface MasterMapper {
     //pd픽 해제
     @Delete("delete from pd_pick where n_num = #{n_num}")
     public int pdPickDelete(@Param("n_num")int n_num);
+
+    //배너픽 가져오기
+    @Select("select ban_pick from banner_pick where n_num = #{n_num}")
+    public String bannerPickGet(@Param("n_num")String n_num);
+
+    //배너픽 존재채크
+    @Select("select count(ban_pick)as cnt from banner_pick where n_num = #{n_num}")
+    public int bannerPickCnt(@Param("n_num")int n_num);
+
+    //배너픽선정
+    @Insert("INSERT INTO banner_pick (n_num, ban_pick) VALUES (#{n_num},#{ban_pick})")
+    public int bannerPickSet(@Param("n_num")int n_num,@Param("ban_pick")String ban_pick);
+
+    //배너픽 랜덤 선정
+    @Select("select ban_num, n_num, ban_pick from banner_pick order by rand() limit 1")
+    List<MasterBannerVO> bannerRandemSet();
+
+    //배너픽 업데이트
+    @Update("update banner_pick set ban_pick = #{ban_pick} where n_num=#{n_num}")
+    public int bannerPickUpdate(@Param("n_num") int n_num,@Param("ban_pick")String ban_pick);
+
+    //배너픽 삭제
+    @Delete("delete from banner_pick where n_num=#{n_num}")
+    public int deleteBannerPick(@Param("n_num")String n_num);
 
     //==============================================================
     //공지작성

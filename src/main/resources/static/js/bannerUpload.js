@@ -43,7 +43,7 @@ $(function(){
         let fromDate = new FormData(form)
 
         $.ajax({
-            url:'/iconChange.do',
+            url:'/bannerChange.do',
             type:'post',
             data : fromDate,
             processData: false,
@@ -53,7 +53,7 @@ $(function(){
                 close();
             },
             error:function(){
-                alert("프로필 등록에 실패하였습니다.");
+                alert("배너 등록에 실패하였습니다.");
             }
         });
     });

@@ -9,11 +9,19 @@ $(function (){
         location.href   = '/master/novelManagement?searchType='+searchType+'&keyword='+keyword+'&sort='+sort+'&page=1';
     });
 
-    //PD픽 메뉴 스위치
     let pdPickListSwitch = 0;
+    let bnPickListSwitch = 0;
+
+    //PD픽 메뉴 스위치
     $(".masterChoiceSwitch").click(function (){
-        if(pdPickListSwitch == 0) {$(".masterChoice").show(); pdPickListSwitch =1;}
+        if(pdPickListSwitch == 0) {$(".masterChoice").show(); pdPickListSwitch =1; $(".masterBanner").hide(); bnPickListSwitch =0;}
         else                      {$(".masterChoice").hide(); pdPickListSwitch =0;}
+    })
+
+    //배너픽 메뉴 스위치
+    $(".masterBannerSwitch").click(function (){
+        if(bnPickListSwitch == 0) {$(".masterBanner").show(); bnPickListSwitch =1; $(".masterChoice").hide(); pdPickListSwitch =0;}
+        else                      {$(".masterBanner").hide(); bnPickListSwitch =0;}
     })
 
     //소설 정지
@@ -93,5 +101,21 @@ $(function (){
         });
     });
 
+    $('.mw_bannerPickBtn').click(function (){
+        let value = $(this).val();
+        let url = "/master/novelManagement/banner?num="+value;
+        let name = "popup";
+        let option = "width = 1240, height = 280, location = no, status= no, toolbars= no, _blank"
+        window.open(url, name, option);
+    })
 
+    //PD픽 삭제
+    $(".bnDelBtn").click(function(){
+        $.ajax({
+            url:'/BannerDelete.do', type:'post',
+            data : {"n_num":$(this).val()},
+            success:function(s){location.reload(); },
+            error:function(){alert("로그인되지 않았거나 혹은 서버와의 통신에 문제가 있습니다."); }
+        });
+    });
 })

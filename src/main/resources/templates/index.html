@@ -28,9 +28,12 @@
                     <div class="slide-3"><a href="#"><img src="../img/banner_3.png" alt="메인이미지3"></a></div>
                 </div>
             </div>
-
             <div class="main_content">
-                <div class="link_zone"></div>
+                <div class="link_zone">
+                    <th:block th:each="bnlist : ${bnlist}">
+                        <a th:href="@{/novelnet/novel(n_num=${bnlist.n_num},page=1,sort='asc')}"><img th:src="'../noteImg/'+${bnlist.ban_pick}" onerror="this.src='../img/bag_3.jpg'" alt="프론트 배너"></a>
+                    </th:block>
+                </div>
                 <div class="recomend_pd">
                     <div class="recomend_pd_tal"><b>PD 추천픽!</b></div>
                     <ul class="recomend_pd_novel">
@@ -50,7 +53,7 @@
                 <div class="hot_novel">
                     <div class="hot_tag">
                         <div class="hot_title">독자들의 <b>강추!</b></div>
-                        <div class="hot_sub"> </div>
+                        <div class="hot_sub"><a th:href="@{/novelnet/search}"><img src="../img/front02.png" alt="나작소"></a></div>
                     </div>
                     <div class="best_one">
                         <div class="novel_what"><h3>조회수</h3></div>

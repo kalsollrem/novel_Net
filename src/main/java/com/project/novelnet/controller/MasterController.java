@@ -1,4 +1,5 @@
 package com.project.novelnet.controller;
+import com.project.novelnet.Vo.MasterVO.MasterBannerVO;
 import com.project.novelnet.Vo.MasterVO.MasterMemoVO;
 import com.project.novelnet.Vo.MasterVO.MasterNovel;
 import com.project.novelnet.Vo.MasterVO.MasterReply;
@@ -23,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
@@ -285,9 +285,105 @@ public class MasterController {
         List<PdPickVO> pdPick = masterMapper.pdPickList();
         model.addAttribute("pdPick",pdPick);
 
+        //pd픽 관리
+        List<MasterBannerVO> bnPick = masterMapper.bannerPickList();
+        model.addAttribute("bnPick",bnPick);
+
 
         return "master_novelManage";
     }
+
+    //소설관리 - 배너픽 모달
+    @GetMapping("/master/novelManagement/banner")
+    public String bannerPick(Model model,
+                             HttpSession session,
+                             @Param("num")       String num)throws Exception
+    {
+
+        //레벨확인
+        try                 {level= (Integer)session.getAttribute("U_LEVEL");}
+        catch (Exception e) {level = 0;}
+
+        //레벨확인
+        if(num == null || num == "") {num    = ""; }
+
+        if (level == 9 && num != ""){
+            //커버탐색
+            String cover;
+            try {cover = masterMapper.bannerPickGet(num);}
+            catch (Exception e){cover = "";}
+
+            System.out.println(cover);
+
+            if(cover != ""){ model.addAttribute("cover",cover); }
+            return "image_modalC";
+        }else
+        {
+            return "banner_warnning";
+        }
+    }
+
+    //배너픽 등록
+    @PostMapping("/bannerChange.do")
+    @ResponseBody
+    public String bannerChange(HttpSession session,
+                             @RequestParam(value = "imgfile"    ,required = false) MultipartFile imgfile,
+                             @RequestParam(value = "oldCover"   ,required = false) String oldCover,
+                             @RequestParam(value = "n_num"   ,required = false) int n_num,
+                             MasterMemoVO masterMemoVO,
+                             HttpServletRequest request)throws Exception
+    {
+        String answer="no";
+
+        //기존 커버 존재여부 확인
+        int cnt = masterMapper.bannerPickCnt(n_num);
+
+        //신규 이미지 저장
+        if (!imgfile.isEmpty())
+        {
+            //커버존재확인되면 파일 지움
+            if (cnt > 0) {fileUploadService.deleteFile(oldCover);}
+
+            //이미지 등록
+            answer = fileUploadService.eventFileUpload(imgfile);
+        }
+
+        //제대로 저장 되었을 경우
+        if (!answer.equals("no")){
+            //신규저장
+            if(cnt == 0) { int p = masterMapper.bannerPickSet(n_num, answer);}
+
+            //기존수정
+            if(cnt >  0) { int p = masterMapper.bannerPickUpdate(n_num, answer);}
+        }
+
+        return answer;
+    }
+
+    //배너픽 삭제
+    @PostMapping("/BannerDelete.do")
+    @ResponseBody
+    public int masterBannerDelete(HttpSession session,
+                                @RequestParam(value = "n_num",required = false) String n_num,
+                                HttpServletRequest request)throws Exception
+    {
+        int answer = 0;
+        String cover;
+        u_num = "1";
+
+        //커버 존재시 삭제
+        try {cover = masterMapper.bannerPickGet(n_num);}
+        catch (Exception e) {cover = "none";}
+        if (cover != "none") {fileUploadService.deleteFile(cover);}
+
+        //삭제
+        try                 {answer = masterMapper.deleteBannerPick(n_num);}
+        catch (Exception e) {System.out.println("실패");}
+        System.out.println("결과 값" + answer);
+
+        return answer;
+    }
+
 
     //소설 정지 앤 해제
     @PostMapping("/masterNovelSwitch.do")

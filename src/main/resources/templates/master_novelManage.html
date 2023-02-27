@@ -45,10 +45,17 @@
                 </div>
 
                 <div class="masterChoiceSwitch">▼ PD픽 리스트</div>
+                <div class="masterBannerSwitch">▼ 배너픽 리스트</div>
                 <ul class="masterChoice">
                     <li th:each="pdPick : ${pdPick}">
                         <div class="pdChoiceName maxHightOpt1" th:text="${pdPick.number}+'. '+${pdPick.n_title}"></div>
                         <div class="pdChoiceBtnZone"><button class="delPDpick pdDelBtn"th:value="${pdPick.n_num}">삭제</button> </div>
+                    </li>
+                </ul>
+                <ul class="masterBanner">
+                    <li th:each="bnPick : ${bnPick}">
+                        <div class="pdChoiceName maxHightOpt1" th:text="${bnPick.number}+'. '+${bnPick.n_title}"></div>
+                        <div class="pdChoiceBtnZone"><button class="delPDpick bnDelBtn"th:value="${bnPick.n_num}">삭제</button> </div>
                     </li>
                 </ul>
 
@@ -84,6 +91,9 @@
 <!--                                <button class="mw_ImgChangeBtn"     th:value="${list.n_cover}">이미지 변경</button>-->
                                 <button class="mw_PdPickBtn"        th:if="${list.pd_num}==0" th:value="${list.n_num}">  Pd픽 선정</button>
                                 <button class="mw_pdDelBtn pdDelBtn"th:if="${list.pd_num}!=0" th:value="${list.n_num}">  Pd픽 삭제</button>
+                                <button class="mw_bannerPickBtn mw_bannerSet"    th:if="${list.ban_num}==null"  th:value="${list.n_num}">  배너픽 선정</button>
+                                <button class="mw_bannerPickBtn mw_bannerUpdate" th:if="${list.ban_num}!=null"  th:value="${list.n_num}">  배너픽 수정</button>
+                                <button class="mw_bannerDel bnDelBtn"            th:if="${list.ban_num}!=null"  th:value="${list.n_num}">  배너픽 삭제</button>
                                 <button class="mw_novelStopBtn"     th:if="${list.stopPoint}==0" th:value="${list.n_num}">소설 정지</button>
                                 <button class="mw_novelOnBtn"       th:if="${list.stopPoint}>0"  th:value="${list.n_num}">정지 해제</button>
                                 <button class="mw_UserDelBtn mw_UserDown"     th:value="${list.u_num}" th:if="${list.u_level}=='0'">유저 강등</button>

@@ -118,7 +118,7 @@ $(function (){
 
     $('.pic_edit').click(function (){
         var url = "/novelnet/profill/myImg";
-        var name = "popup test";
+        var name = "popup";
         var option = "width = 535, height = 850, location = no, status= no, toolbars= no, _blank"
         window.open(url, name, option);    })
 });
