@@ -39,10 +39,19 @@ public interface UserMapper {
     @Update("update user set u_ok = '1', u_code = 'done' where u_num = #{u_num}")
     public int UesrJoinEnd(@Param("u_num")String u_num);
 
+    //유저 이미지 탐색
     @Select("select u_pic from user where u_num = #{u_num}")
     public String findUserCover(@Param("u_num")String u_num);
 
+    //유저 이미지 변경
     @Update("update user set u_pic=#{u_pic} where u_num=#{u_num}")
     public int changeProfill(@Param("u_num")String u_num,@Param("u_pic")String u_pic);
+
+    //유저 프로필 변경
+    @Update("update user set u_nick=#{nick},u_pass=#{pass},u_myself=#{intro} where u_num=#{u_num}")
+    public int updateUserDate(@Param("u_num")String u_num,
+                              @Param("nick")String nick,
+                              @Param("pass")String pass,
+                              @Param("intro")String intro);
 
 }

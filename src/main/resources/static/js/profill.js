@@ -72,66 +72,48 @@ $(function (){
     });
 
 
+    //폼체크
+    let nick;      let pass;      let passCheak;  let intro;
+    let passN = 0; let passC = 0; let passD = 0;
+
     $('.change_ok').click(function ()
     {
+        let reg = /\s/g; //공백판별
 
-        let passC        = $("#passwordChange").val();  //비밀번호
-        let passCheakC   = $(".passcheck").val();       //비밀번호 확인
-        let nickC        = $("#nickChange").val();      //닉네임.
+        nick        = $("#nickChange").val();
+        if (nick.match(reg)){ alert('공백은 사용하실 수 없습니다.') }
+        if (nick.length != 0){passN = 1}
 
-        //텍스트 에어리어 엔터 <br>로 변환
-        let intro        = $('#intro').val();
-        intro = intro.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        pass        = $("#passwordChange").val();
+        if (pass.length < 12)       { passC = 0; alert('비밀번호가 너무 짧습니다.');}
+        else if (pass.match(reg))   { passC = 0; alert('비밀번호의 공백을 제거해주세요');}
+        else                        { passC = 1;}
 
+        passCheak   = $(".passcheck").val();
+        if (passCheak.length < 12)       { passD = 0; alert('비밀번호가 너무 짧습니다.');}
+        else if (passCheak.match(reg))   { passD = 0; alert('비밀번호 확인에 공백을 제거해주세요');}
+        else if (passCheak != pass)      { passD = 0; alert('비밀번호와 일치하지 않습니다');}
+        else                             { passD = 1}
 
-        var message = '';
-        const reg = /\s/g; //공백판별
-        var conformNick  = 0;
-        var conformPass = 0;
+        intro   = $("#intro").val();
 
-        //비밀번호 확인
-        if (passC.length != 0)
-        {
-            if (passC.length < 12)
-            {
-                message = '비밀번호가 너무 짧습니다.';
-                conformPass = 0;
-            }
-            else if (passC.length > 20)
-            {
-                message = '비밀번호가 너무 깁니다.'
-                conformPass = 0;
-            }
-            else if (passC.match(reg))
-            {
-                message = '공백을 제거해주세요.'
-                conformPass = 0;
-            }
-            else if (passC != passCheakC)
-            {
-                message = '비밀번호를 다시 확인해주세요'
-                conformPass = 0;
-            }
-        }
-        else
-        {
-            conformPass = 1;
+        if(passN == 1 && passC==1 && passD==1){
+            $.ajax({
+                url:'/profillUpdate.do',
+                type:'post',
+                data : {"nick":nick,
+                        "pass":pass,
+                        "intro":intro},
+                success:function(s){
+                    if (s == 1) { location.reload(); }
+                    else        { alert('갱신에 실패하였습니다.'); }
+                },
+                error:function(){
+                    alert("수정에 실패하였습니다.");
+                }
+            });
         }
 
-        //닉네임확인
-        if(nickC != "")
-        {
-            if(nickC.match(reg))
-            {
-                message = '공백을 제거해주세요.'
-                conformNick = 0;
-            }
-        }
-        else
-        {
-            conformNick = 1;
-        }
-        alert(message)
     })
 
     $('.pic_edit').click(function (){

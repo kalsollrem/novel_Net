@@ -31,7 +31,10 @@
                         <div class="pic_edit" th:if="${who}=='me'">
                             <img src="../img/edit_icon.png" alt="set">
                         </div>
-                        <div class="profil_name"><div class="nameSpace" th:text="${profillData.u_nick}"></div><div> 님의 회원카드</div></div>
+                        <div class="profil_name">
+                            <div class="nameSpace" th:text="${profillData.u_nick}"></div>
+                            <div> 님의 회원카드<span th:if="${session.U_LEVEL}==1 and ${profillData.u_num}==${session.U_NUM}" style="color: red; font-size: 12px;">(정지)</span></div>
+                        </div>
                         <ul class="profil_menu">
                             <li class="btn_profillRewrite" th:if="${who}=='me'">정보관리</li>
                             <li class="btn_myReply" th:if="${who}=='me'">댓글</li>
@@ -69,7 +72,7 @@
                             </li>
                             <li>
                                 <div class="sf_bestpic title_position">선호태그</div>
-                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}!=null" th:text="${tvo.h_tag}">무협</div>
+                                <div class="my_bestpic text_position"  th:if="${tvo.h_tag}!=null" th:text="${tvo.h_tag}">선호태그</div>
                                 <div class="my_bestpic text_position"  th:if="${tvo.h_tag}==null">없음</div>
                             </li>
                             <li>

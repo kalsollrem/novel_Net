@@ -168,9 +168,9 @@ public class UserController {
                               @Param("pageR") String pageR,
                               HttpSession session) throws Exception
     {
-        String u_num ="29";
-//        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
-
+        String u_num;
+        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
+//        String u_num="29";
         //페이징용 함수
         int count, allPage,nowCase,allCase,leftPage,rightPage,displayPage,start;
 
@@ -309,7 +309,7 @@ public class UserController {
         }
     }
 
-    //프로필 등록
+    //프로필 이미지 등록
     @PostMapping("/iconChange.do")
     @ResponseBody
     public String iconChange(HttpSession session,
@@ -344,5 +344,30 @@ public class UserController {
         }
 
         return answer;
+    }
+
+    //프로필 수정
+    @PostMapping("/profillUpdate.do")
+    @ResponseBody
+    public int profillUpdate(HttpSession session,
+                             @RequestParam(value = "nick"   ,required = false) String nick,
+                             @RequestParam(value = "pass"   ,required = false) String pass,
+                             @RequestParam(value = "intro"  ,required = false) String intro,
+                             MasterMemoVO masterMemoVO,
+                             HttpServletRequest request)throws Exception
+    {
+        int cnt=0;
+
+        String u_num;
+        try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
+
+        //커버탐색
+        try {if (intro == null){intro = "";}}
+        catch (Exception e) {intro = "";}
+
+        cnt = userMapper.updateUserDate(u_num,nick,pass,intro);
+
+
+        return cnt;
     }
 }

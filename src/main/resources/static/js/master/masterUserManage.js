@@ -62,8 +62,6 @@ $(function (){
     {
         let u_num = $(this).val()
         let switchUD = $(".levelChange_"+u_num).val();
-        alert(switchUD)
-        alert(u_num)
 
         $.ajax({
             url:'/userManage.do',
