@@ -90,8 +90,7 @@ $(function (){
         else                        { passC = 1;}
 
         passCheak   = $(".passcheck").val();
-        if (passCheak.length < 12)       { passD = 0; alert('비밀번호가 너무 짧습니다.');}
-        else if (passCheak.match(reg))   { passD = 0; alert('비밀번호 확인에 공백을 제거해주세요');}
+        if (passCheak.match(reg))        { passD = 0; alert('비밀번호 확인에 공백을 제거해주세요');}
         else if (passCheak != pass)      { passD = 0; alert('비밀번호와 일치하지 않습니다');}
         else                             { passD = 1}
 

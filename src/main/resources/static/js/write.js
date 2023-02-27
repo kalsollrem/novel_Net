@@ -58,6 +58,7 @@ $(function (){
                 alert("이미지를 첨부하는데 실패하였습니다.")
             }
         });
+
     }
 
 
@@ -73,4 +74,19 @@ $(function (){
     {
         $('#summernote').summernote('editor.insertText', memo);
     }
+
+
+
+    //업로드 버튼
+    $(".write_uploads").click(function (){
+        let title  = $('#write_title').val();
+        title = title.replace(' ','');
+
+        if(title.length>1)
+        {
+            $('#writeForm').submit();
+        }
+        else { alert('제목을 입력해주세요')}
+
+    });
 })

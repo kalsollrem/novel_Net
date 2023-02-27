@@ -97,7 +97,7 @@
                             <div class="cover_set">
                                 <span>북커버 표지 : *</span>
                                 <div class="cover_zone">
-                                    <input multiple="multiple" type="file" name="coverFile" id="cover">
+                                    <input multiple="multiple" type="file" name="coverFile" id="cover" accept="image/*">
                                 </div>
                                 <div class="cover_rule">
                                     ① 성인/비성인 표지 공통 허용 기준<br>
@@ -117,10 +117,11 @@
                                     또한 안내된 기준을 위반할 경우, 표지가 임의 삭제되거나 교체될 수 있음을 알려드립니다.<br>
                                 </div>
                             </div>
+                        </div>
                         </form>
                         <ul class="correction_button button_box">
-                            <li><button type="submit" class="resist_yes button_style">작품수정</button> </li>
-                            <li><button class="resist_delete button_style">삭제</button> </li>
+                            <li><button class="resist_yes button_style">작품수정</button> </li>
+                            <li><button class="resist_noveldel button_style" th:value="${novelVO.getN_num()}">삭제</button> </li>
                             <li><button class="resist_no button_style">취소</button> </li>
                         </ul>
                     </div>

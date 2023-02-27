@@ -996,7 +996,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 .button_style   {padding-left: 30px; padding-right: 30px; border: 0px; height: 40px; float: left; font-size: 15px; color: white;}
 .resist_yes     {background-color:#17A2B8; }
 .resist_no      {background-color:#363B3E; }
-.resist_delete  {background-color:#EE4F4F; }
+.resist_noveldel{background-color:#EE4F4F; }
 
 /* 작품등록 */
 

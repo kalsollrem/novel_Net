@@ -36,6 +36,40 @@ $(function (){
             }
         }
     });
+
+
+    //수정 버튼
+    $(".resist_yes").click(function (){
+        let title  = $('#regist_title').val();
+        title = title.replace(' ','');
+        if(title.length>1)
+        {
+            $('#novelRegist').submit();
+        }
+        else { alert('제목을 입력해주세요')}
+    });
+
+    //수정 버튼
+    $(".resist_noveldel").click(function (){
+
+        $.ajax({
+            url:'/noveDelete.do',
+            type:'post',
+            data : {"n_num":$(this).val()},
+            success:function(s){
+                if (s == 1) { location.href = "/novelnet"; }
+                else        { alert('삭제에 실패하였습니다.'); }
+            },
+            error:function(){
+                alert("통신에 문제가 있습니다..");
+            }
+        });
+    });
+
+    $(".resist_no").click(function (){
+        window.history.back();
+    })
+
 })
 
 

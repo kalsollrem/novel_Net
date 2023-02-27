@@ -100,7 +100,7 @@ public class NovelController {
     {
         System.out.println("유저번호 :"+session.getAttribute("U_NUM") +  "\n 소설번호 : " + n_num);
 
-        if((Integer)session.getAttribute("U_NUM") == 1)
+        if((Integer)session.getAttribute("U_LEVEL") == 1)
         {
             return "userStop";
         }
@@ -145,7 +145,7 @@ public class NovelController {
 
         JsonObject jsonObject = new JsonObject();
 
-        String fileRoot         = "C:\\code\\KimJeonghyun\\novelNet\\src\\main\\resources\\static\\noteImg\\";	  //저장될 외부 파일 경로
+        String fileRoot         = "C:\\novelNet\\src\\main\\resources\\static\\noteImg\\";	  //저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	                                          //오리지날 파일명
         String extension        = originalFileName.substring(originalFileName.lastIndexOf("."));	          //파일 확장자
 
@@ -275,7 +275,7 @@ public class NovelController {
     @GetMapping("/novelnet/regist")
     public String novelRegist(HttpSession session)
     {
-        if (session.getAttribute("U_LEVEL")=="1")
+        if ((Integer)session.getAttribute("U_LEVEL")==1)
         {
             return "userStop";
         }
@@ -299,39 +299,46 @@ public class NovelController {
 
         //로그인과 경로체크
         if (n_num == null || n_num.matches("-?\\d+(\\.\\d+)?") == false){ return "redirect:/novelnet"; }
-        if (session.getAttribute("U_NUM") == null) { return "redirect:/novelnet/novel?n_num=" + n_num;  }
+//        if (session.getAttribute("U_NUM") == null) { return "redirect:/novelnet/novel?n_num=" + n_num;  }
 
-
-        int u_num = (Integer)session.getAttribute("U_NUM");
-
-        //작성자 권한 확인
-        int Cheak = novelMapper.memoOK(u_num, n_num);
-
-        if (Cheak > 0){
-            NovelVO novelVO = novelMapper.getBookDate(n_num);
-            model.addAttribute("novelVO", novelVO);
+//        if ((Integer)session.getAttribute("U_LEVEL")==1)
+        if (n_num==null)
+        {
+            return "userStop";
         }else
         {
-            return "redirect:/novelnet/novel?n_num=" + n_num;
+//            int u_num = (Integer)session.getAttribute("U_NUM");
+            int u_num = 1;
+
+            //작성자 권한 확인
+            int Cheak = novelMapper.memoOK(u_num, n_num);
+
+            if (Cheak > 0){
+                NovelVO novelVO = novelMapper.getBookDate(n_num);
+                model.addAttribute("novelVO", novelVO);
+            }else
+            {
+                return "redirect:/novelnet/novel?n_num=" + n_num;
+            }
+
+            //태그 체크
+            String first_tag  = novelMapper.tags(n_num, "1st").replace("#","");
+            String second_tag = novelMapper.tags(n_num, "2st");
+
+            //태그 모델에 등록
+            model.addAttribute("firstTag",first_tag);
+
+            if (second_tag != null || second_tag != "")
+            {
+                model.addAttribute("secondTag",second_tag);
+            }
+
+            System.out.println("첫태그 : "    + first_tag);
+            System.out.println("태그리스트 : " + second_tag);
+            System.out.println("유저번호 : "   + u_num);
+
+            return "novel_update";
         }
-
-        //태그 체크
-        String first_tag  = novelMapper.tags(n_num, "1st").replace("#","");
-        String second_tag = novelMapper.tags(n_num, "2st");
-
-        //태그 모델에 등록
-        model.addAttribute("firstTag",first_tag);
-
-        if (second_tag != null || second_tag != "")
-        {
-            model.addAttribute("secondTag",second_tag);
-        }
-
-        System.out.println("첫태그 : "    + first_tag);
-        System.out.println("태그리스트 : " + second_tag);
-        System.out.println("유저번호 : "   + u_num);
-
-        return "novel_update";
     }
 
     @PostMapping("/novelnet/novelRegist.do")
@@ -453,6 +460,30 @@ public class NovelController {
         }
 
         return "redirect:/novelnet/novel?n_num="+n_num;
+    }
+
+    @PostMapping("noveDelete.do")
+    @ResponseBody
+    public int noveDeleteDo(HttpSession session,
+                               NovelVO novelVO,
+                                @RequestParam(value = "n_num"             ,required = false) String n_num,
+                                HttpServletRequest request)throws Exception
+    {
+        novelVO = novelMapper.getBookDate(n_num);
+        String u_num = (String)session.getAttribute("U_NUM").toString();
+        System.out.println("삭제");
+        System.out.println(n_num);
+        System.out.println(novelVO.getU_num()+"/"+u_num);
+        int NovelOk = 0;
+        int memoOk=0;
+        if (u_num.equals(novelVO.getU_num())){
+            novelMapper.deleteTags(n_num);
+            NovelOk = novelMapper.deleteNovel(n_num);
+            memoOk = novelMapper.deleteAllmemo(n_num);
+            fileUploadService.deleteFile(novelVO.getN_cover());
+        }
+
+        return NovelOk;
     }
 
 

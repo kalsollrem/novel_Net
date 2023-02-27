@@ -21,7 +21,7 @@
             <div class="main_content">
         <!------------ 콘텐츠 영역   ------------------>
                 <div class="write_zone">
-                    <form method="post" action="/novelnet/reWriteForm" >
+                    <form method="post" action="/novelnet/reWriteForm" id="writeForm">
                         <input type="hidden" name="Write_number" th:value="${param.n_num}">
                         <input type="hidden" name="Write_chapter"th:value="${param.chapter}">
                         <input type="hidden" name="sort" th:value="${param.sort}">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="write_submit">
                             <span>※ 운영 약정에 위반한 글은 규정에 따라 삭제 혹은 블록 처리 될 수 있습니다.</span>
-                            <input type="submit" value="등록" class="write_uploads">
+                            <input type="button" value="등록" class="write_uploads">
                         </div>
                     </form>
                 </div>

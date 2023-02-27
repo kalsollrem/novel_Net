@@ -101,6 +101,13 @@ public interface NovelMapper {
     //find tag List limit 5(태그 5개 검색)
     List<TagVO> getMiniTag(int n_num);
 
+    //소설 삭제
+    @Delete("delete from novel where n_num = #{n_num}")
+    public int deleteNovel(@Param("n_num")String n_num);
+
+    @Delete("delete from memo where n_num = #{n_num}")
+    public int deleteAllmemo(@Param("n_num")String n_num);
+
     //태그 일렬 검색
     @Select("Select GROUP_CONCAT(h_tag SEPARATOR',')AS tags from hashtag where n_num=#{n_num} and t_carte=#{carte}")
     public String tags(@Param("n_num")String n_num, @Param("carte")String carte);
