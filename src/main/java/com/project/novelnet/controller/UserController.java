@@ -366,7 +366,7 @@ public class UserController {
         catch (Exception e) {intro = "";}
 
         cnt = userMapper.updateUserDate(u_num,nick,pass,intro);
-
+        if (cnt ==1 ) { session.setAttribute("U_NICK", nick); }
 
         return cnt;
     }

@@ -25,7 +25,7 @@
                 <div class="profile">
                     <div class="profile_data">
                         <div class="profil_pic">
-                            <img th:if="${profillData.u_pic} != null"  th:src="'../userImg/'+${profillData.u_pic}" alt="프로필" onerror="this.src='../img/profill.jpg'">
+                            <img th:if="${profillData.u_pic} != null"  th:src="'../userImg/'+${profillData.u_pic}" alt="프로필" onerror="this.src='../img/profill.png'">
                             <img th:unless="${profillData.u_pic} != null" src="../img/profill.png" alt="프로필" >
                         </div>
                         <div class="pic_edit" th:if="${who}=='me'">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="profil_name">
                             <div class="nameSpace" th:text="${profillData.u_nick}"></div>
-                            <div> 님의 회원카드<span th:if="${session.U_LEVEL}==1 and ${profillData.u_num}==${session.U_NUM}" style="color: red; font-size: 12px;">(정지)</span></div>
+                            <div style="font-size: 19px; margin-top: 2px;">님의 회원카드<span th:if="${session.U_LEVEL}==1 and ${profillData.u_num}==${session.U_NUM}" style="color: red;">(정지)</span></div>
                         </div>
                         <ul class="profil_menu">
                             <li class="btn_profillRewrite" th:if="${who}=='me'">정보관리</li>
@@ -90,6 +90,7 @@
                             <div class="change_box">닉네임</div>
                             <div class="change_nick">
                                 <input type="text" class="nick" id="nickChange" placeholder="닉네임을 입력해주세요." maxlength="12" th:value="${profillData.u_nick}">
+                                <span>닉네임은 최대 12글자 까지 입니다.</span>
                             </div>
                         </li>
                         <li>
@@ -103,7 +104,7 @@
                             <div class="change_box">비밀번호 확인</div>
                             <div class="change_passcheck">
                                 <input type="password" class="passcheck" maxlength="20">
-                                <span>비밀번호가 일치합니다.</span>
+                                <span>비밀번호와 일치하도록 적어주세요.</span>
                             </div>
                         </li>
                         <li>
