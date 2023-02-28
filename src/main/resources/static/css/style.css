@@ -82,6 +82,7 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 .contents .main_content                 {margin: auto; width: 1200px; }
 .contents .main_content .link_zone      {width: 100%; height: 130px; margin-top: 20px; }
+.contents .main_content .link_zone>a>img{width: 100%; height: 130px;}
 .contents .main_content .recomend_pd    {width: 1200px; height: 400px; }
 .contents .main_content .hot_novel      {width: 1200px; height: 600px; }
 
