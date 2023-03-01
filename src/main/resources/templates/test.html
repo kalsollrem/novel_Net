@@ -5,6 +5,7 @@
     <title>list</title>
 </head>
 <body>
+
 <table border="1" align="center">
     <tr>
         <th>번호</th>
@@ -17,5 +18,7 @@
         <td th:text="${memo.m_memo}"></td>
     </tr>
 </table>
+<footer th:replace="/include/footer.html :: footer_layout"> </footer>
+
 </body>
 </html>

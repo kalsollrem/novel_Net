@@ -1160,20 +1160,8 @@ public class NovelController {
 
     @GetMapping("/t")
     public String t(){
-        pageingService.setNowPage(15);
-        pageingService.setTotalCount(154);
-
-        int nowCase     = pageingService.getNowCase();
-        int allCase     = pageingService.getAllCase();
-        int leftPage    = pageingService.getLeftPage();
-        int rightPage   = pageingService.getRightPage();
-        int displayPage = pageingService.getDisplayPage();
-
-        System.out.println("전채 간격 " + allCase);
-        System.out.println("현재 간격 " + nowCase);
-        System.out.println("전 버튼 " + leftPage);
-        System.out.println("후 버튼 " + rightPage);
-        System.out.println("하단에 나온 페이지 " + displayPage);
+        List<NovelVO> list = novelMapper.test();
+        System.out.println(list);
         return "test";
     }
 }

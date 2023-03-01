@@ -22,6 +22,9 @@ public interface NovelMapper {
     //게시물 존재여부 체크
     public int cheakMemo(@Param("m_num")String m_num);
 
+    //게시물 존재여부 체크
+    List<NovelVO> test();
+
     //정지상태 체크
     @Select("select stopPoint from novel where n_num=#{n_num}")
     public int novelStopCheak(@Param("n_num")String n_num);

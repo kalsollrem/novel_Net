@@ -11,6 +11,12 @@
         <result column="n_fin" property="n_fin"/>
     </resultMap>
 
+    <!--  소설검색  -->
+    <select id="test" resultType="com.project.novelnet.Vo.NovelVO">
+        select * from novel limit 5
+    </select>
+
+
     <!-- 소설등록 -->
     <insert id="novelRegist" parameterType="com.project.novelnet.Vo.NovelVO">
         <selectKey resultType="int" keyProperty="n_num" order="AFTER">
