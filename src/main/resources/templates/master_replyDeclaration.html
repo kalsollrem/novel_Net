@@ -9,9 +9,9 @@
         <script src="/js/master/masterReply.js"></script>
     </head>
     <body>
-        <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
+        <div class="modal_layout" th:replace="include/header.html :: modal_layout"></div>
         <div class="wrap">
-            <header th:replace="/include/header.html :: header"></header>
+            <header th:replace="include/header.html :: header"></header>
             <div class="masterFrame">
                 <ul class="masterMenu" th:if="${session.U_LEVEL}==9">
                     <li><a th:href="@{/master/novelDeclaration(page=1)}">소설 신고 목록</a></li>
@@ -111,6 +111,6 @@
                 </div>
             </div>
         </div>
-        <footer th:replace="/include/footer.html :: footer_layout"> </footer>
+        <footer th:replace="include/footer.html :: footer_layout"> </footer>
     </body>
 </html>

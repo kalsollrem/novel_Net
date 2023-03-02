@@ -11,10 +11,10 @@
 </head>
 <body>
     <!-- 모달 레이아웃 -->
-    <div class="modal_layout" th:replace="/include/header.html :: modal_layout"></div>
+    <div class="modal_layout" th:replace="include/header.html :: modal_layout"></div>
     <!-- 모달 레이아웃 -->
     <div class="wrap">
-        <header th:replace="/include/header.html :: header"></header>
+        <header th:replace="include/header.html :: header"></header>
         <div class="contents">
             <div class="main_content">
     <!------------ 콘텐츠 영역   ------------------>
@@ -54,7 +54,7 @@
             </div>
         </div>
     </div>
-    <footer th:replace="/include/footer.html :: footer_layout"> </footer>
+    <footer th:replace="include/footer.html :: footer_layout"> </footer>
     
 </body>
 </html>

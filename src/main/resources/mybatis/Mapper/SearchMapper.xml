@@ -17,7 +17,7 @@
 
     <!--  게시물 검색 + 번호매기기  -->
     <select id="findBest" resultType="com.project.novelnet.Vo.NovelVO">
-        SELECT A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_fin, A.stopPoint, b.count, c.u_nick as nick
+        SELECT A.n_num, A.u_num, A.n_title, A.n_introduction, A.n_cover, A.n_fin, A.stopPoint, B.count, C.u_nick as nick
         FROM novel A
         <if test="findtype.equals('count')">
             LEFT JOIN (select sum(m_count)as count, n_num from memo group by n_num)B
@@ -154,7 +154,7 @@
         </choose>
     ) as origin, (select @ROWNUM :=0) Tab
     where n_title like CONCAT('%',#{keyword},'%') or All_tag like CONCAT('%',#{keyword},'%')
-    limit #{start},10;
+    limit #{start},10
     </select>
 
     <!--북마크 갯수-->
