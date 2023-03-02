@@ -23,12 +23,12 @@ public class FileUploadService implements FileUploadRepository {
     @Autowired
     MasterMapper masterMapper;
 
-    String root = "C:\\novelNet\\src\\main\\resources\\static\\noteImg\\";
+    String root = "/home/ubuntu/novelNet/noteImg/";
     @Override
     public void fileUpload(MultipartFile multipartFile, int n_num) {
         System.out.println("첨부파일명 "+multipartFile.getOriginalFilename());
 
-        String fileRoot         = "C:\\novelNet\\src\\main\\resources\\static\\noteImg\\";	                      //저장될 외부 파일 경로
+        String fileRoot         = "/home/ubuntu/novelNet/noteImg/";	                      //저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	                                          //오리지날 파일명
         String extension        = originalFileName.substring(originalFileName.lastIndexOf("."));	          //파일 확장자
 
@@ -54,7 +54,7 @@ public class FileUploadService implements FileUploadRepository {
         System.out.println("첨부파일명 "+multipartFile.getOriginalFilename());
         String answer = "no";
 
-        String fileRoot         = "C:\\novelNet\\src\\main\\resources\\static\\noteImg\\";	                      //저장될 외부 파일 경로
+        String fileRoot         = "/home/ubuntu/novelNet/noteImg/";	                      //저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	                                          //오리지날 파일명
         String extension        = originalFileName.substring(originalFileName.lastIndexOf("."));	          //파일 확장자
 
@@ -82,7 +82,7 @@ public class FileUploadService implements FileUploadRepository {
         System.out.println("첨부파일명 "+multipartFile.getOriginalFilename());
 
         String answer = "no";
-        String fileRoot         = "C:\\novelNet\\src\\main\\resources\\static\\userImg\\";	                      //저장될 외부 파일 경로
+        String fileRoot         = "/home/ubuntu/novelNet/userImg/";	                      //저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	                                          //오리지날 파일명
         String extension        = originalFileName.substring(originalFileName.lastIndexOf("."));	          //파일 확장자
 
@@ -128,7 +128,7 @@ public class FileUploadService implements FileUploadRepository {
     @Override
     public void deleteProfill(String fileName) {
         // 파일의 경로 + 파일명
-        String filePath = "C:\\novelNet\\src\\main\\resources\\static\\userImg\\"+fileName;
+        String filePath = "/home/ubuntu/novelNet/userImg/"+fileName;
 
         File deleteFile = new File(filePath);
 

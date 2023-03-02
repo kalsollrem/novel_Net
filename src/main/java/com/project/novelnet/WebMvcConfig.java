@@ -13,8 +13,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/noteImg/**")
-                .addResourceLocations("file:///C:/novelNet/src/main/resources/static/noteImg/");
+                .addResourceLocations("file:///home/ubuntu/novelNet/noteImg/");
         registry.addResourceHandler("/userImg/**")
-                .addResourceLocations("file:///C:/novelNet/src/main/resources/static/userImg/");
+                .addResourceLocations("file:///home/ubuntu/novelNet/userImg/");
     }
 }

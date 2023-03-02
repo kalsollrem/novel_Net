@@ -145,7 +145,7 @@ public class NovelController {
 
         JsonObject jsonObject = new JsonObject();
 
-        String fileRoot         = "C:\\novelNet\\src\\main\\resources\\static\\noteImg\\";	  //저장될 외부 파일 경로
+        String fileRoot         = "/home/ubuntu/novelNet/noteImg/";	  //저장될 외부 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	                                          //오리지날 파일명
         String extension        = originalFileName.substring(originalFileName.lastIndexOf("."));	          //파일 확장자
 
@@ -946,11 +946,17 @@ public class NovelController {
 
                         //작가의 다른 소설 검색
                         NovelVO subNovel = novelMapper.getAnotherBook(n_num, novelVO.getU_num());
-                        //태그검색
-                        List<TagVO> subTagList = novelMapper.getMiniTag(subNovel.getN_num());
-                        if (subTagList != null) {
+
+                        List<TagVO> subTagList;
+                        if(subNovel != null) {
+                            //태그검색
+                            subTagList = novelMapper.getMiniTag(subNovel.getN_num());
                             model.addAttribute("subtag", subTagList);
+                        }else
+                        {
+                            model.addAttribute("subtag", "");
                         }
+
                         model.addAttribute("subNovel", subNovel);
                         return "book_info";
                     }else
