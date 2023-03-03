@@ -140,7 +140,7 @@ public class SearchController
 
 
         //monopoly : 플랫폼독점(only), 자유(free)
-        if(monopoly == null)                  {monopoly  = "free";}
+        if(monopoly == null || monopoly=="")  {monopoly  = "free";}
         else if(monopoly  == "free")          {monopoly  = "free";}
         else                                  {monopoly  = "only";}
 
@@ -191,7 +191,6 @@ public class SearchController
 
         //서브 검색태그
         if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
-
 
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
         int count = searchMapper.searchPlusNovelCount(mainTag,searchTag,novelType,doType,monopoly);

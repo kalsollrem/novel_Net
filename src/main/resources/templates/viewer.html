@@ -185,7 +185,7 @@
                             <div class="reply_update reply_box" th:id="'up_'+${reply.r_num}" onclick="r_updateOn(this.id)" th:if="${reply.u_num} == ${session.U_NUM}">◎수정</div>
                             <div class="reply_bad reply_box"   th:id="'bad_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/bad.png" alt="비추"><span th:class="'badcho_'+${reply.r_num}" th:text="'비추천('+${reply.r_bad}+')'">비추</span></div>
                             <div class="reply_good reply_box" th:id="'good_'+${reply.r_num}" onclick="updownlike(this.id)"><img src="../img/good_Down.png" alt="추천"><span th:class="'goodcho_'+${reply.r_num}" th:text="'추천('+${reply.r_good}+')'">추천</span></div>
-                            <div class="re_reply reply_box"><span th:id="${reply.r_num}" class="answer_r" onclick="answer_r(this.id)" th:if="${reply.r_num} != ${session.U_NUM} and ${session.U_NUM}!=null">▣ 답글</span></div>
+                            <div class="re_reply reply_box"><span th:id="${reply.r_num}" class="answer_r" onclick="answer_r(this.id)" th:if="${session.U_NUM}!=null">▣ 답글</span></div>
 <!--                            <div class="re_reply_count reply_box" th:if="${reply.r_baby != '0'}"><span>△</span> <span th:text="'대댓글 ('+${reply.r_baby}+'건)'"></span></div>-->
                         </div>
                     </div>

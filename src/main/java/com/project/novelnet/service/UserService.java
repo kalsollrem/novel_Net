@@ -20,7 +20,6 @@ public class UserService implements UserReopsitory {
     @Override
     public int IdCheak(String id) {
         int cnt = novelRepository.mailCheak(id);
-        System.out.println("계정 존재 체크: " + cnt);
         return cnt;
     }
 
