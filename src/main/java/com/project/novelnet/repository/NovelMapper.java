@@ -96,7 +96,11 @@ public interface NovelMapper {
     List<MemoVO> getMemoDate(String n_num, String u_num, int start, int count, String page, String sort);
 
     //Writer another Novel Find(작가의 다른 소설 검색)
-    public NovelVO getAnotherBook(@Param("n_num")String n_num, @Param("au_num")String au_num);
+    NovelVO getAnotherBook(@Param("n_num")String n_num, @Param("au_num")String au_num);
+
+    ////Writer another Novel count(작가의 다른 소설 검색)
+    @Select("select count(n_num) from novel where u_num = #{u_num}")
+    int getAnotherBookCnt(@Param("u_num")String u_num);
 
     //find tag List(태그리스트 검색)
     List<TagVO> getAllTag(String n_num);

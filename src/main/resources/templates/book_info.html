@@ -245,17 +245,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="another_books" th:if="${subNovel.getN_num()!=null}">
+                    <div class="another_books" th:if="${subNovel.n_num!=0}">
                         <div class="books_anne">작가의 다른책</div>
                         <div class="another_bookcase">
                             <div class="another_data">
                                 <div class="another_img">
-                                    <a th:href="'/novelnet/novel?n_num='+${subNovel.getN_num()}+'&sort=asc&page=1'">
-                                        <img th:src="'../noteImg/'+${subNovel.getN_cover()}" th:alt="${subNovel.getN_title()}" onerror="this.src='../img/write_cover.jpg'">
+                                    <a th:href="'/novelnet/novel?n_num='+${subNovel.n_num}+'&sort=asc&page=1'">
+                                        <img th:src="'../noteImg/'+${subNovel.n_cover}" th:alt="${subNovel.n_title}" onerror="this.src='../img/write_cover.jpg'">
                                     </a>
                                 </div>
                                 <div class="another_title">
-                                    <a th:href="'/novelnet/novel?n_num='+${subNovel.getN_num()}+'&sort=asc&page=1'" th:text="${subNovel.getN_title()}"></a>
+                                    <a th:href="'/novelnet/novel?n_num='+${subNovel.n_num}+'&sort=asc&page=1'" th:text="${subNovel.n_title}"></a>
                                 </div>
                                 <ul class="another_tag">
                                     <li th:each="subtag : ${subtag}" th:text="${subtag.h_tag}">#로맨스</li>

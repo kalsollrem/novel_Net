@@ -945,19 +945,28 @@ public class NovelController {
                         model.addAttribute("bookmark", bookmark);
 
                         //작가의 다른 소설 검색
-                        NovelVO subNovel = novelMapper.getAnotherBook(n_num, novelVO.getU_num());
+                        int t = novelMapper.getAnotherBookCnt(novelVO.getU_num());
+                        System.out.println("갯수"+t);
+                        NovelVO subNovel = new NovelVO();
+                        List<TagVO> subTagList = null;
 
-                        List<TagVO> subTagList;
-                        if(subNovel != null) {
+                        //다른소설 존재함
+                        if (t >1)
+                        {
+                            //다른 소설 검색
+                            subNovel = novelMapper.getAnotherBook(n_num, novelVO.getU_num());
                             //태그검색
                             subTagList = novelMapper.getMiniTag(subNovel.getN_num());
-                            model.addAttribute("subtag", subTagList);
                         }else
                         {
-                            model.addAttribute("subtag", "");
+                            subNovel.setN_num(0);
+                            subNovel.setN_cover("");
+                            subNovel.setN_title("");
                         }
-
+                        model.addAttribute("subtag", subTagList);
                         model.addAttribute("subNovel", subNovel);
+
+
                         return "book_info";
                     }else
                     {
