@@ -1168,7 +1168,12 @@ public class NovelController {
         if (next > 0) {model.addAttribute("next", "ok");}
         else          {model.addAttribute("next", "stop");}
 
+        //다음 단추 표시 여부
+        int bottom = 0;
+        if (page == "0" && next == 0) {bottom = 1;}
+
         model.addAttribute("novelVOList", novelVOList);
+        model.addAttribute("bottom",bottom);
 
         return "best";
     }

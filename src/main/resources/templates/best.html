@@ -46,8 +46,10 @@
                         </th:block>
                     </ul>
                     <div class="ranking_load">
-                        <button class="ranking_load_button goNext" th:if="${next}!='stop'">NEXT 100</button>
-                        <button class="ranking_load_button goPrev" th:if="${next}=='stop'">PREV 100</button>
+                        <th:block  th:if="${bottom}!=0">
+                            <button class="ranking_load_button goNext" th:if="${next}!='stop'">NEXT 100</button>
+                            <button class="ranking_load_button goPrev" th:if="${next}=='stop'">PREV 100</button>
+                        </th:block>
                     </div>
                 </div>
             <!------------ 콘텐츠 영역  ------------------>
