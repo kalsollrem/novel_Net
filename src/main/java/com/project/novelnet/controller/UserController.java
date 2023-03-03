@@ -56,7 +56,6 @@ public class UserController {
     public int idCheck(@RequestParam("id") String id) throws Exception {
 
         int cnt = userService.IdCheak(id);
-        System.out.println("ID명 : " + id);
         return cnt;
     }
 
@@ -66,14 +65,12 @@ public class UserController {
 
         //등록
         novelRepository.userJoin(userVO);
-        System.out.println("아이디"+userVO.getU_mail() + "/ 비번 : " + userVO.getU_pass()+ "/ 닉 : "+userVO.getU_nick() + "/ 유저 번호" + userVO.getU_num());
 
         //검증
         String code = novelRepository.findCode(userVO.getU_num());
 
         if(code == null)
         {
-            System.out.println("실패하였습니다.");
             model.addAttribute("message", "가입에 실패하였습니다");
             model.addAttribute("searchUrl", "/novelnet");
 
@@ -81,7 +78,6 @@ public class UserController {
         else
         {
             mailService.mailSend(userVO.getU_mail(), code);
-            System.out.println("메일이 발송되었습니다.");
             model.addAttribute("message", "가입에 성공하였습니다. 메일 인증시 정식가입됩니다.");
             model.addAttribute("searchUrl", "/novelnet");
         }
@@ -93,10 +89,8 @@ public class UserController {
 
         String answer;
 
-        System.out.println(findid);
 
         String password = userMapper.getLostId(findid);
-        System.out.println(password);
 
         //프론트에 보낼 답변
         if (password == null || password == "")
@@ -107,7 +101,6 @@ public class UserController {
             answer = "findOK";
             mailService.passFinemailSend(findid, password);
         }
-        System.out.println(answer);
 
 
 
@@ -145,7 +138,6 @@ public class UserController {
 
     @PostMapping("/novelnet/login")
     public String getLoginData(UserVO userVO, HttpSession session) throws Exception{
-        System.out.println(userVO.getU_mail()+" / "+userVO.getU_pass());
 
         return "redirect:/novelnet";
     }
@@ -203,12 +195,6 @@ public class UserController {
                     rightPage   = pageingService.getRightPage();
                     displayPage = pageingService.getDisplayPage();
 
-                    System.out.println("allPage:" + allPage);
-                    System.out.println("nowCase:" + nowCase);
-                    System.out.println("allCase:" + allCase);
-                    System.out.println("leftPage:" + leftPage);
-                    System.out.println("rightPage:" + rightPage);
-                    System.out.println("displayPage:" + displayPage);
 
                     model.addAttribute("allPage", allPage);
                     model.addAttribute("nowCase", nowCase);
@@ -276,7 +262,6 @@ public class UserController {
             model.addAttribute("profillData", profillData);
             model.addAttribute("who", who);
             model.addAttribute("user", user);
-            System.out.println(who +":"+ profillData);
 
             return "mypage";
         }else
@@ -299,7 +284,6 @@ public class UserController {
             try {cover = userMapper.findUserCover(u_num);}
             catch (Exception e){cover = "";}
 
-            System.out.println(cover);
 
             if(cover != ""){ model.addAttribute("cover",cover); }
             return "image_modalA";
@@ -321,7 +305,6 @@ public class UserController {
         int cnt=0;
         String answer="no";
 
-        System.out.println(imgfile);
         String u_num;
         try {u_num= (String)session.getAttribute("U_NUM").toString();}  catch (Exception e) {u_num = null;}
 

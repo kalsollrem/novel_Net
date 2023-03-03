@@ -73,7 +73,6 @@ public class NovelController {
         //피디픽 설정
         List<Integer> pdlist =  searchMapper.PdPickList();
         Collections.shuffle(pdlist);
-        System.out.println("셔플"+pdlist);
 
         //새 리스트에 마이바티스값 삽입
         List<NovelVO> pickList = searchMapper.findPdPick(pdlist);
@@ -98,7 +97,6 @@ public class NovelController {
     public String novelWrite(HttpSession session, Model model,
                              @RequestParam(value = "n_num"      ,required = false) String n_num)
     {
-        System.out.println("유저번호 :"+session.getAttribute("U_NUM") +  "\n 소설번호 : " + n_num);
 
         if((Integer)session.getAttribute("U_LEVEL") == 1)
         {
@@ -112,7 +110,6 @@ public class NovelController {
             else
             {
                 if(novelMapper.memoOK((Integer)session.getAttribute("U_NUM"), n_num) == 0) {
-                    System.out.println("작성권한이 없습니다.");
                     return "redirect:/novelnet";
                 }
             }
@@ -141,7 +138,6 @@ public class NovelController {
     @ResponseBody
     public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
 
-        System.out.println("첨부파일명 "+multipartFile.getOriginalFilename());
 
         JsonObject jsonObject = new JsonObject();
 
@@ -177,7 +173,6 @@ public class NovelController {
                                  @RequestParam(value = "page"      ,required = false) String page,
                                  @RequestParam(value = "chapter"    ,required = false) String chapter)
     {
-        System.out.println("유저번호 :"+session.getAttribute("U_NUM") +  "\n 소설번호 : " + n_num);
 
         if (page == null || page =="" ||page=="0")
         {
@@ -214,7 +209,7 @@ public class NovelController {
         else
         {
             if(novelMapper.memoOK((Integer)session.getAttribute("U_NUM"), n_num) == 0) {
-                System.out.println("수정권한이 없습니다.");
+
                 return "redirect:redirect:/novelnet/novel?" +
                         "n_num="+n_num+
                         "&sort="+sort+
@@ -236,7 +231,6 @@ public class NovelController {
         memoVO.setM_type(nwForm.getWrite_type());
         memoVO.setM_num(Integer.parseInt(nwForm.getWrite_chapter()));
 
-        System.out.println(nwForm.getWrite_chapter()+'/'+nwForm.getWrite_title()+'/'+nwForm.getWrite_type()+'/'+nwForm.getWrite_memo());
         novelMapper.memoUpdate(memoVO);
 
         return "redirect:/novelnet/view?n_num="+nwForm.getWrite_number()+"&chapter="+nwForm.getWrite_chapter()+
@@ -333,10 +327,6 @@ public class NovelController {
                 model.addAttribute("secondTag",second_tag);
             }
 
-            System.out.println("첫태그 : "    + first_tag);
-            System.out.println("태그리스트 : " + second_tag);
-            System.out.println("유저번호 : "   + u_num);
-
             return "novel_update";
         }
     }
@@ -358,13 +348,6 @@ public class NovelController {
 
         if(regist_title != null && !regist_title.equals("") && session.getAttribute("U_NUM") != null)
         {
-            System.out.println("작품명 : " + regist_title + "\n" +
-                    "연재방식 : " + write_class + "\n" +
-                    "독점여부 : " + monopoly + "\n" +
-                    "연재상태 : " + consummation + "\n" +
-                    "작품분류 : " + first + "\n" +
-                    "해쉬태그 : " + hashtag_add + "\n" +
-                    "작품소개 : " + novel_introduction);
 
             novelVO.setN_title(regist_title);               //타이틀
             novelVO.setN_type(write_class);                 //연재방식
@@ -380,7 +363,7 @@ public class NovelController {
             if (!coverFile.isEmpty()) { fileUploadService.fileUpload(coverFile, novelVO.getN_num()); } //이미지 저장
         }
         else
-        {   System.out.println("작품명 없음");
+        {
             return "redirect:/novelnet/regist";
         }
 
@@ -420,14 +403,6 @@ public class NovelController {
 
         if(regist_title != null && !regist_title.equals("") && session.getAttribute("U_NUM") != null)
         {
-            System.out.println("작품명 : " + regist_title + "\n" +
-                    "연재방식 : " + write_class + "\n" +
-                    "독점여부 : " + monopoly + "\n" +
-                    "연재상태 : " + consummation + "\n" +
-                    "작품분류 : " + first + "\n" +
-                    "해쉬태그 : " + hashtag_add + "\n" +
-                    "작품소개 : " + novel_introduction + "\n" +
-                    "작품번호 : " + n_num);
 
             novelVO.setN_title(regist_title);               //타이틀
             novelVO.setN_type(write_class);                 //연재방식
@@ -445,7 +420,7 @@ public class NovelController {
             if (!coverFile.isEmpty()) { fileUploadService.fileUpload(coverFile, novelVO.getN_num()); } //이미지 저장
         }
         else
-        {   System.out.println("작품명 없음");
+        {
             return "redirect:/novelnet/regist";
         }
 
@@ -471,9 +446,7 @@ public class NovelController {
     {
         novelVO = novelMapper.getBookDate(n_num);
         String u_num = (String)session.getAttribute("U_NUM").toString();
-        System.out.println("삭제");
-        System.out.println(n_num);
-        System.out.println(novelVO.getU_num()+"/"+u_num);
+
         int NovelOk = 0;
         int memoOk=0;
         if (u_num.equals(novelVO.getU_num())){
@@ -523,7 +496,6 @@ public class NovelController {
         }
 
         int stop = novelMapper.novelStopCheak(n_num);
-        System.out.println("정지수="+  stop);
         if (stop > 0)        { return "redirect:/novelnet";}
 
         if (m_num == null || manageService.isInteger(m_num) == false || n_num == null || manageService.isInteger(n_num) == false)
@@ -534,7 +506,6 @@ public class NovelController {
         {
             //게시물 존재확인
             int memoCnt = novelMapper.cheakMemo(m_num);
-            System.out.println("존재여부 : "+memoCnt);
 
             if(memoCnt == 0)
             {
@@ -554,7 +525,7 @@ public class NovelController {
                                         "&sort="+sort+
                                         "&page="+page+
                                         "&chapter="+next;
-                System.out.println(next);
+
             }
 
             //이전화
@@ -565,9 +536,7 @@ public class NovelController {
                                         "&sort="+sort+
                                         "&page="+page+
                                         "&chapter="+back;
-                System.out.println(back);
             }
-            System.out.println("소설번호" + n_num + " / 챕터번호" + m_num);
 
             //리플 갯수
             int cnt = novelMapper.getReplyCount(m_num, n_num);
@@ -590,15 +559,13 @@ public class NovelController {
                 //수정권환
                 int unt = novelMapper.UpdateOkCheaker(m_num, u_num);
                 model.addAttribute("updateOK",unt);
-                System.out.println("권환 : " + unt);
+
 
                 //조회수증가
                 if(session.getAttribute("chapter_"+m_num) == null){
                     session.setAttribute("chapter_"+m_num, m_num);
                     novelMapper.countUp(m_num);
 
-                    System.out.println("조회수 증가");
-                    System.out.println("챕터 세션 : "+ session.getAttribute("chapter_"+m_num));
                 }
             }
 
@@ -630,7 +597,6 @@ public class NovelController {
     {
         String state = "";
         String u_num;
-        System.out.println(r_rnum);
         if(session.getAttribute("U_NUM") == null)
         {
             return "댓글 작성 실패";
@@ -639,20 +605,15 @@ public class NovelController {
         {
             u_num = (String)session.getAttribute("U_NUM").toString(); //유저번호
         }
-        System.out.println("유저번호 :" + u_num);
-        System.out.println("메모 : "+ r_memo + "\n"+
-                            "글번호 : " + m_num + "\n"+
-                            "대댓글번호 : " + r_rnum + "\n"+
-                            "소설번호 :" + n_num);
+
         if(r_memo != "" && r_memo != null){
             if (r_rnum == null || r_rnum == "0"){
                 novelMapper.saveReply(u_num, n_num, m_num, r_memo);
-                System.out.println("댓글 등록완료");
+
                 state = "댓글 등록완료";
             }else
             {
                 novelMapper.saveReReply(u_num, n_num, m_num, r_rnum, r_memo);
-                System.out.println("대댓글 등록완료");
                 state = "댓글 등록완료";
             }
         }
@@ -725,7 +686,6 @@ public class NovelController {
         else
         {
             cnt = novelMapper.replyWarningCheak(r_num,id);
-            System.out.println("신고여부"+cnt);
             if(cnt == 0)
             {
                 novelMapper.replyWarning(r_num,id);
@@ -753,7 +713,6 @@ public class NovelController {
 
         int cnt = 0;
 
-        System.out.println(r_num+"/"+type);
 
         if (type.equals("good"))
         {
@@ -781,7 +740,6 @@ public class NovelController {
         int m_count;
         if (m_num == null || m_num =="" && updown == null || updown ==""){ m_count=0; }
         else {
-            System.out.println(updown+"/"+m_num);
             if (updown.equals("up")) {
                 novelMapper.goodUp(m_num);
             }
@@ -822,7 +780,6 @@ public class NovelController {
 
                 //신고 등록 여부 확인
                 String timgDiff = warningMapper.cheakMemoWarning(novel_num,u_num);
-                System.out.println(timgDiff);
 
                 //신고시간이 null값이거나 1440분을 넘으면 경고등록
                 if (timgDiff == null)
@@ -866,20 +823,17 @@ public class NovelController {
         if (sort == null || !sort.equals("desc"))
         {
             sort = "asc";
-            System.out.println(sort);
         }
 
         if(session.getAttribute("U_NUM") != null) {
             u_num = (String) session.getAttribute("U_NUM").toString(); //유저번호
         }
 
-        System.out.println("유저번호 :" + u_num);
 
         if (n_num == null || n_num.matches("-?\\d+(\\.\\d+)?") == false ){ return "redirect:/novelnet"; } //소설데이터 검색 실패시
         else
         {
             int stop = novelMapper.novelStopCheak(n_num);
-            System.out.println("정지수="+  stop);
             if (stop > 0)        { return "redirect:/novelnet";}
 
             //소설 데이터 검색
@@ -892,7 +846,6 @@ public class NovelController {
                 try
                 {
                     novelVO = novelMapper.getBookDate(n_num); //정보검색
-                    System.out.println(novelVO);
 
                     //정지여부 확인 후 검색 속행
                     if (novelVO.getStopPoint() ==0)
@@ -902,7 +855,6 @@ public class NovelController {
                         //페이징
                         PageingVO pageingVO = new PageingVO();
                         model.addAttribute("paging", novelRepository.novelPaging(n_num, pageInt));
-                        System.out.println(pageingVO);
 
                         if (page != "1") {
                             start = (pageInt - 1) * 10;
@@ -917,24 +869,20 @@ public class NovelController {
                         //작가검색
                         String writer = novelMapper.getWriter(novelVO.getU_num());
                         if (writer == null || writer == "") {
-                            System.out.println("잘못된 이용자입니다.");
                             writer = "가입번호 " + novelVO.getU_num() + " 작가님";
                             model.addAttribute("writer", writer);
                         } else {
-                            System.out.println(writer);
                             model.addAttribute("writer", writer);
                         }
 
                         //태그검색
                         List<TagVO> tagVOList = novelMapper.getAllTag(n_num);
                         if (tagVOList != null) {
-                            System.out.println("태그" + tagVOList);
                             model.addAttribute("tag", tagVOList);
                         }
 
                         //마지막으로 본 게시물 검색
                         String lastChapter = novelMapper.getLastChapter(n_num, u_num);
-                        System.out.println(lastChapter);
                         model.addAttribute("lastChpater", lastChapter);
 
                         //모델에 뷰로 담을 정보 전송
@@ -946,7 +894,6 @@ public class NovelController {
 
                         //작가의 다른 소설 검색
                         int t = novelMapper.getAnotherBookCnt(novelVO.getU_num());
-                        System.out.println("갯수"+t);
                         NovelVO subNovel = new NovelVO();
                         List<TagVO> subTagList = null;
 
@@ -994,7 +941,6 @@ public class NovelController {
         {
             id = (String)session.getAttribute("U_NUM").toString();
 
-            System.out.println(id+"/" +n_num+ "/" +book_switch);
 
             if (book_switch.equals("0"))
             {
@@ -1003,7 +949,7 @@ public class NovelController {
                 {
                     searchMapper.setBookMark(id, n_num);
                     bookmarkSwitch = "on";
-                    System.out.println("북마크 되었습니다.");
+
                 }
             }
             if (book_switch.equals("1"))
@@ -1011,7 +957,6 @@ public class NovelController {
                 int bm_num = searchMapper.getBookMarkNum(id, n_num);
                 searchMapper.deleteBookMark(bm_num);
                 bookmarkSwitch = "off";
-                System.out.println("북마크 취소되었습니다.");
             }
         }
 
@@ -1027,8 +972,6 @@ public class NovelController {
         if(session.getAttribute("U_NUM")!=null && n_num!= null)
         {
             String id = (String)session.getAttribute("U_NUM").toString();
-
-            System.out.println(id+"/" +n_num+ "/" +n_num);
 
             int bm_num = searchMapper.getBookMarkNum(id, n_num);
             searchMapper.deleteBookMark(bm_num);
@@ -1049,7 +992,6 @@ public class NovelController {
                          Model model) throws Exception{
 
         String u_num="0";
-        System.out.println("======================================");
 
         if(session.getAttribute("U_NUM") != null)
         {
@@ -1078,13 +1020,11 @@ public class NovelController {
         else{
           if(manageService.isInteger(page) == false){page = "1"; }
         }
-        System.out.println("변수 리스트 :"+keyword +"/"+ newOld +"/"+category+"/"+page);
 
 
         if (u_num != ""){
             //북마크 갯수 확보
             int count = searchMapper.bookmarkCount(u_num, keyword, category);
-            System.out.println("갯수 : " + count);
 
             //페이징 처리
             pageingService.setNowPage(page);
@@ -1097,11 +1037,6 @@ public class NovelController {
             int rightPage   = pageingService.getRightPage();
             int displayPage = pageingService.getDisplayPage();
 
-            System.out.println("전채 간격 " + allCase);
-            System.out.println("현재 간격 " + nowCase);
-            System.out.println("전 버튼 " + leftPage);
-            System.out.println("후 버튼 " + rightPage);
-            System.out.println("하단에 나온 페이지 " + displayPage);
 
             model.addAttribute("allPage", allPage);
             model.addAttribute("nowCase", nowCase);
@@ -1178,10 +1113,8 @@ public class NovelController {
         return "best";
     }
 
-    @GetMapping("/t")
+    @GetMapping("")
     public String t(){
-        List<NovelVO> list = novelMapper.test();
-        System.out.println(list);
-        return "test";
+        return "redirect:/novelnet";
     }
 }

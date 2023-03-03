@@ -38,7 +38,6 @@ public class SearchController
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
 
-        System.out.println("======================================");
 
         if(keyword == null)                   {keyword = "";    }
 
@@ -82,11 +81,8 @@ public class SearchController
 
         if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
 
-        System.out.println("검색 메인 태그"+mainTag);
-
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
         int count = searchMapper.searchNovelCount(mainTag,searchTag,searchType,keyword);
-        System.out.println("갯수 : " + count);
 
         //페이징 처리
         pageingService.setNowPage(page);
@@ -99,11 +95,6 @@ public class SearchController
         int rightPage   = pageingService.getRightPage();
         int displayPage = pageingService.getDisplayPage();
 
-        System.out.println("전채 간격 " + allCase);
-        System.out.println("현재 간격 " + nowCase);
-        System.out.println("전 버튼 " + leftPage);
-        System.out.println("후 버튼 " + rightPage);
-        System.out.println("하단에 나온 페이지 " + displayPage);
 
         model.addAttribute("keyword", keyword);
         model.addAttribute("searchCount", count);
@@ -117,12 +108,10 @@ public class SearchController
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
 
-        System.out.println("정렬 : "+sort+"/ 메인테그 : "+mainTag+"/ 검색 태그 : "+searchTag+"/ 검색 타입:"+searchType+"/");
 
 
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
         List<NovelVO> novelList = searchMapper.getSearchNovelList(sort,mainTag,searchTag,searchType, keyword, start);
-        //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
         //년도확인
@@ -145,7 +134,6 @@ public class SearchController
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
 
-        System.out.println("======================================");
 
         //연재방식
         String novelType = "free";
@@ -204,12 +192,9 @@ public class SearchController
         //서브 검색태그
         if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
 
-        System.out.println("검색 메인 태그"+mainTag);
 
-        System.out.println("메인태그 "+ mainTag +"/서치태그: "+ searchTag +"/ 노블타입 : "+ novelType +"/ 두 타입: "+ doType +"/ 모노폴리 :"+ monopoly);
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
         int count = searchMapper.searchPlusNovelCount(mainTag,searchTag,novelType,doType,monopoly);
-        System.out.println("갯수 : " + count);
 
         //페이징 처리
         pageingService.setNowPage(page);
@@ -222,11 +207,6 @@ public class SearchController
         int rightPage   = pageingService.getRightPage();
         int displayPage = pageingService.getDisplayPage();
 
-        System.out.println("전채 간격 " + allCase);
-        System.out.println("현재 간격 " + nowCase);
-        System.out.println("전 버튼 " + leftPage);
-        System.out.println("후 버튼 " + rightPage);
-        System.out.println("하단에 나온 페이지 " + displayPage);
 
         model.addAttribute("searchCount", count);
         model.addAttribute("allPage", allPage);
@@ -239,12 +219,8 @@ public class SearchController
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
 
-        System.out.println("정렬 : "+sort+"/ 메인테그 : "+mainTag+"/ 검색 태그 : "+searchTag+"/ 검색 타입:"+doType+"/");
-
-
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
         List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,novelType,doType,monopoly,start);
-        //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
         //년도확인
@@ -269,8 +245,6 @@ public class SearchController
                              @RequestParam(value = "doType"    ,required = false) String doType,
                              @RequestParam(value = "page"      ,required = false) String page,
                              Model model) throws Exception{
-
-        System.out.println("======================================");
 
         //연재방식
         String novelType = "prime";
@@ -330,12 +304,8 @@ public class SearchController
         //서브 검색태그
         if(searchTag==null)                   {searchTag  = "";}  //검색태그가 비어있을 경우
 
-        System.out.println("검색 메인 태그"+mainTag);
-
-        System.out.println("메인태그 "+ mainTag +"/서치태그: "+ searchTag +"/ 노블타입 : "+ novelType +"/ 두 타입: "+ doType +"/ 모노폴리 :"+ monopoly);
         //검색갯수 확보(메인테그, 검색태그, 검색타입, 검색키워드)
         int count = searchMapper.searchPlusNovelCount(mainTag,searchTag,novelType,doType,monopoly);
-        System.out.println("갯수 : " + count);
 
         //페이징 처리
         pageingService.setNowPage(page);
@@ -348,11 +318,6 @@ public class SearchController
         int rightPage   = pageingService.getRightPage();
         int displayPage = pageingService.getDisplayPage();
 
-        System.out.println("전채 간격 " + allCase);
-        System.out.println("현재 간격 " + nowCase);
-        System.out.println("전 버튼 " + leftPage);
-        System.out.println("후 버튼 " + rightPage);
-        System.out.println("하단에 나온 페이지 " + displayPage);
 
         model.addAttribute("searchCount", count);
         model.addAttribute("allPage", allPage);
@@ -365,12 +330,8 @@ public class SearchController
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
 
-        System.out.println("정렬 : "+sort+"/ 메인테그 : "+mainTag+"/ 검색 태그 : "+searchTag+"/ 검색 타입:"+doType+"/");
-
-
         //검색(검색조건, 메인태그, 검색태그, 검색카테고리, 검색어, 시작점 순서)
         List<NovelVO> novelList = searchMapper.getSearchPlusNovelList(sort,mainTag,searchTag,novelType,doType,monopoly,start);
-        //System.out.println(novelList);
         model.addAttribute("novelList",novelList);
 
         //년도확인

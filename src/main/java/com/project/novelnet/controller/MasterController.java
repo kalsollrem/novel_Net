@@ -86,8 +86,7 @@ public class MasterController {
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
         List<MasterNovel> list = masterMapper.novelShingo(searchType,keyword,start);
-        System.out.println("총"+allPageCnt+"개/");
-        System.out.println(list);
+
 
 
         model.addAttribute("list",list);
@@ -166,7 +165,6 @@ public class MasterController {
         //레벨확인
         try                 {level= (Integer)session.getAttribute("U_LEVEL");}
         catch (Exception e) {level = 0;}
-        System.out.println("유저레벨:"+u_level);
         if(level != 9 || level == 0){return "redirect:/novelnet";}
 
         //변수 처리
@@ -179,16 +177,11 @@ public class MasterController {
         if(keyword    == null || keyword.replace(" ","")    == "")  {keyword    = "";}
 
 
-        System.out.println(keyword);
         //페이징처리
         int allPageCnt = masterMapper.replyShingoCnt(searchType,keyword);
         pageingService.setNowPage(page);
         pageingService.setTotalCount(allPageCnt);
         newPageingVO = pageingService.setNewPageingVO(newPageingVO);
-
-        System.out.println("allPage:" + newPageingVO.getAllPage());
-        System.out.println("nowCase:" + newPageingVO.getNowCase());
-        System.out.println("allCase:" + newPageingVO.getAllCase());
 
         model.addAttribute("paging", newPageingVO);
 
@@ -196,8 +189,7 @@ public class MasterController {
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
         List<MasterReply> list = masterMapper.replyShingo(searchType,keyword,start);
-        System.out.println("총"+allPageCnt+"개/");
-        System.out.println(list);
+
 
 
         model.addAttribute("list",list);
@@ -242,7 +234,7 @@ public class MasterController {
         //레벨확인
         try                 {level= (Integer)session.getAttribute("U_LEVEL");}
         catch (Exception e) {level = 0;}
-        System.out.println("유저레벨:"+u_level);
+
         if(level != 9 || level == 0){return "redirect:/novelnet";}
 
         //변수 처리
@@ -260,14 +252,10 @@ public class MasterController {
 
         //페이징처리
         int allPageCnt = masterMapper.novelCnt(searchType,keyword, sort);
-        System.out.println(allPageCnt);
         pageingService.setNowPage(page);
         pageingService.setTotalCount(allPageCnt);
         newPageingVO = pageingService.setNewPageingVO(newPageingVO);
 
-        System.out.println("allPage:" + newPageingVO.getAllPage());
-        System.out.println("nowCase:" + newPageingVO.getNowCase());
-        System.out.println("allCase:" + newPageingVO.getAllCase());
 
         model.addAttribute("paging", newPageingVO);
 
@@ -275,7 +263,6 @@ public class MasterController {
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
         List<NovelVO> list = masterMapper.masterNovelList(searchType,keyword, sort, start);
-        System.out.println("총"+allPageCnt+"개/");
 
 
 
@@ -313,7 +300,6 @@ public class MasterController {
             try {cover = masterMapper.bannerPickGet(num);}
             catch (Exception e){cover = "";}
 
-            System.out.println(cover);
 
             if(cover != ""){ model.addAttribute("cover",cover); }
             return "image_modalC";
@@ -378,8 +364,7 @@ public class MasterController {
 
         //삭제
         try                 {answer = masterMapper.deleteBannerPick(n_num);}
-        catch (Exception e) {System.out.println("실패");}
-        System.out.println("결과 값" + answer);
+        catch (Exception e) {}
 
         return answer;
     }
@@ -394,7 +379,6 @@ public class MasterController {
     {
         //1:성공, 0:실패
         int answer = 0;
-        System.out.println(n_num+'/'+ switchUD);
 //        if((String)session.getAttribute("U_LEVEL").toString() == "9"){
             answer = masterMapper.masterNovelSwitch(n_num,switchUD);
 //        }
@@ -440,7 +424,6 @@ public class MasterController {
         //레벨확인
         try                 {level= (Integer)session.getAttribute("U_LEVEL");}
         catch (Exception e) {level = 0;}
-        System.out.println("유저레벨:"+u_level);
         if(level != 9 || level == 0){return "redirect:/novelnet";}
 
         //변수 처리
@@ -468,8 +451,7 @@ public class MasterController {
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
         List<UserVO> list = masterMapper.masterUserList(searchType,keyword,sort,start);
-        System.out.println("총"+allPageCnt+"개/");
-        System.out.println(list);
+
 
 
         model.addAttribute("list",list);
@@ -512,7 +494,6 @@ public class MasterController {
         //시작페이지처리
         int start = (Integer.parseInt(page)-1)*10;
         List<MasterMemoVO> list = masterMapper.findGongList(carte);
-        System.out.println("총"+allPageCnt+"개/");
 
         model.addAttribute("list",list);
 
@@ -537,7 +518,6 @@ public class MasterController {
         //레벨확인
         try                 {level= (Integer)session.getAttribute("U_LEVEL");}
         catch (Exception e) {level = 0;}
-        System.out.println("유저레벨:"+u_level);
         if(level != 9 || level == 0){return "redirect:/master/notification?carte="+carte+"&page="+page;}
 
         //변수정리
@@ -577,7 +557,6 @@ public class MasterController {
             String answer;
 
             if(write_title.replace(" ","") == "") {write_title = "오늘의 공지";}
-            System.out.println("타입 : " +gongType);
 
             masterMemoVO.setU_num("1");
             masterMemoVO.setMa_title(write_title);
@@ -591,12 +570,10 @@ public class MasterController {
                 if (answer != "no")
                 {
                     masterMemoVO.setMa_cover(answer);
-                    System.out.println(answer);
                 }
             } //이미지 저장
 
             int t = masterMapper.writeGongji(masterMemoVO);
-            System.out.println(t);
 
 //        }
         return "redirect:/master/view?No="+masterMemoVO.getMa_num()+"&carte="+gongType+"&page="+page;
@@ -615,7 +592,6 @@ public class MasterController {
         //레벨확인
         try                 {level= (Integer)session.getAttribute("U_LEVEL");}
         catch (Exception e) {level = 0;}
-        System.out.println("유저레벨:"+u_level);
         if(level != 9 || level == 0){return "redirect:/master/view?No="+masterMemoVO.getMa_num();}
 
         //변수정리
@@ -655,7 +631,6 @@ public class MasterController {
         catch (Exception e) {oldCover = "noImg";}
 
         if(write_title.replace(" ","") == "") {write_title = "오늘의 공지";}
-        System.out.println("타입 : " +gongType);
 
         masterMemoVO.setImageOn("off");
         masterMemoVO.setU_num("1");
@@ -675,7 +650,6 @@ public class MasterController {
             if (answer != "no")
             {
                 masterMemoVO.setMa_cover(answer);
-                System.out.println(answer);
                 masterMemoVO.setImageOn("on");
             }
         }
@@ -684,8 +658,6 @@ public class MasterController {
         if (gongType == "gong") { if (oldCover != "noImg") {fileUploadService.deleteFile(oldCover);} }
 
         int t = masterMapper.reWriteGongJi(masterMemoVO);
-        System.out.println(t);
-
 
         return "redirect:/master/view?No="+masterMemoVO.getMa_num()+"&carte="+carte+"&page="+page;
     }
@@ -711,7 +683,6 @@ public class MasterController {
             //삭제
             try                 {answer = masterMapper.deleteMasterMemo(ma_num,u_num);}
             catch (Exception e) {System.out.println("실패");}
-            System.out.println("결과 값" + answer);
 //        }
 
         return answer;
