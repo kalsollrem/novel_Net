@@ -79,8 +79,8 @@ public class NovelDB implements NovelRepository {
         //코드생성
         String code = mailService.codemaker();
 
-        System.out.println("아이디"+userVO.getU_mail() + "/ 비번 : " + userVO.getU_pass()+ "/ 닉 : "+userVO.getU_nick());
-        System.out.println("인증코드" + code);
+                //System.out.println("아이디"+userVO.getU_mail() + "/ 비번 : " + userVO.getU_pass()+ "/ 닉 : "+userVO.getU_nick());
+                //System.out.println("인증코드" + code);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
@@ -109,7 +109,7 @@ public class NovelDB implements NovelRepository {
     @Override
     public String findCode(int U_num){
         String code = jdbcTemplate.queryForObject("select u_code from user where u_num = ?", String.class, U_num);
-        System.out.println("코드는 : "+ code);
+                //System.out.println("코드는 : "+ code);
 
         return code;
     }
@@ -119,16 +119,16 @@ public class NovelDB implements NovelRepository {
     public void UesrOK(String code) {
 
         String userNum = jdbcTemplate.queryForObject("select u_num from user where u_code = ?", String.class, code);
-        System.out.println("아이디: "+userNum);
+                //System.out.println("아이디: "+userNum);
 
         if (userNum != null)
         {
             jdbcTemplate.update("update user set u_ok = '1', u_code = 'done' where u_num = ?", userNum);
-            System.out.println("인증 변경을 실행하였습니다");
+            //System.out.println("인증 변경을 실행하였습니다");
         }
         else
         {
-            System.out.println("인증 변경에 실패하였습니다.");
+            //System.out.println("인증 변경에 실패하였습니다.");
         }
     }
 
@@ -155,7 +155,7 @@ public class NovelDB implements NovelRepository {
             for(int i = 1 ; i<tagSplit.length; i++)
             {
                 hashtag.add("#"+tagSplit[i]);
-                System.out.println("해쉬태그 "+i+"번째 : "+hashtag.get(i));
+                    //System.out.println("해쉬태그 "+i+"번째 : "+hashtag.get(i));
 
                 //해쉬태그 저장
                 novelMapper.saveTag(n_num, hashtag.get(i), "2st");
@@ -194,12 +194,12 @@ public class NovelDB implements NovelRepository {
         //오른쪽 버튼 구하기
         if (nowLength < allLength && allpage>bookcase ) { pageRight = (nowLength * bookcase)+1;} //내 간격이 전체 간격과 같으면 우측 버튼 없음 ex)현재간격 3, 전체간격 3
 
-        System.out.println("검색된 게시물 숫자 : " + allmemo);
-        System.out.println("검색된 페이지 숫자 : " + allpage);
-        System.out.println("내 전체 페이지 간격 : " + allLength);
-        System.out.println("내가 있는 간격 : " + nowLength);
-        System.out.println("왼쪽 버튼 : " + pageLeft);
-        System.out.println("오른쪽 버튼 : " + pageRight);
+                //System.out.println("검색된 게시물 숫자 : " + allmemo);
+                //System.out.println("검색된 페이지 숫자 : " + allpage);
+                //System.out.println("내 전체 페이지 간격 : " + allLength);
+                //System.out.println("내가 있는 간격 : " + nowLength);
+                //System.out.println("왼쪽 버튼 : " + pageLeft);
+                //System.out.println("오른쪽 버튼 : " + pageRight);
 
         pageingVO.setAllmemo(allmemo);
         pageingVO.setAllpage(allpage);
