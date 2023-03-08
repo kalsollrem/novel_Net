@@ -30,7 +30,7 @@
                             <li>
                                 <a th:href="@{/novelnet/novel(n_num=${novelList.n_num},page=1,sort='asc')}">
                                     <div class="ranking_img_zone">
-                                        <img th:src="'../images/'+${novelList.n_cover}"  onerror="this.src='../img/write_cover.jpg'">
+                                        <img th:src="'../noteImg/'+${novelList.n_cover}"  onerror="this.src='../img/write_cover.jpg'">
                                         <div class="ranking_num" th:text="${novelList.rnum}">1</div>
                                     </div>
                                     <div class="ranking_novel_title"><span class="rnt_inside overLineTypeA" th:title="${novelList.n_title}">[[${novelList.n_title}]]</span></div>

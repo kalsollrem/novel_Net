@@ -198,4 +198,29 @@ public interface NovelMapper {
     //신고
     @Insert("insert into r_warning(r_num, u_num) values(#{r_num}, #{u_num})")
     public int replyWarning(@Param("r_num")String r_num, @Param("u_num")String u_num);
+
+
+
+
+    //게시물 생성용
+    @Insert("INSERT INTO hashtag (`h_tag`, `n_num`, `t_carte`) VALUES (#{a}, #{b}, '2st')")
+    public int testeB(String a, int b);
+
+    @Insert("INSERT INTO hashtag (`h_tag`, `n_num`, `t_carte`) VALUES (#{a}, #{b}, '1st')")
+    public int testeA(String a, int b);
+
+    @Insert("INSERT INTO memo (`n_num`, `m_title`, `m_memo`, `m_count`, `m_good`, `b_stop`, `m_type`) " +
+                      "VALUES (#{num}, #{title}, #{memo}, #{m_count}, #{m_good}, '0', 'gong')")
+    public int testeM(String title, String memo, int num, int m_count , int m_good);
+
+
+    @Update("UPDATE novel SET n_title = #{a}, n_introduction = #{b}, n_type = #{type}, n_fin=#{fin} WHERE (n_num = #{c})")
+    public int tested(String a, String b, String type, String fin, int c);
+
+    @Update("UPDATE novel SET n_cover=#{cover} WHERE (n_num = #{c})")
+    public int coverd(String cover, int c);
+
+    @Update("UPDATE novel SET n_introduction=#{in} WHERE (n_num = #{c})")
+    public int introdu(String in, int c);
+
 }

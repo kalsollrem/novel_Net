@@ -120,7 +120,7 @@
                         <th:block th:each="pickList : ${pickList}">
                             <li th:if="${pickList.noType == 1}">
                                 <div class="pd_tal_hold">
-                                    <a th:href="@{/novelnet/novel(n_num=${pickList.n_num},page=1,sort='asc')}">
+                                    <a th:href="@{/novelnet/novel(n_num=${pickList.n_num},page=1,sort='asc')}" >
                                         <span class="img_zone"><img th:src="'../noteImg/'+${pickList.n_cover}" th:alt="${pickList.n_title}"  onerror="this.src='../img/write_cover.jpg'"></span>
                                         <span class="novel_title overLineTypeA" th:title="${pickList.n_title}" th:text="${pickList.n_title}"></span>
                                     </a>

@@ -226,8 +226,9 @@ public class NovelController {
     {
         MemoVO memoVO = new MemoVO();
 
+        String memo = nwForm.getWrite_memo().replaceAll("\\n", "<br/>");
         memoVO.setM_title(nwForm.getWrite_title());
-        memoVO.setM_memo(nwForm.getWrite_memo());
+        memoVO.setM_memo(memo);
         memoVO.setM_type(nwForm.getWrite_type());
         memoVO.setM_num(Integer.parseInt(nwForm.getWrite_chapter()));
 
@@ -1116,5 +1117,448 @@ public class NovelController {
     @GetMapping("")
     public String t(){
         return "redirect:/novelnet";
+    }
+
+    @GetMapping("pro")
+    public String pro(){
+
+// String n1 = "안녕하세요 독자여러분.\n"+ "다름이 아니라 개인적인 사정이 생겨 이번 한주동안 잠시 휴재를 갖도록 해야할 것 같습니다.\n" + "한주 충전후 다시 돌아오겠습니다!";
+// String n2 ="안녕핫게요 독자여러분. 작가입니다\n" +"다름이 아니라 현재 슬럼프가와서 글을 대대적으로 고칠까 고민중입니다\n" + "이런 소식을 전해드리게되어 대단히 죄솝합니다";
+// String n3 = "안녕하세요 불초 작가입니다\n"+"현재 이벤트 중이오니 댓글을 달아주시면 추첨을 통해 기프티콘을 보내드립니다";
+
+//        String A = "";
+//        String B = "";
+//        String D = "";
+//        String type = "";
+//        String fin = "";
+//        String tagA = "";
+//        String tagB = "";
+//        String tagC = "";
+//        String cover = "";
+//        int t = 1;
+        Random rand = new Random();
+
+        int d=1;
+        int gd;
+        int PT;
+        String epsord = "";
+//        for(int n =1 ; n<=500; n++)
+//        {
+//            int overPT   = rand.nextInt(3);
+//
+//            for(int i =0 ; i<=overPT; i++)
+//            {
+//                PT   = rand.nextInt(2)+1;
+//
+//                switch (d) {
+//                    case 1:
+//                        novelMapper.testeM("공지사항입니다",n1,n,0, 0);
+//                        d=2;
+//                        break;
+//                    case 2:
+//                        novelMapper.testeM("새로운 전달사항입니다",n2,n,0, 0);
+//                        d=3;
+//                        break;
+//                    default:
+//                        novelMapper.testeM("공지확인 부탁드립니다",n3,n,0, 0);
+//                        d=1;
+//                        break;
+//                }
+//            }
+//        }
+
+
+//        for(int i = 1; i<=500; i++) {
+//            cover = t+".jpg";
+//            t++;
+//            if (t > 105) {t=1;}
+//
+//            novelMapper.coverd(cover, i);
+//
+//            //해쉬태그 제조기
+//            int PT = rand.nextInt(8)+1;
+//            switch (PT) {
+//                case 1:
+//                    tagA = "#게이트";
+//                    break;
+//                case 2:
+//                    tagA = "#나작소";
+//                    break;
+//                case 3:
+//                    tagA = "#BL";
+//                    break;
+//                case 4:
+//                    tagA = "#하렘";
+//                    break;
+//                case 5:
+//                    tagA = "#퓨전";
+//                    break;
+//                case 6:
+//                    tagA = "#사극";
+//                    break;
+//                case 7:
+//                    tagA = "#중세";
+//                    break;
+//                case 8:
+//                    tagA = "#로망";
+//                    break;
+//                default:
+//                    tagA = "#고구마";
+//                    break;
+//            }
+//            novelMapper.testeB(tagA,i);
+//
+//            int PA = rand.nextInt(8)+1;
+//            switch (PA) {
+//                case 1:
+//                    tagB = "#badass";
+//                    break;
+//                case 2:
+//                    tagB = "#쾌활한";
+//                    break;
+//                case 3:
+//                    tagB = "#마법";
+//                    break;
+//                case 4:
+//                    tagB = "#중세";
+//                    break;
+//                case 5:
+//                    tagB = "#선협";
+//                    break;
+//                case 6:
+//                    tagB = "#가족애";
+//                    break;
+//                case 7:
+//                    tagB = "#힘숨찐";
+//                    break;
+//                case 8:
+//                    tagB = "#수인";
+//                    break;
+//                default:
+//                    tagB = "#가상현실";
+//                    break;
+//            }
+//            novelMapper.testeB(tagB,i);
+//
+//            int PQ = rand.nextInt(8)+1;
+//            switch (PQ) {
+//                case 1:
+//                    tagC = "#판타지";
+//                    break;
+//                case 2:
+//                    tagC = "#무협";
+//                    break;
+//                case 3:
+//                    tagC = "#현대";
+//                    break;
+//                case 4:
+//                    tagC = "#로맨스";
+//                    break;
+//                case 5:
+//                    tagC = "#대체역사";
+//                    break;
+//                case 6:
+//                    tagC = "#공포";
+//                    break;
+//                case 7:
+//                    tagC = "#SF";
+//                    break;
+//                case 8:
+//                    tagC = "#스포츠";
+//                    break;
+//                default:
+//                    tagC = "#기타";
+//                    break;
+//            }
+//            novelMapper.testeA(tagC,i);
+//
+            //본문
+        String A = "";
+        for(int i = 1; i<=400; i++){
+            int PP = rand.nextInt(12) + 1;
+            switch (PP) {
+                case 1:
+                    A = "<p>암흑가의 검귀.</p> <br>" +
+                            "...그리고, 아카데미의 기간 강사.</p>";
+                    break;
+                case 2:
+                    A = "<p>세 번 죽었고.</p>" +
+                            "<br>" +
+                            "<p>네 번 살았으면.</p>" +
+                            "<br>" +
+                            "<p>고생했다, 이젠 끝낼 때도 됐다.</p>";
+                    break;
+                case 3:
+                    A = "<p>거대 용병 기업으로 거듭난 마계.</p>" +
+                            "<br>" +
+                            "<p>그 소소한 이야기.</p>";
+                    break;
+                case 4:
+                    A = "<p>정신차려보니 이상한 호텔에 떨어졌다.</p>" +
+                            "<br>" +
+                            "<p>무슨 일이 일어난걸까?</p>";
+                    break;
+                case 5:
+                    A = "<p>어쩌다 불로불사가 돼서,</p><br>" +
+                            "<p>어쩌다 아이를 키우는 이야기</p>";
+                    break;
+                case 6:
+                    A = "<p>1회차는 게임이었지만,</p>" +
+                            "<br>" +
+                            "<p>2회차는 실전이라고?!</p>" +
+                            "<br>" +
+                            "<p>하지만 오히려 좋아.</p>" +
+                            "<br>" +
+                            "<p>1회차 때 구하지 못한 나의 사랑스러운 최애캐이자, 연인이었던 그녀를 구해서 반드시 결혼해주마!</p>"+
+                            "<br>" +
+                            "<p>그러기 위해서는 세계부터 구해야겠지?</p>" +
+                            "<br>" +
+                            "<p>그런데 여자가 좀 많은데?</p>" +
+                            "<br>" +
+                            "<p>여친이 하렘을 강요하는데?!</p>";
+                    break;
+                case 7:
+                    A = "<p>즐겨하던 게임 지옥 난이도에 최약체로 빙의했다. 살고 싶은데 주인공 새끼 컨트롤 상태가 심각하다.<br></p>" +
+                            "<br>" +
+                            "<p>어쩔 수 없다.<br></p>" +
+                            "<br>" +
+                            "<p>내가 직접 배드 엔딩을 막는 수밖에.</p>";
+                    break;
+                case 8:
+                    A = "<p>24시간 풀접속 게임 폐인 쌀먹녀를 주웠다.<br></p>" +
+                            "<br>" +
+                            "<p>그런데... 행복이 과하다.</p>";
+                    break;
+                case 9:
+                    A = "무료분만 찍먹하고 뱉었던 로판에 빙의했다.<br></p>" +
+                            "<p>다행히 빙의한 몸 속에 흐르는 피가 푸르고도 푸르러 먹고 사는 것에 문제는 없었다.</p>" +
+                            "<br>" +
+                            "<p>우리 가문의 영화는 황실로부터 대대로 받은 은덕 덕분이다.</p>" +
+                            "<br>" +
+                            "<p>그 대가인지 제도 광장에서 황제 초상화 좀 열심히 흔들 것 같은 아버지를 두었고, 강제로 공무원 루트를 밟게 되었다.</p>" +
+                            "<br>" +
+                            "<p>남들 로맨스 찍을 때 나는 싱글벙글 공무원 라이프를 보낸다.</p>";
+                    break;
+                case 10:
+                    A = "<p>10년간 플레이해왔던 게임의 후속작 베타테스트 신청 메일에 낚여서 끌려갔는데, 지금껏 깔아온 모드가 그대로 남아있었다.</p>" +
+                            "<br>" +
+                            "<p>적 강화 모드는 물론, NPC의 성별 반전 모드와 외형 리터칭 모드까지 전부 다.</p>" +
+                            "<br>" +
+                            "<p>심지어는 캐릭터들의 복장 변경 모드까지도.</p>";
+                    break;
+                case 11:
+                    A = "[창술 Lv.1]</p>" +
+                            "<br>" +
+                            "<p>많은 특성 중에서 창술이 걸렸다는 건 어떻게 보면 나쁘지 않은 결과로 볼 수 있지만…….</p>" +
+                            "<br>" +
+                            "<p>아니, 나빴다.</p>" +
+                            "<br>" +
+                            "<p>그것도 내가 느끼기엔 거의 최악의 결과였다.</p>";
+                    break;
+                case 12:
+                    A = "<p>진달래는 1998년 1월 5일부터 동월 26일까지 방영되었던 KBS 2TV 월화 드라마이며, 총 8부작이다. 극본은 윤혁민 외 2명, 연출은 홍성덕 PD, 무술감독은 김백수, 무용총괄은 김향금[, 음악은 구훈과 이임우, 편곡은 박찬혁 등이 맡았다.</p>" +
+                            " <br>" +
+                            "<p> 라는 스토리를 나는 기억하고 있다</p>";
+                    break;
+                default:
+                    A = "<p>야겜에 나오는 시간 정지 교배 아저씨가 되어버렸다.</p>" +
+                            "<br>" +
+                            "<br>" +
+                            "<p>근데 상황이 개판 5분 전이라, 먼저 세상을 구했더니.</p>" +
+                            "<br>" +
+                            "<br>" +
+                            "<p>어느새, 주변에서 나를 영웅이라고 칭송하고 있었다.</p>" +
+                            "<br>" +
+                            "<br>" +
+                            "<p>……영웅이고 나발이고, 그냥 은퇴하고 싶다.</p>";
+                    break;
+            }
+            novelMapper.introdu(A, i);
+        }
+//
+//            int PC = rand.nextInt(31)+1;
+//            switch (PC) {
+//                case 1:
+//                    B = "오늘";
+//                    break;
+//                case 2:
+//                    B = "내가";
+//                    break;
+//                case 3:
+//                    B = "아카데미";
+//                    break;
+//                case 4:
+//                    B = "오후의";
+//                    break;
+//                case 5:
+//                    B = "하늘의";
+//                    break;
+//                case 6:
+//                    B = "전능의";
+//                    break;
+//                case 7:
+//                    B = "구라안치고";
+//                    break;
+//                case 8:
+//                    B = "엑스트라";
+//                    break;
+//                case 9:
+//                    B = "천만의";
+//                    break;
+//                case 10:
+//                    B = "강호";
+//                    break;
+//                case 11:
+//                    B = "무협지";
+//                    break;
+//                case 12:
+//                    B = "평범한";
+//                    break;
+//                case 13:
+//                    B = "SSS급";
+//                    break;
+//                case 14:
+//                    B = "히로인은";
+//                    break;
+//                case 15:
+//                    B = "호랑";
+//                    break;
+//                case 16:
+//                    B = "밀밭의";
+//                    break;
+//                case 17:
+//                    B = "죽음의";
+//                    break;
+//                case 18:
+//                    B = "불사";
+//                    break;
+//                case 19:
+//                    B = "6★";
+//                    break;
+//                case 20:
+//                    B = "히든";
+//                    break;
+//                case 21:
+//                    B = "버튜얼";
+//                    break;
+//                case 22:
+//                    B = "내 옆방의";
+//                    break;
+//                case 23:
+//                    B = "찐따가";
+//                    break;
+//                case 24:
+//                    B = "천상천하";
+//                    break;
+//                case 25:
+//                    B = "모바일";
+//                    break;
+//                case 26:
+//                    B = "FFF급";
+//                    break;
+//                case 27:
+//                    B = "듣보잡";
+//                    break;
+//                case 28:
+//                    B = "세계를 멸망시키는";
+//                    break;
+//                case 29:
+//                    B = "거짓말쟁이의";
+//                    break;
+//                case 30:
+//                    B = "아메리카의";
+//                    break;
+//                default:
+//                    B = "내 나라의";
+//                    break;
+//            }
+//
+//            int PF = rand.nextInt(20)+1;
+//            switch (PF) {
+//                case 1:
+//                    D = " 창병이 되다";
+//                    break;
+//                case 2:
+//                    D = " 엘리트 지휘관";
+//                    break;
+//                case 3:
+//                    D = " 재능 천재";
+//                    break;
+//                case 4:
+//                    D = " 혼자 레벨업 하는 주인공";
+//                    break;
+//                case 5:
+//                    D = " 검객";
+//                    break;
+//                case 6:
+//                    D = " 버튜버가 되다";
+//                    break;
+//                case 7:
+//                    D = " 가짜 주인공이다";
+//                    break;
+//                case 8:
+//                    D = " 꿀빠는 악역";
+//                    break;
+//                case 9:
+//                    D = " 헌터 라이프";
+//                    break;
+//                case 10:
+//                    D = " 방랑기";
+//                    break;
+//                case 11:
+//                    D = " 추방 용사";
+//                    break;
+//                case 12:
+//                    D = " 반 맨 뒤 4번째 자리";
+//                    break;
+//                case 13:
+//                    D = " 폐기물이 되다";
+//                    break;
+//                case 14:
+//                    D = " 나홀로 독점";
+//                    break;
+//                case 15:
+//                    D = " 첩자";
+//                    break;
+//                case 16:
+//                    D = " 아스라이";
+//                    break;
+//                case 17:
+//                    D = " 네크로멘서가 되다";
+//                    break;
+//                case 18:
+//                    D = " 메이지";
+//                    break;
+//                case 19:
+//                    D = " 조각사";
+//                    break;
+//                default:
+//                    D = " 총통이 되다";
+//                    break;
+//            }
+//
+//            int RF = rand.nextInt(1)+1;
+//            switch (RF) {
+//                case 1:
+//                    type = "prime";
+//                    break;
+//                default:
+//                    type = "free";
+//                    break;
+//            }
+//
+//
+//            int RK = rand.nextInt(3)+1;
+//            switch (RK) {
+//                case 1:
+//                    fin = "done";
+//                    break;
+//                default:
+//                    fin = "doing";
+//                    break;
+//            }
+//            novelMapper.tested(B+D,A,type, fin, i);
+//        }
+        return "test";
     }
 }

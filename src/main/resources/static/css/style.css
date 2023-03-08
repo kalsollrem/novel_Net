@@ -93,12 +93,12 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 /*추천픽(.contents .main_content .recomend_pd) */
 .recomend_pd .recomend_pd_tal       {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; }
-.recomend_pd .recomend_pd_novel     {width: 100%; height: 350px;}
+.recomend_pd .recomend_pd_novel     {width: 100%; min-height: 350px;}
 .recomend_pd .recomend_pd_novel>li  {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px; border: 1px solid #eeeee0; border-radius: 0.2em; box-sizing: border-box; position: relative; box-shadow: 2px 2px ghostwhite;}
 .recomend_pd .recomend_pd_novel>li .img_zone    {width: 180px; height: 250px; display: block;}
 .recomend_pd .recomend_pd_novel>li .img_zone img{width: 170px; height: 245px; border-radius: 0.2em; margin-left: 5px; margin-top: 5px;}
-.recomend_pd .recomend_pd_novel>li .novel_title {width: 175px; height: 40px; margin-left: 5px; line-height: 40px; font-size: 20px; margin-top: 10px; display: block;}
-.recomend_pd .recomend_pd_novel>li .writer_name {width: 175px; height: 25px; margin-left: 5px; line-height: 25px; font-size: 15px; display: block;}
+.recomend_pd .recomend_pd_novel>li .novel_title {width: 175px; height: 40px; margin-left: 5px; line-height: 40px; font-size: 15px; margin-top: 10px; display: block;  overflow:hidden;  text-overflow:ellipsis; white-space:nowrap;}
+.recomend_pd .recomend_pd_novel>li .writer_name {width: 175px; height: 25px; margin-left: 5px; line-height: 25px; font-size: 12px; display: block;}
 
 /*베스트 소설*/
 .hot_novel .hot_tag .hot_title { width: 1200px; height:60px; line-height: 60px; font-size: 28px; }
@@ -122,15 +122,15 @@ header .myInfo .info_menu >li>.infobox{ padding-left: 20px;}
 
 
 
-.recomend_tag                  {width: 1200px; height: 405px;  margin-top: 40px;}
+.recomend_tag                  {width: 1200px; min-height: 405px;  margin-top: 40px; margin-bottom: 30px;}
 .recomend_tag .recomend_pd_tal {width: 1200px; height: 50px; font-size: 25px; line-height: 50px; margin-bottom: 5px;}
 .recomend_tag .recomend_pd_novel                 {width: 100%; height: 350px;}
 .recomend_tag .recomend_pd_novel>li              {width: 180px; height: 100%; float: left; margin: 0px 10px 0px 10px;  position: relative;}
 .recomend_tag .recomend_pd_novel>li .pd_tal_hold {box-sizing: border-box; box-shadow: 2px 2px ghostwhite; border: 1px solid #eeeee0; padding-bottom: 5px; border-radius: 0.2em;}
 .recomend_tag .recomend_pd_novel>li .img_zone    {width: 180px; height: 250px; display: block;}
 .recomend_tag .recomend_pd_novel>li .img_zone img{width: 170px; height: 245px; margin: 3px 5px 0px 5px; border-radius: 0.2em; border: 1px solid ghostwhite; box-sizing: border-box;}
-.recomend_tag .recomend_pd_novel>li .novel_title {width: 175px; height: 30px; line-height: 30px; font-size: 20px; margin-top: 0px;  display: block; margin-left: 5px; }
-.recomend_tag .recomend_pd_novel>li .writer_name {width: 175px; height: 25px; line-height: 25px; font-size: 15px; display: block; margin-left: 5px;}
+.recomend_tag .recomend_pd_novel>li .novel_title {width: 175px; min-height: 30px; line-height: 30px; font-size: 15px; margin-top: 0px;  display: block; margin-left: 5px; overflow:hidden;  text-overflow:ellipsis; white-space:nowrap;}
+.recomend_tag .recomend_pd_novel>li .writer_name {width: 175px; height: 25px; line-height: 25px; font-size: 12px; display: block; margin-left: 5px;}
 
 
 /* 랭킹 페이지 */
